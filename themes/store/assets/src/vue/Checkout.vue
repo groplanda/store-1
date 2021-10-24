@@ -206,7 +206,7 @@ export default {
     calculateTotal() {
       let result = 0;
       this.products.forEach(product => {
-        result += Number(product.amount) * Number(product.sale_price ? product.sale_price : product.price);
+        result += Number(product.amount) * Number(+product.sale_price ? +product.sale_price : +product.price);
       })
       result -= this.promocodeValue;
       return result;
@@ -363,9 +363,6 @@ export default {
     const cartData = JSON.parse(cartStorage);
     this.getProductsByIds(cartData);
     this.isUserLogin();
-  },
-  beforeDestroy() {
-    console.log('destroy');
   }
 }
 </script>
