@@ -1,0 +1,4 @@
+title: Orders
+modelClass: Acme\Shop\Models\Order
+toolbar:
+    buttons: reorder_toolbar

@@ -1,0 +1,5 @@
+title: Brands
+nameFrom: title
+modelClass: Acme\Shop\Models\Brand
+toolbar:
+    buttons: reorder_toolbar

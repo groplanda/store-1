@@ -1,0 +1,10 @@
+name: Galleries
+form: $/acme/settings/models/gallery/fields.yaml
+modelClass: Acme\Settings\Models\Gallery
+defaultRedirect: acme/settings/galleries
+create:
+    redirect: 'acme/settings/galleries/update/:id'
+    redirectClose: acme/settings/galleries
+update:
+    redirect: acme/settings/galleries
+    redirectClose: acme/settings/galleries

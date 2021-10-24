@@ -1,0 +1,13 @@
+<div class="section home-category">
+  <div class="wrap home-category__wrap">
+    <div class="home-category__row">
+      {% for category in categories %}
+      <div class="home-category__item">
+        <img src="{{ category.image|media }}" alt="{{ category.title }}" class="home-category__item-img" />
+        <p class="home-category__item-text">{{ category.title }}</p>
+        <a href="{{ 'category' | page({ slug: category.slug }) }}" class="home-category__item-link"></a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

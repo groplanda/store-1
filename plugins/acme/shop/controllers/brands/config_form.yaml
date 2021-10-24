@@ -1,0 +1,10 @@
+name: Brands
+form: $/acme/shop/models/brand/fields.yaml
+modelClass: Acme\Shop\Models\Brand
+defaultRedirect: acme/shop/brands
+create:
+    redirect: 'acme/shop/brands/update/:id'
+    redirectClose: acme/shop/brands
+update:
+    redirect: acme/shop/brands
+    redirectClose: acme/shop/brands

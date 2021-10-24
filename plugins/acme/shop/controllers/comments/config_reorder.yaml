@@ -1,0 +1,5 @@
+title: Comments
+nameFrom: title
+modelClass: Acme\Shop\Models\Comment
+toolbar:
+    buttons: reorder_toolbar

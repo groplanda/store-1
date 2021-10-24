@@ -1,0 +1,9 @@
+{% set url = this.page.url|replace({'\/': ''}) %}
+<div class="page__menu">
+  <a href="{{ 'company'|staticPage }}" class="page__menu-link{{ url == 'company' ? ' page__menu-link_active' : '' }}">О компании</a>
+  <a href="{{ 'delivery'|staticPage }}" class="page__menu-link{{ url == 'delivery' ? ' page__menu-link_active' : '' }}">Доставка</a>
+  <a href="{{ 'sales'|staticPage }}" class="page__menu-link{{ url == 'sales' ? ' page__menu-link_active' : '' }}">Акции и скидки</a>
+  <a href="{{ 'cooperation'|staticPage }}" class="page__menu-link{{ url == 'cooperation' ? ' page__menu-link_active' : '' }}">Сотрудничество</a>
+  <a href="{{ 'payment'|staticPage }}" class="page__menu-link{{ url == 'payment' ? ' page__menu-link_active' : '' }}">Оплата</a>
+  <a href="{{ 'contact'|page }}" class="page__menu-link{{ url == 'contact' ? ' page__menu-link_active' : '' }}">Контакты</a>
+</div>

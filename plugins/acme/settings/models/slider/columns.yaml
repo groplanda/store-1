@@ -1,0 +1,17 @@
+columns:
+    title:
+        label: Заголовок
+        type: text
+        searchable: true
+        sortable: true
+    image:
+        label: Изображение
+        type: partial
+        searchable: false
+        sortable: false
+        path: ~/plugins/acme/settings/models/slider/_image_column.htm
+    sort_order:
+        label: 'Порядок сортировки'
+        type: number
+        searchable: false
+        sortable: true

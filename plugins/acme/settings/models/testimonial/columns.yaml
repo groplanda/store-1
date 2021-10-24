@@ -1,0 +1,13 @@
+columns:
+    title:
+        label: ФИО
+        type: text
+        sortable: true
+    date:
+        label: Дата
+        type: date
+        sortable: true
+    sort_order:
+        label: 'Порядок сортировки'
+        type: number
+        sortable: true

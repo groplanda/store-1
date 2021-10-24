@@ -1,0 +1,47 @@
+fields:
+    title:
+        label: Заголовок
+        span: auto
+        type: text
+    slug:
+        label: Слаг
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    is_show:
+        label: 'Включить?'
+        span: auto
+        type: switch
+    parent:
+        label: 'Родительская категория'
+        span: auto
+        type: parentbox
+tabs:
+    fields:
+        image:
+            label: Изображение
+            mode: image
+            imageWidth: '80'
+            imageHeight: '80'
+            span: auto
+            type: mediafinder
+            tab: Описание
+        description:
+            label: Описание
+            size: huge
+            span: full
+            type: richeditor
+            tab: Описание
+        meta_title:
+            label: 'Meta заголовок'
+            span: full
+            type: text
+            tab: 'Мета поля'
+        meta_description:
+            label: 'Мета описание'
+            size: small
+            span: full
+            type: textarea
+            tab: 'Мета поля'

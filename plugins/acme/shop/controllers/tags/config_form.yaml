@@ -1,0 +1,10 @@
+name: Tags
+form: $/acme/shop/models/tag/fields.yaml
+modelClass: Acme\Shop\Models\Tag
+defaultRedirect: acme/shop/tags
+create:
+    redirect: 'acme/shop/tags/update/:id'
+    redirectClose: acme/shop/tags
+update:
+    redirect: acme/shop/tags
+    redirectClose: acme/shop/tags

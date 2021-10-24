@@ -1,0 +1,10 @@
+name: Demands
+form: $/acme/settings/models/demand/fields.yaml
+modelClass: Acme\Settings\Models\Demand
+defaultRedirect: acme/settings/demands
+create:
+    redirect: 'acme/settings/demands/update/:id'
+    redirectClose: acme/settings/demands
+update:
+    redirect: acme/settings/demands
+    redirectClose: acme/settings/demands

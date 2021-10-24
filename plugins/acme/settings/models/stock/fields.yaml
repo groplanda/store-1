@@ -1,0 +1,25 @@
+fields:
+    title:
+        label: Заголовок
+        span: auto
+        type: text
+    is_active:
+        label: 'Активен?'
+        span: auto
+        type: switch
+    image:
+        label: Изображение
+        mode: image
+        imageWidth: '100'
+        imageHeight: '100'
+        span: auto
+        type: mediafinder
+    link:
+        label: Ссылка
+        span: auto
+        type: text
+    description:
+        label: Описание
+        size: large
+        span: full
+        type: richeditor

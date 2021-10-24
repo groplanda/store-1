@@ -1,0 +1,5 @@
+title: Tags
+nameFrom: title
+modelClass: Acme\Shop\Models\Tag
+toolbar:
+    buttons: reorder_toolbar

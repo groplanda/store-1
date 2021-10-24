@@ -1,0 +1,5 @@
+title: Pages
+nameFrom: title
+modelClass: Acme\Settings\Models\Page
+toolbar:
+    buttons: reorder_toolbar

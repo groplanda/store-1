@@ -1,0 +1,118 @@
+fields:
+    title:
+        label: Название
+        span: auto
+        type: text
+    slug:
+        label: Слаг
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    price:
+        label: 'Базовая цена'
+        span: auto
+        default: '0'
+        type: number
+    sale_price:
+        label: 'Цена по скидке'
+        span: auto
+        default: '0'
+        type: number
+        comment: 'Если нет скидки - оставить 0'
+    code:
+        label: Артикул
+        span: full
+        type: text
+tabs:
+    fields:
+        is_new:
+            label: 'Новинка?'
+            span: auto
+            type: switch
+            tab: 'Общие параметры'
+        is_active:
+            label: 'Опубликовать?'
+            span: auto
+            type: switch
+            tab: 'Общие параметры'
+        is_hit:
+            label: 'Популярный?'
+            span: auto
+            type: switch
+            tab: 'Общие параметры'
+        description:
+            label: Описание
+            size: giant
+            span: full
+            type: richeditor
+            tab: 'Общие параметры'
+        image:
+            label: Фото
+            mode: image
+            imageWidth: '100'
+            imageHeight: '100'
+            span: auto
+            type: mediafinder
+            tab: Фото
+        gallery:
+            label: Галерея
+            mode: image
+            imageWidth: '75'
+            imageHeight: '75'
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: auto
+            type: fileupload
+            tab: Фото
+        categories:
+            label: Категории
+            nameFrom: title
+            descriptionFrom: description
+            span: full
+            type: relation
+            tab: Категории
+        tags:
+            label: Теги
+            nameFrom: title
+            descriptionFrom: description
+            span: full
+            type: relation
+            tab: Теги
+        props:
+            label: Опции
+            prompt: 'Добавить опции'
+            style: collapsed
+            span: full
+            type: repeater
+            tab: Опции
+            form:
+                fields:
+                    props_option:
+                        label: Опция
+                        span: auto
+                        placeholder: Высота
+                        type: text
+                        comment: 'Например высота'
+                    props_value:
+                        label: 'Значение опции'
+                        span: auto
+                        placeholder: 120см
+                        type: text
+        comments:
+            label: Комметарии
+            nameFrom: title
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: Отзывы
+        brand:
+            label: Бренд
+            nameFrom: title
+            descriptionFrom: description
+            span: full
+            type: relation
+            tab: Бренд

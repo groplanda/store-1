@@ -1,0 +1,25 @@
+description = "Account Page"
+==
+<!DOCTYPE html>
+<html lang="ru">
+  {% partial "meta" %}
+  <body>
+    <!-- Header -->
+    {% partial "header" %}
+
+    <!-- Content -->
+    <main class="main">
+      <!-- хлебные крошки старт --->
+      {% partial "breadcrumbs" %}
+      <!-- хлебные крошки конец --->
+      <div id="account">
+        <Account></Account>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "scripts-vue" %}
+  </body>
+</html>

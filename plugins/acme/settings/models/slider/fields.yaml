@@ -1,0 +1,25 @@
+fields:
+    title:
+        label: Заголовок
+        span: auto
+        type: text
+    link:
+        label: Ссылка
+        span: auto
+        type: text
+    price:
+        label: Цена
+        span: auto
+        type: text
+    image:
+        label: Изображение
+        mode: image
+        imageWidth: '120'
+        imageHeight: '120'
+        span: auto
+        type: mediafinder
+    description:
+        label: Описание
+        size: large
+        span: full
+        type: textarea

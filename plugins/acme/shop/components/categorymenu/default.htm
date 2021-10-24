@@ -1,0 +1,30 @@
+<nav class="header__nav">
+  <a class="header__nav-btn header__nav-btn_desktop" href="{{ 'catalog'|page }}">
+    <svg xmlns="http://www.w3.org/2000/svg" class="header__nav-menu" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+    Каталог
+  </a>
+  <button class="header__nav-btn header__nav-btn_mobile" data-js-action="open-menu">
+    <svg xmlns="http://www.w3.org/2000/svg" class="header__nav-menu" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+    Каталог
+  </button>
+  {% for item in menu %}
+  <div class="header__nav-item">
+    <a href="{{ 'category' | page({ slug: item.slug }) }}" class="header__nav-link {{ this.page.title == item.title ? 'header__nav-link_active' : '' }}">{{ item.title }}</a>
+    {% if item.children|length > 0 %}
+    <div class="header__nav-dropdown">
+      {% for subcat in item.children %}
+      <a href="{{ 'category' | page({ slug: subcat.slug }) }}" class="header__nav-sublink {{ this.page.title == subcat.title ? 'header__nav-sublink_active' : '' }}" >{{ subcat.title }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</nav>

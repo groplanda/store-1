@@ -1,0 +1,6 @@
+plugin:
+    name: 'acme.profile::lang.plugin.name'
+    description: 'acme.profile::lang.plugin.description'
+    author: Acme
+    icon: oc-icon-user
+    homepage: ''

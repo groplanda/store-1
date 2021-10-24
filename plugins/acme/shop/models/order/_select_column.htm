@@ -1,0 +1,48 @@
+<?php
+$texts = ['new' => 'Новый', 'work' => 'В работе', 'pay' => 'Оплачен', 'finish' => 'Выполнен', 'close' => 'Закрыт',  'close' => 'Закрыт', 'waiting' => 'В ожидании оплаты', 'canceled' => 'Оплата отменена'];
+?>
+<span class='<?= $value ?>'><?= $texts[$value] ?></span>
+<style>
+  .new, .work, .finish, .close, .pay, .waiting, .canceled {
+    position: relative;
+    padding-left: 15px;
+  }
+  .new::before, .work::before, .finish::before, .close::before, .pay::before, .waiting::before, .canceled::before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 30px;
+    line-height: 15px;
+  }
+  .new::before, .new {
+    color: #dc3545;
+  }
+  .work::before, .work {
+    color:#007bff;
+  }
+  .finish::before, .finish {
+    color: #28a745;
+  }
+  .close::before, .close {
+    color: #6c757d;
+  }
+  .pay::before, .pay {
+    color: #d23383;
+  }
+  .waiting::before, .waiting {
+    color: #6610ac;
+  }
+  .canceled::before, .canceled {
+    color: #161515;
+  }
+  .table.data .close, .table.data .close:hover {
+    float: none;
+    font-size: 13px;
+    line-height: 1.42857143;
+    font-weight: normal;
+    text-shadow: none;
+    position: relative;
+    padding-left: 15px;
+  }
+</style>

@@ -1,0 +1,5 @@
+title: Demands
+nameFrom: user_name
+modelClass: Acme\Settings\Models\Demand
+toolbar:
+    buttons: reorder_toolbar

@@ -1,0 +1,5 @@
+title: Stocks
+nameFrom: title
+modelClass: Acme\Settings\Models\Stock
+toolbar:
+    buttons: reorder_toolbar

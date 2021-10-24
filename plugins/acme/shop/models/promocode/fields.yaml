@@ -1,0 +1,26 @@
+fields:
+    name:
+        label: Название
+        span: auto
+        placeholder: SALE100
+        type: text
+    is_active:
+        label: 'Активный?'
+        span: auto
+        type: switch
+    type:
+        label: Тип
+        options:
+            1: Дисконт
+        showSearch: true
+        span: auto
+        type: dropdown
+    condition:
+        label: 'От какой цены'
+        span: auto
+        type: number
+    value:
+        label: 'Значение скидки'
+        span: auto
+        placeholder: '100'
+        type: number

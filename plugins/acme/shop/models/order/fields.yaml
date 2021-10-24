@@ -1,0 +1,115 @@
+fields:
+    name:
+        label: Название
+        span: auto
+        type: text
+    status:
+        label: Статус
+        options:
+            new: Новый
+            waiting: 'В ожидание оплаты'
+            canceled: 'Оплата отменена'
+            pay: Оплачен
+            work: 'В работе'
+            finish: Выполнен
+            close: Закрыт
+        showSearch: true
+        span: auto
+        type: dropdown
+    total:
+        label: 'Итоговая цена'
+        span: auto
+        type: text
+    ip:
+        label: 'IP адрес'
+        span: auto
+        placeholder: ''
+        default: 127.0.0.1
+        type: text
+tabs:
+    fields:
+        user_name:
+            label: ФИО
+            span: auto
+            type: text
+            tab: Заказчик
+        user_phone:
+            label: Телефон
+            span: auto
+            type: text
+            tab: Заказчик
+        user_mail:
+            label: E-mail
+            span: auto
+            type: text
+            tab: Заказчик
+        user_address:
+            label: Адрес
+            span: auto
+            type: text
+            tab: Заказчик
+        user_comment:
+            label: Комментарий
+            size: small
+            span: full
+            type: textarea
+            tab: Заказчик
+        user_payment:
+            label: 'Способ оплаты'
+            options:
+                - 'Яндекс касса'
+                - 'Оплата картой при доставке'
+                - 'Оплата наличными при доставке'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: Заказчик
+        products:
+            label: Товары
+            prompt: Добавить
+            style: default
+            span: full
+            type: repeater
+            tab: Товары
+            form:
+                fields:
+                    title:
+                        label: Название
+                        span: auto
+                        type: text
+                    price:
+                        label: Стоимость
+                        span: auto
+                        type: number
+                    sale_price:
+                        label: 'Стоимость по скидке'
+                        span: auto
+                        type: number
+                    amount:
+                        label: Количество
+                        span: auto
+                        type: number
+                    image:
+                        label: Изображение
+                        mode: image
+                        imageWidth: '80'
+                        imageHeight: '80'
+                        span: auto
+                        type: mediafinder
+        user:
+            label: 'Покупатель из кабинета'
+            nameFrom: name
+            descriptionFrom: description
+            select: 'concat(name, '' '', email)'
+            span: full
+            readOnly: 1
+            type: relation
+            tab: Юзер
+        promocode:
+            label: Промод
+            nameFrom: name
+            descriptionFrom: description
+            span: full
+            readOnly: 1
+            type: relation
+            tab: Промокод

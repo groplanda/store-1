@@ -1,0 +1,32 @@
+<section class="slider section">
+  <div class="slider__container swiper" data-js-slider="home-slider">
+    <div class="slider__list swiper-wrapper">
+      {% for slide in slider %}
+      <div class="slider__item swiper-slide">
+        <div class="slider__wrap wrap">
+          <div class="slider__item-content">
+            <h2 class="slider__item-title">{{ slide.title }}</h2>
+            <p class="slider__item-descr">{{ slide.description }}</p>
+            <a href="{{ slide.link }}" class="slider__item-link button button_primary">В каталог</a>
+          </div>
+          <img src="{{ slide.image|media|resize(1920, 500, { mode: 'crop', quality: '80' }) }}" alt="{{ slide.title }}" class="slider__item-img">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <button class="slider__btn slider__btn_prev" data-js-action="home-slider-prev">
+    <svg class="slider__btn-ico" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.125 1.75L1 6.875L6.125 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button class="slider__btn slider__btn_next" data-js-action="home-slider-next">
+    <svg class="slider__btn-ico" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.875 11.25L7 6.125L1.875 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="slider__pagination"></div>
+
+</section>

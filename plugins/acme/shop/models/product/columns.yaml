@@ -1,0 +1,25 @@
+columns:
+    title:
+        label: Заголовок
+        type: text
+        searchable: true
+    image:
+        label: Фото
+        type: partial
+        path: ~/plugins/acme/shop/models/product/_image_column.htm
+    is_active:
+        label: Статус
+        type: switch
+    price:
+        label: Цена
+        type: number
+        searchable: true
+    categories:
+        label: Категории
+        type: text
+        searchable: true
+        select: title
+        relation: categories
+    sort_order:
+        label: 'Порядок сортировки'
+        type: number

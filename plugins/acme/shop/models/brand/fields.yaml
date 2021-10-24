@@ -1,0 +1,21 @@
+fields:
+    title:
+        label: Название
+        span: auto
+        type: text
+    is_active:
+        label: 'Активный?'
+        span: auto
+        type: switch
+    description:
+        label: Описание
+        size: small
+        span: full
+        type: textarea
+    image:
+        label: Логотип
+        mode: image
+        imageWidth: '100'
+        imageHeight: '100'
+        span: auto
+        type: mediafinder

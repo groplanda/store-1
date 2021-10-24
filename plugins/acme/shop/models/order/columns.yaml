@@ -1,0 +1,25 @@
+columns:
+    id:
+        label: 'Номер заказа'
+        type: number
+        sortable: true
+    name:
+        label: Название
+        type: text
+        sortable: true
+    user_name:
+        label: ФИО
+        type: text
+        searchable: true
+        sortable: true
+    user_phone:
+        label: Телефон
+        type: text
+        searchable: true
+        sortable: true
+    status:
+        label: Статус
+        type: partial
+        searchable: true
+        sortable: true
+        path: ~/plugins/acme/shop/models/order/_select_column.htm

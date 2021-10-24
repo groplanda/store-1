@@ -1,0 +1,10 @@
+name: Pages
+form: $/acme/settings/models/page/fields.yaml
+modelClass: Acme\Settings\Models\Page
+defaultRedirect: acme/settings/pages
+create:
+    redirect: 'acme/settings/pages/update/:id'
+    redirectClose: acme/settings/pages
+update:
+    redirect: acme/settings/pages
+    redirectClose: acme/settings/pages

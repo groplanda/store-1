@@ -1,0 +1,17 @@
+<section class="category-additional section">
+  <div class="wrap category-additional__wrap">
+    <h1 class="title title_sm category-additional__title">Производители</h1>
+    <div class="category-additional__row">
+      {% for brand in brands %}
+      <div class="category-additional__item">
+        <a href="{{ 'single-manufacturer' | page({ id: brand.id }) }}" class="category-additional__image {{ brand.image ? 'category-additional__image_overlay' : '' }}">
+          {% if brand.image %}
+          <img src="{{ brand.image|media|resize(166, 100, { mode: 'crop', quality: '80' }) }}" alt="{{ brand.title }}" class="category-additional__pic" />
+          {% endif %}
+        </a>
+        <a href="{{ 'single-manufacturer' | page({ id: brand.id }) }}" class="category-additional__link">{{ brand.title }}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

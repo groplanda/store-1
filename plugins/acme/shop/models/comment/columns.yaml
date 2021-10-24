@@ -1,0 +1,21 @@
+columns:
+    title:
+        label: Имя
+        type: text
+        searchable: true
+        sortable: true
+    star:
+        label: Оценка
+        type: number
+        searchable: true
+        sortable: true
+    status:
+        label: Статус
+        type: switch
+        searchable: true
+        sortable: true
+    product:
+        label: Товар
+        type: text
+        select: title
+        relation: product

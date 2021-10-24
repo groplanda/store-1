@@ -1,0 +1,21 @@
+{% set pages = __SELF__.pages %}
+
+<div class="news section">
+  <div class="news__wrap wrap">
+    <div class="news__row">
+      {% for page in pages %}
+      <div class="news__item">
+        <img src="{{page.image|media|resize(365, 220, { mode: 'crop', quality: '80' })}}" alt="{{page.title}}" class="news__item-image">
+        <div class="news__item-title">{{page.title}}</div>
+          <a href="{{'news'|page({slug: page.slug}) }}" class="news__item-link">
+            Читать далее
+            <svg class="news__item-arrow" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.75 9H14.25" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 3.75L14.25 9L9 14.25" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

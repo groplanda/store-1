@@ -1,0 +1,19 @@
+<div class="menu__list">
+  {% for item in menu %}
+  <div class="menu__item">
+    <a href="{{ 'category' | page({ slug: item.slug }) }}" class="menu__item-link {{ this.page.title == item.title ? 'menu__item-link_active' : '' }}">{{ item.title }}</a>
+    {% if item.children|length > 0 %}
+    <button type="button" class="menu__item-btn" data-js-action="open-dropdown-menu">
+      <svg class="menu__item-ico" width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.31896 9.0954L15.8667 1.54765C16.0444 1.36993 16.0444 1.08492 15.8667 0.90721C15.689 0.729498 15.404 0.729498 15.2263 0.90721L8.00042 8.13307L0.774558 0.90721C0.596846 0.729497 0.311836 0.729497 0.134124 0.90721C0.0469437 0.994389 9.38908e-07 1.11175 9.33924e-07 1.22575C9.28941e-07 1.33976 0.0435905 1.45711 0.134124 1.54429L7.68188 9.09205C7.85624 9.26976 8.1446 9.26976 8.31896 9.0954Z" fill="currentColor"/>
+      </svg>
+    </button>
+    <div class="menu__dropdown">
+      {% for subcat in item.children %}
+      <a href="{{ 'category' | page({ slug: subcat.slug }) }}" class="menu__dropdown-item {{ this.page.title == subcat.title ? 'menu__dropdown-item_active' : '' }}">{{ subcat.title }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>

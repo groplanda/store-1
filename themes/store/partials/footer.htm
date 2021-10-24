@@ -1,0 +1,128 @@
+description = "Footer"
+
+[CategoryMenu]
+templateType = "footer"
+
+[viewBag]
+==
+<footer class="section footer">
+  <div class="wrap footer__wrap">
+    <div class="footer__left">
+      <div class="footer__menu">
+        <div class="footer__title" data-js-action="toggle-footer-dropdown">
+          Каталог товаров
+          <svg class="footer__title-ico" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.31896 9.0954L15.8667 1.54765C16.0444 1.36993 16.0444 1.08492 15.8667 0.90721C15.689 0.729498 15.404 0.729498 15.2263 0.90721L8.00042 8.13307L0.774558 0.90721C0.596846 0.729497 0.311836 0.729497 0.134124 0.90721C0.0469437 0.994389 9.38908e-07 1.11175 9.33924e-07 1.22575C9.28941e-07 1.33976 0.0435905 1.45711 0.134124 1.54429L7.68188 9.09205C7.85624 9.26976 8.1446 9.26976 8.31896 9.0954Z" fill="#8C96A3"/>
+          </svg>
+        </div>
+        <div class="footer__dropdown">
+          {% component 'CategoryMenu' %}
+        </div>
+      </div>
+
+      <div class="footer__menu">
+        <div class="footer__title" data-js-action="toggle-footer-dropdown">
+          Покупателям
+          <svg class="footer__title-ico" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.31896 9.0954L15.8667 1.54765C16.0444 1.36993 16.0444 1.08492 15.8667 0.90721C15.689 0.729498 15.404 0.729498 15.2263 0.90721L8.00042 8.13307L0.774558 0.90721C0.596846 0.729497 0.311836 0.729497 0.134124 0.90721C0.0469437 0.994389 9.38908e-07 1.11175 9.33924e-07 1.22575C9.28941e-07 1.33976 0.0435905 1.45711 0.134124 1.54429L7.68188 9.09205C7.85624 9.26976 8.1446 9.26976 8.31896 9.0954Z" fill="#8C96A3"/>
+          </svg>
+        </div>
+        <div class="footer__dropdown">
+          <div class="footer__menu-list">
+            <a href="{{ 'home'|page }}" class="footer__menu-link">Главная</a>
+            <a href="{{ 'delivery'|staticPage }}" class="footer__menu-link">Доставка</a>
+            <a href="{{ 'sales'|staticPage }}" class="footer__menu-link">Акции и скидки</a>
+            <a href="{{ 'manufacturer'|page }}" class="footer__menu-link">Производители</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__menu">
+        <div class="footer__title" data-js-action="toggle-footer-dropdown">
+          О компании
+          <svg class="footer__title-ico" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.31896 9.0954L15.8667 1.54765C16.0444 1.36993 16.0444 1.08492 15.8667 0.90721C15.689 0.729498 15.404 0.729498 15.2263 0.90721L8.00042 8.13307L0.774558 0.90721C0.596846 0.729497 0.311836 0.729497 0.134124 0.90721C0.0469437 0.994389 9.38908e-07 1.11175 9.33924e-07 1.22575C9.28941e-07 1.33976 0.0435905 1.45711 0.134124 1.54429L7.68188 9.09205C7.85624 9.26976 8.1446 9.26976 8.31896 9.0954Z" fill="#8C96A3"/>
+          </svg>
+        </div>
+        <div class="footer__dropdown">
+          <div class="footer__menu-list">
+            <a href="{{ 'company'|staticPage }}" class="footer__menu-link">О компании</a>
+            <a href="{{ 'cooperation'|staticPage }}" class="footer__menu-link">Сотрудничество</a>
+            <a href="{{ 'contact'|page }}" class="footer__menu-link">Контакты</a>
+            <a href="{{ 'payment'|staticPage }}" class="footer__menu-link">Оплата</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__right">
+      <div class="footer__contact-wrap">
+        <div class="footer__title" data-js-action="toggle-footer-dropdown">
+          Контакты
+          <svg class="footer__title-ico" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.31896 9.0954L15.8667 1.54765C16.0444 1.36993 16.0444 1.08492 15.8667 0.90721C15.689 0.729498 15.404 0.729498 15.2263 0.90721L8.00042 8.13307L0.774558 0.90721C0.596846 0.729497 0.311836 0.729497 0.134124 0.90721C0.0469437 0.994389 9.38908e-07 1.11175 9.33924e-07 1.22575C9.28941e-07 1.33976 0.0435905 1.45711 0.134124 1.54429L7.68188 9.09205C7.85624 9.26976 8.1446 9.26976 8.31896 9.0954Z" fill="#8C96A3"/>
+          </svg>
+        </div>
+        <div class="footer__dropdown">
+          {% for phone in this.theme.phone %}
+          <div class="footer__contact">
+            <a href="tel:{{ phone.val }}" class="footer__contact-link">{{ phone.val }} {% if phone.text|length > 0 %}<span> {{ phone.text }}</span>{% endif %}
+          </div>
+          {% endfor %}
+          <div class="footer__contact footer__contact_address">
+            <a href="{{ 'contact'|page }}" class="footer__contact-link">{{ this.theme.post_code }}, {{ this.theme.city }}, {{ this.theme.address }}</a>
+          </div>
+          <div class="footer__dropdown-row">
+            <div class="footer__dropdown-item">
+              <div class="footer__title footer__title_sm">Мы в социальных сетях:</div>
+              <div class="footer__social-group">
+                {% if this.theme.vk %}
+                <a href="{{ this.theme.vk }}" target="_blank" rel="noopener noreferrer" class="footer__social-link">
+                  <svg width="20" height="12" class="footer__social-ico" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.8218 10.4728C19.768 10.3828 19.4355 9.66023 17.8354 8.17512C16.1603 6.62001 16.3853 6.87253 18.4029 4.18358C19.6318 2.54596 20.1231 1.54588 19.9693 1.11835C19.8231 0.71082 18.9192 0.818328 18.9192 0.818328L15.914 0.83583C15.914 0.83583 15.6915 0.805827 15.5252 0.904585C15.364 1.00209 15.2602 1.22711 15.2602 1.22711C15.2602 1.22711 14.7839 2.4947 14.1489 3.57228C12.81 5.8462 12.2737 5.96621 12.055 5.82495C11.5462 5.49617 11.6737 4.50235 11.6737 3.7973C11.6737 1.59339 12.0075 0.674568 11.0224 0.43705C10.6949 0.358294 10.4549 0.30579 9.61855 0.29704C8.54597 0.285789 7.63715 0.30079 7.12337 0.552059C6.78084 0.719571 6.51707 1.09335 6.67833 1.1146C6.8771 1.14085 7.32713 1.23586 7.5659 1.56088C7.87467 1.97966 7.86342 2.92223 7.86342 2.92223C7.86342 2.92223 8.04093 5.51618 7.44964 5.8387C7.04336 6.05997 6.48707 5.60868 5.29323 3.54478C4.68194 2.48845 4.2194 1.31962 4.2194 1.31962C4.2194 1.31962 4.13064 1.1021 3.97188 0.985841C3.77937 0.84458 3.50935 0.799577 3.50935 0.799577L0.651638 0.817078C0.651638 0.817078 0.222857 0.82958 0.0653449 1.01584C-0.0746654 1.18211 0.0540941 1.52463 0.0540941 1.52463C0.0540941 1.52463 2.29176 6.75877 4.82445 9.39771C7.14837 11.8166 9.78606 11.6579 9.78606 11.6579H10.9812C10.9812 11.6579 11.3424 11.6179 11.5262 11.4191C11.6962 11.2366 11.69 10.8941 11.69 10.8941C11.69 10.8941 11.6662 9.29021 12.4113 9.05394C13.1451 8.82142 14.0876 10.6041 15.0865 11.2904C15.8415 11.8091 16.4153 11.6954 16.4153 11.6954L19.0868 11.6579C19.0868 11.6579 20.4844 11.5716 19.8218 10.4728Z" fill="currentColor"/>
+                  </svg>
+                </a>
+                {% endif %}
+                {% if this.theme.instagram %}
+                <a href="{{ this.theme.instagram }}" target="_blank" rel="noopener noreferrer" class="footer__social-link">
+                  <svg width="18" height="18" class="footer__social-ico" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.375 0H5.625C2.51888 0 0 2.51888 0 5.625V12.375C0 15.4811 2.51888 18 5.625 18H12.375C15.4811 18 18 15.4811 18 12.375V5.625C18 2.51888 15.4811 0 12.375 0ZM16.3125 12.375C16.3125 14.5463 14.5463 16.3125 12.375 16.3125H5.625C3.45375 16.3125 1.6875 14.5463 1.6875 12.375V5.625C1.6875 3.45375 3.45375 1.6875 5.625 1.6875H12.375C14.5463 1.6875 16.3125 3.45375 16.3125 5.625V12.375Z" fill="currentColor"/>
+                    <path d="M9 4.5C6.51487 4.5 4.5 6.51487 4.5 9C4.5 11.4851 6.51487 13.5 9 13.5C11.4851 13.5 13.5 11.4851 13.5 9C13.5 6.51487 11.4851 4.5 9 4.5ZM9 11.8125C7.44975 11.8125 6.1875 10.5503 6.1875 9C6.1875 7.44863 7.44975 6.1875 9 6.1875C10.5503 6.1875 11.8125 7.44863 11.8125 9C11.8125 10.5503 10.5503 11.8125 9 11.8125Z" fill="currentColor"/>
+                    <path d="M13.8375 4.76223C14.1687 4.76223 14.4372 4.49377 14.4372 4.16261C14.4372 3.83145 14.1687 3.56299 13.8375 3.56299C13.5064 3.56299 13.2379 3.83145 13.2379 4.16261C13.2379 4.49377 13.5064 4.76223 13.8375 4.76223Z" fill="currentColor"/>
+                  </svg>
+                </a>
+                {% endif %}
+                {% if this.theme.fb %}
+                <a href="{{ this.theme.fb }}" target="_blank" rel="noopener noreferrer" class="footer__social-link">
+                  <svg width="10" height="20" class="footer__social-ico" viewBox="0 0 10 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.25 6.875V4.375C6.25 3.685 6.81 3.125 7.5 3.125H8.75V0H6.25C4.17875 0 2.5 1.67875 2.5 3.75V6.875H0V10H2.5V20H6.25V10H8.75L10 6.875H6.25Z" fill="currentColor"/>
+                  </svg>
+                </a>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="footer__dropdown-item">
+              <div class="footer__title footer__title_sm">Принимаем к оплате</div>
+              <div class="footer__social-group">
+                <span class="footer__social-link">
+                  <img src="{{ 'assets/images/footer/visa.svg'|theme }}" alt="visa" class="footer__social-img" />
+                </span>
+                <span class="footer__social-link">
+                  <img src="{{ 'assets/images/footer/maestro.svg'|theme }}" alt="maestro" class="footer__social-img" />
+                </span>
+                <span class="footer__social-link">
+                  <img src="{{ 'assets/images/footer/mir.svg'|theme }}" alt="mir" class="footer__social-img" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__copyright">© «Светотека.ру», 2010—2020</div>
+      <a href="{{ 'privacy'|staticPage }}" target="_blank" rel="noopener noreferrer" class="footer__privacy">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>

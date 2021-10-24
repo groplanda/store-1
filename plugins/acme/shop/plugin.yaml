@@ -1,0 +1,44 @@
+plugin:
+    name: 'acme.shop::lang.plugin.name'
+    description: 'acme.shop::lang.plugin.description'
+    author: acme
+    icon: oc-icon-shopping-cart
+    homepage: ''
+navigation:
+    menu-shop:
+        label: Каталог
+        url: acme/shop/products
+        icon: icon-shopping-cart
+        sideMenu:
+            item-products:
+                label: 'Все товары'
+                url: acme/shop/products
+                icon: icon-tachometer
+            menu-add-product:
+                label: 'Добавить товар'
+                url: acme/shop/products/create
+                icon: icon-plus
+            menu-car:
+                label: Категория
+                url: acme/shop/categories
+                icon: icon-folder
+            item-orders:
+                label: Заказы
+                url: acme/shop/orders
+                icon: icon-briefcase
+            item-tag:
+                label: Теги
+                url: acme/shop/tags
+                icon: icon-tags
+            side-menu-comment:
+                label: Отзывы
+                url: acme/shop/comments
+                icon: icon-wechat
+            side-menu-brand:
+                label: Бренды
+                url: acme/shop/brands
+                icon: icon-slack
+            side-menu-promocode:
+                label: Промокоды
+                url: acme/shop/promocodes
+                icon: icon-scissors

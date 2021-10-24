@@ -1,0 +1,21 @@
+
+<div class="catalog section">
+  <div class="catalog__wrap wrap">
+    <div class="catalog__row">
+      {% for category in categories %}
+      <div class="catalog__item">
+        <img src="{{ category.image|media }}" alt="{{ category.title }}" class="catalog__item-img" />
+        <div class="catalog__item-group">
+          <a href="{{ 'category' | page({ slug: category.slug }) }}" class="catalog__item-title">{{ category.title }}</a>
+          {% if category.children|length > 0 %}
+          <div class="catalog__item-list">
+            {% for subcat in category.children %}
+            <a href="{{ 'category' | page({ slug: subcat.slug }) }}" class="catalog__item-link">{{ subcat.title }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>

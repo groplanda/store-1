@@ -1,0 +1,36 @@
+plugin:
+    name: 'acme.settings::lang.plugin.name'
+    description: 'acme.settings::lang.plugin.description'
+    author: acme
+    icon: oc-icon-gear
+    homepage: ''
+navigation:
+    item-settings:
+        label: Настройки
+        url: acme/settings/sliders
+        icon: icon-cog
+        sideMenu:
+            item-slider:
+                label: Слайдер
+                url: acme/settings/sliders
+                icon: icon-sliders
+            item-testimonial:
+                label: Отзывы
+                url: acme/settings/testimonials
+                icon: icon-wechat
+            item-image:
+                label: Галерея
+                url: acme/settings/galleries
+                icon: icon-image
+            side-request:
+                label: 'Заявки из форм'
+                url: acme/settings/demands
+                icon: icon-envelope-o
+            menu-stocks:
+                label: Акции
+                url: acme/settings/stocks
+                icon: icon-star
+            side-menu-news:
+                label: 'Записи (новости)'
+                url: acme/settings/pages
+                icon: icon-list

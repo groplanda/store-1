@@ -1,0 +1,4 @@
+title: Testimonials
+modelClass: Acme\Settings\Models\Testimonial
+toolbar:
+    buttons: reorder_toolbar

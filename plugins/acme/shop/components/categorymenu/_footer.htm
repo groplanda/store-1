@@ -1,0 +1,5 @@
+<div class="footer__menu-list">
+  {% for item in menu %}
+  <a href="{{ 'category' | page({ slug: item.slug }) }}" class="footer__menu-link">{{ item.title }}</a>
+  {% endfor %}
+</div>

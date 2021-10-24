@@ -1,0 +1,7 @@
+columns:
+    title:
+        label: Заголовок
+        type: text
+    page:
+        label: Страница
+        type: text

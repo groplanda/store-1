@@ -1,0 +1,22 @@
+description = "Product Page"
+
+[SingleProduct]
+==
+<!DOCTYPE html>
+<html lang="ru">
+  {% partial "meta" %}
+  <body>
+    <!-- Header -->
+    {% partial "header" %}
+
+    <!-- Content -->
+    <main class="main">
+      {% component 'SingleProduct' %}
+    </main>
+
+    <!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "scripts" %}
+  </body>
+</html>

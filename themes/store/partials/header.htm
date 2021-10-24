@@ -1,0 +1,99 @@
+description = "Header"
+
+[viewBag]
+
+[CategoryMenu]
+templateType = "default"
+
+[CategoryMenu CategoryMenu2]
+templateType = "mobile"
+==
+{% partial "loading" %}
+<header class="header">
+  <div class="header__topbar">
+    <div class="wrap header__topbar-wrap">
+      <a href="{{ 'company'|staticPage }}" class="header__topbar-link">О компании</a>
+      <a href="{{ 'sales'|staticPage }}" class="header__topbar-link">Акции и скидки</a>
+      <a href="{{ 'delivery'|staticPage }}" class="header__topbar-link">Доставка</a>
+      <a href="{{ 'manufacturer'|page }}" class="header__topbar-link">Производители</a>
+      <a href="{{ 'cooperation'|staticPage }}" class="header__topbar-link">Сотрудничество</a>
+      <a href="{{ 'contact'|page }}" class="header__topbar-link">Контакты</a>
+
+      <a href="{{ 'account'|page }}" class="header__topbar-link header__topbar-link_orders header__topbar-link_hide js-account">Мой аккаунт</a>
+
+      <a href="#!" class="header__topbar-link header__topbar-link_orders js-sign" data-js-action="open-modal" data-type-modal="sign">Вход/регистрация</a>
+
+    </div>
+  </div>
+
+  <div class="header__center">
+    <div class="wrap header__wrap">
+      <a href="/" class="header__logo">
+        <img src="{{ this.theme.site_logo|media|resize(false, 50, { mode: 'crop', quality: '100' }) }}" alt="{{ this.theme.site_name }}" />
+      </a>
+      <div class="header__content">
+        <form action="/search" method="GET" class="header__search">
+          <input type="text" name="search" placeholder="Поиск по сайту" class="header__search-input">
+          <button type="submit" class="header__search-btn">
+            <svg class="header__search-ico" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 13L9 9M10.3333 5.66667C10.3333 6.2795 10.2126 6.88634 9.97811 7.45252C9.74358 8.01871 9.39984 8.53316 8.9665 8.9665C8.53316 9.39984 8.01871 9.74358 7.45252 9.97811C6.88634 10.2126 6.2795 10.3333 5.66667 10.3333C5.05383 10.3333 4.447 10.2126 3.88081 9.97811C3.31462 9.74358 2.80018 9.39984 2.36683 8.9665C1.93349 8.53316 1.58975 8.01871 1.35523 7.45252C1.12071 6.88634 1 6.2795 1 5.66667C1 4.42899 1.49167 3.242 2.36683 2.36683C3.242 1.49167 4.42899 1 5.66667 1C6.90434 1 8.09133 1.49167 8.9665 2.36683C9.84167 3.242 10.3333 4.42899 10.3333 5.66667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+        </form>
+        <div class="header__contact">
+          {% if this.theme.phone[0]|length > 0 %}
+          <div class="header__phone">
+            <a href="tel:{{ this.theme.phone[0].val }}" class="header__phone-url">{{ this.theme.phone[0].val }}</a>
+            <span class="header__phone-text">Звонок по России бесплатный</span>
+          </div>
+          {% endif %}
+          <a href="#!" class="header__cart js-cart" data-js-action="open-modal" data-type-modal="cart">
+            <span class="header__cart-count js-cart-count">0</span>
+            <svg class="header__cart-bag" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.666626 0.666641L1.46663 3.33331M1.46663 3.33331L4.66663 14H19.3333V5.99997C19.3333 4.52722 18.1394 3.33331 16.6666 3.33331H1.46663ZM16.6666 19.3333C15.9302 19.3333 15.3333 18.7364 15.3333 18C15.3333 17.2636 15.9302 16.6666 16.6666 16.6666C17.403 16.6666 18 17.2636 18 18C18 18.7364 17.403 19.3333 16.6666 19.3333ZM5.99996 18C5.99996 17.2636 6.59691 16.6666 7.33329 16.6666C8.06967 16.6666 8.66663 17.2636 8.66663 18C8.66663 18.7364 8.06967 19.3333 7.33329 19.3333C6.59691 19.3333 5.99996 18.7364 5.99996 18Z" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header__navbar">
+    <div class="header__wrap wrap">
+      {% component 'CategoryMenu' %}
+
+      <div class="header__mobile">
+        <a href="{{ 'search'|page }}" class="header__mobile-item">
+          <svg class="header__mobile-ico" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 13L9 9M10.3333 5.66667C10.3333 6.2795 10.2126 6.88634 9.97811 7.45252C9.74358 8.01871 9.39984 8.53316 8.9665 8.9665C8.53316 9.39984 8.01871 9.74358 7.45252 9.97811C6.88634 10.2126 6.2795 10.3333 5.66667 10.3333C5.05383 10.3333 4.447 10.2126 3.88081 9.97811C3.31462 9.74358 2.80018 9.39984 2.36683 8.9665C1.93349 8.53316 1.58975 8.01871 1.35523 7.45252C1.12071 6.88634 1 6.2795 1 5.66667C1 4.42899 1.49167 3.242 2.36683 2.36683C3.242 1.49167 4.42899 1 5.66667 1C6.90434 1 8.09133 1.49167 8.9665 2.36683C9.84167 3.242 10.3333 4.42899 10.3333 5.66667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#!" class="header__mobile-item js-mobile-account" data-js-action="open-modal" data-type-modal="sign">
+          <svg class="header__mobile-ico header__mobile-ico_profile" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          </svg>
+        </a>
+        <a href="#!" class="header__cart header__cart_mobile js-cart" data-js-action="open-modal" data-type-modal="cart">
+          <span  class="header__cart-count js-cart-count">0</span>
+          <svg class="header__cart-bag" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.666626 0.666641L1.46663 3.33331M1.46663 3.33331L4.66663 14H19.3333V5.99997C19.3333 4.52722 18.1394 3.33331 16.6666 3.33331H1.46663ZM16.6666 19.3333C15.9302 19.3333 15.3333 18.7364 15.3333 18C15.3333 17.2636 15.9302 16.6666 16.6666 16.6666C17.403 16.6666 18 17.2636 18 18C18 18.7364 17.403 19.3333 16.6666 19.3333ZM5.99996 18C5.99996 17.2636 6.59691 16.6666 7.33329 16.6666C8.06967 16.6666 8.66663 17.2636 8.66663 18C8.66663 18.7364 8.06967 19.3333 7.33329 19.3333C6.59691 19.3333 5.99996 18.7364 5.99996 18Z" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="menu" data-menu="mobile">
+    <div class="menu__overlay" data-js-action="mobile-overlay"></div>
+    <div class="menu__container">
+      <div class="menu__container-scroll">
+        {% component 'CategoryMenu2' %}
+      </div>
+    </div>
+  </div>
+
+</header>

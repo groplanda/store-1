@@ -1,0 +1,20 @@
+columns:
+    user_name:
+        label: Имя
+        type: text
+        searchable: true
+        sortable: true
+    user_phone:
+        label: Телефон
+        type: text
+        searchable: true
+        sortable: true
+    user_mail:
+        label: E-mail
+        type: text
+        searchable: true
+        sortable: true
+    sort_order:
+        label: 'Порядок сортировки'
+        type: number
+        sortable: true

@@ -1,0 +1,10 @@
+name: Stocks
+form: $/acme/settings/models/stock/fields.yaml
+modelClass: Acme\Settings\Models\Stock
+defaultRedirect: acme/settings/stocks
+create:
+    redirect: 'acme/settings/stocks/update/:id'
+    redirectClose: acme/settings/stocks
+update:
+    redirect: acme/settings/stocks
+    redirectClose: acme/settings/stocks

@@ -1,0 +1,7 @@
+columns:
+    name:
+        label: Название
+        type: text
+    is_active:
+        label: Активный
+        type: switch

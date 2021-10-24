@@ -1,0 +1,9 @@
+{% set post =  __SELF__.post %}
+<section id="{{__SELF__.id}}" class="content section">
+  <div class="wrap content__wrap">
+    <h1 class="title content__title">{{ post.title }}</h1>
+    <div class="content__entry">
+      {{ post.description|raw }}
+    </div>
+  </div>
+</section>

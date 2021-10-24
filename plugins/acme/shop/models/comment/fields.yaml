@@ -1,0 +1,25 @@
+fields:
+    title:
+        label: Имя
+        span: auto
+        type: text
+    status:
+        label: Статус
+        span: auto
+        type: switch
+    description:
+        label: 'Текст отзыва'
+        size: large
+        span: full
+        type: textarea
+    product:
+        label: Товар
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+    star:
+        label: Оценка
+        span: auto
+        placeholder: '5'
+        type: number

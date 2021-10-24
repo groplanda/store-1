@@ -1,0 +1,42 @@
+fields:
+    title:
+        label: Заголовок
+        span: auto
+        type: text
+    slug:
+        label: Слаг
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    is_active:
+        label: 'Опубликовать?'
+        span: auto
+        type: switch
+    image:
+        label: Фото
+        mode: image
+        imageWidth: '120'
+        imageHeight: '120'
+        span: auto
+        type: mediafinder
+tabs:
+    fields:
+        description:
+            label: Описание
+            size: giant
+            span: full
+            type: richeditor
+            tab: Описание
+        meta_title:
+            label: 'Meta заголовок'
+            span: full
+            type: text
+            tab: Мета
+        meta_description:
+            label: 'Meta описание'
+            size: tiny
+            span: full
+            type: textarea
+            tab: Мета

@@ -1,0 +1,10 @@
+name: Promocodes
+form: $/acme/shop/models/promocode/fields.yaml
+modelClass: Acme\Shop\Models\Promocode
+defaultRedirect: acme/shop/promocodes
+create:
+    redirect: 'acme/shop/promocodes/update/:id'
+    redirectClose: acme/shop/promocodes
+update:
+    redirect: acme/shop/promocodes
+    redirectClose: acme/shop/promocodes
