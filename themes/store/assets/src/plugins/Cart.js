@@ -8,7 +8,7 @@ export class Cart {
   addToCart(data) {
     if (this.isHasStorage()) {
       const cart = JSON.parse(localStorage.getItem('shop_cart'));
-      const index = cart.findIndex(el => el.id === data.id);
+      const index = cart.findIndex(el => el.id === +data.id);
       const isAdd = data.amount > 0;
       if (index === -1) {
         cart.push(data);
@@ -27,7 +27,7 @@ export class Cart {
   removeFromCart(data) {
     if (this.isHasStorage()) {
       const cart = JSON.parse(localStorage.getItem('shop_cart'));
-      const productIndex = cart.findIndex(el => el.id === data);
+      const productIndex = cart.findIndex(el => el.id === +data);
       if (productIndex !== -1) {
         cart.splice(productIndex, 1);
         localStorage.setItem('shop_cart', JSON.stringify(cart));
