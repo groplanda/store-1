@@ -3,7 +3,7 @@
     <div class="title title_sm checkout__cart-title checkout__cart-title_promo" :class="resultClass">{{ title }}</div>
     <div class="checkout__promo-form">
       <input type="text" v-model="name" placeholder="Код купона" class="checkout__step-input checkout__step-input_promo" />
-      <button type="button" class="button button_primary checkout__promo-button" @click="onSend">Применить</button>
+      <button type="button" class="button button_primary checkout__promo-button" @click.stop="onSend">Применить</button>
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
       }
     },
     isValidate() {
-      return this.name.length < 1;
+      return this.name.length > 1;
     }
   },
   methods: {
