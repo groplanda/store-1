@@ -31,13 +31,13 @@ export default {
         "checkout__cart-title_error": this.result === "error"
       }
     },
-    noDisabledSend() {
-      return this.name.length < 1 || (this.result !== "success" || this.result !== "");
+    isValidate() {
+      return this.name.length < 1;
     }
   },
   methods: {
     onSend() {
-      if (!this.noDisabledSend) return;
+      if (!this.isValidate) return;
 
       const data = {
         'name': this.name,

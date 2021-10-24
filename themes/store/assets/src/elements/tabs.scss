@@ -13,6 +13,7 @@
 
     @media(max-width: 410px) {
       flex-direction: column;
+      align-items: flex-start;
       border-bottom: none;
     }
   }
