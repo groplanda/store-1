@@ -2,10 +2,12 @@
   <div class="category__item category__item_default">
     <div class="product-card product-card_page">
       <span class="product-card__label product-card__label_hit" v-if="product.is_hit">Акция</span>
-      <picture class="product-card__picture">
-        <source :srcset="product.image ? '/storage/app/media' + product.image : noImage" type="image/jpeg" class="product-card__image-src" />
-        <img :src="product.image ? '/storage/app/media' + product.image : noImage" :alt="product.title" class="product-card__image-src" />
-      </picture>
+      <div class="product-card__image">
+        <picture class="product-card__picture">
+          <source :srcset="product.image ? '/storage/app/media' + product.image : noImage" type="image/jpeg" class="product-card__image-src" />
+          <img :src="product.image ? '/storage/app/media' + product.image : noImage" :alt="product.title" class="product-card__image-src" />
+        </picture>
+      </div>
 
       <div class="product-card__content">
         <div class="product-card__heading">
