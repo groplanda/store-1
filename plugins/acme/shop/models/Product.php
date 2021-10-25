@@ -1,7 +1,6 @@
 <?php namespace Acme\Shop\Models;
 
 use Model;
-
 /**
  * Model
  */
@@ -52,6 +51,13 @@ class Product extends Model
         'Acme\Shop\Models\Tag',
         'table' => 'acme_shop_product_tags',
       ],
+      'featured' => [
+        \Acme\Shop\Models\Product::class,
+        'table'    => 'acme_shop_product_featured',
+        'key'      => 'product_id',
+        'otherKey' => 'featured_id',
+        'order'    => 'title'
+      ]
     ];
 
     public $belongsTo = [
@@ -169,4 +175,34 @@ class Product extends Model
     {
       return $query->where('is_featured', '1');
     }
+
+    public function afterSave()
+    {
+      $self = $this;
+      $list = [];
+      foreach($this->featured as $row) {
+        $list[] = $row->id;
+      }
+
+      $products = Product::select('id')->whereIn('id', $list)->get();
+      foreach($products as $product) {
+        $diff = array_diff($list, [$product->id]);
+        array_push($diff, $self->id);
+        $product->featured()->sync($diff);
+      }
+
+      $allProducts = Product::select('id')->whereNotIn('id', $list)->get();
+      foreach($allProducts as $product) {
+        $featured = $product->featured;
+        if (count($featured)) {
+          foreach($featured as $f) {
+            if (!in_array($f->id, $list)) {
+              $product->featured()->detach($f->id);
+            }
+          }
+        }
+      }
+
+    }
+
 }

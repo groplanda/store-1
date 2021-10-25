@@ -87,3 +87,12 @@
 1.0.30:
     - 'Updated table acme_shop_promocode'
     - builder_table_update_acme_shop_promocode.php
+1.0.31:
+    - 'Created table acme_shop_product_featured'
+    - builder_table_create_acme_shop_product_featured.php
+1.0.32:
+    - 'Updated table acme_shop_product'
+    - builder_table_update_acme_shop_product_5.php
+1.0.33:
+    - 'Updated table acme_shop_product'
+    - builder_table_update_acme_shop_product_6.php

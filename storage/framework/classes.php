@@ -162,4 +162,6 @@
   'Acme\\Shop\\Models\\Promocode' => 'plugins\\acme\\shop\\models\\Promocode.php',
   'Acme\\Shop\\Classes\\PromocodeController' => 'plugins\\acme\\shop\\classes\\PromocodeController.php',
   'Acme\\Shop\\Classes\\CommentController' => 'plugins\\acme\\shop\\classes\\CommentController.php',
+  'Acme\\Shop\\FormWidgets\\FeaturedBox' => 'plugins\\acme\\shop\\formwidgets\\FeaturedBox.php',
+  'Acme\\Shop\\FormWidgets\\BrandBox' => 'plugins\\acme\\shop\\formwidgets\\BrandBox.php',
 );

@@ -55,6 +55,7 @@ const header = document.querySelector("header"),
     }
     closeAllModals();
     const currentModal = modalId.querySelector(`[data-modal="${typeModal}"]`);
+    if (!currentModal) return;
     modalId.classList.add("modal_active");
     currentModal.classList.add("modal__popup_open");
     document.body.classList.add("modal-open");

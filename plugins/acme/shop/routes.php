@@ -84,7 +84,10 @@ Route::prefix('/api')->group(function () {
       $query->orderBy('sort_order', 'asc')->where('is_show', 1)->get(['id', 'parent_id', 'title', 'slug']);
     }])->with(['brand' => function($query) {
       $query->where([['is_active', 1]])->select(['id', 'title'])->get();
-    }])->where('id', $id)->first();
+    }])->with(['featured' => function($query) {
+      $query->orderBy('sort_order', 'asc')->where('is_active', 1)->get(['id', 'code', 'title', 'image']);
+    }])
+    ->where('id', $id)->first();
   });
   Route::get('/slider', function () {
     return Slider::orderBy('sort_order', 'asc')->get();
@@ -133,4 +136,11 @@ Route::prefix('/api')->group(function () {
 
   Route::post('/promocode/add', 'Acme\Shop\Classes\PromocodeController@add');
 
+});
+
+Route::get('sitemap.xml', function () {
+  $products = Product::all();
+  $categories = Category::all();
+
+  return Response::view('acme.shop::sitemap', ['products' => $products, 'categories' => $categories])->header('Content-Type', 'text/xml');
 });

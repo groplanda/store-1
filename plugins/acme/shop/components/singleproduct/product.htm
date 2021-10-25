@@ -1,0 +1,219 @@
+{% set index = 1 %}
+<div class="breadcrumbs section">
+  <div class="breadcrumbs__wrap wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for breadcrumb in breadcrumbs %}
+    {% if not loop.last %}
+    <div class="breadcrumbs__item" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <a itemprop="item" class="breadcrumbs__link" href="{{ breadcrumb.category ? 'category'|page({slug: breadcrumb.url}) : breadcrumb.url|page }}">
+        <span itemprop="name">{{ breadcrumb.title }}</span>
+      </a>
+      <div class="breadcrumbs__hidden" itemprop="url" href="{{ breadcrumb.category ? 'category'|page({slug: breadcrumb.url}) : breadcrumb.url|page }}"></div>
+      <meta itemprop="position" content="{{ index }}" />
+      <svg width="10" height="6" class="breadcrumbs__arrow" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.94207 2.85L7.7199 0.824504C7.65816 0.774358 7.59066 0.764709 7.51735 0.79558C7.44412 0.82649 7.40735 0.882393 7.40735 0.96345V2.25976H0.185181C0.131143 2.25976 0.0867528 2.27709 0.0520719 2.31181C0.0174114 2.34651 0 2.3909 0 2.4449V3.55598C0 3.60996 0.0173303 3.65435 0.0520517 3.68901C0.0868136 3.72371 0.131203 3.74104 0.18516 3.74104H7.40739V5.03732C7.40739 5.11459 7.44422 5.17049 7.51741 5.20511C7.59079 5.2361 7.65828 5.22439 7.72002 5.17049L9.94219 3.12173C9.98076 3.08318 10 3.03696 10 2.9829C10 2.93288 9.98064 2.88857 9.94207 2.85Z" fill="black"/>
+      </svg>
+    </div>
+    {% else %}
+    <div class="breadcrumbs__item" itemscope itemtype="https://schema.org/BreadcrumbList" >
+      <div itemprop="name" class="breadcrumbs__link">{{ breadcrumb.title }}</div>
+      <div class="breadcrumbs__hidden" itemprop="item" itemprop="url" href="{{ 'product'|page({ id: breadcrumb.url }) }}"></div>
+      <meta itemprop="position" content="{{ index }}" />
+    </div>
+    {% endif %}
+    {% set index = loop.index + 1 %}
+    {% endfor %}
+  </div>
+</div>
+<section class="product section" itemscope itemtype="https://schema.org/Product">
+  <!-- meta start -->
+  <meta itemprop="name" content="{{ product.meta_title ? product.meta_title : product.title }}" />
+  <link itemprop="url" href="{{ this.page.url }}" />
+  <link itemprop="image" href="{{ product.image|media }}" />
+  {% if product.brand %}
+  <meta itemprop="brand" content="{{ product.brand.title }}" />
+  <meta itemprop="manufacturer" content="{{ product.brand.title }}" />
+  {% endif %}
+  <meta itemprop="model" content="{{ product.title }}" />
+  <meta itemprop="gtin12" content="upc" />
+  <meta itemprop="gtin8" content="ean" />
+  <meta itemprop="productID" content="{{ product.code }}" />
+  <meta itemprop="category" content="{{ product.categories[0].title }}" />
+  <meta itemprop="description" content="{{ product.meta_description }}" />
+  <!-- meta end -->
+  <div class="wrap product__wrap" data-sticky-container>
+    <div class="product__row">
+      <div class="product__gallery">
+        {% if product.image %}
+        <div class="product__slider swiper" data-js-slider="product-view">
+          <div class="swiper-wrapper">
+            <div class="product__slider-item swiper-slide">
+              <img src="{{ product.image|media|resize(false, 450, { mode: 'crop', quality: '80' }) }}" alt="{{ product.title }}" class="product__slider-img" />
+            </div>
+            {% for image in product.gallery %}
+            <div class="product__slider-item swiper-slide">
+              <img src="{{ image.path|resize(false, 450, { mode: 'crop', quality: '80' }) }}" alt="{{ image.title ? image.title : image.file_name }}" class="product__slider-img" />
+            </div>
+            {% endfor %}
+          </div>
+          {% if product.gallery|length > 0 %}
+          <button class="product__slider-arrow product__slider-arrow_prev">
+            <svg class="product__slider-arrow-ico" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.125 1.75L1 6.875L6.125 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="product__slider-arrow product__slider-arrow_next">
+            <svg class="product__slider-arrow-ico" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.875 11.25L7 6.125L1.875 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% if product.gallery|length > 0 %}
+        <div class="product__thumbs swiper" data-js-slider="product-thumbs">
+          <div class="swiper-wrapper">
+            <div class="product__thumb-item swiper-slide">
+              <div class="product__thumb-inner">
+                <img src="{{ product.image|media }}" alt="{{ product.title }}" class="product__slider-img" />
+              </div>
+            </div>
+            {% for image in product.gallery %}
+            <div class="product__thumb-item swiper-slide">
+              <div class="product__thumb-inner">
+                <img src="{{ image.path }}" alt="{{ image.title ? image.title : image.file_name }}" class="product__slider-img" />
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <div class="product__info" data-sticky data-sticky-for="992" data-sticky-class="product__info_fixed">
+        <h1 class="title title_lg product__title">{{ product.title }}</h1>
+        <div class="product__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+          {% if product.sale_price > 0 %}
+          <div class="product__price-current">{{ product.sale_price|number_format(0, '', ' ') }} ₽</div>
+          <div class="product__price-old">{{ product.price|number_format(0, '', ' ') }} ₽</div>
+          {% else %}
+          <div class="product__price-current">{{ product.price|number_format(0, '', ' ') }} ₽</div>
+          {% endif %}
+          <meta itemprop="priceCurrency" content="RUB" />
+          <meta itemprop="price" content="{{ product.sale_price ? product.sale_price : product.price }}" />
+          <link itemprop="availability" href="https://schema.org/InStock" />
+        </div>
+        <div class="product__tag-list">
+          {% if product.is_hit %}
+          <div class="product__tag-item">Хит продаж</div>
+          {% endif %}
+          {% if product.sale_price > 0 %}
+          <div class="product__tag-item">Распродажа</div>
+          {% endif %}
+        </div>
+        <div class="product__info-action">
+          {% if product.price %}
+          <button type="button" class="button button_primary product__info-btn" data-product-id="{{ product.id }}" data-js-action="add-to-cart">Добавить в корзину</button>
+          {% endif %}
+          {% if product.code %}
+          <span class="product__code button button_outline">Код товара: {{ product.code }}</span>
+          {% endif %}
+        </div>
+        <div class="product__advantages">
+          <div class="product__advantages-item">
+            <svg class="product__advantages-ico" width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 9.76569L8.21865 18L24 2.23428L21.7343 -6.10352e-05L8.21865 13.4999L2.23429 7.51562L0 9.76569Z" fill="currentColor"/>
+            </svg>
+            <p class="product__advantages-descr">В наличии</p>
+          </div>
+          <div class="product__advantages-item">
+            <svg class="product__advantages-ico" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.8912 14.737C22.4082 19.5998 18.4681 23.5082 13.6018 23.9554C7.84937 24.4839 2.94418 20.2546 2.3752 14.7574H1.3614C0.745047 14.7574 0.359833 14.0901 0.668067 13.5564L2.93543 9.63004C3.24362 9.09636 4.01397 9.0964 4.32213 9.63008L6.58906 13.5564C6.89722 14.0902 6.512 14.7574 5.89569 14.7574H5.01311C5.58648 18.8617 9.40748 21.9398 13.7884 21.2977C17.0303 20.8226 19.6599 18.2649 20.2109 15.0351C21.0356 10.2009 17.3156 5.99363 12.6317 5.99363C11.1127 5.99363 9.64662 6.43433 8.38725 7.26888C7.80278 7.65617 6.99259 7.57954 6.56381 7.02484C6.09695 6.42084 6.24271 5.55861 6.86526 5.13822C8.21643 4.22544 9.74819 3.65501 11.353 3.45638V1.96811H10.3027C9.94128 1.96811 9.6483 1.67517 9.6483 1.31376V0.654472C9.6483 0.293062 9.94124 0.00012207 10.3027 0.00012207H15.1737C15.535 0.00012207 15.828 0.293062 15.828 0.654472V1.31376C15.828 1.67514 15.5351 1.96811 15.1737 1.96811H14.0167V3.47191C19.3834 4.19603 23.4549 9.06134 22.8912 14.737ZM23.2301 4.83402L21.2571 3.01031C20.9917 2.76501 20.5777 2.78129 20.3324 3.04666L19.8105 3.61132C19.5651 3.87669 19.5814 4.29069 19.8468 4.53603L21.8198 6.3597C22.0852 6.60496 22.4992 6.58872 22.7445 6.32335L23.2664 5.75869C23.5118 5.49332 23.4955 5.07932 23.2301 4.83402ZM12.6006 7.33888V13.7386H18.9365C18.9366 9.84122 15.9796 7.33888 12.6006 7.33888Z" fill="currentColor"/>
+            </svg>
+            <p class="product__advantages-descr">Доставка по Москве — бесплатно, по России — от 300 ₽</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="product__content">
+      {% if product.featured|length > 0 %}
+      <div class="product__featured">
+        <div class="product__featured-title">Дополнительные цвета: </div>
+        <div class="product__featured-row">
+          {% for featured in product.featured %}
+          <div class="product__featured-item">
+            <img src="{{ featured.image|media|resize(false, 80, { mode: 'crop', quality: '80' }) }}" class="product__featured-img" alt="{{ featured.title }}" />
+            <a href="#!" data-featured="{{ featured.id }}" title="{{ featured.title }}" class="product__featured-url"></a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+      <div class="tabs">
+        <div class="tabs__heading">
+          <div class="tabs__heading-item tabs__heading-item_current" data-header-tab="0">Описание и характеристики</div>
+          <div class="tabs__heading-item" data-header-tab="1">Доставка и оплата</div>
+        </div>
+        <div class="tabs__body">
+          <div class="tabs__item tabs__item_open" data-body-tab="0">
+            <div class="product__body">
+              {{ product.description|raw }}
+            </div>
+
+            <div class="product__props">
+              {% for prop in product.props %}
+              <div class="product__prop">
+                <div class="product__prop-thead">
+                  <div class="product__prop-label">{{ prop.props_option }}</div>
+                </div>
+                <div class="product__prop-val">{{ prop.props_value }}</div>
+              </div>
+              {% endfor %}
+              {% if product.brand %}
+              <div class="product__prop">
+                <div class="product__prop-thead">
+                  <div class="product__prop-label">Бренд</div>
+                </div>
+                <div class="product__prop-val">{{ product.brand.title }}</div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="tabs__item" data-body-tab="1">
+            <div class="page__entry">
+              {% content "product-delivery.htm" %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product__comment">
+        <h3 class="title title_sm product__comment-title">Отзывы</h3>
+        {% if product.comments|length > 0 %}
+        <div class="product__comment-list">
+          {% for comment in product.comments %}
+          <div class="product__comment-item" itemscope itemtype="https://schema.org/Review">
+            <div class="product__comment-name" itemprop="author">{{ comment.title }}</div>
+            <meta itemprop="datePublished" content="{{ comment.created_at|date('Y-m-d') }}" />
+            <div class="product__comment-stars" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+              <meta itemprop="worstRating" content = "1" />
+              <meta itemprop="ratingValue" content="{{ comment.star }}" />
+              <meta itemprop="bestRating" content="5" />
+              {% for index in 1..5 %}
+              <svg xmlns="http://www.w3.org/2000/svg" class="product__comment-star{{ index <= comment.star ? ' product__comment-star_active' : '' }}" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+              </svg>
+              {% endfor %}
+            </div>
+            <p class="product__comment-decription">{{ comment.description }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+          <p class="product__comment-empty">Отзывов пока нет...</p>
+        {% endif %}
+        <button type="button" class="product__comment-btn button button_blue" data-js-action="open-modal" data-type-modal="add-comment" data-product-id="{{ product.id }}">Оставить отзыв</button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -43,6 +43,14 @@ class Plugin extends PluginBase
             'Acme\Shop\FormWidgets\Parentbox' => [
                 'label' => 'Parent box',
                 'code' => 'parentbox'
+            ],
+            'Acme\Shop\FormWidgets\FeaturedBox' => [
+              'label' => 'Featured box',
+              'code' => 'featuredbox'
+            ],
+            'Acme\Shop\FormWidgets\BrandBox' => [
+              'label' => 'Brand box',
+              'code' => 'brandbox'
             ]
         ];
     }

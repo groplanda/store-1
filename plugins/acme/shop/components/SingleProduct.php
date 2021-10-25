@@ -15,13 +15,20 @@ class SingleProduct extends \Cms\Classes\ComponentBase
 
     function prepareVars()
     {
-      $id = $this->param('id');
+      $page = post('page', null);
+      if (isset($page) && !empty($page)) {
+        $id = $page;
+      } else {
+        $id = $this->param('id');
+      }
       $product = Product::with(['gallery', 'tags'])->with(['comments' => function($query) {
         $query->orderBy('sort_order', 'asc')->where('status', 1);
       }])->with(['categories' => function($query) {
         $query->orderBy('sort_order', 'asc')->where('is_show', 1)->get(['id', 'parent_id', 'title', 'slug']);
       }])->with(['brand' => function($query) {
         $query->where([['is_active', 1]])->select(['id', 'title'])->get();
+      }])->with(['featured' => function($query) {
+        $query->orderBy('sort_order', 'asc')->where('is_active', 1)->get(['id', 'code', 'title', 'image']);
       }])->where('id', $id)->first();
 
       if($product == null) {
@@ -54,7 +61,7 @@ class SingleProduct extends \Cms\Classes\ComponentBase
       $this->prepareVars();
     }
 
-    public function getBreadcrumbs() {
-
+    public function onFeature() {
+      $this->prepareVars();
     }
 }

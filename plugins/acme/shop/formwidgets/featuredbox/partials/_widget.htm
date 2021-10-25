@@ -1,0 +1,23 @@
+<br>
+<select multiple class="s2" name="<?= $name ?>" style="width: 100%; display: block">
+  <?php foreach($products as $key => $product):  ?>
+  <option
+  <?php echo in_array($key, $selectedValue) ? 'selected="selected"' : '' ?>
+  value="<?= $key ?>"><?= $product ?></option>
+  <?php endforeach;  ?>
+</select>
+<script>
+  $( document ).ready(function() {
+    $('.s2').select2({
+      placeholder: "Добавить товар",
+      tags: true
+    })
+    setTimeout(() => {
+      $('.s2').css({'width': '100%', 'display': 'block'})
+      $('.select2-container .select2-selection--multiple').css('min-height', '36px')
+      $('.select2 .select2-search__field').css({'width': '100% !important'})
+      $('.select2-container--default .select2-selection--multiple .select2-selection__choice__remove').css({'margin-left': '0'})
+      $('.select2-container--default .select2-selection--multiple .select2-selection__choice').css({'padding-left': '25px', 'padding-right': '5px'})
+    }, 1000)
+  });
+</script>

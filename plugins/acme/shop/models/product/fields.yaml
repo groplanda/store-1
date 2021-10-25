@@ -111,8 +111,9 @@ tabs:
             tab: Отзывы
         brand:
             label: Бренд
-            nameFrom: title
-            descriptionFrom: description
-            span: full
-            type: relation
+            type: brandbox
             tab: Бренд
+        featured:
+            label: Вариативные товары
+            tab: Вариативные товары
+            type: featuredbox

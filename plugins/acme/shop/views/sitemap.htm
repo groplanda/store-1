@@ -1,0 +1,21 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  {% for product in products %}
+      <url>
+          <loc>{{ url('/product') }}/{{ product.id }}</loc>
+          <lastmod>{{ product.created_at|date('c') }}</lastmod>
+          <changefreq>always</changefreq>
+          <priority>0.5</priority>
+      </url>
+  {% endfor %}
+
+  {% for category in categories %}
+      <url>
+          <loc>{{ url('/category') }}/{{ category.slug }}</loc>
+          <lastmod>{{ category.created_at|date('c') }}</lastmod>
+          <changefreq>always</changefreq>
+          <priority>0.5</priority>
+      </url>
+  {% endfor %}
+
+</urlset>
