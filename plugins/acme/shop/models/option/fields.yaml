@@ -1,0 +1,19 @@
+fields:
+    name:
+        label: Имя
+        span: auto
+        type: text
+    type:
+        label: 'Тип опции'
+        options:
+            select: 'Одиночный выбор'
+            checkbox: 'Множественный выбор'
+        showSearch: true
+        span: auto
+        type: dropdown
+    option_value:
+        label: 'Опции'
+        nameFrom: name
+        span: full
+        type: partial
+        path: field_option_value

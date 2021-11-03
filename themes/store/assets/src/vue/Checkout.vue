@@ -110,7 +110,7 @@
             <div class="checkout__cart-list" v-if="products">
               <CartItem
                 v-for="product in products"
-                :key="product.id"
+                :key="product.index"
                 :product="product"
                 @changeAmount="changeAmount"
                 @deleteProduct="deleteProduct"
@@ -272,13 +272,25 @@ export default {
     },
 
     getProductsByIds(cartData) {
-      const productIds = cartData.map(el => el.id);
-      axios.get(`/api/products/${productIds}`)
+      const productIds = cartData.filter(el => !el.optionId).map(el => el.id),
+            options = cartData.filter(el => el.optionId && el.optionId).map(el => {
+              return { id: el.id, optionId: el.optionId };
+            })
+      axios.get("/api/products/" + productIds, { params: { options } })
       .then(response => {
-        this.products = response.data.map(product => {
-          cartData.forEach(el => {
-            if (el.id == product.id) product.amount = el.amount;
-          });
+        this.products = response.data.map((product, index) => {
+          if (this.hasProductOption(product.options)) {
+            const productOption = product.options[0];
+
+            product.optionId = productOption.id;
+            product.amount = this.findAmountByOptionId(cartData, productOption.id);
+            product.price = productOption.price;
+            product.sale_price = productOption.sale_price;
+            product.title = product.title + ' - ' + productOption.product_option.name + ' ' + productOption.option_value.name;
+          } else {
+            product.amount = this.findAmountById(cartData, product.id);
+          }
+          product.index = index + '-' + product.id;
           return product;
         })
       })
@@ -287,12 +299,32 @@ export default {
       })
     },
 
+    findAmountById(array, id) {
+      return array.find(el => +el.id == +id).amount
+    },
+
+    findAmountByOptionId(array, optionId) {
+      return array.find(el => +el.optionId == +optionId).amount
+    },
+
+    hasProductOption(options) {
+      return options && options.length > 0;
+    },
+
     changeAmount(data) {
-      const prepareData = { id: data.id, amount: data.amount };
+      const prepareData = { id: data.id, amount: data.amount, optionId: data.optionId };
       this.products = this.products.map(product => {
-        if (data.id == product.id) {
-          prepareData.amount = data.amount - product.amount;
-          product.amount = data.amount;
+
+        if (data.optionId) {
+          if (Number(data.optionId) === Number(product.optionId)) {
+            prepareData.amount = Number(data.amount) - Number(product.amount);
+            product.amount = data.amount;
+          }
+        } else {
+          if (Number(data.id) == Number(product.id)) {
+            prepareData.amount = Number(data.amount) - Number(product.amount);
+            product.amount = data.amount;
+          }
         }
         return product;
       })
@@ -300,13 +332,19 @@ export default {
       cart.addToCart(prepareData);
     },
 
-    deleteProduct(id) {
-      const productIndex = this.products.findIndex(el => el.id === id);
+    deleteProduct(data) {
+      let productIndex = -1;
+      if (data.optionId) {
+        productIndex = this.products.findIndex(el => Number(el.id) === Number(data.id) && Number(el.optionId) === Number(data.optionId));
+      } else {
+        productIndex = this.products.findIndex(el => Number(el.id) === Number(data.id));
+      }
       if (productIndex !== -1) {
         this.products.splice(productIndex, 1);
       }
       const cart = new Cart(".js-cart", ".js-cart-count");
-      cart.removeFromCart(id);
+      cart.removeFromCart(productIndex);
+
       if (this.products.length === 0) {
         window.location.href = "/";
       }

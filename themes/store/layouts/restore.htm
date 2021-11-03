@@ -1,0 +1,55 @@
+description = "Restore password"
+==
+<?php
+function onStart()
+{
+  $this['reset'] = request()->get('reset');
+  if($this['reset'] == null) {
+    return \Redirect::to('/');
+  }
+}
+?>
+==
+<!DOCTYPE html>
+<html lang="ru">
+  {% partial "meta" %}
+  <body>
+    <!-- Header -->
+    {% partial "header" %}
+
+    <!-- Content -->
+    <main class="main">
+      <!-- хлебные крошки старт --->
+      {% partial "breadcrumbs" %}
+      <!-- хлебные крошки конец --->
+      <section class="restore section">
+        <div class="wrap restore__wrap">
+          {% if reset %}
+          <div class="restore__content">
+            <h1 class="restore__title title title_sm">Восстановление пароля</h1>
+            <form id="restore-password" class="restore__form">
+              <div class="restore__form-group">
+                <label class="restore__form-label">Код</label>
+                <input type="text" name="code" class="restore__form-input" placeholder="Код восстановления" value="{{ reset }}" />
+                <span class="modal__form-error" data-error-for="code"></span>
+              </div>
+              <div class="restore__form-group restore__form-group_last">
+                <label class="restore__form-label">Новый пароль</label>
+                <input type="password" name="password" class="restore__form-input" placeholder="**********" />
+                <span class="modal__form-error" data-error-for="password"></span>
+              </div>
+              <button type="submit" class="button button_primary restore__form-button">Изменить пароль</button>
+              <div class="restore__form-done" data-js-action="response"></div>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "scripts" %}
+  </body>
+</html>

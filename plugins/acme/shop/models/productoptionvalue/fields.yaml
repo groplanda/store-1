@@ -1,0 +1,28 @@
+fields:
+    price:
+        label: Цена
+        span: auto
+        type: number
+    sale_price:
+        label: 'Цена по скидке'
+        span: auto
+        default: '0'
+        type: number
+        comment: 'Оставить 0 если скидки нет'
+    quantity:
+        label: 'Кол-во товара'
+        span: full
+        placeholder: '100'
+        type: number
+    product_option:
+        label: Опция
+        nameFrom: name
+        descriptionFrom: type
+        span: left
+        type: relation
+    option_value:
+        label: Значение
+        nameFrom: name
+        descriptionFrom: description
+        span: right
+        type: relation

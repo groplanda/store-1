@@ -57,15 +57,16 @@ class Product extends Model
         'key'      => 'product_id',
         'otherKey' => 'featured_id',
         'order'    => 'title'
-      ]
+      ],
     ];
 
     public $belongsTo = [
-      'brand' => [\Acme\Shop\Models\Brand::class]
+      'brand' => [\Acme\Shop\Models\Brand::class],
     ];
 
     public $hasMany  = [
-      'comments' => [\Acme\Shop\Models\Comment::class, 'key' => 'product_id']
+      'comments' => [\Acme\Shop\Models\Comment::class, 'key' => 'product_id'],
+      'options' => [\Acme\Shop\Models\ProductOptionValue::class, 'key' => 'product_id']
     ];
 
     public static $allowedSortingOptions = [

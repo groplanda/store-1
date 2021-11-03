@@ -27,7 +27,7 @@ class CommentController extends Controller
 
     $messages = [
       'required' => 'Поле обязательно к заполнению!',
-      'star.required' => 'Укажите оценку',
+      'star.required' => 'Выберите оценку',
       'between'  => 'Оценка должна быть от 1 до 5',
       'min'      => 'Минимум :min символов!',
       'max'      => 'Максимум :max символов!',

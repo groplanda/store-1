@@ -24,10 +24,17 @@
 
       <div class="account__table-row" v-for="(product, index) in order.products" :key="index">
         <div class="account__table-col account__table-col_info">
-          <a :href="'/product/' + product.id" class="account__table-link">{{ product.title }}</a>
+          <a :href="'/product/' + product.id" class="account__table-link">{{ product.title }} x {{ product.amount }}</a>
         </div>
         <div class="account__table-col account__table-col_total">
           <span class="account__table-total">{{ product.sale_price ? productPrice(product.sale_price) : productPrice(product.price) }}</span>
+        </div>
+      </div>
+
+      <div class="account__table-row">
+        <div class="account__table-col account__table-col_info">
+          <button type="button" class="account__table-button button button_primary" @click="repeatOrder">Повторить заказ</button>
+          <div class="account__table-error" v-if="message">{{ message }}</div>
         </div>
       </div>
 
@@ -55,7 +62,8 @@ export default {
         { id: '0', title: 'Яндекс касса' },
         { id: '1', title: 'Картой при доставке' },
         { id: '2', title: 'Наличными при доставке' }
-      ]
+      ],
+      message: ""
     }
   },
   props: {
@@ -112,6 +120,22 @@ export default {
     productPrice(price) {
       return price.toLocaleString('ru') + ' ₽';
     },
+    repeatOrder() {
+      this.message = "";
+      const products = this.order.products;
+      const order = products.filter(product => product.id).map(product => {
+        return {
+          id: product.id,
+          amount: product.amount,
+          optionId: product.optionId ? product.optionId : null
+        }
+      })
+      if (order.length < 1) {
+        this.message = "Не удалось повторить заказ!";
+        return;
+      }
+      this.$emit("repeatOrder", order);
+    }
   }
 }
 </script>

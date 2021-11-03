@@ -265,6 +265,38 @@
     }
   }
 
+  &__form-forgot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $grey-color;
+    font-size: 13px;
+    line-height: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: $blue-color;
+      text-decoration: none;
+    }
+  }
+
+  &__form-link {
+    margin-top: 5px;
+    display: block;
+    color: $grey-color;
+    font-size: 13px;
+    line-height: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      color: $blue-color;
+      text-decoration: none;
+    }
+  }
+
   &__form-input {
     background: $light-color;
     border: 1px solid $blue-light-color;

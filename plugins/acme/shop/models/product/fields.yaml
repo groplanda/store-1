@@ -83,12 +83,12 @@ tabs:
             type: relation
             tab: Теги
         props:
-            label: Опции
-            prompt: 'Добавить опции'
+            label: Параметры
+            prompt: 'Добавить параметр'
             style: collapsed
             span: full
             type: repeater
-            tab: Опции
+            tab: Параметры
             form:
                 fields:
                     props_option:
@@ -102,18 +102,18 @@ tabs:
                         span: auto
                         placeholder: 120см
                         type: text
-        comments:
-            label: Комметарии
-            nameFrom: title
-            descriptionFrom: description
-            span: auto
-            type: relation
-            tab: Отзывы
         brand:
             label: Бренд
             type: brandbox
             tab: Бренд
         featured:
-            label: Вариативные товары
-            tab: Вариативные товары
+            label: 'Вариативные товары'
+            tab: 'Вариативные товары'
             type: featuredbox
+        options:
+            label: 'Опции'
+            nameFrom: name
+            span: full
+            type: partial
+            path: field_options
+            tab: Опции

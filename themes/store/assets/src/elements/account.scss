@@ -235,6 +235,19 @@
     font-weight: 700;
   }
 
+  &__table-button {
+    font-size: 12px;
+    padding: 1px 20px;
+  }
+
+  &__table-error {
+    margin-top: 2px;
+    color: $red-color;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
   &__form-row {
     display: flex;
     flex-wrap: wrap;

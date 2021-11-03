@@ -1,6 +1,8 @@
 <?php namespace Acme\Shop\Components;
 
 use Acme\Shop\Models\Product;
+use Acme\Shop\Models\Wish;
+use Auth;
 
 class SingleProduct extends \Cms\Classes\ComponentBase
 {
@@ -21,6 +23,7 @@ class SingleProduct extends \Cms\Classes\ComponentBase
       } else {
         $id = $this->param('id');
       }
+
       $product = Product::with(['gallery', 'tags'])->with(['comments' => function($query) {
         $query->orderBy('sort_order', 'asc')->where('status', 1);
       }])->with(['categories' => function($query) {
@@ -29,11 +32,18 @@ class SingleProduct extends \Cms\Classes\ComponentBase
         $query->where([['is_active', 1]])->select(['id', 'title'])->get();
       }])->with(['featured' => function($query) {
         $query->orderBy('sort_order', 'asc')->where('is_active', 1)->get(['id', 'code', 'title', 'image']);
+      }])->with(['options' => function($query) {
+        $query->with(['product_option' => function($query) {
+          $query->select(['id', 'type', 'name'])->get();
+        }])->with(['option_value' => function($query) {
+          $query->select(['id', 'name'])->get();
+        }])->get();
       }])->where('id', $id)->first();
 
       if($product == null) {
           return \Response::make($this->controller->run('404'), 404);
       }
+
       $this->page['product'] = $product;
       $this->page->title = $this->page['product']->title;
       $this->page->meta_title = $this->page['product']->meta_title;
@@ -51,8 +61,13 @@ class SingleProduct extends \Cms\Classes\ComponentBase
       }
 
       if ($product->categories[0]) {
-
         $this->page['additionals'] = Product::select(['id', 'title', 'slug', 'image', 'sale_price', 'price'])->where([['is_active', 1], ['id', '!=', $product->id]])->orderBy('sort_order', 'asc')->limit(4)->get();
+      }
+
+      $user = $this->checkUser();
+      if ($user) {
+        $this->page['user_id'] = $user->id;
+        $this->page['is_wish'] = $this->isProductWish($user->id, $product->id);
       }
     }
 
@@ -61,7 +76,29 @@ class SingleProduct extends \Cms\Classes\ComponentBase
       $this->prepareVars();
     }
 
-    public function onFeature() {
+    public function onFeature()
+    {
       $this->prepareVars();
+    }
+
+    private function checkUser() {
+      if (!$user = Auth::getUser()) {
+        return null;
+      }
+      if (!Auth::isImpersonator()) {
+          $user->touchLastSeen();
+      }
+      return $user;
+    }
+
+    private function isProductWish($user_id, $product_id) {
+      $wish = Wish::where('user_id', $user_id)->first();
+      if ($wish) {
+        $products = $wish->products;
+        if(is_array($products)) {
+          return array_search($product_id, $products) !== false;
+        }
+        return false;
+      }
     }
 }

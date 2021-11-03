@@ -1,0 +1,30 @@
+columns:
+    product_option:
+        label: Имя
+        type: text
+        searchable: true
+        sortable: true
+        select: name
+        relation: product_option
+    option_value:
+        label: Значение
+        type: text
+        searchable: true
+        sortable: true
+        select: name
+        relation: option_value
+    price:
+        label: Цена
+        type: number
+        searchable: true
+        sortable: true
+    sale_price:
+        label: 'Цена по скидке'
+        type: number
+        searchable: true
+        sortable: true
+    quantity:
+        label: Количество
+        type: number
+        searchable: true
+        sortable: true

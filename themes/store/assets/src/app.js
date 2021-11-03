@@ -9,6 +9,7 @@ import { Cart } from './plugins/Cart';
 import './helpers/modal';
 import { Tabs } from './plugins/Tabs';
 import noUiSlider from 'nouislider';
+import { Wish } from './plugins/Wish';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -245,12 +246,14 @@ document.addEventListener("DOMContentLoaded", () => {
       addBtns.forEach(btn => {
         btn.addEventListener("click", function() {
           const id = this.dataset.productId;
+          const optionId = this.dataset.optionId ? Number(this.dataset.optionId) : null;
           if (!id) return;
-          cart.addToCart({ id: Number(id), amount: 1 })
+          cart.addToCart({ id: Number(id), amount: 1, optionId: optionId })
         })
       })
     }
   }
+
   addToCart();
 
   // mobile menu
@@ -473,6 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
       productSlider();
     }
     new Sticky('[data-sticky]');
+    setupOptions();
   }
 
   function productSlider() {
@@ -514,6 +518,71 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = e.target.dataset.featured;
       selectFeatured(id)
     }
+
+    if (e.target.dataset.jsAction === "options") {
+      e.preventDefault();
+      const selected = e.target;
+      selectOption(selected);
+    }
+
+    if (e.target.dataset.jsAction === "toggle-wish") {
+      e.preventDefault();
+      const target = e.target;
+      target.classList.toggle("product__wish_active");
+
+      new Wish().toggeWish({
+        product_id: target.dataset.productId,
+        user_id: target.dataset.userId
+      });
+
+    }
+  }
+
+  function setupOptions() {
+    const activeOptionBtn = document.querySelector(".product__options-item_active");
+
+    if (activeOptionBtn) {
+      selectOption(activeOptionBtn)
+    }
+  }
+
+  function selectOption(btn) {
+    removeActiveOptions();
+    btn.classList.add("product__options-item_active");
+    const DATA_KEYS = ['price', 'salePrice', 'type', 'name', 'optionId'];
+    const productData = {};
+    DATA_KEYS.forEach(key => productData[key] = btn.dataset[key]);
+    updateProductPrice(productData.price, productData.salePrice);
+    updateAddToCart(productData.optionId);
+  }
+
+  function removeActiveOptions() {
+    const buttons = document.querySelectorAll('[data-js-action="options"]');
+    for(let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove("product__options-item_active");
+    }
+  }
+
+  function updateAddToCart(optionId) {
+    const addToCart = document.querySelector('[data-js-action="add-to-cart"]');
+    addToCart.setAttribute('data-option-id', optionId);
+  }
+
+  function updateProductPrice(price, salePrice) {
+    const $currentPrice = document.querySelector('[data-js="price-current"]'),
+          $oldPrice = document.querySelector('[data-js="price-old"]');
+    if (+salePrice > 0) {
+      $currentPrice.textContent = preparePrice(salePrice);
+      $oldPrice.textContent = preparePrice(price);
+      $oldPrice.classList.remove("product__price-old_hide");
+      return;
+    }
+    $currentPrice.textContent = preparePrice(price);
+    $oldPrice.classList.add("product__price-old_hide");
+  }
+
+  function preparePrice (price) {
+    return price.toLocaleString('ru') + ' ₽';
   }
 
   function selectFeatured(id) {
@@ -540,6 +609,8 @@ document.addEventListener("DOMContentLoaded", () => {
       addToCart();
       new Sticky('[data-sticky]');
       new Tabs(".tabs", "tabs__heading-item_current", "tabs__item_open").init();
+      setupOptions();
+      productWrap.addEventListener("click", handleProduct);
       setTimeout(() => {
         preloader.classList.remove("loading_active");
       }, 400)
@@ -554,5 +625,4 @@ document.addEventListener("DOMContentLoaded", () => {
     const getParams = location.search;
     history.pushState({id: id}, null, fullLoc + id + getParams);
   }
-
 });

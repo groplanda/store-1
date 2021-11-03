@@ -1,0 +1,11 @@
+
+options:
+  label: Опции
+  view:
+    list: $/acme/shop/models/productoptionvalue/columns.yaml
+    showSearch: true
+    showSorting: true
+    toolbarButtons: create|delete
+  manage:
+    form: $/acme/shop/models/productoptionvalue/fields.yaml
+    showCheckboxes: true

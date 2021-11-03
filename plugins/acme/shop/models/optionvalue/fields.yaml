@@ -1,0 +1,11 @@
+fields:
+    name:
+        label: 'Значение опции'
+        span: auto
+        type: text
+    sort_order:
+        label: 'Порядок сортировки'
+        span: auto
+        placeholder: ''
+        default: '0'
+        type: number

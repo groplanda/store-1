@@ -96,3 +96,42 @@
 1.0.33:
     - 'Updated table acme_shop_product'
     - builder_table_update_acme_shop_product_6.php
+1.0.34:
+    - 'Created table acme_shop_option'
+    - builder_table_create_acme_shop_option.php
+1.0.35:
+    - 'Created table acme_shop_option_description'
+    - builder_table_create_acme_shop_option_description.php
+1.0.36:
+    - 'Drop table acme_shop_option_description'
+    - builder_table_delete_acme_shop_option_description.php
+1.0.37:
+    - 'Updated table acme_shop_option'
+    - builder_table_update_acme_shop_option.php
+1.0.38:
+    - 'Created table acme_shop_product_option'
+    - builder_table_create_acme_shop_product_option.php
+1.0.39:
+    - 'Updated table acme_shop_option'
+    - builder_table_update_acme_shop_option_2.php
+1.0.40:
+    - 'Created table acme_shop_option_value'
+    - builder_table_create_acme_shop_option_value.php
+1.0.41:
+    - 'Updated table acme_shop_option_value'
+    - builder_table_update_acme_shop_option_value.php
+1.0.42:
+    - 'Updated table acme_shop_option_value'
+    - builder_table_update_acme_shop_option_value_2.php
+1.0.43:
+    - 'Updated table acme_shop_option_value'
+    - builder_table_update_acme_shop_option_value_3.php
+1.0.44:
+    - 'Created table acme_shop_product_option_value'
+    - builder_table_create_acme_shop_product_option_value.php
+1.0.45:
+    - 'Updated table acme_shop_product_option_value'
+    - builder_table_update_acme_shop_product_option_value.php
+1.0.46:
+    - 'Created table acme_shop_wish'
+    - builder_table_create_acme_shop_wish.php

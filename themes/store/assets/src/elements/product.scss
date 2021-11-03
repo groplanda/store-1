@@ -188,9 +188,92 @@
     color: $grey-color;
     margin: 0 0 2px 15px;
 
+    &_hide {
+      display: none;
+    }
+
     @media(max-width: 767px) {
       font-size: 14px;
       line-height: 17px;
+    }
+  }
+
+  &__wish {
+    margin-left: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 31px;
+    height: 31px;
+
+    @media(max-width: 767px) {
+      width: 26px;
+      height: 26px;
+      margin-left: 20px;
+    }
+
+    &_active, &:hover {
+      #{$root} {
+        &__wish-like {
+          fill: $blue-color;
+        }
+      }
+    }
+  }
+
+  &__wish-like {
+    color: $blue-light-color;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    transition: all .25s ease;
+
+    @media(max-width: 767px) {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__options {
+    margin-bottom: 20px;
+  }
+
+  &__options-title {
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    margin-bottom: 10px;
+  }
+
+  &__options-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 -5px;
+  }
+
+  &__options-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    background: #fff;
+    border: 1px solid $blue-light-color;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    color: $dark-color;
+    transition: all .3s ease;
+
+    &:hover, &:focus, &_active {
+      border-color: $blue-color;
+    }
+
+    &_active, &:focus {
+      color: $blue-color;
     }
   }
 

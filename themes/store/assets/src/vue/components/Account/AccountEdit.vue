@@ -15,7 +15,7 @@
     <div class="account__form-row">
       <div class="account__form-group account__form-group_col">
         <label class="account__form-label">Адрес электронной почты</label>
-        <input type="text" class="account__form-input" v-model="form.email" placeholder="ivanov@yandex.ru" />
+        <input type="text" class="account__form-input" v-model="form.email" placeholder="ivanov@yandex.ru" readonly />
         <span class="account__form-error" v-if="emailErr">{{ emailErr }}</span>
       </div>
       <div class="account__form-group account__form-group_col">

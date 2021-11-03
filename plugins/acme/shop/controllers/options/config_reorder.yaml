@@ -1,0 +1,4 @@
+title: Options
+modelClass: Acme\Shop\Models\Option
+toolbar:
+    buttons: reorder_toolbar

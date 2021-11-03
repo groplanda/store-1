@@ -91,16 +91,44 @@
       <div class="product__info" data-sticky data-sticky-for="992" data-sticky-class="product__info_fixed">
         <h1 class="title title_lg product__title">{{ product.title }}</h1>
         <div class="product__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-          {% if product.sale_price > 0 %}
-          <div class="product__price-current">{{ product.sale_price|number_format(0, '', ' ') }} ₽</div>
-          <div class="product__price-old">{{ product.price|number_format(0, '', ' ') }} ₽</div>
-          {% else %}
-          <div class="product__price-current">{{ product.price|number_format(0, '', ' ') }} ₽</div>
+
+          <div class="product__price-current" data-js="price-current">
+            {{ product.sale_price > 0 ? product.sale_price|number_format(0, '', ' ') : product.price|number_format(0, '', ' ') }} ₽
+          </div>
+          <div class="product__price-old{{ product.sale_price == 0 ? ' product__price-old_hide' : '' }}" data-js="price-old">{{ product.price|number_format(0, '', ' ') }} ₽</div>
+
+          {% if user_id %}
+          <button type="button" class="product__wish{{ is_wish ? ' product__wish_active' : '' }}" data-product-id="{{ product.id }}" data-user-id="{{ user_id }}" data-js-action="toggle-wish">
+            <svg xmlns="http://www.w3.org/2000/svg" class="product__wish-like" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+            </svg>
+          </button>
           {% endif %}
           <meta itemprop="priceCurrency" content="RUB" />
           <meta itemprop="price" content="{{ product.sale_price ? product.sale_price : product.price }}" />
           <link itemprop="availability" href="https://schema.org/InStock" />
         </div>
+        {% if product.options|length > 0 %}
+          <div class="product__options">
+            <div class="product__options-title">Размеры: </div>
+            <div class="product__options-row">
+              {% for option in product.options %}
+              <button
+                type="button"
+                class="product__options-item{{ loop.first ? ' product__options-item_active' : '' }}"
+                data-price="{{ option.price }}"
+                data-sale-price="{{ option.sale_price }}"
+                data-type="{{ option.product_option.type }}"
+                data-name="{{ option.product_option.name }}"
+                data-option-id="{{ option.id }}"
+                data-js-action="options"
+              >
+                {{ option.option_value.name }}
+              </button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
         <div class="product__tag-list">
           {% if product.is_hit %}
           <div class="product__tag-item">Хит продаж</div>

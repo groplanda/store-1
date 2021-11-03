@@ -1,0 +1,11 @@
+option_value:
+  label: Опции
+  view:
+    list: $/acme/shop/models/optionvalue/columns.yaml
+    showSearch: true
+    showSorting: true
+  manage:
+    form: $/acme/shop/models/optionvalue/fields.yaml
+    showCheckboxes: true
+  customMessages:
+    buttonRemove: Убрать из опции

@@ -164,4 +164,13 @@
   'Acme\\Shop\\Classes\\CommentController' => 'plugins\\acme\\shop\\classes\\CommentController.php',
   'Acme\\Shop\\FormWidgets\\FeaturedBox' => 'plugins\\acme\\shop\\formwidgets\\FeaturedBox.php',
   'Acme\\Shop\\FormWidgets\\BrandBox' => 'plugins\\acme\\shop\\formwidgets\\BrandBox.php',
+  'acme\\shop\\Controllers\\options' => 'plugins\\acme\\shop\\controllers\\options.php',
+  'Acme\\Shop\\Models\\Option' => 'plugins\\acme\\shop\\models\\Option.php',
+  'lovata\\shopaholic\\Plugin' => 'plugins\\lovata\\shopaholic\\Plugin.php',
+  'lovata\\toolbox\\Plugin' => 'plugins\\lovata\\toolbox\\Plugin.php',
+  'Acme\\Shop\\Models\\OptionValue' => 'plugins\\acme\\shop\\models\\OptionValue.php',
+  'Acme\\Shop\\Models\\ProductOptionValue' => 'plugins\\acme\\shop\\models\\ProductOptionValue.php',
+  'Acme\\Shop\\Models\\Wish' => 'plugins\\acme\\shop\\models\\Wish.php',
+  'Acme\\Shop\\Classes\\WishController' => 'plugins\\acme\\shop\\classes\\WishController.php',
+  'Acme\\Shop\\Components\\HeaderSession' => 'plugins\\acme\\shop\\components\\HeaderSession.php',
 );

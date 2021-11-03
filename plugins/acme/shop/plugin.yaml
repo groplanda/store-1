@@ -42,3 +42,7 @@ navigation:
                 label: Промокоды
                 url: acme/shop/promocodes
                 icon: icon-scissors
+            side-menu-options:
+                label: Опции
+                url: acme/shop/options
+                icon: icon-toggle-on

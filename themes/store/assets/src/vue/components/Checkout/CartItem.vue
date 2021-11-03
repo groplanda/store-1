@@ -51,10 +51,12 @@ export default {
     },
     changeAmount(val) {
       this.count = val;
-      this.$emit("changeAmount", { id: this.product.id, amount: this.count });
+      const optionId = this.product.optionId ? this.product.optionId : null;
+      this.$emit("changeAmount", { id: this.product.id, amount: this.count, optionId: optionId });
     },
     deleteProduct() {
-      this.$emit("deleteProduct", this.product.id);
+      const optionId = this.product.optionId ? this.product.optionId : null;
+      this.$emit("deleteProduct", { id: this.product.id, optionId: optionId });
     }
   }
 }

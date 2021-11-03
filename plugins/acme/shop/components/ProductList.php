@@ -37,7 +37,7 @@ class ProductList extends \Cms\Classes\ComponentBase
             $this->page['products'] = Product::active()->listFrontEnd($options, $perPage);
         } else {
             $category = Category::where('slug', $slug)->with(['products' => function($query) {
-              $query->select(['id', 'title', 'slug', 'image', 'sale_price', 'price', 'brand_id'])->where('is_active', 1)->with('tags')->with(['brand' => function($query) {
+              $query->select(['id', 'title', 'slug', 'image', 'sale_price', 'price', 'brand_id'])->where('is_active', 1)->with(['tags', 'options'])->with(['brand' => function($query) {
                 return $query->where([['is_active', 1]])->select(['id', 'title'])->get();
               }])->get();
             }])->withCount('products')->first();

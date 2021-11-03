@@ -1,7 +1,6 @@
 <?php
 
 namespace Acme\Shop\Classes;
-
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Validator;
@@ -14,6 +13,9 @@ use October\Rain\Auth\Manager;
 use October\Rain\Auth\AuthException;
 use RainLab\User\Components\Account;
 use Acme\Shop\Models\Order;
+use Acme\Shop\Models\Wish;
+use Acme\Shop\Models\Product;
+use Mail;
 
 class UserController extends Controller
 {
@@ -103,10 +105,16 @@ class UserController extends Controller
       return response()->json(['status' => 'error', 'password' => ['Неверный логин или пароль']]);
     }
 
-    $user = Auth::authenticate([
+    $credentials = [
       'login'    => $request->get('login'),
       'password' => $request->get('password')
-    ], true);
+    ];
+    Event::fire('rainlab.user.beforeAuthenticate', [$this, $credentials]);
+    $user = Auth::authenticate($credentials, true);
+
+    if ($ipAddress = $request->ip()) {
+      $user->touchIpAddress($ipAddress);
+    }
 
     return response()->json(array_merge(['status' => 'success', 'message' => $user]));
   }
@@ -140,11 +148,10 @@ class UserController extends Controller
 
   public function isUserLogin() {
     if (Cookie::has($this->sessionKey)) {
-
       if (!$user = Auth::getUser()) {
         return response()->json(false);
       }
-      return response()->json(true);
+      return response()->json($user->id);
     } else {
       return response()->json(false);
     }
@@ -248,10 +255,107 @@ class UserController extends Controller
     return response()->json((['status' => 'success', 'message' => 'Пароль обновлен!']), 200);
   }
 
+  public function resetPassword(Request $request) {
+    $rules = [
+      'email' => 'required|email'
+    ];
+
+    $messages = [
+      'required' => 'Поле обязательно к заполнению!',
+      'email'    => 'Некорректный e-mail',
+    ];
+
+    $validator = Validator::make($request->all(), $rules, $messages);
+
+    if ($validator->fails()) {
+      $validatorErrors = $validator->errors()->toArray();
+      return response()->json(array_merge(['status' => 'error'], $validatorErrors));
+    }
+
+    if (!$user = $this->getUserByLogin($request->get('email'))) {
+      return response()->json(['status' => 'error', 'email' => ['Пользователь не существует!']]);
+    }
+
+    $code = implode('!', [$user->id, $user->getResetPasswordCode()]);
+    $link = $this->makeResetUrl($code);
+    $data = [
+      'name' => $user->name,
+      'username' => $user->username,
+      'link' => $link,
+      'code' => $code
+    ];
+
+    Mail::send('acme.shop::mail.restore', $data, function($message) use ($user) {
+        $message->to($user->email, $user->full_name);
+    });
+
+    return response()->json((['status' => 'success', 'message' => 'На ваш e-mail отправлен <br>код для сброса пароля!']), 200);
+  }
+
+
+  public function restorePassword(Request $request) {
+    $rules = [
+      'code'     => 'required',
+      'password' => 'required|between:6,255'
+    ];
+
+    $messages = [
+      'required' => 'Поле обязательно к заполнению!',
+      'between' => 'Длина пароля должна быть от :min до :max символов.',
+    ];
+
+    $validator = Validator::make($request->all(), $rules, $messages);
+
+    if ($validator->fails()) {
+      $validatorErrors = $validator->errors()->toArray();
+      return response()->json(array_merge(['status' => 'error'], $validatorErrors));
+    }
+
+
+    $errorResponse = response()->json(['status' => 'error', 'code' => ['Неверный код восстановления']]);
+
+    $parts = explode('!', $request->get('code'));
+    if (count($parts) != 2) {
+      return $errorResponse;
+    }
+
+    list($userId, $code) = $parts;
+
+    if (!strlen(trim($userId)) || !strlen(trim($code)) || !$code) {
+      return $errorResponse;
+    }
+
+    if (!$user = Auth::findUserById($userId)) {
+      return $errorResponse;
+    }
+
+    if (!$user->attemptResetPassword($code, $request->get('password'))) {
+      return $errorResponse;
+    }
+
+    if (method_exists(\RainLab\User\Classes\AuthManager::class, 'clearThrottleForUserId')) {
+      Auth::clearThrottleForUserId($user->id);
+    }
+    return response()->json((['status' => 'success', 'message' => 'Пароль успешно изменен']), 200);
+  }
+
+  protected function makeResetUrl($code) {
+    $url = $this->getHostUrl();
+    if (strpos($url, $code) === false) {
+      $url .= '/reset-password/?reset=' . $code;
+    }
+    return $url;
+  }
+
   private function removeKeysFromArray($keys, $array) {
     foreach($keys as $key) {
       unset($array[$key]);
     }
     return $array;
+  }
+
+  private function getHostUrl() {
+    $url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';
+    return $url . $_SERVER['SERVER_NAME'];
   }
 }

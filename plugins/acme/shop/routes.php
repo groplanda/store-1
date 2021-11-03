@@ -21,8 +21,29 @@ Route::prefix('/api')->group(function () {
     $hit_products = Product::select('id','title','image','price','sale_price','is_new','is_hit','code')->with(['categories'])->orderBy('sort_order', 'asc')->where('is_active', 1)->where('is_hit', 1)->limit(8)->get();
     return $hit_products;
   });
-  Route::get('/products/{ids}', function ($ids) {
-    return Product::select('id','title','slug','image','price','sale_price')->whereIn('id', explode(',', $ids))->get();
+  Route::get('/products/{ids?}', function ($ids = "", Request $request) {
+    $ids_array = explode(',', $ids);
+    $productCollection = Product::select('id','title','image','price','sale_price')->whereIn('id', $ids_array)->with(['options'])->get();
+    $options = $request->get('options');
+
+    if (isset($options) && !empty($options)) {
+      foreach($options as $row) {
+        $product = json_decode($row);
+        $query = Product::select('id','title','image','price','sale_price')
+        ->where('id', $product->id)
+        ->with(['options' => function($query) use ($product) {
+          $query->with(['product_option' => function($query) {
+          $query->select(['id', 'type', 'name'])->get();
+          }])->with(['option_value' => function($query) {
+          $query->select(['id', 'name'])->get();
+          }])->where('id', $product->optionId)->first();
+          }])->first();
+
+        $productCollection->push($query);
+      }
+    }
+    return $productCollection;
+
   });
   Route::post('/add-order', 'Acme\Shop\Classes\OrderController@add');
   Route::get('/categories', function () {
@@ -86,6 +107,12 @@ Route::prefix('/api')->group(function () {
       $query->where([['is_active', 1]])->select(['id', 'title'])->get();
     }])->with(['featured' => function($query) {
       $query->orderBy('sort_order', 'asc')->where('is_active', 1)->get(['id', 'code', 'title', 'image']);
+    }])->with(['options' => function($query) {
+      $query->with(['product_option' => function($query) {
+        $query->select(['id', 'type', 'name'])->get();
+      }])->with(['option_value' => function($query) {
+        $query->select(['id', 'name'])->get();
+      }])->get();
     }])
     ->where('id', $id)->first();
   });
@@ -106,6 +133,7 @@ Route::prefix('/api')->group(function () {
     ->where('title','LIKE',"%{$query}%")
     ->orWhere('code','LIKE',"%{$query}%")
     ->orderBy('price', 'desc')
+    ->with(['options'])
     ->get();
   });
   Route::get('/stocks', function () {
@@ -113,8 +141,8 @@ Route::prefix('/api')->group(function () {
   });
   Route::post('/add-comment', 'Acme\Shop\Classes\CommentController@add');
   Route::get('/checkout/status/{order_id}', 'Acme\Shop\Classes\OrderController@getPayStatus');
-  Route::post('/user/register', 'Acme\Shop\Classes\UserController@register');
-  Route::post('/user/auth', 'Acme\Shop\Classes\UserController@auth');
+  Route::post('/user/register', 'Acme\Shop\Classes\UserController@register')->middleware('web');
+  Route::post('/user/auth', 'Acme\Shop\Classes\UserController@auth')->middleware('web');
 
   Route::get('/user/isUserLogin', 'Acme\Shop\Classes\UserController@isUserLogin');
 
@@ -124,6 +152,11 @@ Route::prefix('/api')->group(function () {
     Route::get('/user/orders', 'Acme\Shop\Classes\UserController@userOrders');
     Route::post('/user/edit', 'Acme\Shop\Classes\UserController@userEdit');
     Route::post('/user/change-password', 'Acme\Shop\Classes\UserController@userChangePassword');
+
+    Route::post('/user/wish', 'Acme\Shop\Classes\WishController@wish');
+    Route::post('/user/check-wish', 'Acme\Shop\Classes\WishController@checkwish');
+    Route::get('/user/wish/{user}', 'Acme\Shop\Classes\WishController@wishlist');
+    Route::get('/user/wish-count/{user}', 'Acme\Shop\Classes\WishController@wishcount');
   });
 
   Route::get('/brand/{id}', function ($id, Request $request) {
@@ -136,6 +169,8 @@ Route::prefix('/api')->group(function () {
 
   Route::post('/promocode/add', 'Acme\Shop\Classes\PromocodeController@add');
 
+  Route::post('/user/reset-password', 'Acme\Shop\Classes\UserController@resetPassword');
+  Route::post('/user/restore-password', 'Acme\Shop\Classes\UserController@restorePassword');
 });
 
 Route::get('sitemap.xml', function () {
