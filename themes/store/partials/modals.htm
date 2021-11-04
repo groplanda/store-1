@@ -212,5 +212,33 @@
       </div>
     </div>
 
+    {% if this.page.layout == 'category' %}
+    <div class="modal__popup modal__popup_lg" data-modal="single-product">
+      <button class="modal__popup-close" data-role="modal-close">
+        <svg class="modal__popup-cross" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.8023 1.19766L9 9M9 9L1.19765 16.8023M9 9L16.8023 16.8023M9 9L1.19765 1.19766" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="modal__popup-container">
+        <div class="loading loading_hide loading_search" id="quick-loading">
+          <div class="loading__wrapper">
+            <div class="loading__layer">
+              <div class="loading__circle-clipper loading__circle-clipper--left">
+                <div class="loading__circle"></div>
+              </div>
+              <div class="loading__gap-path">
+                <div class="loading__circle"></div>
+              </div>
+              <div class="loading__circle-clipper loading__circle-clipper--right">
+                <div class="loading__circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="quick-output"></div>
+      </div>
+    </div>
+    {% endif %}
+
   </div>
 </div>

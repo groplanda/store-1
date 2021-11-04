@@ -117,7 +117,7 @@
     position: absolute;
     top: 20px;
     left: 20px;
-    z-index: 1;
+    z-index: 3;
 
     &_hit {
       background: $blue-color;
@@ -130,6 +130,22 @@
     height: 300px;
     margin-bottom: 15px;
     position: relative;
+
+    &_catalog {
+      @media(min-width: 768px) {
+        z-index: 2;
+        cursor: pointer;
+
+        &:hover {
+          #{$root} {
+            &__quick-view {
+              opacity: 1;
+              pointer-events: all;
+            }
+          }
+        }
+      }
+    }
   }
 
   &__image-src {
@@ -144,6 +160,24 @@
     align-items: center;
     justify-content: center;
     transform: translate(-50%, -50%);
+  }
+
+  &__quick-view {
+    display: none;
+    @media(min-width: 768px) {
+      display: inline-flex;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 30px;
+      z-index: 5;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   &__content {

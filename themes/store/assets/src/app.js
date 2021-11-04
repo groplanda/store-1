@@ -10,6 +10,7 @@ import './helpers/modal';
 import { Tabs } from './plugins/Tabs';
 import noUiSlider from 'nouislider';
 import { Wish } from './plugins/Wish';
+import { quickView } from './plugins/QuickView';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -463,8 +464,31 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: 'smooth',
         block: 'start'
       })
+      catalogQuickView();
     });
   }
+
+  // catalog quick view
+  catalogQuickView();
+
+  function catalogQuickView() {
+    const quickViewBtns = document.querySelectorAll(".js-quick-view"),
+    quickOutput =  document.getElementById("quick-output"),
+    quickLoading = document.getElementById("quick-loading");
+
+    if (quickViewBtns) {
+      quickViewBtns.forEach(quickBtn => {
+        quickBtn.addEventListener("click", function() {
+          const productId = this.dataset.quickProductId;
+          quickOutput.innerHTML = "";
+          quickLoading.classList.remove("loading_hide");
+          if (!productId) return;
+          new quickView(productId, quickOutput, quickLoading).fecthProductData();
+        })
+      })
+    }
+  }
+
 
   // single product page
   const productWrap = document.getElementById('partialSingleProduct');

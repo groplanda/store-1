@@ -116,6 +116,21 @@ Route::prefix('/api')->group(function () {
     }])
     ->where('id', $id)->first();
   });
+
+  Route::get('/product/quick-product/{id}', function ($id) {
+    $product = Product::with(['featured' => function($query) {
+      $query->orderBy('sort_order', 'asc')->where('is_active', 1)->get(['id', 'code', 'title', 'image']);
+    }])->with(['options' => function($query) {
+      $query->with(['product_option' => function($query) {
+        $query->select(['id', 'type', 'name'])->get();
+      }])->with(['option_value' => function($query) {
+        $query->select(['id', 'name'])->get();
+      }])->get();
+    }])
+    ->where('id', $id)->first();
+    return Response::view('acme.shop::product.quick', ['product' => $product]);
+  });
+
   Route::get('/slider', function () {
     return Slider::orderBy('sort_order', 'asc')->get();
   });

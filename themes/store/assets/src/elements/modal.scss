@@ -13,7 +13,7 @@
   background: rgba(43, 47, 51, 0.6);
   opacity: 0;
   transition: .4s;
-  z-index: 1000;
+  z-index: 10;
   pointer-events: none;
 
   $root: &;
@@ -50,6 +50,11 @@
 
     &_open {
       display: block;
+    }
+
+    &_lg {
+      max-width: 1100px;
+      min-height: 620px;
     }
 
     @media(max-width: 767px) {

@@ -182,7 +182,7 @@ span[hidden], img[hidden] {
 
 .alert {
   position: fixed;
-  z-index: 10;
+  z-index: 15;
   top: 30px;
   right: 30px;
   font-weight: bold;
@@ -283,4 +283,5 @@ span[hidden], img[hidden] {
 @import "./elements/filter.scss";
 @import "./elements/checkbox.scss";
 @import "./elements/restore.scss";
+@import "./elements/product-quick.scss";
 @import "nouislider/dist/nouislider.css";

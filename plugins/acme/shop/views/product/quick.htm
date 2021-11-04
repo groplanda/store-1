@@ -1,0 +1,92 @@
+<section class="section product-quick">
+  <div class="wrap product-quick__wrap">
+    <div class="product-quick__gallery">
+      {% if product.image %}
+      <div class="product-quick__slider swiper" data-js-slider="product-quick-view">
+        <div class="swiper-wrapper">
+          <div class="product-quick__slider-item swiper-slide">
+            <img src="{{ product.image|media|resize(false, 450, { mode: 'crop', quality: '80' }) }}" alt="{{ product.title }}" class="product-quick__image-src" />
+          </div>
+          {% for image in product.gallery %}
+          <div class="product-quick__slider-item swiper-slide">
+            <img src="{{ image.path|resize(false, 450, { mode: 'crop', quality: '80' }) }}" alt="{{ image.title ? image.title : image.file_name }}" class="product-quick__image-src" />
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% if product.gallery|length > 0 %}
+        <button class="product-quick__slider-arrow product-quick__slider-arrow_prev">
+          <svg class="product-quick__slider-arrow-ico" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.125 1.75L1 6.875L6.125 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="product-quick__slider-arrow product-quick__slider-arrow_next">
+          <svg class="product-quick__slider-arrow-ico" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.875 11.25L7 6.125L1.875 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="product-quick__info">
+      <div class="product-quick__title title title_sm">{{ product.title }}</div>
+      <div class="product-quick__price">
+        <div class="product-quick__price-current" data-js="price-current">
+          {{ product.sale_price > 0 ? product.sale_price|number_format(0, '', ' ') : product.price|number_format(0, '', ' ') }} ₽
+        </div>
+        <div class="product-quick__price-old{{ product.sale_price == 0 ? ' product-quick__price-old_hide' : '' }}" data-js="price-old">
+          {{ product.price|number_format(0, '', ' ') }} ₽
+        </div>
+      </div>
+      {% if product.options|length > 0 %}
+        <div class="product-quick__options">
+          <div class="product-quick__options-title">Размеры: </div>
+          <div class="product-quick__options-row">
+            {% for option in product.options %}
+            <button
+              type="button"
+              class="product-quick__options-item product__options-item{{ loop.first ? ' product__options-item_active' : '' }}"
+              data-price="{{ option.price }}"
+              data-sale-price="{{ option.sale_price }}"
+              data-type="{{ option.product_option.type }}"
+              data-name="{{ option.product_option.name }}"
+              data-option-id="{{ option.id }}"
+              data-js-action="options"
+            >
+              {{ option.option_value.name }}
+            </button>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      <div class="product-quick__info-action">
+        {% if product.price %}
+        <button
+          type="button"
+          class="button button_primary product-quick__add"
+          data-product-id="{{ product.id }}"
+          data-js-action="add-to-cart"
+        >
+        Добавить в корзину</button>
+        {% endif %}
+        {% if product.code %}
+          <span class="product-quick__code button button_outline">Код товара: {{ product.code }}</span>
+        {% endif %}
+      </div>
+      <div class="product-quick__tag-list">
+        {% if product.is_hit %}
+        <div class="product-quick__tag-item">Хит продаж</div>
+        {% endif %}
+        {% if product.sale_price > 0 %}
+        <div class="product-quick__tag-item">Распродажа</div>
+        {% endif %}
+      </div>
+      <div class="product-quick__descr">
+        {{ product.description|raw }}
+      </div>
+    </div>
+    <div class="product-quick__footer">
+      <a href="/product/{{ product.id }}" class="button button_primary product-quick__more">Больше информации</a>
+    </div>
+  </div>
+</section>

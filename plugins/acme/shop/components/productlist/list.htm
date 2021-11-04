@@ -5,11 +5,18 @@
       {% if product.is_hit %}
       <span class="product-card__label product-card__label_hit">Акция</span>
       {% endif %}
-      <div class="product-card__image">
+      <div class="product-card__image product-card__image_catalog">
         <picture class="product-card__picture">
           <source srcset="{{ product.image|media|resize(false, 300, { mode: 'crop', quality: '80', extension: 'jpg' }) }}" type="image/jpeg" class="product-card__image-src" />
           <img src="{{ product.image|media|resize(false, 300, { mode: 'crop', quality: '80' }) }}"  alt="{{ product.title }}" class="product-card__image-src" />
         </picture>
+        <button
+          class="button button_primary product-card__quick-view js-quick-view"
+          type="button"
+          data-js-action="open-modal"
+          data-type-modal="single-product"
+          data-quick-product-id="{{ product.id }}"
+        >Быстрый просмотр</button>
       </div>
       <div class="product-card__content">
         <div class="product-card__heading">
