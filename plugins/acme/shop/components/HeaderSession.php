@@ -48,7 +48,7 @@ class HeaderSession extends \Cms\Classes\ComponentBase
     private function countWish($user_id) {
       $wish = Wish::where('user_id', $user_id)->first();
       if (!$wish) {
-        return null;
+        return 0;
       }
       $products = $wish->products;
       if(is_array($products)) {
