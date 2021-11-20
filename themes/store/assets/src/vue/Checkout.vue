@@ -537,7 +537,7 @@ export default {
         if (Number(data.id) == Number(product.id)) {
           product.amount = data.amount;
           if (product.amount > product.max_free_quantity) {
-            product.currentPrice = product.sale_price ? product.sale_price : product.price;
+            product.currentPrice = Number(product.sale_price) ? Number(product.sale_price) : Number(product.price);
           } else {
             product.currentPrice = this.setDefaultPrice(product);
           }
@@ -549,7 +549,7 @@ export default {
     setDefaultPrice(product) {
       const { sale_price, price, max_free_quantity } = product;
       if (max_free_quantity > 0) return 0;
-      return sale_price ? sale_price : price;
+      return sale_price ? Number(sale_price) : Number(price);
     }
   },
   created() {
