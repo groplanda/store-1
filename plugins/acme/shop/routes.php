@@ -186,6 +186,10 @@ Route::prefix('/api')->group(function () {
 
   Route::post('/user/reset-password', 'Acme\Shop\Classes\UserController@resetPassword');
   Route::post('/user/restore-password', 'Acme\Shop\Classes\UserController@restorePassword');
+
+  Route::get('/featured-in-cart', function () {
+    return Product::select('id','title','image','price','sale_price', 'max_free_quantity')->where('is_featured_in_cart', 1)->orderBy('sort_order', 'asc')->get();
+  });
 });
 
 Route::get('sitemap.xml', function () {

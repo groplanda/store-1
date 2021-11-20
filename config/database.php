@@ -56,7 +56,7 @@ return [
             'driver'    => 'mysql',
             'host'      => 'localhost',
             'port'      => '',
-            'database'  => 'html-store',
+            'database'  => 'html-sushi',
             'username'  => 'root',
             'password'  => 'root',
             'charset'   => 'utf8',

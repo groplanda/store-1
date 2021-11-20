@@ -27,43 +27,32 @@
 
 <section id="categorySection" class="category section">
   <div class="category__wrap wrap">
+
+    <div class="category__list">
+      <div class="title category__list-title">Наши категории</div>
+      <div class="category__list-scroll">
+        <div class="category__list-row">
+          {% for cat in all_categories %}
+          <a href="{{ 'category' | page({ slug: cat.slug }) }}" class="category__list-item{{ category.id == cat.id ? ' category__list-item_active' : '' }}">{{ cat.title }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
     <div class="category__heading">
-      <h1 class="title title_lg category__title">{{ category.title }}</h1>
+      <h1 class="title category__title">{{ category.title }}</h1>
       {% if category.products_count > 0 %}
       <span class="category__suptitle">{{ category.products_count }} {{ countLabel }}</span>
       {% endif %}
-      {% if category.parent_id %}
-      <a href="{{ 'category' | page({ slug: parentCat.slug }) }}" class="category__heading-all">
-        <span class="category__heading-all-text">Все {{ parentCat.title|lower }}</span>
-        <svg class="category__heading-all-ico" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3.75 9H14.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M9 3.75L14.25 9L9 14.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      {% endif %}
     </div>
     <div class="category__body">
-      <div id="partialFilter" class="category__filter">
-        <button type="button" class="category__filter-button button button_blue" data-js-action="toggle-mobile-filter">
-          <svg class="category__filter-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFF">
-            <g data-name="Layer 2">
-              <g data-name="funnel">
-                <rect width="24" height="24" opacity="0"/>
-                <path d="M13.9 22a1 1 0 0 1-.6-.2l-4-3.05a1 1 0 0 1-.39-.8v-3.27l-4.8-9.22A1 1 0 0 1 5 4h14a1 1 0 0 1 .86.49 1 1 0 0 1 0 1l-5 9.21V21a1 1 0 0 1-.55.9 1 1 0 0 1-.41.1zm-3-4.54l2 1.53v-4.55A1 1 0 0 1 13 14l4.3-8H6.64l4.13 8a1 1 0 0 1 .11.46z"/>
-              </g>
-            </g>
-          </svg>
-          Фильтр
-        </button>
-        {% partial "ProductList::filter" %}
-      </div>
       <div class="category__content">
         <div class="category__sort">
           <div class="category__sort-list">
             <div class="category__sort-label" data-js-action="open-sort">
               <span>Сортировка:</span>
-              <svg class="category__sort-ico" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.31896 9.0954L15.8667 1.54765C16.0444 1.36993 16.0444 1.08492 15.8667 0.90721C15.689 0.729498 15.404 0.729498 15.2263 0.90721L8.00042 8.13307L0.774558 0.90721C0.596846 0.729497 0.311836 0.729497 0.134124 0.90721C0.0469437 0.994389 9.38908e-07 1.11175 9.33924e-07 1.22575C9.28941e-07 1.33976 0.0435905 1.45711 0.134124 1.54429L7.68188 9.09205C7.85624 9.26976 8.1446 9.26976 8.31896 9.0954Z" fill="#8C96A3"/>
+              <svg class="category__sort-ico" width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.6195 0.990037C10.5034 0.873629 10.3655 0.781272 10.2136 0.718256C10.0617 0.65524 9.89893 0.622803 9.73451 0.622803C9.5701 0.622803 9.40729 0.65524 9.25543 0.718256C9.10357 0.781272 8.96563 0.873629 8.84951 0.990037L0.539515 9.30004C0.446811 9.39255 0.373263 9.50244 0.323082 9.62341C0.272901 9.74439 0.24707 9.87407 0.24707 10.005C0.24707 10.136 0.272901 10.2657 0.323082 10.3867C0.373263 10.5076 0.446811 10.6175 0.539515 10.71L8.84951 19.02C9.33951 19.51 10.1295 19.51 10.6195 19.02C11.1095 18.53 11.1095 17.74 10.6195 17.25L3.37951 10L10.6295 2.75004C11.1095 2.27004 11.1095 1.47004 10.6195 0.990037Z" fill="currentColor"/>
               </svg>
             </div>
             <div class="category__sort-dropdown" id="partialSort">
@@ -73,30 +62,8 @@
               <button type="button" class="category__sort-item" data-js-action="sort-products" value="sort_order asc">По умолчанию</button>
             </div>
           </div>
-          <div class="category__view">
-            <button type="button" class="category__view-btn category__view-btn_active" data-js-action="view-product" data-type="grid">
-              <svg width="12" height="12" class="category__view-ico" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-                <rect x="5.05273" width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-                <rect x="10.1055" width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-                <rect y="5.05264" width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-                <rect x="5.05273" y="5.05264" width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-                <rect x="10.1055" y="5.05264" width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-                <rect y="10.1053" width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-                <rect x="5.05273" y="10.1053" width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-                <rect x="10.1055" y="10.1053" width="1.89474" height="1.89474" rx="0.947368" fill="currentColor"/>
-              </svg>
-            </button>
-            <button type="button" class="category__view-btn" data-js-action="view-product" data-type="list">
-              <svg width="12" height="10" class="category__view-ico" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="12" height="1.7734" rx="0.886698" fill="currentColor"/>
-                <rect y="4.11331" width="12" height="1.7734" rx="0.886698" fill="currentColor"/>
-                <rect y="8.22659" width="12" height="1.7734" rx="0.886698" fill="currentColor"/>
-              </svg>
-            </button>
-          </div>
         </div>
-        <div id="partialProducts" class="category__row category__row_catalog">
+        <div id="partialProducts" class="category__row">
           {% partial "ProductList::list" %}
         </div>
         <div id="partialPaginate" class="category__pagination">

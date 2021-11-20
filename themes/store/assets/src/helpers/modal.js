@@ -1,7 +1,8 @@
 const header = document.querySelector("header"),
         triggerCloseModal  = document.querySelectorAll('[data-role="modal-close"]'),
         modalId = document.getElementById("modal"),
-        modalList = modalId.querySelectorAll("[data-modal]");
+        modalList = modalId.querySelectorAll("[data-modal]"),
+        mobileMenu = document.querySelector('[data-menu="mobile"]');
 
   document.body.addEventListener("click", function (e) {
     if (e.target.dataset.jsAction === "open-modal" ) {
@@ -60,6 +61,7 @@ const header = document.querySelector("header"),
     currentModal.classList.add("modal__popup_open");
     document.body.classList.add("modal-open");
     document.body.style.paddingRight = offsetBody;
+    setFixedElOffset(offsetBody);
 
     if (target.dataset.productId) { // если это карточка товара
       currentModal.querySelector('[data-input="product-id"]').value = target.dataset.productId;
@@ -71,6 +73,7 @@ const header = document.querySelector("header"),
     for(let i = 0; i < modalList.length; i++) {
       modalList[i].classList.remove("modal__popup_open");
     }
+    mobileMenu.classList.remove("menu_open");
   }
 
   function handleCloseModal(e) {
@@ -82,6 +85,14 @@ const header = document.querySelector("header"),
   function closeModal() {
     modalId.classList.remove("modal_active");
     closeAllModals();
+    setFixedElOffset(0);
     document.body.classList.remove("modal-open");
     document.body.style.paddingRight = '';
+  }
+
+  function setFixedElOffset(offset) {
+    const fixed = document.querySelectorAll(".js-fixed");
+    if (fixed) {
+      fixed.forEach(el => el.style.marginRight = offset);
+    }
   }

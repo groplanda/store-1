@@ -173,4 +173,5 @@
   'Acme\\Shop\\Models\\Wish' => 'plugins\\acme\\shop\\models\\Wish.php',
   'Acme\\Shop\\Classes\\WishController' => 'plugins\\acme\\shop\\classes\\WishController.php',
   'Acme\\Shop\\Components\\HeaderSession' => 'plugins\\acme\\shop\\components\\HeaderSession.php',
+  'Acme\\Shop\\Components\\SpecialProducts' => 'plugins\\acme\\shop\\components\\SpecialProducts.php',
 );

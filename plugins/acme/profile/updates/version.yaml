@@ -1,3 +1,6 @@
 1.0.1:
     - Initialize plugin.
     - add_new_fields.php
+1.0.2:
+  - create user fields.
+  - add_user_fields.php

@@ -3,6 +3,7 @@ window.$ = window.jQuery = $;
 import 'swiper/css/bundle';
 import './plugins/UserAuth';
 import './plugins/AddComment';
+import './helpers/show-more';
 import Swiper, { Navigation, Pagination, Thumbs } from 'swiper';
 import Sticky from 'sticky-js';
 import { Cart } from './plugins/Cart';
@@ -10,7 +11,7 @@ import './helpers/modal';
 import { Tabs } from './plugins/Tabs';
 import noUiSlider from 'nouislider';
 import { Wish } from './plugins/Wish';
-import { quickView } from './plugins/QuickView';
+import { SingleProduct } from './plugins/SingleProduct';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -53,123 +54,58 @@ document.addEventListener("DOMContentLoaded", () => {
       spaceBetween: 0,
       slideClass: 'slider__item',
       slideActiveClass: 'slider__item_active',
-      navigation: {
-        nextEl: '.slider__btn_next',
-        prevEl: '.slider__btn_prev',
-      },
-      pagination: {
-        el: '.slider__pagination',
-        dynamicBullets: false,
-        bulletClass: 'slider__bullet',
-        bulletActiveClass: 'slider__bullet_active',
-        currentClass: 'slider__bullet_current',
-        clickable: true
-      }
-    })
-
-  }
-
-  // home products
-
-  const homeProducts = document.querySelector('[data-js-slider="home-products"]');
-
-  if (homeProducts) {
-
-    new Swiper('[data-js-slider="home-products"]', {
-      slidesPerView: 4,
-      grid: {
-        rows: 2,
-        fill: 'column'
-      },
-      spaceBetween: 30,
-      slideClass: 'home-products__item',
-      slideActiveClass: 'home-products__item_active',
-      simulateTouch: false,
-      breakpoints: {
-        320: {
-          slidesPerView: 1.25,
-          grid: {
-            rows: 1,
-          },
-          spaceBetween: 16,
-          pagination: {
-            el: '.home-products__pagination',
-            bulletClass: 'home-products__bullet',
-            bulletActiveClass: 'home-products__bullet_active',
-            currentClass: 'home-products__bullet_current',
-          }
-        },
-        480: {
-          slidesPerView: 1.5,
-          grid: {
-            rows: 1,
-          },
-          spaceBetween: 20,
-          pagination: {
-            el: '.home-products__pagination',
-            bulletClass: 'home-products__bullet',
-            bulletActiveClass: 'home-products__bullet_active',
-            currentClass: 'home-products__bullet_current',
-          }
-        },
-        576: {
-          slidesPerView: 2,
-          grid: {
-            rows: 2,
-          },
-        },
-        992: {
-          slidesPerView: 3,
-          grid: {
-            rows: 2,
-          }
-        },
-        1200: {
-          slidesPerView: 4,
-          grid: {
-            rows: 2,
-          }
-        },
-      }
     })
   }
 
-  // footer toggle
-  toggleDropdown('[data-js-action="toggle-footer-dropdown"]', "footer__title_active", ".footer__dropdown");
+  // home categories
+  const homeCategories = document.querySelectorAll(".js-category");
+  if (homeCategories) {
+    calcCategories(homeCategories);
 
-  function toggleDropdown(trigger, activeClass, nextClass) {
-    $(trigger).on("click", function() {
-      $(trigger).not(this).removeClass(activeClass).next(nextClass).slideUp();
-      $(this).toggleClass(activeClass);
-      if ($(this).hasClass(activeClass)) {
-        $(this).next(nextClass).slideDown();
-      } else {
-        $(this).next(nextClass).slideUp();
-      }
-    });
-  }
+    const mediaQuery = [
+      '(min-width: 1340px)',
+      '(max-width: 1339px)',
+      '(min-width: 1200px)',
+      '(max-width: 1199px)',
+      '(min-width: 900px)',
+      '(max-width: 899px)'
+    ];
 
-  // view product
-
-  const viewProduct = document.querySelectorAll('[data-js-action="view-product"]');
-
-  if (viewProduct) {
-    viewProduct.forEach(view => {
-      view.addEventListener("click", updateViewProducts)
+    mediaQuery.forEach(query => {
+      const size = window.matchMedia(query);
+      size.addListener(handleChange)
     })
   }
 
-  function updateViewProducts() {
-    const productCards = document.querySelectorAll(".product-card"),
-          type = this.dataset.type;
-          viewProduct.forEach(view => view.classList.remove("category__view-btn_active"));
-          this.classList.add("category__view-btn_active");
-    if (productCards) {
-      let typeSelect = type === "list" ? 'add' : 'remove';
-      productCards.forEach(card => {
-        card.classList[typeSelect]("product-card_list");
-        card.parentElement.classList[typeSelect]("category__item_list");
-      })
+  function handleChange(e) {
+    if (e.matches) {
+      calcCategories(homeCategories);
+    }
+  }
+
+  function calcCategories(categories) {
+
+    if (!categories) return;
+    let skip = 0;
+    const pageWidth = window.innerWidth;
+
+    for(let i = skip; i < categories.length; i++) {
+      categories[i].classList.remove("home-category__item_hide")
+    }
+
+    if (pageWidth >= 1340) return;
+
+    if (pageWidth < 1340) {
+      skip = 7;
+    }
+    if (pageWidth < 1200) {
+      skip = 6;
+    }
+    if (pageWidth < 900) {
+      skip = 5;
+    }
+    for(let i = skip; i < categories.length; i++) {
+      categories[i].classList.add("home-category__item_hide")
     }
   }
 
@@ -187,69 +123,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // tabs
-  new Tabs(".tabs", "tabs__heading-item_current", "tabs__item_open").init();
   new Tabs(".modal__tabs", "modal__tabs-title_active", "modal__tabs-item_active").init();
-
-  const additionalSlider = document.querySelector('[data-js-slider="additional-slider"]');
-
-  if (additionalSlider) {
-
-    new Swiper('[data-js-slider="additional-slider"]', {
-      slidesPerView: 4,
-      spaceBetween: 30,
-      simulateTouch: false,
-      breakpoints: {
-        320: {
-          slidesPerView: 1.25,
-          grid: {
-            rows: 1,
-          },
-          spaceBetween: 16,
-          pagination: {
-            el: '.additional__pagination',
-            bulletClass: 'additional__bullet',
-            bulletActiveClass: 'additional__bullet_active',
-            currentClass: 'additional__bullet_current',
-          }
-        },
-        480: {
-          slidesPerView: 1.5,
-          grid: {
-            rows: 1,
-          },
-          spaceBetween: 20,
-          pagination: {
-            el: '.additional__pagination',
-            bulletClass: 'additional__bullet',
-            bulletActiveClass: 'additional__bullet_active',
-            currentClass: 'additional__bullet_current',
-          }
-        },
-        576: {
-          slidesPerView: 2,
-        },
-        992: {
-          slidesPerView: 3,
-        },
-        1200: {
-          slidesPerView: 4,
-        },
-      }
-    })
-  }
 
   // add cart
   function addToCart() {
     let addBtns = document.querySelectorAll('[data-js-action="add-to-cart"]');
     const cart = new Cart(".js-cart", ".js-cart-count");
     cart.updateCart();
+    cart.displayProductQty();
     if (addBtns.length > 0) {
       addBtns.forEach(btn => {
         btn.addEventListener("click", function() {
           const id = this.dataset.productId;
-          const optionId = this.dataset.optionId ? Number(this.dataset.optionId) : null;
           if (!id) return;
-          cart.addToCart({ id: Number(id), amount: 1, optionId: optionId })
+
+          const optionId = this.dataset.optionId ? Number(this.dataset.optionId) : null,
+                amount = this.dataset.productAmount ? Number(this.dataset.productAmount) : 1;
+
+          const data = { id: Number(id), amount: amount, optionId: optionId };
+
+          if (this.dataset.type === "qty") {
+            changeQty(this, amount);
+          } else if (this.dataset.type === "product-page") {
+            setProductPageAmount(1, this);
+            document.querySelector('[data-js-action="qty-val"]').textContent = 1;
+          } else {
+            this.classList.add("product-card__button_hide");
+            this.nextElementSibling.classList.add("qty_show");
+          }
+          cart.addToCart(data);
         })
       })
     }
@@ -257,14 +159,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   addToCart();
 
+  function changeQty(btn, amount) {
+    const qty = btn.parentElement;
+    if (!qty.classList.contains("qty")) return;
+    const qtyValue = qty.querySelector('[data-js-action="qty-val"]')
+    qtyValue.textContent = Number(qtyValue.textContent) + amount;
+
+    if (Number(qtyValue.textContent) === 0) {
+      qty.classList.remove("qty_show");
+      qty.previousElementSibling.classList.remove("product-card__button_hide");
+      qtyValue.textContent = 1;
+    }
+  }
+
+  productPageQty();
+
+  function productPageQty() {
+    const qtyEl = document.querySelector('[data-js-action="update-qty"]'),
+          buttonEl = document.querySelector('[data-js-action="add-to-cart"]');
+
+    if (qtyEl) {
+      qtyEl.addEventListener("click", e => {
+        const target = e.target;
+        const qtyVal = qtyEl.querySelector('[data-js-action="qty-val"]');
+        if (target && target.tagName.toLowerCase() === "button") {
+
+          if (target.classList.contains("js-remove-cart")) {
+            if (Number(qtyVal.textContent) === 1) return;
+            qtyVal.textContent = Number(qtyVal.textContent) - 1;
+          } else {
+            qtyVal.textContent = Number(qtyVal.textContent) + 1;
+          }
+          setProductPageAmount(qtyVal.textContent, buttonEl)
+        }
+      })
+    }
+  }
+
+  function setProductPageAmount(value, buttonEl) {
+    buttonEl.dataset.productAmount = value;
+  }
+
   // mobile menu
-  const trigger = document.querySelector('[data-js-action="open-menu"]'),
+  const triggers = document.querySelectorAll('[data-js-action="open-menu"]'),
         mobileMenu = document.querySelector('[data-menu="mobile"]');
 
-  if (trigger) {
-    trigger.addEventListener("click", () => {
-      mobileMenu.classList.toggle("menu_open");
-      document.body.classList.toggle("modal-open");
+  if (triggers) {
+    triggers.forEach(trigger => {
+      trigger.addEventListener("click", () => {
+        mobileMenu.classList.toggle("menu_open");
+        document.body.classList.toggle("modal-open");
+      })
     })
   }
 
@@ -386,8 +331,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  toggleDropdown('[data-js-action="filter-dropdown"]', "filter__item-heading_active", ".filter__item-dropdown");
-
   function getSortValue() {
     const sorted = document.querySelectorAll('[data-js-action="sort-products"]');
     let result = 'price asc';
@@ -432,24 +375,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let sort = getSortValue();
     let page = getActivePage();
     let brand = getCheckboxVals(noResetType ? checkboxBrands : []);
-    let min = Number(priceValues[0].textContent);
-    let max = Number(priceValues[1].textContent);
 
     if (target.dataset.jsAction === "paginate") {
       page = Number(e.target.dataset.page);
+    }
+
+    const filterData = {
+      'filter[page]': page,
+      'filter[sort]': sort,
+      'filter[brand]': brand
+    }
+
+    if (priceValues[0] && priceValues[1]) {
+      let min = Number(priceValues[0].textContent);
+      let max = Number(priceValues[1].textContent);
+      filterData.filter[min] = min
+      filterData.filter[max] = max
     }
 
     $.request('onFilterProduct', {
       beforeUpdate() {
         preloader.classList.add("loading_active");
       },
-      data: {
-        'filter[page]': page,
-        'filter[sort]': sort,
-        'filter[brand]': brand,
-        'filter[min]': min,
-        'filter[max]': max
-      },
+      data: filterData,
       update: {
         '@list.htm' : '#partialProducts',
         '@pagination.htm' : '#partialPaginate',
@@ -465,6 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
         block: 'start'
       })
       catalogQuickView();
+      addToCart();
     });
   }
 
@@ -472,56 +421,33 @@ document.addEventListener("DOMContentLoaded", () => {
   catalogQuickView();
 
   function catalogQuickView() {
-    const quickViewBtns = document.querySelectorAll(".js-quick-view"),
-    quickOutput =  document.getElementById("quick-output"),
-    quickLoading = document.getElementById("quick-loading");
+    const quickViewBtns = document.querySelectorAll(".js-quick-view");
 
     if (quickViewBtns) {
+      let quickView = new SingleProduct();
       quickViewBtns.forEach(quickBtn => {
-        quickBtn.addEventListener("click", function() {
+        quickBtn.addEventListener("click", function(e) {
+          e.preventDefault();
           const productId = this.dataset.quickProductId;
-          quickOutput.innerHTML = "";
-          quickLoading.classList.remove("loading_hide");
           if (!productId) return;
-          new quickView(productId, quickOutput, quickLoading).fecthProductData();
+          quickView.fecthProductData(productId);
         })
       })
     }
   }
-
 
   // single product page
   const productWrap = document.getElementById('partialSingleProduct');
 
   if (productWrap) {
     productWrap.addEventListener("click", handleProduct);
-    const productThumbs = productWrap.querySelector('[data-js-slider="product-thumbs"]');
-    if (productThumbs) {
-      productSlider();
-    }
+    productSlider();
     new Sticky('[data-sticky]');
     setupOptions();
   }
 
   function productSlider() {
-    // slider start
-    const productThumbs = new Swiper('[data-js-slider="product-thumbs"]', {
-      spaceBetween: 6,
-      slidesPerView: 4,
-      freeMode: true,
-      watchSlidesProgress: true,
-      breakpoints: {
-        320: {
-          slidesPerView: 2,
-        },
-        576: {
-          slidesPerView: 3,
-        },
-        768: {
-          slidesPerView: 4,
-        }
-      }
-    });
+
     new Swiper('[data-js-slider="product-view"]', {
       spaceBetween: 0,
       slideClass: 'product__slider-item',
@@ -529,9 +455,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navigation: {
         nextEl: '.product__slider-arrow_next',
         prevEl: '.product__slider-arrow_prev',
-      },
-      thumbs: {
-        swiper: productThumbs
       }
     });
   }

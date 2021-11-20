@@ -31,20 +31,33 @@ tabs:
         user_name:
             label: ФИО
             span: auto
+            cssClass: ''
             type: text
             tab: Заказчик
         user_phone:
             label: Телефон
             span: auto
+            cssClass: ''
             type: text
             tab: Заказчик
         user_mail:
             label: E-mail
             span: auto
+            cssClass: ''
             type: text
             tab: Заказчик
         user_address:
             label: Адрес
+            span: auto
+            type: text
+            tab: Заказчик
+        user_entrance:
+            label: Подъезд
+            span: auto
+            type: text
+            tab: Заказчик
+        user_flat:
+            label: Квартира
             span: auto
             type: text
             tab: Заказчик
@@ -58,8 +71,17 @@ tabs:
             label: 'Способ оплаты'
             options:
                 - 'Яндекс касса'
-                - 'Оплата картой при доставке'
-                - 'Оплата наличными при доставке'
+                - 'Оплата картой'
+                - 'Оплата наличными'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: Заказчик
+        user_delivery:
+            label: 'Способ доставки'
+            options:
+                - 'Доставка курьером'
+                - Самовывоз
             showSearch: true
             span: auto
             type: dropdown

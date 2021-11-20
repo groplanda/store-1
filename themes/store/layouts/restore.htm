@@ -18,33 +18,37 @@ function onStart()
     {% partial "header" %}
 
     <!-- Content -->
-    <main class="main">
-      <!-- хлебные крошки старт --->
-      {% partial "breadcrumbs" %}
-      <!-- хлебные крошки конец --->
-      <section class="restore section">
-        <div class="wrap restore__wrap">
-          {% if reset %}
-          <div class="restore__content">
-            <h1 class="restore__title title title_sm">Восстановление пароля</h1>
-            <form id="restore-password" class="restore__form">
-              <div class="restore__form-group">
-                <label class="restore__form-label">Код</label>
-                <input type="text" name="code" class="restore__form-input" placeholder="Код восстановления" value="{{ reset }}" />
-                <span class="modal__form-error" data-error-for="code"></span>
+    <main class="main section">
+      <div class="main__wrap wrap">
+        <div class="main__content">
+          <!-- хлебные крошки старт --->
+          {% partial "breadcrumbs" %}
+          <!-- хлебные крошки конец --->
+          <section class="restore section">
+            <div class="wrap restore__wrap">
+              {% if reset %}
+              <div class="restore__content">
+                <h1 class="restore__title title">Восстановление пароля</h1>
+                <form id="restore-password" class="form">
+                  <div class="form__group">
+                    <label class="form__group-label">Код</label>
+                    <input type="text" name="code" class="form__group-input" placeholder="Код восстановления" value="{{ reset }}" />
+                    <span class="form__group-error" data-error-for="code"></span>
+                  </div>
+                  <div class="form__group form__group_last">
+                    <label class="form__group-label">Новый пароль</label>
+                    <input type="password" name="password" class="form__group-input" placeholder="**********" />
+                    <span class="form__group-error" data-error-for="password"></span>
+                  </div>
+                  <button type="submit" class="button button_primary form__submit">Изменить пароль</button>
+                  <div class="form__done" data-js-action="response"></div>
+                </form>
               </div>
-              <div class="restore__form-group restore__form-group_last">
-                <label class="restore__form-label">Новый пароль</label>
-                <input type="password" name="password" class="restore__form-input" placeholder="**********" />
-                <span class="modal__form-error" data-error-for="password"></span>
-              </div>
-              <button type="submit" class="button button_primary restore__form-button">Изменить пароль</button>
-              <div class="restore__form-done" data-js-action="response"></div>
-            </form>
-          </div>
-          {% endif %}
+              {% endif %}
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
     </main>
 
     <!-- Footer -->

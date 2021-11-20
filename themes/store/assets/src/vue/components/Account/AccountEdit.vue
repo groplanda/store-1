@@ -1,49 +1,61 @@
 <template>
-  <form class="account__form" @submit.prevent="onEdit">
-    <div class="account__form-row">
-      <div class="account__form-group account__form-group_col">
-        <label class="account__form-label">Имя и фамилия</label>
-        <input type="text" class="account__form-input" v-model="form.name" placeholder="Иван Иванов" />
-        <span class="account__form-error" v-if="nameErr">{{ nameErr }}</span>
+  <form class="form" @submit.prevent="onEdit">
+    <div class="form__row">
+      <div class="form__group form__group_col">
+        <label class="form__group-label">Имя и фамилия</label>
+        <input type="text" class="form__group-input" v-model="form.name" placeholder="Иван Иванов" />
+        <span class="form__group-error" v-if="nameErr">{{ nameErr }}</span>
       </div>
-      <div class="account__form-group account__form-group_col">
-        <label class="account__form-label">Отчество</label>
-        <input type="text" class="account__form-input" v-model="form.surname" placeholder="Иванович" />
-        <span class="account__form-error" v-if="surnameErr">{{ surnameErr }}</span>
-      </div>
-    </div>
-    <div class="account__form-row">
-      <div class="account__form-group account__form-group_col">
-        <label class="account__form-label">Адрес электронной почты</label>
-        <input type="text" class="account__form-input" v-model="form.email" placeholder="ivanov@yandex.ru" readonly />
-        <span class="account__form-error" v-if="emailErr">{{ emailErr }}</span>
-      </div>
-      <div class="account__form-group account__form-group_col">
-        <label class="account__form-label">Номер телефона</label>
-        <input type="text" class="account__form-input" v-model="form.phone" placeholder="+7 (___) ___ __-__" v-mask="'+7 (###) ###-##-##'" />
-        <span class="account__form-error" v-if="phoneErr">{{ phoneErr }}</span>
+      <div class="form__group form__group_col">
+        <label class="form__group-label">Отчество</label>
+        <input type="text" class="form__group-input" v-model="form.surname" placeholder="Иванович" />
+        <span class="form__group-error" v-if="surnameErr">{{ surnameErr }}</span>
       </div>
     </div>
-    <div class="account__form-row account__form-row_last">
-      <div class="account__form-group account__form-group_full">
-        <label class="account__form-label">Стандартный адрес доставки</label>
-        <input type="text" class="account__form-input" v-model="form.address" placeholder="г. Москва, ул. Пушкина д.1, кв. 1" />
-         <span class="account__form-error" v-if="addressErr">{{ addressErr }}</span>
+    <div class="form__row">
+      <div class="form__group form__group_col">
+        <label class="form__group-label">Email</label>
+        <input type="text" class="form__group-input" v-model="form.email" placeholder="ivanov@yandex.ru" readonly />
+        <span class="form__group-error" v-if="emailErr">{{ emailErr }}</span>
+      </div>
+      <div class="form__group form__group_col">
+        <label class="form__group-label">Номер телефона</label>
+        <input type="text" class="form__group-input" v-model="form.phone" placeholder="+7 (___) ___ __-__" v-mask="'+7 (###) ###-##-##'" />
+        <span class="form__group-error" v-if="phoneErr">{{ phoneErr }}</span>
       </div>
     </div>
-    <div class="account__form-row">
-      <div class="account__form-group account__form-group_full">
-        <label class="radio radio_edit">
-          <input type="checkbox" name="is_subscribe" value="1" v-model="form.is_subscribe" class="radio__input" />
-          <span class="radio__circle"></span>
-          <span class="radio__group">
-            <span class="radio__group-title">Хочу получать информацию о скидках и акциях</span>
+    <div class="form__row">
+      <div class="form__group form__group_col">
+        <label class="form__group-label">Адрес доставки</label>
+        <input type="text" class="form__group-input" v-model="form.address" placeholder="г. Москва, ул. Пушкина д.1" />
+         <span class="form__group-error" v-if="addressErr">{{ addressErr }}</span>
+      </div>
+      <div class="form__group form__group_sm">
+        <label class="form__group-label">Подъезд</label>
+        <input type="number" class="form__group-input" v-model="form.entrance" placeholder="1" />
+         <span class="form__group-error" v-if="entranceErr">{{ entranceErr }}</span>
+      </div>
+      <div class="form__group form__group_sm">
+        <label class="form__group-label">Квартира</label>
+        <input type="number" class="form__group-input" v-model="form.flat" placeholder="12" />
+         <span class="form__group-error" v-if="flatErr">{{ flatErr }}</span>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="form__group form__group_col">
+        <label class="checkbox">
+          <input type="checkbox" name="is_subscribe" value="1" v-model="form.is_subscribe" class="checkbox__input" />
+          <span class="checkbox__square">
+            <svg class="checkbox__ico" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.5466 2.00008L11.1366 0.580078L4.54663 7.17008L1.96663 4.60008L0.546631 6.01008L4.54663 10.0001L12.5466 2.00008Z" fill="#E31E24"/>
+            </svg>
           </span>
+          <span class="checkbox__title">Хочу получать информацию о скидках и акциях</span>
         </label>
       </div>
     </div>
-    <button type="submit" class="button button_primary account__form-button">Изменить данные</button>
-    <span class="account__form-response" v-if="submitStatus">{{ submitStatus }}</span>
+    <button type="submit" class="button button_primary form__submit">Изменить данные</button>
+    <span class="form__done" v-if="submitStatus">{{ submitStatus }}</span>
   </form>
 </template>
 <script>
@@ -66,6 +78,8 @@ export default {
         phone: "",
         email: "",
         address: "",
+        entrance: "",
+        flat: "",
         is_subscribe: false
       },
       errors: [],
@@ -92,10 +106,18 @@ export default {
     addressErr() {
       return checkErr('address', this.errors);
     },
+
+    entranceErr() {
+      return checkErr('entrance', this.errors);
+    },
+
+    flatErr() {
+      return checkErr('flat', this.errors);
+    }
   },
   methods: {
     fillUserData(userData) {
-      const USER_KEYS = ['name', 'surname', 'phone', 'email', 'address', 'is_subscribe'];
+      const USER_KEYS = ['name', 'surname', 'phone', 'email', 'address', 'entrance', 'flat', 'is_subscribe'];
       USER_KEYS.forEach(key => {
         if (userData[key]) {
           this.form[key] = userData[key];
@@ -114,6 +136,7 @@ export default {
         }
         if (data.status === 'success') {
           this.submitStatus = data.message;
+          this.$emit("updateUser")
         }
       })
       .catch(error => {

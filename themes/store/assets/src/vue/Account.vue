@@ -1,49 +1,58 @@
 <template>
-  <section class="page section">
+  <section class="account section">
     <Loading  v-if="!userData" />
-    <div class="wrap page__wrap" v-else>
-      <h1 class="title page__title">Добро пожаловать, {{ userData.name }}</h1>
-      <div class="page__row">
-        <aside class="page__aside page__aside_account">
-          <div class="page__menu">
-            <span class="page__menu-link" :class="{ 'page__menu-link_active': activeTab === 0 }" @click="activeTab = 0">Мои заказы</span>
-            <span class="page__menu-link" :class="{ 'page__menu-link_active': activeTab === 1 }" @click="activeTab = 1">Изменить личные данные</span>
-            <span class="page__menu-link" :class="{ 'page__menu-link_active': activeTab === 2 }" @click="activeTab = 2">Изменить пароль</span>
-            <span class="page__menu-link" :class="{ 'page__menu-link_active': activeTab === 3 }" @click="activeTab = 3">Избранное</span>
-            <span class="page__menu-link" @click="onLogout">Выйти</span>
-          </div>
-        </aside>
-        <div class="page__content page__content_account">
-          <div class="page__entry">
-            <div class="account">
+    <div class="wrap account__wrap" v-else>
+      <div class="account__tab_default" v-if="activeTab === 0">
+        <div class="account__heading account__heading_home">
+          <h1 class="title account__title">Личный кабинет</h1>
+          <button class="account__heading-logout" type="button" @click="onLogout" title="Выйти">
+            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.00201 18H16.002C17.105 18 18.002 17.103 18.002 16V2C18.002 0.897 17.105 0 16.002 0H2.00201C0.899014 0 0.00201416 0.897 0.00201416 2V8.001H7.00001V4L13 9L7.00001 14V10.001H0.00201416V16C0.00201416 17.103 0.899014 18 2.00201 18Z" fill="white"/>
+            </svg>
+          </button>
+        </div>
 
-              <div class="account__orders" v-if="activeTab === 0">
-                <AccountOrders :orders="orders" v-if="orders.length" />
-                <div class="title title_sm account__title" v-else>Заказов пока нет...</div>
-              </div>
-              <div class="account__form" v-if="activeTab === 1">
-                <AccountEdit :user="userData" />
-              </div>
-              <div class="account__form" v-if="activeTab === 2">
-                <AccountChangePassword :user="userData" />
-              </div>
-              <div class="account__form" v-if="activeTab === 3">
-                <Wish :userId="userData.id" />
-              </div>
-            </div>
-          </div>
+        <AccountInfo :user="userData" />
+
+        <div class="account__button-list">
+          <button type="button" class="account__button" @click="activeTab = 1">Изменить пароль</button>
+          <button type="button" class="account__button" @click="activeTab = 2">Изменить данные</button>
+          <button type="button" class="account__button" @click="activeTab = 3">Избранное</button>
+        </div>
+        <div class="account__orders">
+          <div class="title account__title account__title_orders">История заказов</div>
+          <AccountOrders :orders="orders" v-if="orders.length" />
+          <div class="account__subtitle" v-else>Заказов пока нет...</div>
         </div>
       </div>
+
+      <div class="account__tab_default" v-if="activeTab === 1">
+        <AccountBack title="Изменить пароль" @back="activeTab = 0" />
+        <AccountChangePassword :user="userData" />
+      </div>
+
+      <div class="account__tab_default" v-if="activeTab === 2">
+        <AccountBack title="Изменить данные" @back="activeTab = 0" />
+        <AccountEdit :user="userData" @updateUser="updateUser" />
+      </div>
+
+      <div class="account__tab" v-if="activeTab === 3">
+        <AccountBack title="Избранное" @back="activeTab = 0" />
+        <Wish :userId="userData.id" />
+      </div>
+
     </div>
   </section>
 </template>
 <script>
 import axios from "axios";
+import AccountInfo from "./components/Account/AccountInfo";
 import AccountOrders from "./components/Account/AccountOrders";
 import AccountEdit from "./components/Account/AccountEdit";
 import AccountChangePassword from "./components/Account/AccountChangePassword";
 import Loading from "./components/Loading/Loading";
 import Wish from "./components/Wish/Wish";
+import AccountBack from "./components/Account/AccountBack";
 
 export default {
   name: "Account",
@@ -52,7 +61,9 @@ export default {
     AccountEdit,
     Loading,
     AccountChangePassword,
-    Wish
+    Wish,
+    AccountInfo,
+    AccountBack
   },
   data() {
     return {
@@ -60,6 +71,9 @@ export default {
       activeTab: 0,
       orders: []
     }
+  },
+  computed: {
+
   },
   methods: {
     getUserdata() {
@@ -119,11 +133,14 @@ export default {
           console.log('500');
         }
       })
+    },
+    updateUser() {
+      this.getUserdata();
     }
   },
   created() {
     this.getUserdata();
     this.fetchUserOrders();
-  },
+  }
 }
 </script>

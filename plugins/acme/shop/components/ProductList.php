@@ -46,8 +46,10 @@ class ProductList extends \Cms\Classes\ComponentBase
               return \Response::make($this->controller->run('404'), 404);
             }
 
+            $this->page['all_categories'] = Category::orderBy('sort_order', 'asc')->where([['is_show', 1], ['parent_id', null]])->get(['id', 'title', 'slug']);
+
             $breadcrumbs[] = ['title' => 'Главная', 'url' => 'home'];
-            $breadcrumbs[] = ['title' => 'Каталог', 'url' => 'catalog'];
+            $breadcrumbs[] = ['title' => 'Меню', 'url' => 'catalog'];
 
             if (isset($category->parent_id) && !empty($category->parent_id)) {
               $this->page['categories'] = Category::where([['parent_id', $category->parent_id], ['is_show', 1], ['id', '!=', $category->id]])->select(['id', 'title', 'slug', 'image'])->get();

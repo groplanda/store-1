@@ -6,36 +6,41 @@
   по указанному вами номеру телефона, для уточнения
   деталей заказа и согласования время доставки
 </p>
+<h2>
+  Позиции заказа:
+</h2>
+<table class="panel break-all" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+      <td class="panel-content">
+          <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                  <td class="panel-item">
+                    Сумма заказа: {{ total }}
+                  </td>
+              </tr>
+          </table>
+      </td>
+  </tr>
+</table>
 <div class="table">
   <table>
     <thead>
         <tr align="center">
             <th>№</td>
             <th>Название</td>
-            <th>Фото</td>
             <th>Цена</td>
             <th>Количество</td>
         </tr>
     </thead>
     <tbody>
         {% for product in products %}
-        {% set image = 'storage/app/media/' ~ product.image|trim('/') %}
         <tr>
             <td style="text-align: center;">{{ loop.index }}</td>
             <td style="text-align: center;">
-              <span style="display: block; max-width: 160px; width: 100%; margin: 0 auto;">{{ product.title }}</span>
-            </td>
-            <td style="text-align: center;">
-              <img
-                border="0"
-                vspace="0"
-                hspace="0"
-                style="color: #FFFFFF; font-size: 10px; margin: 0 auto; padding: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block; max-width: 100%; width: auto; height: 60px"
-                src="{{ message.embed(image|app) }}"
-              />
+              <span style="display: block; max-width: 160px; width: 100%; margin: 0 auto; color: #000">{{ product.title }}</span>
             </td>
             <td>
-              <h3 style="color: #F4484E; text-align: center;">{{ product.price }} ₽</h3>
+              <h3 style="color: #eb5757; text-align: center;">{{ product.sale_price ? product.sale_price : product.price }} ₽</h3>
             </td>
             <td style="text-align: center;">{{ product.amount }}</td>
         </tr>
@@ -55,7 +60,7 @@
                       <table border="0" cellpadding="0" cellspacing="0">
                           <tr>
                               <td>
-                                  <a href="/account" class="button button-positive" target="_blank">
+                                  <a href="{{ host }}/account" class="button button-positive" target="_blank">
                                       Личный кабинет
                                   </a>
                               </td>

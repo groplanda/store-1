@@ -20,6 +20,11 @@ fields:
         type: parentbox
 tabs:
     fields:
+        is_soon:
+            label: 'Уже скоро?'
+            span: auto
+            type: switch
+            tab: Описание
         image:
             label: Изображение
             mode: image

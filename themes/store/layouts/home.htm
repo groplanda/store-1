@@ -6,8 +6,6 @@ templateType = "homepage"
 [PopularProducts]
 
 [FullSlider]
-
-[PageList]
 ==
 <!DOCTYPE html>
 <html lang="ru">
@@ -17,53 +15,26 @@ templateType = "homepage"
     {% partial "header" %}
 
     <!-- Content -->
-    <main class="main">
-      {% component 'FullSlider' %}
 
-      <div class="section advantages">
-        <div class="advantages__wrap wrap">
-          <div class="advantages__row">
-            <div class="advantages__item">
-              <img src="{{ 'assets/images/advantages/shield.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Гарантия 1 год на весь ассортимент</p>
+    <main class="main section">
+      <div class="main__wrap wrap">
+        <div class="main__content">
+          {% component 'FullSlider' %}
+          {% component 'CategoryList' %}
+          {% component 'PopularProducts' %}
+
+          <section class="content section">
+            <div class="wrap content__wrap">
+              <h1 class="title content__title">{{ this.theme.site_name }}</h1>
+              <div class="content__entry">
+                {% page %}
+              </div>
             </div>
-            <div class="advantages__item advantages__item_price">
-              <img src="{{ 'assets/images/advantages/price.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Максимально низкие цены</p>
-            </div>
-            <div class="advantages__item">
-              <img src="{{ 'assets/images/advantages/clock.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Доставка в любой регион России</p>
-            </div>
-            <div class="advantages__item advantages__item_sale">
-              <img src="{{ 'assets/images/advantages/sale.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Ежедневные скидки и акции</p>
-            </div>
-            <div class="advantages__item advantages__item_count">
-              <img src="{{ 'assets/images/advantages/shop.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Более 25000 наименовайний товара</p>
-            </div>
-          </div>
+          </section>
+
         </div>
       </div>
-
-      {% component 'PopularProducts' %}
-
-      {% component 'CategoryList' %}
-
-      <section class="content section">
-        <div class="wrap content__wrap">
-          <h1 class="title content__title">{{ this.theme.site_name }}</h1>
-          <div class="content__entry">
-            {% page %}
-          </div>
-        </div>
-      </section>
-
-      {% component 'PageList' %}
-
     </main>
-
     <!-- Footer -->
     {% partial "footer" %}
     {% partial "modals" %}

@@ -98,7 +98,9 @@ function createRedirect() {
 const reserPasswordForm = document.getElementById("reset-password"),
       resetSuccessMsg = document.getElementById("reset-success");
 
-reserPasswordForm.addEventListener("submit", resetPassword);
+if (reserPasswordForm) {
+  reserPasswordForm.addEventListener("submit", resetPassword);
+}
 
 function resetPassword(e) {
   e.preventDefault();

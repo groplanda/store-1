@@ -1,18 +1,99 @@
+<h2>
+  Поступил заказ с сайта.
+</h2>
 <p>
-Новый заказ с сайта от <b>{{ user_name }}</b> - <b>{{ user_phone }}</b>
+  От <b>{{ user_name }}</b> - <b>{{ user_phone }}</b>
 </p>
 {% if user_email %}
 <p>
-    E-mail: {{ user_email }}
+  E-mail: {{ user_email }}
 </p>
 {% endif %}
-{% if user_adress %}
+{% if user_address %}
 <p>
-    Адрес: {{ user_adress }}
+  Адрес: {{ user_address }}, подьезд {{ user_entrance }}, кв. {{ user_flat }}
 </p>
 {% endif %}
 {% if user_comment %}
 <p>
-    Комментарий: {{ user_comment }}
+  Комментарий: {{ user_comment }}
 </p>
+{% endif %}
+{% if payment %}
+<p>
+  Оплата: {{ payment }}
+</p>
+{% endif %}
+{% if delivery %}
+<p>
+  Доставка: {{ delivery }}
+</p>
+{% endif %}
+{% if promocode %}
+<table class="promotion break-all" align="center" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+      <td align="center">
+        Промокод:  {{ promocode }}
+      </td>
+  </tr>
+</table>
+{% endif %}
+{% if total %}
+<table class="panel break-all" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+      <td class="panel-content">
+          <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                  <td class="panel-item">
+                    Сумма заказа: {{ total }}
+                  </td>
+              </tr>
+          </table>
+      </td>
+  </tr>
+</table>
+{% endif %}
+<h2>
+  Позиции заказа:
+</h2>
+<div class="table">
+  <table>
+    <thead>
+        <tr align="center">
+            <th>№</td>
+            <th>Название</td>
+            <th>Цена</td>
+            <th>Количество</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td style="text-align: center;">{{ loop.index }}</td>
+            <td style="text-align: center;">
+              <a href="{{ host }}/product/{{ product.id }}" target="_blank" rel="noopener noreferrer" style="display: block; max-width: 160px; width: 100%; margin: 0 auto; color: #000">{{ product.title }}</a>
+            </td>
+            <td>
+              <h3 style="color: #eb5757; text-align: center;">{{ product.sale_price ? product.sale_price : product.price }} ₽</h3>
+            </td>
+            <td style="text-align: center;">{{ product.amount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% if user_payment == 0 %}
+<table class="panel break-all" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+      <td class="panel-content">
+          <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                  <td class="panel-item">
+                    Была выбрана оплата онлайн. Обязательно проверьте платеж в личном кабинете Яндекс.Касса
+                  </td>
+              </tr>
+          </table>
+      </td>
+  </tr>
+</table>
 {% endif %}

@@ -14,11 +14,11 @@ class PopularProducts extends \Cms\Classes\ComponentBase
 
     public function onRun()
     {
-      $this->page['populars'] = Product::select('id','title','slug','image','price','sale_price','is_new','is_hit')
+      $this->page['populars'] = Product::select('id','title','slug','image','price','sale_price','description','is_new','is_hit')
                                         ->orderBy('sort_order', 'asc')
-                                        ->where([['is_active', 1], ['is_hit', 1]])
+                                        ->where([['is_active', 1], ['is_new', 1]])
                                         ->with(['options'])
-                                        ->limit(8)
+                                        ->limit(12)
                                         ->get();
     }
 }

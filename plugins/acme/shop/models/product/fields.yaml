@@ -42,6 +42,22 @@ tabs:
             span: auto
             type: switch
             tab: 'Общие параметры'
+        is_featured_in_cart:
+            label: 'Рекомендовать при оформлении?'
+            span: auto
+            type: switch
+            tab: 'Общие параметры'
+        max_free_quantity:
+            label: 'Макс. бесплатное кол-во'
+            span: auto
+            default: '0'
+            trigger:
+                action: show
+                field: is_featured_in_cart
+                condition: checked
+            type: number
+            comment: 'Для товаров корзины'
+            tab: 'Общие параметры'
         description:
             label: Описание
             size: giant
@@ -111,7 +127,7 @@ tabs:
             tab: 'Вариативные товары'
             type: featuredbox
         options:
-            label: 'Опции'
+            label: Опции
             nameFrom: name
             span: full
             type: partial

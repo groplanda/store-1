@@ -1,9 +1,9 @@
 <template>
   <div class="checkout__promo">
-    <div class="title title_sm checkout__cart-title checkout__cart-title_promo" :class="resultClass">{{ title }}</div>
     <div class="checkout__promo-form">
-      <input type="text" v-model="name" placeholder="Код купона" class="checkout__step-input checkout__step-input_promo" />
-      <button type="button" class="button button_primary checkout__promo-button" @click.stop="onSend">Применить</button>
+      <input type="text" v-model="name" placeholder="Код купона" class="checkout__promo-input" />
+      <button type="button" class="button checkout__promo-button" @click.stop="onSend">Применить</button>
+      <div class="checkout__promo-result" :class="resultClass">{{ title }}</div>
     </div>
   </div>
 </template>
@@ -20,15 +20,15 @@ export default {
   data() {
     return {
       name: "",
-      title: "У вас есть промокод?",
+      title: "",
       result: ""
     }
   },
   computed: {
     resultClass() {
       return {
-        "checkout__cart-title_success": this.result === "success",
-        "checkout__cart-title_error": this.result === "error"
+        "checkout__promo-result_success": this.result === "success",
+        "checkout__promo-result_error": this.result === "error"
       }
     },
     isValidate() {

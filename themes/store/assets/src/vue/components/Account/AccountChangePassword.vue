@@ -1,25 +1,29 @@
 <template lang="">
-  <form class="account__form" @submit.prevent="onChange">
-    <div class="account__form-row account__form-row_last">
-      <div class="account__form-group account__form-group_full">
-        <label class="account__form-label">Текущий пароль</label>
-        <input type="password" class="account__form-input" v-model="form.current_password" placeholder="**********" />
-        <span class="account__form-error" v-if="currentPasswordErr">{{ currentPasswordErr }}</span>
-      </div>
-      <div class="account__form-group account__form-group_full">
-        <label class="account__form-label">Новый пароль</label>
-        <input type="password" class="account__form-input" v-model="form.password" placeholder="**********" />
-        <span class="account__form-error" v-if="passwordErr">{{ passwordErr }}</span>
-      </div>
-      <div class="account__form-group account__form-group_full">
-        <label class="account__form-label">Подтвердите пароль</label>
-        <input type="password" class="account__form-input" v-model="form.password_confirmation" placeholder="**********" />
-        <span class="account__form-error" v-if="passwordConfirmationErr">{{ passwordConfirmationErr }}</span>
+  <form class="form" @submit.prevent="onChange">
+    <div class="form__row">
+      <div class="form__group form__group_col">
+        <label class="form__group-label">Текущий пароль</label>
+        <input type="password" class="form__group-input" v-model="form.current_password" placeholder="**********" />
+        <span class="form__group-error" v-if="currentPasswordErr">{{ currentPasswordErr }}</span>
       </div>
     </div>
-    <button type="submit" class="button button_primary account__form-button">Изменить пароль</button>
+    <div class="form__row">
+      <div class="form__group form__group_col">
+        <label class="form__group-label">Новый пароль</label>
+        <input type="password" class="form__group-input" v-model="form.password" placeholder="**********" />
+        <span class="form__group-error" v-if="passwordErr">{{ passwordErr }}</span>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="form__group form__group_col">
+        <label class="form__group-label">Подтвердите пароль</label>
+        <input type="password" class="form__group-input" v-model="form.password_confirmation" placeholder="**********" />
+        <span class="form__group-error" v-if="passwordConfirmationErr">{{ passwordConfirmationErr }}</span>
+      </div>
+    </div>
+    <button type="submit" class="button button_primary form__submit">Изменить пароль</button>
     <input type="hidden" v-model="form.email" />
-    <span class="account__form-response" v-if="submitStatus">{{ submitStatus }}</span>
+    <span class="form__done" v-if="submitStatus">{{ submitStatus }}</span>
   </form>
 </template>
 <script>

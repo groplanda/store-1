@@ -3,7 +3,7 @@ export class Cart {
   constructor(cartEl, CountEl) {
     this.$cart = document.querySelectorAll(cartEl);
     this.$countCart = document.querySelectorAll(CountEl);
-    this.storageName = "shop_cart"
+    this.storageName = "sushi_shop"
   }
 
   addToCart(data) {
@@ -21,11 +21,16 @@ export class Cart {
       } else {
         cart[index].amount = Number(cart[index].amount) + Number(data.amount);
       }
+
       localStorage.setItem(this.storageName, JSON.stringify(cart));
-      this.alertCart(isAdd ? "add" : "default", isAdd ? "Товар добавлен в корзину!" : "Количество товаров изменилось!");
+      if (index !== -1 && cart[index].amount === 0) {
+        this.removeFromCart(index);
+      } else {
+        this.alertCart(isAdd ? "add" : "default", isAdd ? "Товар добавлен в корзину!" : "Количество товаров изменилось!");
+      }
     } else {
       localStorage.setItem(this.storageName, JSON.stringify([data]));
-      this.alertCart("add", "Товар добален в корзину!");
+      this.alertCart("add", "Товар добавлен в корзину!");
     }
     this.updateCart();
   }
@@ -57,6 +62,44 @@ export class Cart {
         })
       }
     }
+  }
+
+  displayProductQty() {
+    if (this.isHasStorage()) {
+      const cart = JSON.parse(localStorage.getItem(this.storageName));
+      cart.forEach(row => {
+        if (+row.amount > 0) {
+          this.showQtyEl(row.id, document, row.amount);
+        }
+      });
+    }
+  }
+
+  displaySingleProductQty(id, element) {
+    if (this.isHasStorage()) {
+      const cart = JSON.parse(localStorage.getItem(this.storageName)),
+            index = this.findById(cart, +id);
+      if ( index === -1 ) return
+      const productData = cart[index];
+      this.showQtyEl(id, element, productData.amount);
+    }
+  }
+
+  showQtyEl(id, parent, amount) {
+    const button = parent.querySelector(`button[data-product-id="${id}"]`);
+    if (!button) return;
+    const qty = button.nextElementSibling;
+    if (!qty) return;
+    button.classList.add("product-card__button_hide");
+    qty.querySelector('[data-js-action="qty-val"]').textContent = amount;
+    qty.classList.add("qty_show");
+  }
+
+  getProductsQty(){
+    if (this.isHasStorage()) {
+      return JSON.parse(localStorage.getItem(this.storageName));
+    }
+    return [];
   }
 
   findById(products, id) {

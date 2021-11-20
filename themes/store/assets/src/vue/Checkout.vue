@@ -1,66 +1,127 @@
 <template>
   <section class="checkout section">
     <div class="wrap checkout__wrap">
-      <form class="checkout__row" @submit.prevent="onCheckout">
+      <form class="checkout__row form" @submit.prevent="onCheckout">
         <div class="checkout__col">
-          <h1 class="title title_lg checkout__title">Оформление заказа</h1>
-          <div class="checkout__step">
+          <h1 class="title checkout__title">Оформление заказа</h1>
+          <div class="checkout__step checkout__step_last">
             <div class="checkout__step-heading">
               <div class="checkout__step-count">1</div>
+              <div class="checkout__step-name">Выбор доставки</div>
+            </div>
+
+            <div class="checkout__step-payment">
+              <label class="radio">
+                <input type="radio" name="delivery_type" value="0" v-model="form.user_delivery" class="radio__input" :disabled="disableCourier" />
+                <span class="radio__circle"></span>
+                <span class="radio__group">
+                  <span class="radio__group-title">Доставка курьером</span>
+                  <span class="radio__group-descr">Доставка действует от суммы 600 руб.</span>
+                </span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="delivery_type" value="1" v-model="form.user_delivery" checked class="radio__input" />
+                <span class="radio__circle"></span>
+                <span class="radio__group">
+                  <span class="radio__group-title">Самовывоз</span>
+                  <span class="radio__group-descr">Бесплатно</span>
+                </span>
+              </label>
+
+              <span class="checkout__step-error" v-if="deliveryErr">{{ deliveryErr }}</span>
+            </div>
+          </div>
+          <div class="checkout__step">
+            <div class="checkout__step-heading">
+              <div class="checkout__step-count">2</div>
               <div class="checkout__step-name">Контактные данные</div>
             </div>
-            <div class="checkout__step-group checkout__step-group_full">
-              <label class="checkout__step-label">Имя и фамилия</label>
+            <div class="form__group">
+              <label class="form__group-label">Имя и фамилия
+                <span class="form__group-asterisk">*</span>
+              </label>
               <input
                 type="text"
                 v-model="form.user_name"
-                class="checkout__step-input"
-                :class="{ 'checkout__step-input_error': nameErr }"
+                class="form__group-input"
+                :class="{ 'form__group-input_error': nameErr }"
                 placeholder="Иван Иванов"
               />
-              <span class="checkout__step-error" v-if="nameErr">{{ nameErr }}</span>
+              <span class="form__group-error form__group-error_active" v-if="nameErr">{{ nameErr }}</span>
             </div>
-            <div class="checkout__step-row">
-              <div class="checkout__step-group checkout__step-group_col">
-                <label class="checkout__step-label">Адрес электронной почты</label>
-                <input
-                  type="text"
-                  v-model="form.user_email"
-                  class="checkout__step-input"
-                  :class="{ 'checkout__step-input_error': emailErr }"
-                  placeholder="ivanov@yandex.ru"
-                />
-                <span class="checkout__step-error" v-if="emailErr">{{ emailErr }}</span>
-              </div>
-              <div class="checkout__step-group checkout__step-group_col">
-                <label class="checkout__step-label">Номер телефона</label>
+            <div class="form__row">
+              <div class="form__group form__group_col">
+                <label class="form__group-label">Номер телефона
+                  <span class="form__group-asterisk">*</span>
+                </label>
                 <input
                   type="text"
                   v-model="form.user_phone"
                   v-mask="'+7 (###) ###-##-##'"
-                  :class="{ 'checkout__step-input_error': phoneErr }"
-                  class="checkout__step-input"
+                  :class="{ 'form__group-input_error': phoneErr }"
+                  class="form__group-input"
                   placeholder="+7 (___) ___ __-__"
                 />
-                <span class="checkout__step-error" v-if="phoneErr">{{ phoneErr }}</span>
+                <span class="form__group-error form__group-error_active" v-if="phoneErr">{{ phoneErr }}</span>
+              </div>
+              <div class="form__group form__group_col">
+                <label class="form__group-label">Email</label>
+                <input
+                  type="text"
+                  v-model="form.user_email"
+                  class="form__group-input"
+                  :class="{ 'form__group-input_error': emailErr }"
+                  placeholder="ivanov@yandex.ru"
+                />
+                <span class="form__group-error form__group-error_active" v-if="emailErr">{{ emailErr }}</span>
               </div>
             </div>
-            <div class="checkout__step-group checkout__step-group_full">
-              <label class="checkout__step-label">Адрес доставки</label>
-              <input
-                type="text"
-                v-model="form.user_address"
-                class="checkout__step-input"
-                :class="{ 'checkout__step-input_error': addressErr }"
-                placeholder="г. Москва, ул. Пушкина д.1, кв. 1"
-              />
-              <span class="checkout__step-error" v-if="addressErr">{{ addressErr }}</span>
+            <div class="form__row" v-if="form.user_delivery == 0">
+              <div class="form__group form__group_col">
+                <label class="form__group-label">Адрес доставки
+                  <span class="form__group-asterisk">*</span>
+                </label>
+                <input
+                  type="text"
+                  v-model="form.user_address"
+                  class="form__group-input"
+                  :class="{ 'form__group-input_error': addressErr }"
+                  placeholder="г. Москва, ул. Пушкина д.1"
+                />
+                <span class="form__group-error form__group-error_active" v-if="addressErr">{{ addressErr }}</span>
+              </div>
+              <div class="form__group form__group_sm">
+                <label class="form__group-label">Подьезд
+                  <span class="form__group-asterisk">*</span>
+                </label>
+                <input
+                  type="text"
+                  v-model="form.user_entrance"
+                  class="form__group-input"
+                  :class="{ 'form__group-input_error': entranceErr }"
+                  placeholder="3"
+                />
+                <span class="form__group-error form__group-error_active" v-if="entranceErr">{{ entranceErr }}</span>
+              </div>
+              <div class="form__group form__group_sm">
+                <label class="form__group-label">Квартира
+                  <span class="form__group-asterisk">*</span>
+                </label>
+                <input
+                  type="text"
+                  v-model="form.user_flat"
+                  class="form__group-input"
+                  :class="{ 'form__group-input_error': flatErr }"
+                  placeholder="17"
+                />
+                <span class="form__group-error form__group-error_active" v-if="flatErr">{{ flatErr }}</span>
+              </div>
             </div>
           </div>
 
           <div class="checkout__step checkout__step_last">
             <div class="checkout__step-heading">
-              <div class="checkout__step-count">2</div>
+              <div class="checkout__step-count">3</div>
               <div class="checkout__step-name">Способ оплаты</div>
             </div>
 
@@ -92,21 +153,20 @@
               <span class="checkout__step-error" v-if="paymentErr">{{ paymentErr }}</span>
             </div>
 
-            <div class="checkout__step-group checkout__step-group_full checkout__step-group_last">
-              <label class="checkout__step-label">Комментарий к заказу</label>
+            <div class="form__group">
+              <label class="form__group-label">Комментарий к заказу</label>
               <textarea
                 v-model="form.user_comment"
-                class="checkout__step-input checkout__step-input_textarea"
-                :class="{ 'checkout__step-input_error': commentErr }"
+                class="form__group-input form__group-input_textarea"
+                :class="{ 'form__group_error': commentErr }"
                 placeholder="Дополнительная информация"></textarea>
-              <span class="checkout__step-error" v-if="commentErr">{{ commentErr }}</span>
+              <span class="form__group-error form__group-error_active" v-if="commentErr">{{ commentErr }}</span>
             </div>
           </div>
 
         </div>
         <div class="checkout__col">
           <div class="checkout__cart">
-            <div class="title title_sm checkout__cart-title">Товары в корзине</div>
             <div class="checkout__cart-list" v-if="products">
               <CartItem
                 v-for="product in products"
@@ -117,8 +177,12 @@
               />
             </div>
           </div>
+          <div class="checkout__cart" v-if="featuredProducts.length">
+            <div class="title checkout__title">Рекомендуем:</div>
+            <FeaturedProductItem v-for="product in featuredProducts" :key="product.id" :product="product" @changeAmount="changeFeaturedAmount" />
+          </div>
           <Promocode :total="calculateTotal" @setPromo="setPromo" />
-          <CartTotal :price="{ sum: calculateSum, total: calculateTotal, promocode: promocodeValue }"/>
+          <CartTotal :price="{ sum: calculateSum, total: calculateTotal, promocode: promocodeValue, sale: calculateSale, featured: calculateFeatured }"/>
         </div>
         <div class="checkout__footer">
           <button type="submit" class="button button_primary checkout__send">Оформить заказ</button>
@@ -129,23 +193,35 @@
         </div>
       </form>
     </div>
+    <div class="checkout__loading" v-if="loading">
+      <div class="checkout__loading-wrap">
+        <Loading :isWhite="true" />
+        <div class="checkout__loading-msg">
+          {{ submitStatus }}
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 import { onValidate, checkErr } from "@/src/helpers/validate.js";
+import { Cart } from '@/src/plugins/Cart';
 import axios from "axios";
 import CartItem from "./components/Checkout/CartItem";
 import CartTotal from "./components/Checkout/CartTotal";
 import Promocode from "./components/Checkout/Promocode";
-import { Cart } from '@/src/plugins/Cart';
+import FeaturedProductItem from "./components/Checkout/FeaturedProductItem";
+import Loading from "./components/Loading/Loading";
 
 export default {
   name: "App",
   components: {
     CartItem,
     CartTotal,
-    Promocode
+    Promocode,
+    FeaturedProductItem,
+    Loading
   },
   data() {
     return {
@@ -158,12 +234,17 @@ export default {
         user_comment: "",
         user_payment: 0,
         user_sum: 0,
+        user_delivery: 1,
+        user_entrance: "",
+        user_flat: "",
         user_promocode: null,
       },
       products: [],
+      featuredProducts: [],
       promocodeValue: 0,
       submitStatus: null,
-      errors: []
+      errors: [],
+      loading: false
     }
   },
   computed: {
@@ -191,34 +272,68 @@ export default {
       return checkErr('user_payment', this.errors);
     },
 
+    deliveryErr() {
+       return checkErr('user_delivery', this.errors);
+    },
+
+    entranceErr() {
+      return checkErr('user_entrance', this.errors);
+    },
+
+    flatErr() {
+      return checkErr('user_flat', this.errors);
+    },
+
     submitMsg () {
       return this.submitStatus;
     },
 
     calculateSum() {
+      return this.products.reduce((sum, product) => sum + Number(product.amount) * Number(product.price), 0);
+    },
+
+    calculateWidthSale() {
+      return this.products.reduce((sum, product) => sum + Number(product.amount) * Number(+product.sale_price ? +product.sale_price : +product.price), 0);
+    },
+
+    calculateTotal() {
+      return this.calculateWidthSale - this.promocodeValue + this.calculateFeatured;
+    },
+
+    calculateSale() {
+      return this.calculateSum - this.calculateWidthSale;
+    },
+
+    disableCourier() {
+      return this.calculateTotal < 600
+    },
+
+    calculateFeatured() {
       let result = 0;
-      this.products.forEach(product => {
-        result += Number(product.amount) * Number(product.price);
+      this.featuredProducts.forEach(product => {
+        if (product.currentPrice > 0) {
+          if (product.max_free_quantity > 0) {
+            result += ((Number(product.amount) - Number(product.max_free_quantity)) * Number(product.currentPrice));
+          } else {
+            result += Number(product.amount) * Number(product.currentPrice);
+          }
+        }
       })
       return result;
     },
 
-    calculateTotal() {
-      let result = 0;
-      this.products.forEach(product => {
-        result += Number(product.amount) * Number(+product.sale_price ? +product.sale_price : +product.price);
-      })
-      result -= this.promocodeValue;
-      return result;
+    selectedFeaturedproducts() {
+      return this.featuredProducts.filter(product => product.amount > 0);
     }
   },
   methods: {
     onCheckout() {
       this.setSubmitStatus(null);
       this.errors = [];
+      this.loading = true;
 
       this.setSubmitStatus("Заказ отправляется...");
-      this.form.products = this.products;
+      this.form.products = this.products.concat(this.selectedFeaturedproducts);
       this.form.user_sum = this.calculateTotal + this.promocodeValue;
 
       axios.post('/api/add-order', this.form)
@@ -228,6 +343,7 @@ export default {
           if(data.status === 'error') {
             this.onValidate(data)
             this.setSubmitStatus(null);
+            this.loading = false;
 
           } else if (data.status === 'redirect') {
             message = 'Подготовка формы оплаты...';
@@ -237,7 +353,6 @@ export default {
             }, 1500);
 
           } else if(data.status === 'success') {
-            message = data.message;
             this.clearProductData();
             this.createRedirect(data.id);
           }
@@ -247,6 +362,7 @@ export default {
         })
         .catch(error => {
           console.log(error);
+          this.loading = false;
         })
     },
 
@@ -330,6 +446,7 @@ export default {
       })
       const cart = new Cart(".js-cart", ".js-cart-count");
       cart.addToCart(prepareData);
+      if (this.disableCourier) this.form.user_delivery = 1;
     },
 
     deleteProduct(data) {
@@ -344,16 +461,18 @@ export default {
       }
       const cart = new Cart(".js-cart", ".js-cart-count");
       cart.removeFromCart(productIndex);
-
+      if (this.disableCourier) this.form.user_delivery = 1;
       if (this.products.length === 0) {
         window.location.href = "/";
       }
     },
+
     createRedirect(id) {
       const url = new URL(process.env.MIX_URL + "/success-order");
       url.searchParams.set('id', id);
       window.location.href = url;
     },
+
     getUserdata() {
       axios.get("/api/user/userdata")
       .then(response => {
@@ -371,14 +490,16 @@ export default {
         }
       })
     },
+
     fillUserData(userData) {
-      const USER_KEYS = ['id', 'name', 'email', 'phone', 'address'];
+      const USER_KEYS = ['id', 'name', 'email', 'phone', 'address', 'entrance', 'flat'];
       USER_KEYS.forEach(key => {
         if (userData[key]) {
           this.form[`user_${key}`] = userData[key];
         }
       })
     },
+
     isUserLogin() {
       axios.get("/api/user/isUserLogin")
       .then(response => {
@@ -387,9 +508,48 @@ export default {
         }
       })
     },
+
     setPromo(promocode) {
       this.form.user_promocode = promocode.id;
       this.promocodeValue = promocode.value;
+    },
+
+    getFeaturedProducts() {
+      axios.get("/api/featured-in-cart")
+      .then(response => {
+        const data = response.data;
+        if (data.length === 0) return;
+        this.featuredProducts = data.map(product => {
+          return {
+            ...product,
+            amount: 0,
+            currentPrice: this.setDefaultPrice(product)
+          }
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    },
+
+    changeFeaturedAmount(data) {
+      this.featuredProducts = this.featuredProducts.map(product => {
+        if (Number(data.id) == Number(product.id)) {
+          product.amount = data.amount;
+          if (product.amount > product.max_free_quantity) {
+            product.currentPrice = product.sale_price ? product.sale_price : product.price;
+          } else {
+            product.currentPrice = this.setDefaultPrice(product);
+          }
+        }
+        return product;
+      })
+    },
+
+    setDefaultPrice(product) {
+      const { sale_price, price, max_free_quantity } = product;
+      if (max_free_quantity > 0) return 0;
+      return sale_price ? sale_price : price;
     }
   },
   created() {
@@ -401,6 +561,7 @@ export default {
     const cartData = JSON.parse(cartStorage);
     this.getProductsByIds(cartData);
     this.isUserLogin();
+    this.getFeaturedProducts();
   }
 }
 </script>

@@ -20,14 +20,14 @@ function toggleStar() {
 
 function toggleStarClass(count, add) {
   for(let i = 0; i < count; i++) {
-    starsInput[i].classList[add]("modal__star-input_active");
+    starsInput[i].classList[add]("form__star-input_active");
   }
 }
 
 // add comments
 
 const commentForm = document.getElementById("add-comment"),
-      errorClass = "modal__form-error_active";
+      errorClass = "form__form-error_active";
 
 if (commentForm) {
   commentForm.addEventListener("submit", addComment)

@@ -14,6 +14,7 @@ class Plugin extends PluginBase
         'Acme\Shop\Components\ProductList'         => 'ProductList',
         'Acme\Shop\Components\SingleProduct'       => 'SingleProduct',
         'Acme\Shop\Components\PopularProducts'     => 'PopularProducts',
+        'Acme\Shop\Components\SpecialProducts'     => 'SpecialProducts',
         'Acme\Shop\Components\CategoryMenu'        => 'CategoryMenu',
         'Acme\Shop\Components\BrandList'           => 'BrandList',
         'Acme\Shop\Components\SingleBrand'         => 'SingleBrand',
@@ -25,7 +26,7 @@ class Plugin extends PluginBase
     public function registerMailLayouts()
     {
       return [
-        'order' => 'acme.shop::layouts.order'
+       // 'order' => 'acme.shop::layouts.order'
       ];
     }
 

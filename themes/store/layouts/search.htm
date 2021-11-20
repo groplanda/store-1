@@ -8,12 +8,16 @@ description = "Search page"
     {% partial "header" %}
 
     <!-- Content -->
-    <main class="main">
-      <!-- хлебные крошки старт --->
-      {% partial "breadcrumbs" %}
-      <!-- хлебные крошки конец --->
-      <div id="search">
-        <Search></Search>
+    <main class="main section">
+      <div class="main__wrap wrap">
+        <div class="main__content">
+          <!-- хлебные крошки старт --->
+          {% partial "breadcrumbs" %}
+          <!-- хлебные крошки конец --->
+          <div id="search">
+            <Search></Search>
+          </div>
+        </div>
       </div>
     </main>
 

@@ -22,7 +22,9 @@ class Plugin extends PluginBase
         $model->addFillable([
           'phone',
           'address',
-          'is_subscribe'
+          'is_subscribe',
+          'flat',
+          'entrance'
         ]);
 
         $model->rules['password'] = 'between:6,255';
@@ -46,6 +48,16 @@ class Plugin extends PluginBase
           'address' => [
             'label'   => 'Адрес',
             'type'    =>  'text',
+            'tab'     =>   'Профиль'
+          ],
+          'entrance' => [
+            'label'   => 'Подъезд',
+            'type'    =>  'number',
+            'tab'     =>   'Профиль'
+          ],
+          'flat' => [
+            'label'   => 'Квартира',
+            'type'    =>  'number',
             'tab'     =>   'Профиль'
           ],
           'is_subscribe' => [

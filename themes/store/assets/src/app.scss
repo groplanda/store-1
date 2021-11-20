@@ -11,7 +11,8 @@
 body {
   font-family: $base-font;
   font-size: $base-font-size;
-  color: $dark-color;
+  line-height: $base-line-height;
+  color: #000;
   background: #FFF;
 
   &.modal-open {
@@ -51,7 +52,7 @@ ol, ul {
 }
 
 a {
-  color: $blue-color;
+  color: $yellow-color;
   text-decoration: none;
   transition: all .3s ease;
 
@@ -69,6 +70,11 @@ span[hidden], img[hidden] {
   display: none;
 }
 
+svg {
+  display: inline-block;
+  transition: all .25s ease;
+}
+
 .section {
   display: flex;
   flex-direction: column;
@@ -77,142 +83,79 @@ span[hidden], img[hidden] {
 
 .wrap {
   width: 100%;
-  max-width: 1186px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
   padding: 0 20px;
 
-  @media(max-width: 1199px) {
-    max-width: 991px;
-    padding: 0 15px;
+  @media(min-width: 768px) {
+    max-width: 1920px;
   }
 
-  @media(max-width: 991px) {
-    max-width: 768px;
+  @media(min-width: 992px) {
+    padding: 0 40px;
   }
 
-  @media(max-width: 767px) {
-    max-width: 100%;
-    padding: 0 12px;
+  @media(min-width: 1199px) {
+    padding: 0 60px;
+  }
+}
+
+.main {
+  &__wrap {
+    @media(min-width: 768px) {
+      max-width: 1530px;
+    }
+    justify-content: center;
+  }
+  &__content {
+    width: 100%;
   }
 }
 
 .button {
-  color: $dark-color;
-  background: #FFF;
-  border: 1px solid #FFF;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 19px 0;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 19px;
-  transition: all .2s ease;
-
-  @media(max-width: 767px) {
-    padding: 16px 0;
-    font-size: 14px;
-    line-height: 17px;
-  }
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
 
   &_primary {
     color: #FFF;
     background: $red-color;
-    border-color: $red-color;
     &:hover {
-      background: $red-color-hover;
-      border-color: $red-color-hover;
-      text-decoration: none;
-      color: #FFF;
+      background: darken($color: $red-color, $amount: 5%);
     }
-  }
-
-  &_blue {
-    color: #FFF;
-    background: $blue-color;
-    border-color: $blue-color;
-
-    &:hover {
-      background: $red-color-hover;
-      border-color: $red-color-hover;
-      text-decoration: none;
-      color: #FFF;
-    }
-  }
-
-  &_outline {
-    padding: 18px 0;
-    color: $grey-color;
-    border: 2px solid $blue-light-color;
   }
 }
 
 .title {
-  font-weight: 900;
-  font-size: 36px;
-  line-height: 44px;
-  color: #000000;
+  color: #000;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
 
-  @media(max-width: 767px) {
-    font-size: 24px;
-    line-height: 29px;
-  }
-
-  &_lg {
-    line-height: 52px;
-    @media(max-width: 767px) {
-      line-height: 29px;
-    }
-  }
-
-  &_sm {
-    font-size: 24px;
-    line-height: 29px;
-
-    @media(max-width: 767px) {
-      font-size: 18px;
-      line-height: 24px;
-    }
+  @media(min-width: 768px) {
+    font-weight: 700;
   }
 }
 
 .alert {
   position: fixed;
   z-index: 15;
-  top: 30px;
-  right: 30px;
-  font-weight: bold;
+  top: 95px;
+  right: 20px;
+  color: #FFF;
+  font-weight: 600;
   font-size: 14px;
-  line-height: 24px;
-  color: #FFFFFF;
-  padding: 6px 15px;
-  border-radius: 30px;
-  margin-right: 15px;
+  line-height: 28px;
+  background: #2C2C2C;
+  border-radius: 10px;
+  padding: 10px 20px;
   animation: fadeOut 4s both;
-
-  &_remove {
-    background: $red-color;
-  }
-
-  &_add {
-    background: $green-color;
-  }
-
-  &_default {
-    background: $grey-color;
-  }
-
-  @media(max-width: 767px) {
-    padding: 2px 10px;
-    font-size: 12px;
-    line-height: 20px;
-    top: 20px;
-    right: 20px;
-  }
 }
 
 @mixin placeholder($color) {
@@ -246,7 +189,7 @@ span[hidden], img[hidden] {
   0% {
     opacity: 1
   }
-  99% {
+  95% {
     opacity: 0;
     z-index: 1;
   }
@@ -258,30 +201,24 @@ span[hidden], img[hidden] {
 
 @import "./elements/header.scss";
 @import "./elements/slider.scss";
-@import "./elements/advantages.scss";
-@import "./elements/home-products.scss";
-@import "./elements/product-card.scss";
 @import "./elements/home-category.scss";
-@import "./elements/content.scss";
-@import "./elements/news.scss";
-@import "./elements/footer.scss";
-@import "./elements/breadcrumbs.scss";
 @import "./elements/catalog.scss";
-@import "./elements/category.scss";
-@import "./elements/product.scss";
-@import "./elements/tabs.scss";
-@import "./elements/additional.scss";
-@import "./elements/checkout.scss";
-@import "./elements/radio.scss";
+@import "./elements/product-card.scss";
+@import "./elements/content.scss";
 @import "./elements/modal.scss";
-@import "./elements/success-order.scss";
-@import "./elements/page.scss";
-@import "./elements/menu.scss";
-@import "./elements/category-additional.scss";
 @import "./elements/loading.scss";
-@import "./elements/account.scss";
-@import "./elements/filter.scss";
+@import "./elements/product.scss";
+@import "./elements/qty.scss";
+@import "./elements/footer.scss";
+@import "./elements/menu.scss";
+@import "./elements/breadcrumbs.scss";
+@import "./elements/category.scss";
+@import "./elements/page.scss";
+@import "./elements/form.scss";
+@import "./elements/loading.scss";
 @import "./elements/checkbox.scss";
+@import "./elements/radio.scss";
+@import "./elements/checkout.scss";
+@import "./elements/success-order.scss";
 @import "./elements/restore.scss";
-@import "./elements/product-quick.scss";
-@import "nouislider/dist/nouislider.css";
+@import "./elements/account.scss";

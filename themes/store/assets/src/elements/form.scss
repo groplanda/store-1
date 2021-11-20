@@ -1,0 +1,224 @@
+.form {
+  position: relative;
+  $root: &;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+  }
+
+  &__group {
+    width: 100%;
+    text-align: left;
+    position: relative;
+    margin-bottom: 15px;
+
+    @media(min-width: 768px) {
+      margin-bottom: 20px;
+    }
+
+    &_col {
+      margin-left: 10px;
+      margin-right: 10px;
+      @media(min-width: 768px) {
+        flex: 1 1;
+      }
+    }
+
+    &_sm {
+      flex: 1 1;
+      margin-left: 10px;
+      margin-right: 10px;
+      @media(min-width: 768px) {
+        flex: none;
+        width: 82px;
+      }
+    }
+
+    &_last {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__group-label {
+    display: block;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    color: $label-color;
+    margin-bottom: 9px;
+
+    @media(min-width: 768px) {
+      font-size: 14px;
+    }
+  }
+
+  &__group-asterisk {
+    font-size: 14px;
+    color: $red-color;
+    font-weight: 500;
+
+    @media(min-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  &__group-forgot {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    font-size: 10px;
+    line-height: 12px;
+    color: #000000;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: $red-color;
+      text-decoration: none;
+    }
+
+    @media(min-width: 768px) {
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+
+  &__group-input {
+    width: 100%;
+    height: 40px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+    padding: 0 15px;
+    color: #000;
+    background: #FFFFFF;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+
+    @include placeholder($placeholder-color);
+
+    @media(min-width: 768px) {
+      height: 48px;
+      padding: 0 20px;
+      font-size: 16px;
+    }
+
+    &_textarea {
+      padding: 12px 15px;
+      height: 105px;
+      resize: none;
+    }
+  }
+
+  &__group-error {
+    color: $red-color;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 2px;
+  }
+
+  &__submit {
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+    height: 40px;
+
+    @media(min-width: 768px) {
+      font-size: 15px;
+      height: 60px;
+    }
+  }
+
+  &__link {
+    display: block;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #000;
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover {
+      color: $red-color;
+      text-decoration: none;
+    }
+  }
+
+  &__stars {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+  }
+
+  &__star-input {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    left: 0;
+    top: 0;
+
+    &:checked ~ {
+      #{$root} {
+        &__star-ico {
+          color: $green-color;
+        }
+      }
+    }
+
+    &_active ~ {
+      #{$root} {
+        &__star-ico {
+          color: $green-color;
+        }
+      }
+    }
+
+    &_one:checked ~ {
+      #{$root} {
+        &__star-ico {
+          color: $red-color;
+        }
+      }
+    }
+  }
+
+  &__star {
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    margin-right: 8px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__star-ico {
+    width: 20px;
+    height: 20px;
+    color: $border-color;
+  }
+
+  &__done {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 19px;
+    color: $green-color;
+    font-weight: 500;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+  }
+}

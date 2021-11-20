@@ -52,7 +52,7 @@ class SingleProduct extends \Cms\Classes\ComponentBase
       if ($product->categories) {
         $breadcrumbs = [];
         $breadcrumbs[] = ['title' => 'Главная', 'url' => 'home'];
-        $breadcrumbs[] = ['title' => 'Каталог', 'url' => 'catalog'];
+        $breadcrumbs[] = ['title' => 'Меню', 'url' => 'catalog'];
         foreach($product->categories as $category) {
           $breadcrumbs[] = [ 'title' => $category->title, 'url' => $category->slug, 'category' => true ];
         }

@@ -50,8 +50,4 @@ class Category extends Model
       return $query->select(array_diff($this->columns, (array) $value));
     }
 
-    // public function parent()
-    // {
-    //     return $this->hasOne(Acme\Shop\Models\Category::class, 'id', 'parent_id');
-    // }
 }

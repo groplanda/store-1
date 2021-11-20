@@ -10,11 +10,11 @@
       <div class="modal__popup-container">
         <div class="modal__popup-cart-image">
           <svg class="modal__popup-cart-ico" width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.32617 1.32596L4.18395 7.51855M4.18395 7.51855L11.6151 32.2889H45.6743V13.7111C45.6743 10.2911 42.9018 7.51855 39.4817 7.51855H4.18395ZM39.4817 44.6741C37.7717 44.6741 36.3854 43.2878 36.3854 41.5778C36.3854 39.8678 37.7717 38.4815 39.4817 38.4815C41.1918 38.4815 42.578 39.8678 42.578 41.5778C42.578 43.2878 41.1918 44.6741 39.4817 44.6741ZM14.7114 41.5778C14.7114 39.8678 16.0976 38.4815 17.8077 38.4815C19.5177 38.4815 20.9039 39.8678 20.9039 41.5778C20.9039 43.2878 19.5177 44.6741 17.8077 44.6741C16.0976 44.6741 14.7114 43.2878 14.7114 41.5778Z" stroke="#007AFF" stroke-width="3"/>
+            <path d="M2.32617 1.32596L4.18395 7.51855M4.18395 7.51855L11.6151 32.2889H45.6743V13.7111C45.6743 10.2911 42.9018 7.51855 39.4817 7.51855H4.18395ZM39.4817 44.6741C37.7717 44.6741 36.3854 43.2878 36.3854 41.5778C36.3854 39.8678 37.7717 38.4815 39.4817 38.4815C41.1918 38.4815 42.578 39.8678 42.578 41.5778C42.578 43.2878 41.1918 44.6741 39.4817 44.6741ZM14.7114 41.5778C14.7114 39.8678 16.0976 38.4815 17.8077 38.4815C19.5177 38.4815 20.9039 39.8678 20.9039 41.5778C20.9039 43.2878 19.5177 44.6741 17.8077 44.6741C16.0976 44.6741 14.7114 43.2878 14.7114 41.5778Z" stroke="currentColor" stroke-width="3"/>
           </svg>
         </div>
-        <div class="modal__popup-cart-info">Ваша корзина пуста</div>
-        <a href="/catalog" class="button button_primary modal__popup-cart-button">Каталог товаров</a>
+        <div class="modal__title title">Ваша корзина пуста!</div>
+        <a href="{{ 'catalog'|page }}" class="button button_primary modal__popup-button">Перейти в меню</a>
       </div>
     </div>
 
@@ -32,53 +32,55 @@
           </div>
           <div class="modal__tabs-body">
             <div class="modal__tabs-item modal__tabs-item_active" data-body-tab="0">
-              {{ form_open({ class: 'modal__form', id: 'authUser'  }) }}
-                <div class="modal__form-group">
-                  <label class="modal__form-label">Логин</label>
-                  <input type="email" name="login" class="modal__form-input" placeholder="user@mail.ru" />
-                  <span class="modal__form-error" data-error-for="login"></span>
+              {{ form_open({ class: 'form', id: 'authUser'  }) }}
+                <div class="form__group">
+                  <label class="form__group-label">Логин</label>
+                  <input type="email" name="login" class="form__group-input" placeholder="user@mail.ru" />
+                  <span class="form__group-error" data-error-for="login"></span>
                 </div>
-                <div class="modal__form-group modal__form-group_last">
-                  <label class="modal__form-label">Пароль</label>
-                  <a data-js-action="open-modal" data-type-modal="reset-password" class="modal__form-forgot">Забыли пароль?</a>
-                  <input type="password" name="password" class="modal__form-input" placeholder="**********" />
-                  <span class="modal__form-error" data-error-for="password"></span>
+                <div class="form__group form__group_last">
+                  <label class="form__group-label">Пароль</label>
+                  <a data-js-action="open-modal" data-type-modal="reset-password" class="form__group-forgot">Забыли пароль?</a>
+                  <input type="password" name="password" class="form__group-input" placeholder="**********" />
+                  <span class="form__group-error" data-error-for="password"></span>
                 </div>
-                <button type="submit" class="button button_primary modal__form-button">Войти</button>
+                <button type="submit" class="button button_primary form__submit">Войти</button>
               {{ form_close() }}
             </div>
             <div class="modal__tabs-item" data-body-tab="1">
-              {{ form_open({ class: 'modal__form', id: 'registerUser'  }) }}
-                <div class="modal__form-group">
-                  <label class="modal__form-label">Имя</label>
-                  <input type="text" name="name" class="modal__form-input" placeholder="Иванов Иван" />
-                  <span class="modal__form-error" data-error-for="name"></span>
+              {{ form_open({ class: 'form', id: 'registerUser'  }) }}
+                <div class="form__group">
+                  <label class="form__group-label">Имя</label>
+                  <input type="text" name="name" class="form__group-input" placeholder="Иванов Иван" />
+                  <span class="form__group-error" data-error-for="name"></span>
                 </div>
-                <div class="modal__form-group">
-                  <label class="modal__form-label">Email</label>
-                  <input type="email" name="email" class="modal__form-input" placeholder="user@mail.ru" />
-                  <span class="modal__form-error" data-error-for="email"></span>
+                <div class="form__group">
+                  <label class="form__group-label">Email</label>
+                  <input type="email" name="email" class="form__group-input" placeholder="user@mail.ru" />
+                  <span class="form__group-error" data-error-for="email"></span>
                 </div>
-                <div class="modal__form-group">
-                  <label class="modal__form-label">Пароль</label>
-                  <input type="password" name="password" class="modal__form-input" placeholder="**********" />
-                  <span class="modal__form-error" data-error-for="password"></span>
+                <div class="form__group">
+                  <label class="form__group-label">Пароль</label>
+                  <input type="password" name="password" class="form__group-input" placeholder="**********" />
+                  <span class="form__group-error" data-error-for="password"></span>
                 </div>
-                <div class="modal__form-group modal__form-group_last">
-                  <label class="modal__form-label">Повторите пароль</label>
-                  <input type="password" name="password_confirmation" class="modal__form-input" placeholder="**********" />
-                  <span class="modal__form-error" data-error-for="password_confirmation"></span>
+                <div class="form__group form__group_last">
+                  <label class="form__group-label">Повторите пароль</label>
+                  <input type="password" name="password_confirmation" class="form__group-input" placeholder="**********" />
+                  <span class="form__group-error" data-error-for="password_confirmation"></span>
                 </div>
-                <div class="modal__form-group">
-                  <label class="radio radio_edit">
-                    <input type="checkbox" name="is_subscribe" value="1" class="radio__input" />
-                    <span class="radio__circle"></span>
-                    <span class="radio__group">
-                      <span class="radio__group-title">Хочу получать информацию о скидках и акциях</span>
+                <div class="form__group">
+                  <label class="checkbox">
+                    <input type="checkbox" name="is_subscribe" value="1" class="checkbox__input" />
+                    <span class="checkbox__square">
+                      <svg class="checkbox__ico" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.5466 2.00008L11.1366 0.580078L4.54663 7.17008L1.96663 4.60008L0.546631 6.01008L4.54663 10.0001L12.5466 2.00008Z" fill="#E31E24"/>
+                      </svg>
                     </span>
+                    <span class="checkbox__title">Подписаться на рассылку</span>
                   </label>
                 </div>
-                <button type="submit" class="button button_primary modal__form-button">Зарегистрироваться</button>
+                <button type="submit" class="button button_primary form__submit">Зарегистрироваться</button>
               {{ form_close() }}
             </div>
           </div>
@@ -93,12 +95,14 @@
         </svg>
       </button>
       <div class="modal__popup-container">
-        <svg class="modal__success-logout" width="100" height="92" viewBox="0 0 100 92" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M45.8322 91.7681C20.5621 91.7681 0 71.2067 0 45.9367C0 20.6666 20.5621 0.104523 45.8322 0.104523C54.6194 0.104523 63.1687 2.60841 70.556 7.34993C72.0063 8.28374 72.4312 10.217 71.4974 11.6711C70.5605 13.1252 68.6311 13.5456 67.177 12.6125C60.8021 8.51643 53.4194 6.35433 45.8322 6.35433C24.0074 6.35433 6.24981 24.112 6.24981 45.9367C6.24981 67.7607 24.0074 85.5183 45.8322 85.5183C67.6561 85.5183 85.4138 67.7607 85.4138 45.9367C85.4138 44.6321 85.3512 43.3405 85.2307 42.0702C85.0643 40.3491 86.3224 38.824 88.0389 38.6577C89.7639 38.499 91.2844 39.7494 91.4515 41.466C91.5926 42.9369 91.6636 44.4284 91.6636 45.9367C91.6636 71.2067 71.1022 91.7681 45.8322 91.7681Z" fill="currentColor"/>
-          <path d="M51.0398 56.3528C50.2403 56.3528 49.44 56.0484 48.8319 55.4365L30.0825 36.6871C28.8618 35.4657 28.8618 33.4867 30.0825 32.266C31.3032 31.0453 33.2822 31.0453 34.5028 32.266L51.0444 48.8075L94.6633 5.18784C95.8847 3.96717 97.8637 3.96717 99.0844 5.18784C100.305 6.4085 100.305 8.3875 99.0844 9.60817L53.2522 55.4403C52.6396 56.0484 51.8401 56.3528 51.0398 56.3528Z" fill="currentColor"/>
-        </svg>
-        <div class="modal__popup-cart-info">Вы успешно вышли!</div>
-        <a href="#!" data-role="modal-close" class="button button_primary modal__popup-cart-button">Закрыть окно</a>
+        <div class="modal__popup-logout">
+          <svg class="modal__popup-logout-ico" width="100" height="92" viewBox="0 0 100 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45.8322 91.7681C20.5621 91.7681 0 71.2067 0 45.9367C0 20.6666 20.5621 0.104523 45.8322 0.104523C54.6194 0.104523 63.1687 2.60841 70.556 7.34993C72.0063 8.28374 72.4312 10.217 71.4974 11.6711C70.5605 13.1252 68.6311 13.5456 67.177 12.6125C60.8021 8.51643 53.4194 6.35433 45.8322 6.35433C24.0074 6.35433 6.24981 24.112 6.24981 45.9367C6.24981 67.7607 24.0074 85.5183 45.8322 85.5183C67.6561 85.5183 85.4138 67.7607 85.4138 45.9367C85.4138 44.6321 85.3512 43.3405 85.2307 42.0702C85.0643 40.3491 86.3224 38.824 88.0389 38.6577C89.7639 38.499 91.2844 39.7494 91.4515 41.466C91.5926 42.9369 91.6636 44.4284 91.6636 45.9367C91.6636 71.2067 71.1022 91.7681 45.8322 91.7681Z" fill="currentColor"/>
+            <path d="M51.0398 56.3528C50.2403 56.3528 49.44 56.0484 48.8319 55.4365L30.0825 36.6871C28.8618 35.4657 28.8618 33.4867 30.0825 32.266C31.3032 31.0453 33.2822 31.0453 34.5028 32.266L51.0444 48.8075L94.6633 5.18784C95.8847 3.96717 97.8637 3.96717 99.0844 5.18784C100.305 6.4085 100.305 8.3875 99.0844 9.60817L53.2522 55.4403C52.6396 56.0484 51.8401 56.3528 51.0398 56.3528Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="modal__title title">Вы успешно вышли!</div>
+        <a href="#!" data-role="modal-close" class="button button_primary modal__popup-button">Закрыть окно</a>
       </div>
     </div>
 
@@ -110,66 +114,67 @@
         </svg>
       </button>
       <div class="modal__popup-container">
-        <div class="title title_sm modal__popup-title">Оставить отзыв</div>
-        <form class="modal__form" id="add-comment">
-          <div class="modal__form-group">
-            <label class="modal__form-label">Как вас зовут?</label>
-            <input type="text" name="title" class="modal__form-input" placeholder="Иванов Иван" />
-            <span class="modal__form-error" data-error-for="title"></span>
+        <div class="title modal__popup-title">Оставить отзыв</div>
+        <form class="form" id="add-comment">
+          <div class="form__group">
+            <label class="form__group-label">Как вас зовут?</label>
+            <input type="email" name="title" class="form__group-input" placeholder="Иванов Иван" />
+            <span class="form__group-error" data-error-for="title"></span>
           </div>
-          <div class="modal__form-group modal__form-group_last">
-            <label class="modal__form-label">Ваш отзыв</label>
-            <textarea name="description" class="modal__form-input modal__form-input_textarea" placeholder="" /></textarea>
-            <span class="modal__form-error" data-error-for="description"></span>
+          <div class="form__group">
+            <label class="form__group-label">Ваш отзыв</label>
+            <textarea  name="description" class="form__group-input form__group-input_textarea" placeholder="Текст отзыва"></textarea>
+            <span class="form__group-error" data-error-for="description"></span>
           </div>
-          <div class="modal__form-group">
-            <label class="modal__form-label">Ваша оценка</label>
-            <div class="modal__stars">
-              <label class="modal__star">
-                <input class="modal__star-input modal__star-input_one" value="1" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+          <div class="form__group">
+            <label class="form__group-label">Ваша оценка</label>
+            <div class="form__stars">
+              <label class="form__star">
+                <input class="form__star-input form__star-input_one" value="1" type="radio" name="star" data-js-action="star-rating" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="form__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
                </svg>
               </label>
 
-              <label class="modal__star">
-                <input class="modal__star-input modal__star-input_two" value="2" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <label class="form__star">
+                <input class="form__star-input form__star-input_two" value="2" type="radio" name="star" data-js-action="star-rating" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="form__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
                </svg>
               </label>
 
-              <label class="modal__star">
-                <input class="modal__star-input modal__star-input_three" value="3" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <label class="form__star">
+                <input class="form__star-input form__star-input_three" value="3" type="radio" name="star" data-js-action="star-rating" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="form__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
                </svg>
               </label>
 
-              <label class="modal__star">
-                <input class="modal__star-input modal__star-input_four" value="4" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <label class="form__star">
+                <input class="form__star-input form__star-input_four" value="4" type="radio" name="star" data-js-action="star-rating" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="form__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
                </svg>
               </label>
 
-              <label class="modal__star">
-                <input class="modal__star-input modal__star-input_five" value="5" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <label class="form__star">
+                <input class="form__star-input form__star-input_five" value="5" type="radio" name="star" data-js-action="star-rating" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="form__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
                </svg>
               </label>
 
-              <span class="modal__form-error" data-error-for="star"></span>
+              <span class="form__group-error" data-error-for="star"></span>
             </div>
           </div>
           <input type="hidden" name="product_id" value="" data-input="product-id" />
-          <button type="submit" class="button button_primary modal__form-button">Оставить отзыв</button>
+          <button type="submit" class="button button_primary form__submit">Оставить отзыв</button>
           <span class="modal__form-done" data-comment="done"></span>
         </form>
       </div>
@@ -183,15 +188,15 @@
         </svg>
       </button>
       <div class="modal__popup-container">
-        <div class="title title_sm modal__popup-title">Восстановление пароля</div>
-        <form class="modal__form" id="reset-password">
-          <div class="modal__form-group">
-            <label class="modal__form-label">Email</label>
-            <input type="email" name="email" class="modal__form-input" placeholder="user@mail.ru" />
-            <span class="modal__form-error" data-error-for="email"></span>
+        <div class="title modal__popup-title">Восстановление пароля</div>
+        <form class="form" id="reset-password">
+          <div class="form__group form__group_last">
+            <label class="form__group-label">Email</label>
+            <input type="email" name="email" class="form__group-input" placeholder="user@mail.ru" />
+            <span class="form__group-error" data-error-for="email"></span>
           </div>
-          <button type="submit" class="button button_primary modal__form-button">Сбросить пароль</button>
-          <a data-js-action="open-modal" data-type-modal="sign" class="modal__form-link">Я вспомнил пароль</a>
+          <button type="submit" class="button button_primary form__submit">Сбросить пароль</button>
+          <a data-js-action="open-modal" data-type-modal="sign" class="form__link">Я вспомнил пароль</a>
         </form>
       </div>
     </div>
@@ -203,20 +208,22 @@
         </svg>
       </button>
       <div class="modal__popup-container">
-        <svg class="modal__success-logout" width="100" height="92" viewBox="0 0 100 92" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M45.8322 91.7681C20.5621 91.7681 0 71.2067 0 45.9367C0 20.6666 20.5621 0.104523 45.8322 0.104523C54.6194 0.104523 63.1687 2.60841 70.556 7.34993C72.0063 8.28374 72.4312 10.217 71.4974 11.6711C70.5605 13.1252 68.6311 13.5456 67.177 12.6125C60.8021 8.51643 53.4194 6.35433 45.8322 6.35433C24.0074 6.35433 6.24981 24.112 6.24981 45.9367C6.24981 67.7607 24.0074 85.5183 45.8322 85.5183C67.6561 85.5183 85.4138 67.7607 85.4138 45.9367C85.4138 44.6321 85.3512 43.3405 85.2307 42.0702C85.0643 40.3491 86.3224 38.824 88.0389 38.6577C89.7639 38.499 91.2844 39.7494 91.4515 41.466C91.5926 42.9369 91.6636 44.4284 91.6636 45.9367C91.6636 71.2067 71.1022 91.7681 45.8322 91.7681Z" fill="currentColor"/>
-          <path d="M51.0398 56.3528C50.2403 56.3528 49.44 56.0484 48.8319 55.4365L30.0825 36.6871C28.8618 35.4657 28.8618 33.4867 30.0825 32.266C31.3032 31.0453 33.2822 31.0453 34.5028 32.266L51.0444 48.8075L94.6633 5.18784C95.8847 3.96717 97.8637 3.96717 99.0844 5.18784C100.305 6.4085 100.305 8.3875 99.0844 9.60817L53.2522 55.4403C52.6396 56.0484 51.8401 56.3528 51.0398 56.3528Z" fill="currentColor"/>
-        </svg>
-        <div class="modal__popup-cart-info" id="reset-success"></div>
-        <a href="#!" data-role="modal-close" class="button button_primary modal__popup-cart-button">Закрыть окно</a>
+        <div class="modal__popup-logout">
+          <svg class="modal__popup-logout-ico" width="100" height="92" viewBox="0 0 100 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45.8322 91.7681C20.5621 91.7681 0 71.2067 0 45.9367C0 20.6666 20.5621 0.104523 45.8322 0.104523C54.6194 0.104523 63.1687 2.60841 70.556 7.34993C72.0063 8.28374 72.4312 10.217 71.4974 11.6711C70.5605 13.1252 68.6311 13.5456 67.177 12.6125C60.8021 8.51643 53.4194 6.35433 45.8322 6.35433C24.0074 6.35433 6.24981 24.112 6.24981 45.9367C6.24981 67.7607 24.0074 85.5183 45.8322 85.5183C67.6561 85.5183 85.4138 67.7607 85.4138 45.9367C85.4138 44.6321 85.3512 43.3405 85.2307 42.0702C85.0643 40.3491 86.3224 38.824 88.0389 38.6577C89.7639 38.499 91.2844 39.7494 91.4515 41.466C91.5926 42.9369 91.6636 44.4284 91.6636 45.9367C91.6636 71.2067 71.1022 91.7681 45.8322 91.7681Z" fill="currentColor"/>
+            <path d="M51.0398 56.3528C50.2403 56.3528 49.44 56.0484 48.8319 55.4365L30.0825 36.6871C28.8618 35.4657 28.8618 33.4867 30.0825 32.266C31.3032 31.0453 33.2822 31.0453 34.5028 32.266L51.0444 48.8075L94.6633 5.18784C95.8847 3.96717 97.8637 3.96717 99.0844 5.18784C100.305 6.4085 100.305 8.3875 99.0844 9.60817L53.2522 55.4403C52.6396 56.0484 51.8401 56.3528 51.0398 56.3528Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="modal__subtitle" id="reset-success"></div>
+        <a href="#!" data-role="modal-close" class="button button_primary modal__popup-button">Закрыть окно</a>
       </div>
     </div>
 
-    {% if this.page.layout == 'category' %}
+
     <div class="modal__popup modal__popup_lg" data-modal="single-product">
       <button class="modal__popup-close" data-role="modal-close">
-        <svg class="modal__popup-cross" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16.8023 1.19766L9 9M9 9L1.19765 16.8023M9 9L16.8023 16.8023M9 9L1.19765 1.19766" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg class="modal__popup-cross" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.4948 10L19.478 3.01684C19.8094 2.68601 19.9958 2.23707 19.9962 1.76879C19.9966 1.3005 19.811 0.851233 19.4802 0.519814C19.1494 0.188395 18.7004 0.00197318 18.2321 0.00155962C17.7638 0.00114607 17.3146 0.186774 16.9832 0.517609L10 7.50077L3.01684 0.517609C2.68542 0.18619 2.23592 0 1.76723 0C1.29853 0 0.849028 0.18619 0.517609 0.517609C0.18619 0.849028 0 1.29853 0 1.76723C0 2.23592 0.18619 2.68542 0.517609 3.01684L7.50077 10L0.517609 16.9832C0.18619 17.3146 0 17.7641 0 18.2328C0 18.7015 0.18619 19.151 0.517609 19.4824C0.849028 19.8138 1.29853 20 1.76723 20C2.23592 20 2.68542 19.8138 3.01684 19.4824L10 12.4992L16.9832 19.4824C17.3146 19.8138 17.7641 20 18.2328 20C18.7015 20 19.151 19.8138 19.4824 19.4824C19.8138 19.151 20 18.7015 20 18.2328C20 17.7641 19.8138 17.3146 19.4824 16.9832L12.4948 10Z" fill="currentColor" />
         </svg>
       </button>
       <div class="modal__popup-container">
@@ -238,7 +245,7 @@
         <div id="quick-output"></div>
       </div>
     </div>
-    {% endif %}
+
 
   </div>
 </div>

@@ -166,7 +166,7 @@ class UserController extends Controller
     if (!$user = Auth::getUser()) {
       return null;
     }
-    $orders = Order::where('user_id', $user->id)->select('id', 'user_id', 'name', 'created_at', 'products', 'status', 'user_payment')->get();
+    $orders = Order::where('user_id', $user->id)->select('id', 'user_id', 'name', 'created_at', 'products', 'status', 'user_payment', 'user_address', 'user_delivery')->get();
     return response()->json((['status' => 'success', 'message' => $orders]), 200);
   }
 
@@ -181,7 +181,7 @@ class UserController extends Controller
       'name'    => 'required|min:3|max:50',
       'email'   => 'required|email',
       'surname' => 'max:50',
-      'phone' => 'min:3|max:50',
+      'phone'   => 'min:3|max:50|unique:users',
       'address' => 'max:100'
     ];
 
@@ -191,6 +191,7 @@ class UserController extends Controller
       'min'      => 'Минимум :min символов!',
       'max'      => 'Максимум :max символов!',
       'email'    => 'Некорректный e-mail',
+      'numeric'  => 'Укажите номер'
     ];
 
     $validator = Validator::make($request->all(), $rules, $messages);

@@ -31,7 +31,11 @@ class OrderController extends Controller
       'user_payment'    => 'required',
       'products'        => 'required',
       'user_sum'        => 'required',
-      'user_promocode'  => 'numeric'
+      'user_promocode'  => 'numeric|nullable',
+      'user_delivery'   => 'required|integer',
+      'user_address'    => 'required_if:user_delivery,==,0',
+      'user_entrance'   => 'required_if:user_delivery,==,0',
+      'user_flat'       => 'required_if:user_delivery,==,0'
     ];
 
     $messages = [
@@ -39,7 +43,11 @@ class OrderController extends Controller
       'min'      => 'Минимум :min символов!',
       'max'      => 'Максимум :max символов!',
       'email'    => 'Некорректный e-mail',
-      'user_payment.required' => 'Выберите тип оплаты!'
+      'user_payment.required' => 'Выберите тип оплаты!',
+      'user_delivery.required' => 'Выберите тип доставки!',
+      'user_address.required_if' => 'Заполните адрес!',
+      'user_entrance.required_if' => 'Укажите подьезд!',
+      'user_flat.required_if' => 'Укажите квартиру!'
     ];
     $validator = Validator::make($request->all(), $rules, $messages);
 
@@ -50,24 +58,28 @@ class OrderController extends Controller
 
     } else {
       $total = $request->get('user_sum');
+      $promocodeName = false;
       $promocode = $this->checkPromocode($request->get('user_promocode'), $request->get('user_sum'));
 
       if ($this->hasProp($promocode)) {
         $total -= $promocode->value;
+        $promocodeName = $promocode->name;
       }
+
 
       date_default_timezone_set('Europe/Moscow');
       $time = date('m/d/Y H:i:s', time());
 
-      Mail::send('acme.shop::mail.message', $request->all(), function($message) {
+      $messageDetails = $this->prepareOrderDetail($request->all(), $promocodeName, $total);
+
+      Mail::send('acme.shop::mail.message', $messageDetails, function($message) use ($time)  {
         $message->to($this->getUserMail(), 'Admin Person');
-        $message->subject('Новый заказ с сайта');
+        $message->subject('Новый заказ с сайта:'. $time);
       });
 
       if ($request->get('user_email')) {
-        $vars = $request->all();
-        Mail::send('acme.shop::mail.order', $vars, function($message) use ($vars, $time) {
-          $message->to($vars["user_email"], 'Admin Person');
+        Mail::send('acme.shop::mail.order', $messageDetails, function($message) use ($messageDetails, $time) {
+          $message->to($messageDetails["user_email"], 'Admin Person');
           $message->subject('Заказ - '. $time);
         });
       };
@@ -177,7 +189,9 @@ class OrderController extends Controller
     $order->user_phone = $request->get('user_phone');
     $order->user_mail = $request->get('user_email');
     $order->user_address = $request->get('user_address');
-    $order->user_comment = $request->get('user_comment');
+    $order->user_delivery = $request->get('user_delivery');
+    $order->user_entrance = $request->get('user_entrance');
+    $order->user_flat = $request->get('user_flat');
     $order->products = $request->get('products');
     $order->user_payment = $request->get('user_payment');
     $order->user_id = $request->get('user_id');
@@ -236,5 +250,41 @@ class OrderController extends Controller
 
   private function checkPromocode($id, $condition) {
     return Promocode::where([['id', $id], ['condition', '<=', $condition], ['is_active', 1]])->first();
+  }
+
+  private function prepareOrderDetail($data, $promocode, $total) {
+    $result = [];
+    foreach($data as $key => $value) {
+      if ($key === "user_payment") {
+        $result['payment'] = $this->getPaymentStatus((int)$value);
+      }
+      if ($key === "user_delivery") {
+        $result['delivery'] = $this->getDeliveryStatus((int)$value);
+      }
+      $result[$key] = $value;
+    }
+    $result['host'] = $this->getHostUrl();
+    if ($promocode) {
+      $result['promocode'] = $promocode;
+    }
+    if ($total) {
+      $result['total'] = $total;
+    }
+    return $result;
+  }
+
+  private function getDeliveryStatus($id) {
+    $array = ['Доставка курьером', 'Самовывоз'];
+    return $array[$id];
+  }
+
+  private function getPaymentStatus($id) {
+    $array = ['Яндекс касса(online)', 'Оплата картой', 'Оплата наличными'];
+    return $array[$id];
+  }
+
+  private function getHostUrl() {
+    $url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';
+    return $url . $_SERVER['SERVER_NAME'];
   }
 }

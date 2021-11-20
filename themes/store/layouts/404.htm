@@ -1,0 +1,38 @@
+description = "404 page"
+==
+<!DOCTYPE html>
+<html lang="ru">
+  {% partial "meta" %}
+  <body>
+    <!-- Header -->
+    {% partial "header" %}
+
+    <!-- Content -->
+    <main class="main section">
+      <div class="main__wrap wrap">
+        <div class="main__content">
+          <!-- хлебные крошки старт --->
+          {% partial "breadcrumbs" %}
+          <!-- хлебные крошки конец --->
+          <section class="page section">
+            <div class="wrap page__wrap">
+              <h1 class="title page__title page__title_not-found">{{ this.page.title }}</h1>
+              <div class="page__not-found">
+                <div class="page__not-found-circle">
+                  <div class="page__not-found-title">404</div>
+                </div>
+                <img src="{{ 'assets/images/404.png'|theme }}" alt="404" class="page__not-found-img">
+              </div>
+              <a href="{{ 'catalog'|page }}" class="button button_primary page__button page__button_not-found">Перейти в меню</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "scripts" %}
+  </body>
+</html>

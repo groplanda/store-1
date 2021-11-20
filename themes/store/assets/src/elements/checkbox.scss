@@ -1,14 +1,11 @@
 .checkbox {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
-  margin-bottom: 20px;
+  align-items: center;
+  margin-bottom: 15px;
   position: relative;
   cursor: pointer;
-
-  @media(max-width: 767px) {
-    margin-bottom: 10px;
-  }
+  padding: 3px 0;
 
   $root: &;
 
@@ -26,8 +23,7 @@
     &:checked ~ {
       #{$root} {
         &__square {
-          border-color: $blue-color;
-          background: $blue-color;
+          border-color: $red-color;
           #{$root} {
             &__ico {
               transform: scale(1);
@@ -39,34 +35,32 @@
   }
 
   &__square {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 2px;
-    border: 1px solid $blue-light-color;
-    margin-right: 15px;
+    border: 2px solid $border-color;
+    margin-right: 18px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     position: relative;
     background: #FFF;
     transition: border-color .2s ease;
-
-    @media(max-width: 767px) {
-      margin-right: 8px;
-    }
   }
 
   &__ico {
-    color: #FFF;
+    width: 13px;
+    height: 10px;
+    color: $red-color;
     transition: transform .2s ease;
     transform: scale(0);
   }
 
   &__title {
     flex: 1 1;
-    color: $dark-color;
+    color: #000;
     font-weight: 500;
     font-size: 14px;
-    line-height: 14px;
+    line-height: 17px;
   }
 }

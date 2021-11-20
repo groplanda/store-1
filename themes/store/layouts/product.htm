@@ -10,8 +10,12 @@ description = "Product Page"
     {% partial "header" %}
 
     <!-- Content -->
-    <main class="main">
-      {% component 'SingleProduct' %}
+    <main class="main section">
+      <div class="main__wrap wrap">
+        <div class="main__content">
+          {% component 'SingleProduct' %}
+        </div>
+      </div>
     </main>
     <!-- Footer -->
     {% partial "footer" %}

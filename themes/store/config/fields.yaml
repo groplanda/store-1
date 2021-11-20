@@ -87,13 +87,13 @@ tabs:
           cssClass: col-md-4
           tab: Контакты
           placeholder: '79147580525'
-      fb:
+      tg:
           type: text
-          label: facebook
+          label: Telegram
           span: storm
           cssClass: col-md-4
           tab: Контакты
-          placeholder:  https://fb.com
+          placeholder:  https://t.me/channel
       vk:
           type: text
           label: Вконтакте
