@@ -374,8 +374,8 @@ export default {
 
     clearProductData() {
       this.resetForm();
-      if (localStorage.getItem('shop_cart')) {
-        localStorage.removeItem('shop_cart');
+      if (localStorage.getItem('sushi_shop')) {
+        localStorage.removeItem('sushi_shop');
       }
     },
 
@@ -553,7 +553,7 @@ export default {
     }
   },
   created() {
-    const cartStorage = localStorage.getItem('shop_cart');
+    const cartStorage = localStorage.getItem('sushi_shop');
     if (!cartStorage) {
       window.location.href = "/";
       return;
