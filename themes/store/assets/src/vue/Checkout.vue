@@ -405,6 +405,8 @@ export default {
             product.title = product.title + ' - ' + productOption.product_option.name + ' ' + productOption.option_value.name;
           } else {
             product.amount = this.findAmountById(cartData, product.id);
+            product.price = Number(product.price);
+            product.sale_price = Number(product.sale_price)
           }
           product.index = index + '-' + product.id;
           return product;
@@ -523,6 +525,9 @@ export default {
           return {
             ...product,
             amount: 0,
+            price: Number(product.price),
+            sale_price: Number(product.sale_price),
+            max_free_quantity: Number(product.max_free_quantity),
             currentPrice: this.setDefaultPrice(product)
           }
         })
@@ -537,7 +542,7 @@ export default {
         if (Number(data.id) == Number(product.id)) {
           product.amount = data.amount;
           if (product.amount > product.max_free_quantity) {
-            product.currentPrice = Number(product.sale_price) ? Number(product.sale_price) : Number(product.price);
+            product.currentPrice = product.sale_price ? product.sale_price : product.price;
           } else {
             product.currentPrice = this.setDefaultPrice(product);
           }
@@ -549,7 +554,7 @@ export default {
     setDefaultPrice(product) {
       const { sale_price, price, max_free_quantity } = product;
       if (max_free_quantity > 0) return 0;
-      return sale_price ? Number(sale_price) : Number(price);
+      return sale_price ? sale_price : price;
     }
   },
   created() {
