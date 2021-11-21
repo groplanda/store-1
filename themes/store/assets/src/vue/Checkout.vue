@@ -405,8 +405,6 @@ export default {
             product.title = product.title + ' - ' + productOption.product_option.name + ' ' + productOption.option_value.name;
           } else {
             product.amount = this.findAmountById(cartData, product.id);
-            product.price = Number(product.price);
-            product.sale_price = Number(product.sale_price)
           }
           product.index = index + '-' + product.id;
           return product;
@@ -522,16 +520,10 @@ export default {
         const data = response.data;
         if (data.length === 0) return;
         this.featuredProducts = data.map(product => {
-          const price = Number(product.sale_price),
-                sale_price =  Number(product.sale_price),
-                max_free_quantity = Number(product.max_free_quantity);
           return {
             ...product,
             amount: 0,
-            price: price,
-            sale_price: sale_price,
-            max_free_quantity: max_free_quantity,
-            currentPrice: this.setDefaultPrice(price, sale_price, max_free_quantity),
+            currentPrice: this.setDefaultPrice(product)
           }
         })
       })
@@ -554,7 +546,8 @@ export default {
       })
     },
 
-    setDefaultPrice(price, sale_price, max_free_quantity) {
+    setDefaultPrice(product) {
+      const { sale_price, price, max_free_quantity } = product;
       if (max_free_quantity > 0) return 0;
       return sale_price ? sale_price : price;
     }
