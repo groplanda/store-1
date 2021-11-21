@@ -522,13 +522,16 @@ export default {
         const data = response.data;
         if (data.length === 0) return;
         this.featuredProducts = data.map(product => {
+          const price = Number(product.sale_price),
+                sale_price =  Number(product.sale_price),
+                max_free_quantity = Number(product.max_free_quantity);
           return {
             ...product,
             amount: 0,
-            price: Number(product.price),
-            sale_price: Number(product.sale_price),
-            max_free_quantity: Number(product.max_free_quantity),
-            currentPrice: this.setDefaultPrice(product)
+            price: price,
+            sale_price: sale_price,
+            max_free_quantity: max_free_quantity,
+            currentPrice: this.setDefaultPrice(price, sale_price, max_free_quantity),
           }
         })
       })
@@ -551,8 +554,7 @@ export default {
       })
     },
 
-    setDefaultPrice(product) {
-      const { sale_price, price, max_free_quantity } = product;
+    setDefaultPrice(price, sale_price, max_free_quantity) {
       if (max_free_quantity > 0) return 0;
       return sale_price ? sale_price : price;
     }
