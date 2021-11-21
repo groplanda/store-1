@@ -21,6 +21,17 @@ class ProductOptionValue extends Model
      */
     public $table = 'acme_shop_product_option_value';
 
+    protected $casts = [
+      'id' => 'integer',
+      'product_id' => 'integer',
+      'option_id' => 'integer',
+      'option_value_id' => 'integer',
+      'price' => 'integer',
+      'sale_price' => 'integer',
+      'quantity' => 'integer',
+      'key' => 'integer'
+    ];
+
     /**
      * @var array Validation rules
      */

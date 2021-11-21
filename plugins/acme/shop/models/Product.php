@@ -24,6 +24,18 @@ class Product extends Model
     protected $jsonable = ['props'];
     protected $slugs = ['slug' => 'title'];
 
+    protected $casts = [
+      'id' => 'integer',
+      'price' => 'integer',
+      'sale_price' => 'integer',
+      'max_free_quantity' => 'integer',
+      'is_active' => 'integer',
+      'is_new' => 'integer',
+      'is_hit' => 'integer',
+      'brand_id' => 'integer',
+      'is_featured_in_cart' => 'integer'
+    ];
+
     /**
      * @var array Validation rules
      */

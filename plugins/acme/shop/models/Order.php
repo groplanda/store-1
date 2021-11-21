@@ -15,6 +15,12 @@ class Order extends Model
      */
     public $table = 'acme_shop_orders';
 
+    protected $casts = [
+      'id' => 'integer',
+      'user_id' => 'integer',
+      'user_delivery' => 'integer',
+    ];
+
     /**
      * @var array Validation rules
      */

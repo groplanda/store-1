@@ -15,6 +15,11 @@ class Wish extends Model
      */
     public $table = 'acme_shop_wish';
 
+    protected $casts = [
+      'id' => 'integer',
+      'user_id' => 'integer'
+    ];
+
     protected $jsonable = ['products'];
 
     public $belongsTo  = [

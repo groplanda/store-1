@@ -16,6 +16,12 @@ class Comment extends Model
      */
     public $table = 'acme_shop_comment';
 
+    protected $casts = [
+      'id' => 'integer',
+      'star' => 'integer',
+      'status' => 'integer',
+    ];
+
     /**
      * @var array Validation rules
      */

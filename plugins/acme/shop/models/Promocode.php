@@ -15,6 +15,13 @@ class Promocode extends Model
      */
     public $table = 'acme_shop_promocode';
 
+    protected $casts = [
+      'id' => 'integer',
+      'type' => 'integer',
+      'is_active' => 'integer',
+      'value' => 'integer'
+    ];
+
     /**
      * @var array Validation rules
      */

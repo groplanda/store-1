@@ -26,6 +26,11 @@ class Category extends Model
     protected $slugs = ['slug' => 'title'];
     protected $columns = ['id', 'title', 'slug', 'description', 'image', 'is_show', 'meta_description', 'meta_title', 'parent_id', 'sort_order'];
 
+    protected $casts = [
+      'id' => 'integer',
+      'is_show' => 'integer',
+    ];
+
     /**
      * @var array Validation rules
      */
