@@ -18,7 +18,7 @@ class Promocode extends Model
     protected $casts = [
       'id' => 'integer',
       'type' => 'integer',
-      'is_active' => 'integer',
+      'is_active' => 'boolean',
       'value' => 'integer'
     ];
 

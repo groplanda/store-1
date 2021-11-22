@@ -1,0 +1,10 @@
+name: Contacts
+form: $/acme/settings/models/contact/fields.yaml
+modelClass: Acme\Settings\Models\Contact
+defaultRedirect: acme/settings/contacts
+create:
+    redirect: 'acme/settings/contacts/update/:id'
+    redirectClose: acme/settings/contacts
+update:
+    redirect: acme/settings/contacts
+    redirectClose: acme/settings/contacts

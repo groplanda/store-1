@@ -1,0 +1,17 @@
+fields:
+    name:
+        label: Город
+        span: auto
+        type: text
+    is_active:
+        label: 'Активен?'
+        span: auto
+        type: switch
+    phone:
+        label: Телефон
+        span: auto
+        type: text
+    address:
+        label: Улица
+        span: auto
+        type: text

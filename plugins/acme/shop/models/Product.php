@@ -29,11 +29,11 @@ class Product extends Model
       'price' => 'integer',
       'sale_price' => 'integer',
       'max_free_quantity' => 'integer',
-      'is_active' => 'integer',
-      'is_new' => 'integer',
-      'is_hit' => 'integer',
+      'is_active' => 'boolean',
+      'is_new' => 'boolean',
+      'is_hit' => 'boolean',
       'brand_id' => 'integer',
-      'is_featured_in_cart' => 'integer'
+      'is_featured_in_cart' => 'boolean'
     ];
 
     /**

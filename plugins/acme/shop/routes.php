@@ -11,6 +11,7 @@ use Acme\Settings\Models\Testimonial;
 use Acme\Settings\Models\Gallery;
 use Acme\Settings\Models\Stock;
 use Illuminate\Http\Request;
+use Acme\Settings\Models\Contact;
 
 Route::prefix('/api')->group(function () {
   Route::get('/new-products', function () {
@@ -23,7 +24,7 @@ Route::prefix('/api')->group(function () {
   });
   Route::get('/products/{ids?}', function ($ids = "", Request $request) {
     $ids_array = explode(',', $ids);
-    $productCollection = Product::select('id','title','image','price','sale_price')->whereIn('id', $ids_array)->with(['options'])->get();
+    $productCollection = Product::select('id','title','image','price','sale_price')->whereIn('id', $ids_array)->with(['options'])->orderByRaw("FIELD(id, $ids)")->get();
     $options = $request->get('options');
 
     if (isset($options) && !empty($options)) {
@@ -172,6 +173,21 @@ Route::prefix('/api')->group(function () {
     Route::post('/user/check-wish', 'Acme\Shop\Classes\WishController@checkwish');
     Route::get('/user/wish/{user}', 'Acme\Shop\Classes\WishController@wishlist');
     Route::get('/user/wish-count/{user}', 'Acme\Shop\Classes\WishController@wishcount');
+  });
+
+  Route::post('/select-city/', function (Request $request) {
+    $id = $request->city_id;
+    $cookie = Cookie::forever('selected_city', $id);
+    Cookie::queue($cookie);
+  })->middleware('web');
+
+  Route::get('/get-city/', function () {
+    if(Cookie::get('selected_city') !== null) {
+      $data = Contact::findOrFail((int)Cookie::get('selected_city'));
+    } else {
+      $data = Contact::active()->orderBy('sort_order', 'asc')->first();
+    }
+    return response()->json((['city' => $data->name]), 200);
   });
 
   Route::get('/brand/{id}', function ($id, Request $request) {

@@ -174,4 +174,9 @@
   'Acme\\Shop\\Classes\\WishController' => 'plugins\\acme\\shop\\classes\\WishController.php',
   'Acme\\Shop\\Components\\HeaderSession' => 'plugins\\acme\\shop\\components\\HeaderSession.php',
   'Acme\\Shop\\Components\\SpecialProducts' => 'plugins\\acme\\shop\\components\\SpecialProducts.php',
+  'acme\\settings\\Controllers\\contacts' => 'plugins\\acme\\settings\\controllers\\contacts.php',
+  'Acme\\Settings\\Models\\Contact' => 'plugins\\acme\\settings\\models\\Contact.php',
+  'Acme\\Settings\\Components\\Header' => 'plugins\\acme\\settings\\components\\Header.php',
+  'Acme\\Settings\\Components\\ContactModal' => 'plugins\\acme\\settings\\components\\ContactModal.php',
+  'Acme\\Settings\\Components\\ContactData' => 'plugins\\acme\\settings\\components\\ContactData.php',
 );

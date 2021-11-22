@@ -1,9 +1,9 @@
 description = "Footer"
 
-[CategoryMenu]
-templateType = "footer"
-
 [viewBag]
+
+[ContactData]
+templateType = "footer"
 ==
 <footer class="section footer">
   <div class="wrap footer__wrap">
@@ -39,13 +39,7 @@ templateType = "footer"
       {% endif %}
     </div>
 
-    <div class="footer__contact">
-      {% for phone in this.theme.phone %}
-      <a href="tel:{{ phone.val }}" class="footer__contact-text">{{ phone.val }} </a>
-      {% endfor %}
-      <a href="{{ 'contact'|page }}" class="footer__contact-text footer__contact-text_address">{{ this.theme.city }}, {{ this.theme.address }}</a>
-    </div>
-
+    {% component 'ContactData' %}
     <div class="footer__bottom">
       <div class="footer__privacy">
         <a href="{{ 'privacy'|staticPage }}" class="footer__privacy-link">Политика конфиденциальности</a>

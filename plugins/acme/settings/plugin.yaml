@@ -34,3 +34,7 @@ navigation:
                 label: 'Записи (новости)'
                 url: acme/settings/pages
                 icon: icon-list
+            side-menu-contact:
+                label: Контакты
+                url: acme/settings/contacts
+                icon: icon-map-marker

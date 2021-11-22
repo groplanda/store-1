@@ -338,6 +338,12 @@
       margin-left: 20px;
     }
 
+    &_comment {
+      @media(max-width: 767px) {
+        width: 180px;
+      }
+    }
+
   }
 
   &__wish {

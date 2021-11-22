@@ -1,0 +1,16 @@
+<div class="contact-modal">
+  <div class="contact-modal__scroll">
+    {% for contact in contacts %}
+    <button
+      type="button"
+      class="contact-modal__name{{ loop.index == selectedId ? ' contact-modal__name_active' : '' }}"
+      data-role="modal-close"
+      data-city-id="{{ contact.id }}"
+      data-js-action="select-city"
+      data-city="{{ contact.name }}"
+      data-phones="{{ contact.phone }}"
+      data-address="{{ contact.address }}"
+    >{{ contact.name }}</button>
+    {% endfor %}
+  </div>
+</div>

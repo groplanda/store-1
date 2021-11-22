@@ -28,7 +28,7 @@ class Category extends Model
 
     protected $casts = [
       'id' => 'integer',
-      'is_show' => 'integer',
+      'is_show' => 'boolean',
     ];
 
     /**

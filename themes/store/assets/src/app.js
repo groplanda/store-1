@@ -12,6 +12,7 @@ import { Tabs } from './plugins/Tabs';
 import noUiSlider from 'nouislider';
 import { Wish } from './plugins/Wish';
 import { SingleProduct } from './plugins/SingleProduct';
+import { SelectCity } from './plugins/SelectCity';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -572,4 +573,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const getParams = location.search;
     history.pushState({id: id}, null, fullLoc + id + getParams);
   }
+
+  const selectCity = new SelectCity();
+  selectCity.init();
 });

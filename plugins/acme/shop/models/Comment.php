@@ -19,7 +19,7 @@ class Comment extends Model
     protected $casts = [
       'id' => 'integer',
       'star' => 'integer',
-      'status' => 'integer',
+      'status' => 'boolean',
     ];
 
     /**

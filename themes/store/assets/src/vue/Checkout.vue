@@ -244,8 +244,19 @@ export default {
       promocodeValue: 0,
       submitStatus: null,
       errors: [],
-      loading: false
+      loading: false,
+      isLogged: false
     }
+  },
+  watch: {
+    'form.user_delivery'(newValue) {
+      if (!this.isLogged && +newValue === 0) {
+        const activeCity = document.querySelector('[data-contact="name"]');
+        if (activeCity) {
+          this.form.user_address = activeCity.textContent + ", ";
+        }
+      }
+    },
   },
   computed: {
     nameErr() {
@@ -324,7 +335,7 @@ export default {
 
     selectedFeaturedproducts() {
       return this.featuredProducts.filter(product => product.amount > 0);
-    }
+    },
   },
   methods: {
     onCheckout() {
@@ -479,6 +490,7 @@ export default {
         const data = response.data;
         if (response.status === 200 && data.status === "success") {
           this.fillUserData(data.user);
+          this.isLogged = true;
         }
       })
       .catch(error => {
@@ -550,6 +562,20 @@ export default {
       const { sale_price, price, max_free_quantity } = product;
       if (max_free_quantity > 0) return 0;
       return sale_price ? sale_price : price;
+    },
+
+    setSelectedCity() {
+      const selectCity = document.querySelectorAll('[data-js-action="select-city"]'),
+            self = this;
+      if (selectCity) {
+        selectCity.forEach(select => {
+          select.addEventListener("click", function() {
+            if (!this.isLogged && +self.isLogged === 0) {
+              self.form.user_address = this.dataset.city + ", ";
+            }
+          })
+        })
+      }
     }
   },
   created() {
@@ -562,6 +588,9 @@ export default {
     this.getProductsByIds(cartData);
     this.isUserLogin();
     this.getFeaturedProducts();
+  },
+  mounted() {
+    this.setSelectedCity();
   }
 }
 </script>

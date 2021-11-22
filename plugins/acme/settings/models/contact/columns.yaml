@@ -1,0 +1,15 @@
+columns:
+    name:
+        label: Город
+        type: text
+        searchable: true
+        sortable: true
+    is_active:
+        label: Активен
+        type: switch
+        searchable: true
+        sortable: true
+    sort_order:
+        label: 'Порядок сортировки'
+        type: number
+        sortable: false

@@ -30,3 +30,6 @@
 1.0.11:
     - 'Created table acme_settings_page'
     - builder_table_create_acme_settings_page.php
+1.0.12:
+    - 'Created table acme_settings_contact'
+    - builder_table_create_acme_settings_contact.php
