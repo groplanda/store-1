@@ -1,50 +1,65 @@
 <template>
-  <div class="account__table-row">
-    <div class="account__table-col account__table-col_info">
-      Заказ №
-      <span class="account__table-val">{{ order.name }}</span>
-      <span v-if="orderStatus" :class="'account__table-status_' + orderStatus.id" class="account__table-status">{{ orderStatus.title }}</span>
+  <div class="account__order">
+    <div class="account__order-title">Заказ за {{ orderDate.name }}</div>
+    <div class="account__order-total" v-if="infoCollapse">
+      <div class="account__order-value">Сумма заказа</div>
+      <div class="account__order-value">{{ totalSum }}</div>
     </div>
-    <div class="account__table-col account__table-col_count">
-      {{ productCount }} {{ labelCount }}
+    <div class="account__order-body" v-else>
+
+      <div class="account__order-products">
+
+        <div class="account__order-product" v-for="(product, index) in order.products" :key="index">
+          <a :href="'/product/' + product.id" class="account__order-product-name">
+            {{ product.title }} x {{ product.amount }}
+          </a>
+          <div class="account__order-product-price">
+            {{ product.sale_price ? productPrice(product.sale_price) : productPrice(product.price) }}
+          </div>
+        </div>
+
+        <button type="button" class="button button_primary account__order-repeat" @click="repeatOrder">Повторить заказ</button>
+        <div class="account__order-error" v-if="message">{{ message }}</div>
+
+      </div>
+
+      <div class="account__order-total account__order-total_bordered">
+        <div class="account__order-value">Сумма заказа</div>
+        <div class="account__order-value">{{ totalSum }}</div>
+      </div>
+
+      <div class="account__order-item" v-if="order.user_delivery === 0">
+        <div class="account__order-value account__order-value_col">Адрес доставки</div>
+        <div class="account__order-text">{{ order.user_address }}</div>
+      </div>
+      <div class="account__order-item" v-else>
+        <div class="account__order-value account__order-value_col">Тип доставки</div>
+        <div class="account__order-text">Самовывоз</div>
+      </div>
+
+      <div class="account__order-item" v-if="paymentStatus">
+        <div class="account__order-value account__order-value_col">Способ оплаты</div>
+        <div class="account__order-text">{{ paymentStatus.title }}</div>
+      </div>
+
+      <div class="account__order-item" v-if="orderStatus">
+        <div class="account__order-value account__order-value_col">Статус заказа</div>
+        <div class="account__order-text" :class="'account__order-text_' + orderStatus.id ">{{ orderStatus.title }}</div>
+      </div>
+
+      <div class="account__order-item">
+        <div class="account__order-text"><strong>Время заказа</strong> - {{ orderDate.time }}</div>
+      </div>
+
     </div>
-    <div class="account__table-col account__table-col_delivery" v-if="paymentStatus">
-      {{ paymentStatus.title }}
-    </div>
-    <div class="account__table-col account__table-col_total">
-      <span class="account__table-total">{{ totalSum }}</span>
-    </div>
-    <button type="button" class="account__table-btn" @click="toggleProducts">
-      <svg class="account__table-arrow" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.175 0.533325L5 4.34999L8.825 0.533325L10 1.70833L5 6.70833L0 1.70833L1.175 0.533325Z" fill="#8C96A3"/>
-      </svg>
+    <button type="button" class="account__button account__button_order button" @click="infoCollapse = !infoCollapse">
+      {{ infoCollapse ? 'Подробнее' : 'Скрыть' }}
     </button>
-
-    <div class="account__table-products">
-
-      <div class="account__table-row" v-for="(product, index) in order.products" :key="index">
-        <div class="account__table-col account__table-col_info">
-          <a :href="'/product/' + product.id" class="account__table-link">{{ product.title }} x {{ product.amount }}</a>
-        </div>
-        <div class="account__table-col account__table-col_total">
-          <span class="account__table-total">{{ product.sale_price ? productPrice(product.sale_price) : productPrice(product.price) }}</span>
-        </div>
-      </div>
-
-      <div class="account__table-row">
-        <div class="account__table-col account__table-col_info">
-          <button type="button" class="account__table-button button button_primary" @click="repeatOrder">Повторить заказ</button>
-          <div class="account__table-error" v-if="message">{{ message }}</div>
-        </div>
-      </div>
-
-    </div>
-
   </div>
+
 </template>
 <script>
 import { choseWordForm } from "@/src/helpers/prepare.js";
-
 export default {
   name: "AccountSingleOrder",
   data() {
@@ -63,7 +78,8 @@ export default {
         { id: '1', title: 'Картой при доставке' },
         { id: '2', title: 'Наличными при доставке' }
       ],
-      message: ""
+      message: "",
+      infoCollapse: true
     }
   },
   props: {
@@ -108,15 +124,16 @@ export default {
     },
     labelCount() {
       return choseWordForm(this.productCount, 'товар', 'товара', 'товаров');
+    },
+    orderDate() {
+      const date = new Date(this.order.created_at);
+      return {
+        time: date.getHours() + ':' + date.getMinutes(),
+        name: date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear(),
+      }
     }
   },
   methods: {
-    toggleProducts(e) {
-      const parent = e.target.parentElement;
-      if (parent) {
-        parent.classList.toggle("account__table-row_active")
-      }
-    },
     productPrice(price) {
       return price.toLocaleString('ru') + ' ₽';
     },

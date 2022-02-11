@@ -31,7 +31,6 @@ class OrderController extends Controller
       'user_payment'    => 'required',
       'products'        => 'required',
       'user_sum'        => 'required',
-      'user_promocode'  => 'numeric'
     ];
 
     $messages = [

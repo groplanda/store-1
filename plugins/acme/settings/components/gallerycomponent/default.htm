@@ -1,0 +1,18 @@
+{% set gallery = __SELF__.gallery %}
+
+<div class="gallery gallery--home">
+  <div class="gallery__inner">
+    <div class="gallery__list">
+      {% for image in gallery.images %}
+      <a class="gallery__item" href="{{ image.path }}" data-lightbox="roadtrip">
+        <img
+          src="{{ image.thumb(115,115, { 'mode': 'crop', quality: '80' }) }}"
+          alt="{{ image.title }}"
+          class="gallery__thumb"
+          loading="lazy"
+        />
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

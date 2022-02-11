@@ -1,5 +1,5 @@
 <template>
-  <div class="loading loading_active" :class="{ 'loading_search': isSearch }">
+  <div class="loading loading_active" :class="loadingClass">
     <div class="loading__wrapper">
       <div class="loading__layer">
         <div class="loading__circle-clipper loading__circle-clipper--left">
@@ -22,6 +22,18 @@ export default {
     isSearch: {
       type: Boolean,
       default: false
+    },
+    isWhite: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    loadingClass() {
+      return {
+        'loading_search': this.isSearch,
+        'loading_white': this.isWhite
+      }
     }
   }
 }

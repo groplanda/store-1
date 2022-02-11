@@ -1,31 +1,34 @@
-<template lang="">
+<template>
   <form class="account__form" @submit.prevent="onChange">
-    <div class="account__form-row account__form-row_last">
-      <div class="account__form-group account__form-group_full">
+    <div class="account__form-row">
+      <div class="account__form-group">
         <label class="account__form-label">Текущий пароль</label>
         <input type="password" class="account__form-input" v-model="form.current_password" placeholder="**********" />
         <span class="account__form-error" v-if="currentPasswordErr">{{ currentPasswordErr }}</span>
       </div>
-      <div class="account__form-group account__form-group_full">
+    </div>
+    <div class="account__form-row">
+      <div class="account__form-group">
         <label class="account__form-label">Новый пароль</label>
         <input type="password" class="account__form-input" v-model="form.password" placeholder="**********" />
         <span class="account__form-error" v-if="passwordErr">{{ passwordErr }}</span>
       </div>
-      <div class="account__form-group account__form-group_full">
+    </div>
+    <div class="account__form-row">
+      <div class="account__form-group">
         <label class="account__form-label">Подтвердите пароль</label>
         <input type="password" class="account__form-input" v-model="form.password_confirmation" placeholder="**********" />
         <span class="account__form-error" v-if="passwordConfirmationErr">{{ passwordConfirmationErr }}</span>
       </div>
     </div>
-    <button type="submit" class="button button_primary account__form-button">Изменить пароль</button>
+    <button type="submit" class="account__form-submit">Изменить пароль</button>
     <input type="hidden" v-model="form.email" />
-    <span class="account__form-response" v-if="submitStatus">{{ submitStatus }}</span>
+    <span class="account__form-done" v-if="submitStatus">{{ submitStatus }}</span>
   </form>
 </template>
 <script>
 import axios from "axios";
 import { onValidate, checkErr } from "@/src/helpers/validate.js";
-
 export default {
   name: "AccountChangePassword",
   props: {

@@ -4,22 +4,25 @@ description = "Account Page"
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <!-- Header -->
-    {% partial "header" %}
+    <div class="wrapper" data-js="wrapper">
+      <!-- Header -->
+      {% partial "header" %}
 
-    <!-- Content -->
-    <main class="main">
-      <!-- хлебные крошки старт --->
-      {% partial "breadcrumbs" %}
-      <!-- хлебные крошки конец --->
-      <div id="account">
-        <Account></Account>
-      </div>
-    </main>
+      <!-- Panel -->
+      {% partial "fixed-panel" %}
 
-    <!-- Footer -->
-    {% partial "footer" %}
-    {% partial "modals" %}
+      <!-- Content -->
+      <main class="wrapper__container">
+        <div id="account">
+          <Account></Account>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      {% partial "footer" %}
+      {% partial "modals" %}
+    </div>
+    {% partial "scripts" %}
     {% partial "scripts-vue" %}
   </body>
 </html>

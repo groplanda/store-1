@@ -1,23 +1,38 @@
-description = "Static page"
+description = "Static Page"
+
+[staticPage]
+useContent = 1
+default = 0
 ==
+
 <!DOCTYPE html>
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <!-- Header -->
-    {% partial "header" %}
+    <div class="wrapper" data-js="wrapper">
+      <!-- Header -->
+      {% partial "header" %}
 
-    <!-- Content -->
-    <main class="main">
-      <!-- хлебные крошки старт --->
-      {% partial "breadcrumbs" %}
-      <!-- хлебные крошки конец --->
-      {% page %}
-    </main>
+      <!-- Panel -->
+      {% partial "fixed-panel" %}
 
-    <!-- Footer -->
-    {% partial "footer" %}
-    {% partial "modals" %}
+      <!-- Content -->
+      <main class="wrapper__container">
+        <section class="post section">
+          <div class="post__container container container--main">
+            {% partial "breadcrumbs" %}
+            <div class="post__heading">
+              <div class="post__title">{{ this.page.title }}</div>
+            </div>
+            <div class="post__body"> {% component 'staticPage' %}</div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      {% partial "footer" %}
+      {% partial "modals" %}
+    </div>
     {% partial "scripts" %}
   </body>
 </html>

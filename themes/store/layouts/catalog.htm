@@ -1,38 +1,32 @@
 description = "Сatalog page"
 
 [CategoryList]
-templateType = "default"
+templateType = "homepage"
 ==
 <!DOCTYPE html>
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <!-- Header -->
-    {% partial "header" %}
+    <div class="wrapper" data-js="wrapper">
+      <!-- Header -->
+      {% partial "header" %}
 
-    <!-- Content -->
-    <main class="main">
-      <!-- хлебные крошки старт --->
-      {% partial "breadcrumbs" %}
-      <!-- хлебные крошки конец --->
+      <!-- Panel -->
+      {% partial "fixed-panel" %}
 
-      {% component 'CategoryList' %}
-
-      <section class="content section">
-        <div class="wrap content__wrap">
-          <h1 class="title content__title">{{ this.page.meta_title ? this.page.meta_title : this.page.title }}</h1>
-          <div class="content__entry">
-            {% page %}
+      <!-- Content -->
+      <main class="wrapper__container">
+        <div class="section">
+          <div class="container container--main">
+          {% component 'CategoryList' %}
           </div>
         </div>
-      </section>
+      </main>
 
-
-    </main>
-
-    <!-- Footer -->
-    {% partial "footer" %}
-    {% partial "modals" %}
+      <!-- Footer -->
+      {% partial "footer" %}
+      {% partial "modals" %}
+    </div>
     {% partial "scripts" %}
   </body>
 </html>

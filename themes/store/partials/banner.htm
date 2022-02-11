@@ -1,0 +1,25 @@
+description = "Banners"
+
+[FullSlider]
+
+[viewBag]
+==
+<div class="banner">
+  <div class="banner__row">
+    {% component 'FullSlider' %}
+    <div class="banner__blocks">
+      {% for banner in this.theme.banners %}
+      <div class="banner__blocks-items">
+        <a href="{{ banner.link }}" class="banner__blocks-link"></a>
+        <img
+          src="{{ banner.image|media|resize(405, 300, { mode: 'crop', quality: '90' })  }}"
+          alt="{{ banner.title }}"
+          class="banner__blocks-img"
+        />
+        <div class="banner__blocks-title">{{ banner.title }}</div>
+        <div class="banner__blocks-price">{{ banner.tag }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

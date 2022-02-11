@@ -4,7 +4,7 @@ export function onValidate(arrayErrors, form) {
   for(let errorKey in arrayErrors) {
     if(Array.isArray(arrayErrors[errorKey])) {
       // eslint-disable-next-line no-prototype-builtins
-      if(form.hasOwnProperty(errorKey)) {
+      if(form.hasOwnProperty(errorKey) || form.has(errorKey)) {
         arrayErrors[errorKey].forEach(err => {
           errors.push({name: errorKey, message: err})
         })

@@ -4,75 +4,75 @@ description = "Contact page"
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <!-- Header -->
-    {% partial "header" %}
+    <div class="wrapper" data-js="wrapper">
+      <!-- Header -->
+      {% partial "header" %}
 
-    <!-- Content -->
-    <main class="main">
-      <!-- хлебные крошки старт --->
-      {% partial "breadcrumbs" %}
-      <!-- хлебные крошки конец --->
-      <section class="page section">
-        <div class="wrap page__wrap">
-          <h1 class="title page__title">{{ this.page.title }}</h1>
-          <div class="page__row">
-            <aside class="page__aside">
-              {% partial "left-menu" %}
-            </aside>
-            <div class="page__content" itemscope itemtype="http://schema.org/Organization">
+      <!-- Panel -->
+      {% partial "fixed-panel" %}
+
+      <!-- Content -->
+      <main class="wrapper__container">
+        <section class="post section">
+          <div class="post__container container container--main">
+            {% partial "breadcrumbs" %}
+            <div class="post__heading">
+              <div class="post__title">{{ this.page.title }}</div>
+            </div>
+
+            <div class="contact" itemscope itemtype="http://schema.org/Organization">
               <span itemprop="name" hidden>{{this.theme.site_name}}</span>
-              <img itemprop="logo url" src="{ this.theme.site_logo|media }}" alt="{{this.theme.site_name}}" hidden />
+              <img itemprop="logo url" src="{{ this.theme.site_logo|media }}" alt="{{this.theme.site_name}}" hidden />
 
-              <div class="page__contact" itemscope itemtype="http://schema.org/PostalAddress">
-                <div class="page__contact-title title title_sm">Офис</div>
-                <p class="page__contact-text">
+              <div class="contact__box" itemscope itemtype="http://schema.org/PostalAddress">
+                <div class="contact__title">Офис</div>
+                <p class="contact__text">
                   <span itemprop="addressLocality">{{ this.theme.city }}</span>,
                   <span itemprop="streetAddress">{{ this.theme.address }}</span>
                   <span itemprop="postalCode" hidden>{{ this.theme.post_code }}</span>
                 </p>
               </div>
 
-              <div class="page__contact" >
-                <div class="page__contact-title title title_sm">Телефоны</div>
+              <div class="contact__box" >
+                <div class="contact__title">Телефоны</div>
                 {% for phone in this.theme.phone %}
-                <p class="page__contact-text">
-                  <a class="page__contact-link" itemprop="telephone" href="tel:{{ phone.val }}">{{ phone.val }}</a>
-                  {% if phone.text|length > 0 %}<span class="page__contact-small"> {{ phone.text }} </span> {% endif %}
+                <p class="contact__text">
+                  <a class="contact__link" itemprop="telephone" href="tel:{{ phone.val }}">{{ phone.val }}</a>
+                  {% if phone.text|length > 0 %}<span class="contact__small"> {{ phone.text }} </span> {% endif %}
                 </p>
                 {% endfor %}
               </div>
 
-              <div class="page__contact" >
-                <div class="page__contact-title title title_sm">E-mail</div>
-                <p class="page__contact-text">
-                  <a class="page__contact-link" itemprop="email" href="mailto:{{ this.theme.t_email }}">{{ this.theme.t_email }}</a>
-                  <span class="page__contact-small">- по общим вопросам</span>
+              <div class="contact__box" >
+                <div class="contact__title">E-mail</div>
+                <p class="contact__text">
+                  <a class="contact__link" itemprop="email" href="mailto:{{ this.theme.t_email }}">{{ this.theme.t_email }}</a>
+                  <span class="contact__small">- по общим вопросам</span>
                 </p>
               </div>
 
-              <div class="page__contact" >
-                <div class="page__contact-title title title_sm">График работы</div>
+              <div class="contact__box" >
+                <div class="contact__title">График работы</div>
                 {% for open in this.theme.open %}
-                <p class="page__contact-text">
+                <p class="contact__text">
                   {{ open.val }}
-                  {% if open.text|length > 0 %}<span class="page__contact-small"> {{ open.text }} </span> {% endif %}
+                  {% if open.text|length > 0 %}<span class="contact__small"> {{ open.text }} </span> {% endif %}
                 </p>
                 {% endfor %}
               </div>
 
-              <div class="page__contact-map">
+              <div class="contact__map">
                 {{ this.theme.ymap|raw  }}
               </div>
-
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
 
-    <!-- Footer -->
-    {% partial "footer" %}
-    {% partial "modals" %}
+      <!-- Footer -->
+      {% partial "footer" %}
+      {% partial "modals" %}
+    </div>
     {% partial "scripts" %}
   </body>
 </html>

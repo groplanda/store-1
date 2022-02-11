@@ -29,9 +29,15 @@ class ProductList extends \Cms\Classes\ComponentBase
     function prepareVars()
     {
         $slug = $this->param('slug');
-        $options = post('filter', []);
+        $request = post('filter', []);
+        $options = $request ? $request : request()->post() ;
         $perPage = $this->property('maxItems');
         $breadcrumbs = [];
+        $sort = $this->defaultSort();
+
+        if(request()->get('sort')) {
+          $sort = $this->getCurrentSort(request()->get('sort'));
+        }
 
         if ($slug == null) {
             $this->page['products'] = Product::active()->listFrontEnd($options, $perPage);
@@ -75,6 +81,7 @@ class ProductList extends \Cms\Classes\ComponentBase
         $this->page['pages'] = $this->page['products']->lastPage();
         $this->page['perPage'] = $perPage;
         $this->page['breadcrumbs'] = $breadcrumbs;
+        $this->page['sort'] = $sort;
     }
 
     public function onRun()
@@ -104,5 +111,23 @@ class ProductList extends \Cms\Classes\ComponentBase
         }
       }
       return array_map('unserialize', array_unique(array_map('serialize', $brands)));
+    }
+
+    private function getCurrentSort($key) {
+      $list = [
+        'price asc'        => 'Возрастание цены',
+        'price desc'       => 'Убывание цены',
+        'sort_order desc'  => 'Вначале новые',
+        'sort_order asc'   => 'Вначале старые'
+      ];
+
+      return [
+        'val' => $list[$key],
+        'key' => $key
+      ];
+    }
+
+    private function defaultSort() {
+      return ['val' => 'Сортировка', 'key' => 'default'];
     }
 }

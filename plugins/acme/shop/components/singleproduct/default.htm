@@ -1,56 +1,30 @@
-<div id="partialSingleProduct">
-  {% partial "SingleProduct::product" %}
-</div>
-
-{% if additionals|length > 0 %}
-<section class="additional section">
-  <div class="wrap additional__wrap">
-    <h2 class="title title_sm additional__title">Похожие товары</h2>
-    <div class="additional__slider swiper" data-js-slider="additional-slider">
-      <div class="swiper-wrapper">
-        {% for product in additionals %}
-        <div class="swiper-slide additional__slide">
-          <div class="product-card">
-            {% if product.is_hit %}
-            <span class="product-card__label product-card__label_hit">Акция</span>
-            {% endif %}
-            <div class="product-card__image">
-              <picture class="product-card__picture">
-                <source srcset="{{ product.image|media|resize(false, 300, { mode: 'crop', quality: '80', extension: 'jpg' }) }}" type="image/jpeg" class="product-card__image-src" />
-                <img src="{{ product.image|media|resize(false, 300, { mode: 'crop', quality: '80' }) }}"  alt="{{ product.title }}"  class="product-card__image-src" />
-              </picture>
-            </div>
-            <div class="product-card__content">
-              <div class="product-card__heading">
-                <div class="product-card__name">{{ product.title }}</div>
-              </div>
-
-              <div class="product-card__bottom">
-                <div class="product-card__prices">
-                  {% if product.sale_price > 0 %}
-                  <div class="product-card__current-price">{{ product.sale_price|number_format(0, '', ' ') }} ₽</div>
-                  <div class="product-card__old-price">{{ product.price|number_format(0, '', ' ') }} ₽</div>
-                  {% else %}
-                  <div class="product-card__current-price">{{ product.price|number_format(0, '', ' ') }} ₽</div>
-                  {% endif %}
-                </div>
-                {% if product.price > 0 %}
-                <button type="button" class="product-card__button" data-product-id="{{ product.id }}" data-js-action="add-to-cart">
-                  <svg class="product-card__button-ico" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.43329 0.43335L1.95329 2.16668M1.95329 2.16668L4.03329 9.10002H13.5666V3.90002C13.5666 2.94272 12.7906 2.16668 11.8333 2.16668H1.95329ZM11.8333 12.5667C11.3546 12.5667 10.9666 12.1787 10.9666 11.7C10.9666 11.2214 11.3546 10.8333 11.8333 10.8333C12.3119 10.8333 12.7 11.2214 12.7 11.7C12.7 12.1787 12.3119 12.5667 11.8333 12.5667ZM4.89996 11.7C4.89996 11.2214 5.28797 10.8333 5.76662 10.8333C6.24527 10.8333 6.63329 11.2214 6.63329 11.7C6.63329 12.1787 6.24527 12.5667 5.76662 12.5667C5.28797 12.5667 4.89996 12.1787 4.89996 11.7Z" stroke="white"/>
-                  </svg>
-                </button>
-                {% endif %}
-              </div>
-
-            </div>
-            <a href="{{ 'product'|page({ id: product.id }) }}" class="product-card__url"></a>
-          </div>
+<section class="product section">
+  <div id="partialSingleProduct" class="product__container container container--main">
+    <div class="breadcrumbs section">
+      <div class="breadcrumbs__wrap wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
+        {% for breadcrumb in breadcrumbs %}
+        {% if not loop.last %}
+        <div class="breadcrumbs__item" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <a itemprop="item" class="breadcrumbs__link" href="{{ breadcrumb.category ? 'category'|page({slug: breadcrumb.url}) : breadcrumb.url|page }}">
+            <span itemprop="name">{{ breadcrumb.title }}</span>
+          </a>
+          <div class="breadcrumbs__hidden" itemprop="url" href="{{ breadcrumb.category ? 'category'|page({slug: breadcrumb.url}) : breadcrumb.url|page }}"></div>
+          <meta itemprop="position" content="{{ index }}" />
+          <svg width="10" height="6" class="breadcrumbs__arrow" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.94207 2.85L7.7199 0.824504C7.65816 0.774358 7.59066 0.764709 7.51735 0.79558C7.44412 0.82649 7.40735 0.882393 7.40735 0.96345V2.25976H0.185181C0.131143 2.25976 0.0867528 2.27709 0.0520719 2.31181C0.0174114 2.34651 0 2.3909 0 2.4449V3.55598C0 3.60996 0.0173303 3.65435 0.0520517 3.68901C0.0868136 3.72371 0.131203 3.74104 0.18516 3.74104H7.40739V5.03732C7.40739 5.11459 7.44422 5.17049 7.51741 5.20511C7.59079 5.2361 7.65828 5.22439 7.72002 5.17049L9.94219 3.12173C9.98076 3.08318 10 3.03696 10 2.9829C10 2.93288 9.98064 2.88857 9.94207 2.85Z" fill="black"/>
+          </svg>
         </div>
+        {% else %}
+        <div class="breadcrumbs__item" itemscope itemtype="https://schema.org/BreadcrumbList" >
+          <div itemprop="name" class="breadcrumbs__link">{{ breadcrumb.title }}</div>
+          <div class="breadcrumbs__hidden" itemprop="item" itemprop="url" href="{{ 'product'|page({ id: breadcrumb.url }) }}"></div>
+          <meta itemprop="position" content="{{ index }}" />
+        </div>
+        {% endif %}
+        {% set index = loop.index + 1 %}
         {% endfor %}
       </div>
-      <div class="additional__pagination"></div>
     </div>
+    {% partial "SingleProduct::product" %}
   </div>
 </section>
-{% endif %}

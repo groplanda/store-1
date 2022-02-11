@@ -173,4 +173,7 @@
   'Acme\\Shop\\Models\\Wish' => 'plugins\\acme\\shop\\models\\Wish.php',
   'Acme\\Shop\\Classes\\WishController' => 'plugins\\acme\\shop\\classes\\WishController.php',
   'Acme\\Shop\\Components\\HeaderSession' => 'plugins\\acme\\shop\\components\\HeaderSession.php',
+  'Acme\\Settings\\Components\\GalleryComponent' => 'plugins\\acme\\settings\\components\\GalleryComponent.php',
+  'acme\\settings\\Controllers\\demands' => 'plugins\\acme\\settings\\controllers\\demands.php',
+  'Acme\\Settings\\Models\\Demand' => 'plugins\\acme\\settings\\models\\Demand.php',
 );

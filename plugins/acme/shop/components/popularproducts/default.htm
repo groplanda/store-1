@@ -1,65 +1,115 @@
-<section class="section home-products">
-  <div class="wrap home-products__wrap">
-    <div class="home-products__heading">
-      <h2 class="title">Товары по акции</h2>
-      <!-- <a href="#" class="home-products__all">
-        <span class="home-products__all-text">Смотреть все</span>
-        <svg class="home-products__all-ico" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3.75 9H14.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M9 3.75L14.25 9L9 14.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+{% set products = __SELF__.products %}
+<section class="product-slider" data-js="home-products-slider-body">
+  <div class="product-slider__heading">
+    <div class="product-slider__title">{{ __SELF__.title }}</div>
+    <div class="product-slider__controls">
+      <button class="product-slider__controls-btn product-slider__controls-btn--prev" data-js-action="home-products-control">
+        <svg viewBox="0 0 16 16" class="product-slider__controls-ico icon-control-prev">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
         </svg>
-      </a> -->
+      </button>
+      <button class="product-slider__controls-btn product-slider__controls-btn--next" data-js-action="home-products-control">
+        <svg viewBox="0 0 16 16" class="product-slider__controls-ico icon-control-prev">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+        </svg>
+      </button>
     </div>
-    <div class="home-products__container swiper" data-js-slider="home-products">
-      <div class="home-products__list swiper-wrapper">
-        {% for product in populars %}
-        <div class="swiper-slide home-products__item">
-          <div class="product-card">
-            {% if product.is_hit %}
-            <span class="product-card__label product-card__label_hit">Акция</span>
-            {% endif %}
-            <div class="product-card__image">
-              <picture class="product-card__picture">
-                <source srcset="{{ product.image|media|resize(false, 300, { mode: 'crop', quality: '80', extension: 'jpg' }) }}" type="image/jpeg" class="product-card__image-src" />
-                <img src="{{ product.image|media|resize(false, 300, { mode: 'crop', quality: '80' }) }}"  alt="{{ product.title }}"  class="product-card__image-src" />
-              </picture>
-            </div>
-            <div class="product-card__content">
-              <div class="product-card__heading">
-                <div class="product-card__name">{{ product.title }}</div>
-              </div>
-
-              <div class="product-card__bottom">
-                <div class="product-card__prices">
-                  {% if product.sale_price > 0 %}
-                  <div class="product-card__current-price">{{ product.sale_price|number_format(0, '', ' ') }} ₽</div>
-                  <div class="product-card__old-price">{{ product.price|number_format(0, '', ' ') }} ₽</div>
-                  {% else %}
-                  <div class="product-card__current-price">{{ product.price|number_format(0, '', ' ') }} ₽</div>
-                  {% endif %}
-                </div>
-                {% if product.options|length > 0 %}
-                <a href="{{ 'product'|page({ id: product.id }) }}" class="product-card__button">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="product-card__button-ico" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                  </svg>
-                </a>
-                {% elseif product.price > 0  %}
-                <button type="button" class="product-card__button" data-product-id="{{ product.id }}" data-js-action="add-to-cart">
-                  <svg class="product-card__button-ico" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.43329 0.43335L1.95329 2.16668M1.95329 2.16668L4.03329 9.10002H13.5666V3.90002C13.5666 2.94272 12.7906 2.16668 11.8333 2.16668H1.95329ZM11.8333 12.5667C11.3546 12.5667 10.9666 12.1787 10.9666 11.7C10.9666 11.2214 11.3546 10.8333 11.8333 10.8333C12.3119 10.8333 12.7 11.2214 12.7 11.7C12.7 12.1787 12.3119 12.5667 11.8333 12.5667ZM4.89996 11.7C4.89996 11.2214 5.28797 10.8333 5.76662 10.8333C6.24527 10.8333 6.63329 11.2214 6.63329 11.7C6.63329 12.1787 6.24527 12.5667 5.76662 12.5667C5.28797 12.5667 4.89996 12.1787 4.89996 11.7Z" stroke="white"/>
-                  </svg>
-                </button>
+  </div>
+  <div class="product-slider__main">
+    <div class="swiper-container product-slider__swiper swiper" data-js-slider="home-products">
+      <div class="swiper-wrapper">
+        {% for product in products %}
+        <div class="product-slider__item swiper-slide">
+          <div class="product-item" data-product-index="{{ product.id }}">
+            <div class="product-item__top">
+              <div class="product-item__tags">
+                {% if product.is_new %}
+                <div class="product-item__tag product-item__tag--new">New</div>
+                {% endif %}
+                {% if product.is_hit %}
+                <div class="product-item__tag product-item__tag--new">Sale</div>
                 {% endif %}
               </div>
-
+              <div class="product-item__image">
+                <a href="{{ 'product'|page({ id: product.id }) }}" class="product-item__link">
+                  <img
+                    src="{{ product.image|media|resize(387, 387, { mode: 'crop', quality: '80' }) }}"
+                    alt="{{ product.title }}"
+                    class="product-item__image-thumb"
+                  />
+              </a>
+              </div>
+              <div class="product-item__order">
+                <button
+                  type="button"
+                  class="product-item__order-btn"
+                  data-product-id="{{ product.id }}"
+                  data-js-action="add-to-cart"
+                  data-product-amount="1"
+                >
+                  <svg viewBox="0 0 16 16" class="product-item__order-ico icon-cart ">
+                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
-            <a href="{{ 'product'|page({ id: product.id }) }}" class="product-card__url"></a>
+            <div class="product-item__bottom">
+              <a href="{{ 'product'|page({ id: product.id }) }}" class="product-item__title">{{ product.title }}</a>
+              {% if product.categories[0] %}
+              <a href="{{ 'category' | page({ slug: product.categories[0].slug }) }}" class="product-item__category">{{ product.categories[0].title}}</a>
+              {% endif %}
+              {% if product.code %}
+              <div class="product-item__code">Артикул: {{ product.code }}</div>
+              {% endif %}
+              <div class="product-item__cart">
+                <div class="product-item__amount">
+                  <div class="product-amount" data-js-action="update-qty">
+                    <button
+                      type="button"
+                      class="product-amount__btn product-item__amount-btn--disabled js-remove-cart">
+                      <svg viewBox="0 0 12 2" class="product-amount__btn-ico icon-minus">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"></path>
+                      </svg>
+                    </button>
+                    <input
+                      type="number"
+                      readonly="readonly"
+                      class="product-amount__val"
+                      value="1"
+                      data-js-action="qty-val"
+                    />
+                    <button
+                      type="button"
+                      class="product-amount__btn js-add-cart">
+                      <svg viewBox="0 0 12 12" class="product-amount__btn-ico icon-plus">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7 1a1 1 0 0 0-2 0v4H1a1 1 0 0 0 0 2h4v4a1 1 0 1 0 2 0V7h4a1 1 0 1 0 0-2H7V1z"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="product-item__price">
+                  {% if product.sale_price > 0 %}
+                  <div class="product-item__current-price">
+                    <strong class="product-item__price-val">{{ product.sale_price|number_format(0, '', ' ') }}</strong>
+                    <span class="product-item__price-label">₽</span>
+                  </div>
+                  <div class="product-item__old-price">
+                    <strong class="product-item__price-val">{{ product.price|number_format(0, '', ' ') }}</strong>
+                    <span class="product-item__price-label">₽</span>
+                  </div>
+                  {% else %}
+                  <div class="product-item__current-price">
+                    <strong class="product-item__price-val">{{ product.price|number_format(0, '', ' ') }}</strong>
+                    <span class="product-item__price-label">₽</span>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         {% endfor %}
       </div>
-      <div class="home-products__pagination"></div>
     </div>
   </div>
 </section>

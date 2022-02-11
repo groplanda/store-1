@@ -3,15 +3,14 @@
 {% set leftLimit = 2 %}
 {% set rightLimit = 3 %}
 
-<button class="category__pagination-btn category__pagination-btn_pill{{ currentPage == 1 ? ' category__pagination-btn_disabled' : '' }}" data-page="{{ currentPage - 1 }}" data-js-action="paginate">
-  Назад
+<button class="category__pagination-item {{ currentPage == 1 ? ' category__pagination-item--disabled' : '' }}" data-page="{{ currentPage - 1 }}" data-js-action="paginate">
   <svg class="category__pagination-ico" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M6.125 1.75L1 6.875L6.125 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </button>
 {% if pages < leftLimit + rightLimit + 2 %}
   {% for i in 1..pages %}
-    <button class="category__pagination-btn{{ currentPage == i ? ' category__pagination-btn_current' : '' }}" data-page="{{ i }}" data-js-action="paginate">
+    <button class="category__pagination-item{{ currentPage == i ? ' category__pagination-item--active' : '' }}" data-page="{{ i }}" data-js-action="paginate">
       {{ i }}
     </button>
   {% endfor %}
@@ -21,25 +20,25 @@
 
 {% set i = currentPage - leftLimit %}
     {% if currentPage > 3 %}
-    <button class="category__pagination-btn">...</button>
+    <button class="category__pagination-item">...</button>
     {% endif %}
 {% for i in i..(currentPage + rightLimit) %}
-  <button class="category__pagination-btn{{ currentPage == i ? ' category__pagination-btn_current' : '' }}" data-page="{{ i }}" data-js-action="paginate">
+  <button class="category__pagination-item{{ currentPage == i ? ' category__pagination-item--active' : '' }}" data-page="{{ i }}" data-js-action="paginate">
     {{ i }}
   </button>
 {% endfor %}
-  <button class="category__pagination-btn">...</button>
+  <button class="category__pagination-item">...</button>
 {% elseif currentPage <= leftLimit%}
 
 {% set iSlice = 1 + leftLimit - currentPage %}
 
 {% for i in 1..(currentPage + (rightLimit + iSlice)) %}
-  <button class="category__pagination-btn{{ currentPage == i ? ' category__pagination-btn_current' : '' }}" data-page="{{ i }}" data-js-action="paginate">
+  <button class="category__pagination-item{{ currentPage == i ? ' category__pagination-item--active' : '' }}" data-page="{{ i }}" data-js-action="paginate">
     {{ i }}
   </button>
 {% endfor %}
-  <button class="category__pagination-btn">...</button>
-  <button class="category__pagination-btn" data-page="{{ pages }}" data-js-action="paginate">
+  <button class="category__pagination-item">...</button>
+  <button class="category__pagination-item" data-page="{{ pages }}" data-js-action="paginate">
     {{ pages }}
   </button>
 {% else %}
@@ -47,9 +46,9 @@
 {% set iSlice = rightLimit - (pages - currentPage) %}
 
 {% set i = currentPage - (leftLimit + iSlice) %}
-  <button class="category__pagination-btn">...</button>
+  <button class="category__pagination-item">...</button>
 {% for i in i..pages %}
-  <button class="category__pagination-btn{{ currentPage == i ? ' category__pagination-btn_current' : '' }}" data-page="{{ i }}" data-js-action="paginate">
+  <button class="category__pagination-item{{ currentPage == i ? ' category__pagination-item--active' : '' }}" data-page="{{ i }}" data-js-action="paginate">
     {{ i }}
   </button>
 {% endfor %}
@@ -58,8 +57,7 @@
 
 {% endif %}
 
-<button class="category__pagination-btn category__pagination-btn_pill{{ pages == currentPage ? ' category__pagination-btn_disabled' : '' }}" data-page="{{ currentPage + 1 }}" data-js-action="paginate">
-  Вперед
+<button class="category__pagination-item {{ pages == currentPage ? ' category__pagination-item_disabled' : '' }}" data-page="{{ currentPage + 1 }}" data-js-action="paginate">
   <svg class="category__pagination-ico" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1.875 11.25L7 6.125L1.875 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>

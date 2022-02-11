@@ -2,20 +2,27 @@ description = "Product Page"
 
 [SingleProduct]
 ==
+
 <!DOCTYPE html>
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <!-- Header -->
-    {% partial "header" %}
+    <div class="wrapper" data-js="wrapper">
+      <!-- Header -->
+      {% partial "header" %}
 
-    <!-- Content -->
-    <main class="main">
-      {% component 'SingleProduct' %}
-    </main>
-    <!-- Footer -->
-    {% partial "footer" %}
-    {% partial "modals" %}
+      <!-- Panel -->
+      {% partial "fixed-panel" %}
+
+      <!-- Content -->
+      <main class="wrapper__container">
+        {% component 'SingleProduct' %}
+      </main>
+
+      <!-- Footer -->
+      {% partial "footer" %}
+      {% partial "modals" %}
+    </div>
     {% partial "scripts" %}
   </body>
 </html>

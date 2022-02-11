@@ -4,69 +4,68 @@ description = "Homepage"
 templateType = "homepage"
 
 [PopularProducts]
+productsType = "is_new"
+productsTitle = "Новинки"
 
-[FullSlider]
+[PopularProducts PopularProducts2]
+productsType = "is_hit"
+productsTitle = "Лучшее"
 
-[PageList]
+[GalleryComponent]
+galleryName = 1
 ==
 <!DOCTYPE html>
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <!-- Header -->
-    {% partial "header" %}
+    <div class="wrapper" data-js="wrapper">
+      <!-- Header -->
+      {% partial "header" %}
 
-    <!-- Content -->
-    <main class="main">
-      {% component 'FullSlider' %}
+      <!-- Panel -->
+      {% partial "fixed-panel" %}
 
-      <div class="section advantages">
-        <div class="advantages__wrap wrap">
-          <div class="advantages__row">
-            <div class="advantages__item">
-              <img src="{{ 'assets/images/advantages/shield.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Гарантия 1 год на весь ассортимент</p>
+      <!-- Content -->
+      <main class="wrapper__container">
+        <div class="section">
+          <div class="container container--main">
+            {% partial "banner" %}
+            <div class="folders">
+              <div class="folders__row">
+                {% component 'CategoryList' %}
+              </div>
             </div>
-            <div class="advantages__item advantages__item_price">
-              <img src="{{ 'assets/images/advantages/price.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Максимально низкие цены</p>
-            </div>
-            <div class="advantages__item">
-              <img src="{{ 'assets/images/advantages/clock.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Доставка в любой регион России</p>
-            </div>
-            <div class="advantages__item advantages__item_sale">
-              <img src="{{ 'assets/images/advantages/sale.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Ежедневные скидки и акции</p>
-            </div>
-            <div class="advantages__item advantages__item_count">
-              <img src="{{ 'assets/images/advantages/shop.svg'|theme }}" alt="" class="advantages__item-ico" />
-              <p class="advantages__item-descr">Более 25000 наименовайний товара</p>
-            </div>
+            {% component 'PopularProducts' %}
+            {% component 'PopularProducts2' %}
+            {% partial "adds" %}
+
+            <section class="question-form">
+              <div class="question-form__image">
+                <img src="{{ 'assets/images/question_form.png'|theme }}" alt="вопросы" class="question-form__image-thumb">
+              </div>
+              <div class="question-form__container">
+                <div class="question-form__title">Остались вопросы?</div>
+                <button type="button" class="question-form__btn" data-js-action="open-modal" data-type-modal="form">Напишите нам</button>
+              </div>
+            </section>
+            <section class="about">
+              <div class="about__content">
+                <div class="about__content-title">О компании</div>
+                <div class="about__content-body">
+                  {% page %}
+                </div>
+                <a href="{{ 'company'|staticPage }}" class="about__content-link">Читать дальше</a>
+              </div>
+              {% component 'GalleryComponent' %}
+            </section>
           </div>
         </div>
-      </div>
+      </main>
 
-      {% component 'PopularProducts' %}
-
-      {% component 'CategoryList' %}
-
-      <section class="content section">
-        <div class="wrap content__wrap">
-          <h1 class="title content__title">{{ this.theme.site_name }}</h1>
-          <div class="content__entry">
-            {% page %}
-          </div>
-        </div>
-      </section>
-
-      {% component 'PageList' %}
-
-    </main>
-
-    <!-- Footer -->
-    {% partial "footer" %}
-    {% partial "modals" %}
+      <!-- Footer -->
+      {% partial "footer" %}
+      {% partial "modals" %}
+    </div>
     {% partial "scripts" %}
   </body>
 </html>

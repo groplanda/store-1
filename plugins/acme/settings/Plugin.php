@@ -9,7 +9,8 @@ class Plugin extends PluginBase
       return [
         'Acme\Settings\Components\FullSlider' => 'FullSlider',
         'Acme\Settings\Components\PageList' => 'PageList',
-        'Acme\Settings\Components\PageSingle' => 'PageSingle'
+        'Acme\Settings\Components\PageSingle' => 'PageSingle',
+        'Acme\Settings\Components\GalleryComponent' => 'GalleryComponent'
       ];
     }
 

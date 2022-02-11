@@ -11,103 +11,168 @@ templateType = "mobile"
 [HeaderSession]
 ==
 {% partial "loading" %}
-<header class="header">
-  <div class="header__topbar">
-    <div class="wrap header__topbar-wrap">
-      <a href="{{ 'company'|staticPage }}" class="header__topbar-link">О компании</a>
-      <a href="{{ 'sales'|staticPage }}" class="header__topbar-link">Акции и скидки</a>
-      <a href="{{ 'delivery'|staticPage }}" class="header__topbar-link">Доставка</a>
-      <a href="{{ 'manufacturer'|page }}" class="header__topbar-link">Производители</a>
-      <a href="{{ 'cooperation'|staticPage }}" class="header__topbar-link">Сотрудничество</a>
-      <a href="{{ 'contact'|page }}" class="header__topbar-link">Контакты</a>
-
-      {% if user %}
-      <a href="{{ 'account'|page }}" class="header__topbar-link header__topbar-link_orders">Мой аккаунт</a>
-      {% else %}
-      <a href="#!" class="header__topbar-link header__topbar-link_orders" data-js-action="open-modal" data-type-modal="sign">Вход/регистрация</a>
-      {% endif %}
+<header class="header section">
+  <div class="header__container container">
+    <div class="header__row header__row--mobile">
+      <button class="header__burg" data-js-action="toggle-panel" data-panel="nav">
+        <svg viewBox="0 0 26 20" class="header__burg-ico icon-burg ">
+          <path fill-rule="evenodd" clip-rule="evenodd"d="M0 1a1 1 0 0 1 1-1h24a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h24a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h19a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"></path>
+        </svg>
+      </button >
+      <button class="header__call" data-js-action="open-header-popup">
+        <svg viewBox="0 0 16 16" class="header__call-ico icon-phone ">
+          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
+        </svg>
+      </button>
+      <div class="header__user">
+        {% if user %}
+        <a href="{{ 'account'|page }}" class="header__user-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="header__user-ico" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>
+        </a>
+        {% else %}
+        <a href="#!" class="header__user-link" data-js-action="open-modal" data-type-modal="sign">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="header__user-ico">
+            <g data-name="Layer 2">
+              <g data-name="log-in">
+                <rect width="24" height="24" transform="rotate(-90 12 12)" opacity="0"/>
+                <path d="M19 4h-2a1 1 0 0 0 0 2h1v12h-1a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z"/>
+                <path d="M11.8 7.4a1 1 0 0 0-1.6 1.2L12 11H4a1 1 0 0 0 0 2h8.09l-1.72 2.44a1 1 0 0 0 .24 1.4 1 1 0 0 0 .58.18 1 1 0 0 0 .81-.42l2.82-4a1 1 0 0 0 0-1.18z"/>
+              </g>
+            </g>
+          </svg>
+        </a>
+        {% endif %}
+      </div>
+      <div class="header__cart">
+        <a href="#!" class="header__cart-link" data-js-action="open-modal"></a>
+        <div class="header__cart-amount js-cart-count">0</div>
+        <svg viewBox="0 0 16 16" class="header__cart-ico icon-cart">
+          <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
+        </svg>
+      </div>
     </div>
-  </div>
-
-  <div class="header__center">
-    <div class="wrap header__wrap">
-      <a href="/" class="header__logo">
-        <img src="{{ this.theme.site_logo|media|resize(false, 50, { mode: 'crop', quality: '100' }) }}" alt="{{ this.theme.site_name }}" />
+    <div class="header__row header__row--desktop">
+      <a href="{{ 'home'|page }}" class="header__logo">
+        <img
+          src="{{ this.theme.site_logo|media|resize(false, 50, { mode: 'crop', quality: '100' }) }}"
+          alt="{{this.theme.site_name}}"
+          class="header__logo-thumb"
+        />
       </a>
-      <div class="header__content">
-        <form action="/search" method="GET" class="header__search">
-          <input type="text" name="search" placeholder="Поиск по сайту" class="header__search-input">
-          <button type="submit" class="header__search-btn">
-            <svg class="header__search-ico" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 13L9 9M10.3333 5.66667C10.3333 6.2795 10.2126 6.88634 9.97811 7.45252C9.74358 8.01871 9.39984 8.53316 8.9665 8.9665C8.53316 9.39984 8.01871 9.74358 7.45252 9.97811C6.88634 10.2126 6.2795 10.3333 5.66667 10.3333C5.05383 10.3333 4.447 10.2126 3.88081 9.97811C3.31462 9.74358 2.80018 9.39984 2.36683 8.9665C1.93349 8.53316 1.58975 8.01871 1.35523 7.45252C1.12071 6.88634 1 6.2795 1 5.66667C1 4.42899 1.49167 3.242 2.36683 2.36683C3.242 1.49167 4.42899 1 5.66667 1C6.90434 1 8.09133 1.49167 8.9665 2.36683C9.84167 3.242 10.3333 4.42899 10.3333 5.66667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <nav class="header__nav">
+        <div class="header__nav-item">
+          <a href="{{ 'home'|page }}" class="header__nav-link">Главная</a>
+        </div>
+        <div class="header__nav-item">
+          <a href="{{ 'company'|staticPage }}" class="header__nav-link">О компании</a>
+        </div>
+        <div class="header__nav-item">
+          <a href="{{ 'sales'|staticPage }}" class="header__nav-link">Акции и скидки</a>
+        </div>
+        <div class="header__nav-item">
+          <a href="{{ 'contact'|page }}" class="header__nav-link">Контакты</a>
+        </div>
+        {% if user %}
+        <div class="header__nav-item">
+          <a href="{{ 'account'|page }}" class="header__nav-link">Аккаунт</a>
+        </div>
+        {% else %}
+        <div class="header__nav-item">
+          <a href="#!" class="header__nav-link" data-js-action="open-modal" data-type-modal="sign">Вход</a>
+        </div>
+        {% endif %}
+      </nav>
+      <div class="header__contacts">
+        <div class="header__address header__address--top">
+          <svg viewBox="0 0 9 18" class="header__address-ico icon-map ">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M4.5 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM0 4.5a4.5 4.5 0 1 1 5.25 4.438v8.312a.75.75 0 0 1-1.5 0V8.938A4.501 4.501 0 0 1 0 4.5z"
+            ></path>
+          </svg>
+          <div class="header__address-text">{{ this.theme.city }}, {{ this.theme.address }}</div>
+        </div>
+        {% if this.theme.phone[0]|length > 0 %}
+        <div class="header__phone header__phone--top">
+          <svg viewBox="0 0 16 16" class="header__phone-ico icon-phone ">
+            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
+          </svg>
+          <a href="tel:{{ this.theme.phone[0].val }}" class="header__phone-link">{{ this.theme.phone[0].val }}</a>
+        </div>
+        {% endif %}
+        <button class="header__more" data-js-action="open-header-popup">
+          <svg viewBox="0 0 20 4" class="header__more-ico icon-more ">
+            <path d="M4 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm8 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" fill="currentColor"></path>
+          </svg>
+        </button>
+        <div class="header__popup" data-js="header-popup">
+          <div class="header__popup-title">Контакты</div>
+          <button class="header__popup-btn" data-js-action="close-header-popup">
+            <svg viewBox="0 0 20 20" class="header__popup-close icon-close ">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M.293.293a1 1 0 0 1 1.414 0L10 8.586 18.293.293a1 1 0 1 1 1.414 1.414L11.414 10l8.293 8.293a1 1 0 0 1-1.414 1.414L10 11.414l-8.293 8.293a1 1 0 0 1-1.414-1.414L8.586 10 .293 1.707a1 1 0 0 1 0-1.414z"></path>
             </svg>
           </button>
-
-        </form>
-        <div class="header__contact">
-          {% if this.theme.phone[0]|length > 0 %}
+          <div class="header__address">
+            <svg viewBox="0 0 9 18" class="header__address-ico icon-map ">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM0 4.5a4.5 4.5 0 1 1 5.25 4.438v8.312a.75.75 0 0 1-1.5 0V8.938A4.501 4.501 0 0 1 0 4.5z"></path>
+            </svg>
+            <div class="header__address-text">{{ this.theme.city }}, {{ this.theme.address }}</div>
+          </div>
+          {% for phone in this.theme.phone %}
           <div class="header__phone">
-            <a href="tel:{{ this.theme.phone[0].val }}" class="header__phone-url">{{ this.theme.phone[0].val }}</a>
-            <span class="header__phone-text">Звонок по России бесплатный</span>
+            <svg viewBox="0 0 16 16" class="header__phone-ico icon-phone ">
+              <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
+            </svg>
+            <a href="tel:{{ phone.val }}" class="header__phone-link">{{ phone.val }}</a>
           </div>
-          {% endif %}
-
-          <div class="header__cart-list">
-            {% if user %}
-            <a href="{{ 'account'|page }}" class="header__cart">
-              <span class="header__cart-count header__cart-count_active js-wish-count">{{ wish }}</span>
-              <svg class="header__cart-like" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.5408 1.90117C17.5543 0.781873 16.1859 0.165466 14.6875 0.165466C12.5802 0.165466 11.246 1.42406 10.4979 2.47992C10.3038 2.7539 10.1386 3.02863 10 3.28715C9.86137 3.02863 9.69629 2.7539 9.50215 2.47992C8.75402 1.42406 7.41984 0.165466 5.3125 0.165466C3.81414 0.165466 2.44566 0.781912 1.45918 1.90121C0.518242 2.96894 0 4.39894 0 5.92777C0 7.59195 0.649727 9.1398 2.04473 10.7989C3.29148 12.2817 5.08512 13.8101 7.16211 15.58C7.93605 16.2395 8.73641 16.9216 9.58848 17.6671L9.61406 17.6895C9.72453 17.7862 9.86227 17.8345 10 17.8345C10.1377 17.8345 10.2755 17.7862 10.3859 17.6895L10.4115 17.6671C11.2636 16.9216 12.0639 16.2396 12.838 15.5799C14.9149 13.8102 16.7085 12.2817 17.9553 10.7989C19.3503 9.13976 20 7.59195 20 5.92777C20 4.39894 19.4818 2.96894 18.5408 1.90117ZM12.0779 14.688C11.4107 15.2566 10.724 15.8417 10 16.4711C9.27602 15.8418 8.58934 15.2566 7.92203 14.688C3.85723 11.2242 1.17188 8.93586 1.17188 5.92777C1.17188 4.68441 1.58613 3.52957 2.33836 2.67601C3.09922 1.81277 4.15543 1.33734 5.3125 1.33734C6.9191 1.33734 7.95766 2.32711 8.54594 3.15742C9.07363 3.90211 9.34898 4.65281 9.44289 4.94098C9.52145 5.18219 9.74633 5.34543 10 5.34543C10.2537 5.34543 10.4786 5.18219 10.5571 4.94098C10.651 4.65281 10.9264 3.90211 11.4541 3.15738C12.0423 2.32711 13.0809 1.33734 14.6875 1.33734C15.8446 1.33734 16.9008 1.81277 17.6616 2.67601C18.4139 3.52957 18.8281 4.68441 18.8281 5.92777C18.8281 8.93586 16.1428 11.2242 12.0779 14.688Z" fill="currentColor"/>
-              </svg>
-            </a>
-            {% endif %}
-            <a href="#!" class="header__cart js-cart" data-js-action="open-modal" data-type-modal="cart">
-              <span class="header__cart-count js-cart-count">0</span>
-              <svg class="header__cart-bag" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.666626 0.666641L1.46663 3.33331M1.46663 3.33331L4.66663 14H19.3333V5.99997C19.3333 4.52722 18.1394 3.33331 16.6666 3.33331H1.46663ZM16.6666 19.3333C15.9302 19.3333 15.3333 18.7364 15.3333 18C15.3333 17.2636 15.9302 16.6666 16.6666 16.6666C17.403 16.6666 18 17.2636 18 18C18 18.7364 17.403 19.3333 16.6666 19.3333ZM5.99996 18C5.99996 17.2636 6.59691 16.6666 7.33329 16.6666C8.06967 16.6666 8.66663 17.2636 8.66663 18C8.66663 18.7364 8.06967 19.3333 7.33329 19.3333C6.59691 19.3333 5.99996 18.7364 5.99996 18Z" stroke="currentColor" stroke-width="1.2"/>
-              </svg>
-            </a>
+          {% endfor %}
+          <div class="header__social">
+            <div class="header__social-list">
+              {% if this.theme.instagram %}
+              <a
+                href="{{ this.theme.instagram }}"
+                target="_blank"
+                class="header__social-link">
+                <svg viewBox="0 0 20 21" class="header__social-ico icon-inst ">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M14.2257 21H5.77336C2.58451 21 0 18.2855 0 14.9363V6.06368C0 2.71543 2.58451 0 5.77336 0H14.2257C17.4146 0 20 2.71543 20 6.06368V14.9363C20 18.2855 17.4146 21 14.2257 21ZM18.1098 5.78784C18.1098 3.65749 16.4649 1.92992 14.4366 1.92992C14.4366 1.92992 12.3046 1.8192 10.219 1.8192C7.88258 1.8192 5.56345 1.92992 5.56345 1.92992C3.53419 1.92992 1.88932 3.65749 1.88932 5.78784C1.88932 5.78784 1.8366 8.2847 1.8366 10.6928C1.8366 12.9367 1.88932 15.1024 1.88932 15.1024C1.88932 17.2337 3.53419 18.9613 5.56345 18.9613C5.56345 18.9613 7.85805 19.071 10.1136 19.071C12.2928 19.071 14.4366 18.9613 14.4366 18.9613C16.4649 18.9613 18.1098 17.2337 18.1098 15.1024C18.1098 15.1024 18.2152 12.9367 18.2152 10.6928C18.2152 8.2847 18.1098 5.78784 18.1098 5.78784ZM15.3281 6.11808C14.661 6.11808 14.1203 5.55113 14.1203 4.85151C14.1203 4.15094 14.661 3.58399 15.3281 3.58399C15.9951 3.58399 16.5358 4.15094 16.5358 4.85151C16.5358 5.55113 15.9951 6.11808 15.3281 6.11808ZM9.99911 15.929C7.14378 15.929 4.82915 13.4989 4.82915 10.5C4.82915 7.50205 7.14378 5.07199 9.99911 5.07199C12.8553 5.07199 15.1699 7.50205 15.1699 10.5C15.1699 13.4989 12.8553 15.929 9.99911 15.929ZM9.99911 6.9456C8.15887 6.9456 6.66576 8.51282 6.66576 10.4446C6.66576 12.3784 8.15887 13.9456 9.99911 13.9456C11.8412 13.9456 13.3333 12.3784 13.3333 10.4446C13.3333 8.51282 11.8412 6.9456 9.99911 6.9456Z"
+                  ></path>
+                </svg>
+              </a>
+              {% endif %}
+              {% if this.theme.vk %}
+              <a href="{{ this.theme.vk }}"
+                target="_blank"
+                class="header__social-link">
+                <svg viewBox="0 0 22 12" class="header__social-ico icon-vk ">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M21.8038 10.7034C22.5326 11.8582 20.9965 11.9491 20.9965 11.9491L18.0582 11.989C18.0582 11.989 17.4269 12.1079 16.5957 11.5625C15.4977 10.8412 14.4609 8.96619 13.6536 9.20994C12.8339 9.45968 12.8607 11.1469 12.8607 11.1469C12.8607 11.1469 12.8655 11.5065 12.6799 11.6983C12.4762 11.9071 12.0792 11.9491 12.0792 11.9491H10.7641C10.7641 11.9491 7.86306 12.1169 5.30734 9.57256C2.52111 6.79845 0.0591262 1.29318 0.0591262 1.29318C0.0591262 1.29318 -0.082431 0.932559 0.072519 0.757741C0.245642 0.561945 0.717187 0.548958 0.717187 0.548958L3.86018 0.528979C3.86018 0.528979 4.15669 0.57593 4.36808 0.724775C4.54311 0.847647 4.64163 1.07841 4.64163 1.07841C4.64163 1.07841 5.14952 2.30613 5.82288 3.41697C7.13613 5.58771 7.74732 6.06222 8.19304 5.82946C8.8425 5.49081 8.64833 2.76265 8.64833 2.76265C8.64833 2.76265 8.65981 1.77268 8.32121 1.33114C8.05818 0.990498 7.56368 0.889604 7.34465 0.861633C7.1677 0.838657 7.45847 0.447064 7.83436 0.271247C8.39964 0.0055241 9.39917 -0.0084614 10.5795 0.00252716C11.4986 0.0115178 11.7645 0.0664607 12.1232 0.148375C13.2069 0.399114 12.8396 1.36511 12.8396 3.68269C12.8396 4.42492 12.7 5.46884 13.2595 5.81547C13.5006 5.96332 14.0898 5.83745 15.5627 3.44594C16.261 2.31312 16.7842 0.97951 16.7842 0.97951C16.7842 0.97951 16.898 0.742757 17.0768 0.639864C17.2576 0.535972 17.5034 0.568937 17.5034 0.568937L20.8119 0.548958C20.8119 0.548958 21.8057 0.436076 21.9664 0.864629C22.1347 1.31516 21.5953 2.36607 20.2437 4.08827C18.0247 6.91633 17.777 6.6516 19.6201 8.2869C21.3801 9.84927 21.7445 10.6095 21.8038 10.7034Z"
+                  ></path>
+                </svg>
+              </a>
+              {% endif %}
+              {% if this.theme.whatsapp %}
+              <a href="whatsapp://send?phone={{ this.theme.whatsapp }}"
+                target="_blank"
+                class="header__social-link">
+                <svg viewBox="0 0 16 16" class="header__social-ico icon-whatsapp">
+                  <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
+                </svg>
+              </a>
+              {% endif %}
+            </div>
           </div>
-
+          <button type="button" class="header__btn" data-js-action="open-modal" data-type-modal="form">Заказать звонок</button>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="header__navbar">
-    <div class="header__wrap wrap">
-      {% component 'CategoryMenu' %}
-
-      <div class="header__mobile">
-        <a href="{{ 'search'|page }}" class="header__mobile-item">
-          <svg class="header__mobile-ico" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 13L9 9M10.3333 5.66667C10.3333 6.2795 10.2126 6.88634 9.97811 7.45252C9.74358 8.01871 9.39984 8.53316 8.9665 8.9665C8.53316 9.39984 8.01871 9.74358 7.45252 9.97811C6.88634 10.2126 6.2795 10.3333 5.66667 10.3333C5.05383 10.3333 4.447 10.2126 3.88081 9.97811C3.31462 9.74358 2.80018 9.39984 2.36683 8.9665C1.93349 8.53316 1.58975 8.01871 1.35523 7.45252C1.12071 6.88634 1 6.2795 1 5.66667C1 4.42899 1.49167 3.242 2.36683 2.36683C3.242 1.49167 4.42899 1 5.66667 1C6.90434 1 8.09133 1.49167 8.9665 2.36683C9.84167 3.242 10.3333 4.42899 10.3333 5.66667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a href="#!" class="header__mobile-item js-mobile-account" data-js-action="open-modal" data-type-modal="sign">
-          <svg class="header__mobile-ico header__mobile-ico_profile" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-          </svg>
-        </a>
-        <a href="#!" class="header__cart header__cart_mobile js-cart" data-js-action="open-modal" data-type-modal="cart">
-          <span  class="header__cart-count js-cart-count">0</span>
-          <svg class="header__cart-bag" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.666626 0.666641L1.46663 3.33331M1.46663 3.33331L4.66663 14H19.3333V5.99997C19.3333 4.52722 18.1394 3.33331 16.6666 3.33331H1.46663ZM16.6666 19.3333C15.9302 19.3333 15.3333 18.7364 15.3333 18C15.3333 17.2636 15.9302 16.6666 16.6666 16.6666C17.403 16.6666 18 17.2636 18 18C18 18.7364 17.403 19.3333 16.6666 19.3333ZM5.99996 18C5.99996 17.2636 6.59691 16.6666 7.33329 16.6666C8.06967 16.6666 8.66663 17.2636 8.66663 18C8.66663 18.7364 8.06967 19.3333 7.33329 19.3333C6.59691 19.3333 5.99996 18.7364 5.99996 18Z" stroke="currentColor" stroke-width="1.2"/>
-          </svg>
-        </a>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="menu" data-menu="mobile">
-    <div class="menu__overlay" data-js-action="mobile-overlay"></div>
-    <div class="menu__container">
-      <div class="menu__container-scroll">
-        {% component 'CategoryMenu2' %}
-      </div>
-    </div>
-  </div>
-
 </header>

@@ -128,3 +128,84 @@ tabs:
         mode: image
         imageWidth: 200
         tab: Общие
+      banners:
+        label: Баннеры
+        span: storm
+        cssClass: col-md-12
+        tab: Общие
+        type: repeater
+        prompt: Добавить
+        minItems: 2
+        maxItems: 2
+        style: accordion
+        form:
+          fields:
+            title:
+              type: text
+              label: Заголовок
+              span: storm
+              cssClass: col-md-4
+            link:
+              type: text
+              label: Ссылка
+              span: storm
+              cssClass: col-md-4
+            tag:
+              type: text
+              label: Тег
+              span: storm
+              cssClass: col-md-4
+            image:
+              label: Фото
+              type: mediafinder
+              mode: image
+              imageHeight: 75
+              imageWidth: 75
+              span: storm
+              cssClass: col-md-12
+      adds:
+        label: Доп. баннеры
+        span: storm
+        cssClass: col-md-12
+        tab: Общие
+        type: repeater
+        prompt: Добавить
+        minItems: 1
+        style: accordion
+        form:
+          fields:
+            title:
+              type: text
+              label: Заголовок
+              span: storm
+              placeholder: 'Фурнитура'
+              cssClass: col-md-4
+            link:
+              type: text
+              label: Ссылка
+              span: storm
+              placeholder: '/category/mebel'
+              cssClass: col-md-4
+            tag:
+              type: text
+              label: Тег
+              span: storm
+              placeholder: 'до - 20%'
+              cssClass: col-md-4
+            type:
+              label: Ширина баннера
+              type: dropdown
+              cssClass: col-md-12
+              default: 100
+              options:
+                  33: '33%'
+                  50: '50%'
+                  100: '100%'
+            image:
+              label: Фото
+              type: mediafinder
+              mode: image
+              imageHeight: 75
+              imageWidth: 75
+              span: storm
+              cssClass: col-md-12

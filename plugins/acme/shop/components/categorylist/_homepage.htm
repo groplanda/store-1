@@ -1,11 +1,18 @@
-<div class="section home-category">
-  <div class="wrap home-category__wrap">
-    <div class="home-category__row">
+<div class="categories">
+  <div class="categories__container">
+    <div class="categories__row">
       {% for category in categories %}
-      <div class="home-category__item">
-        <img src="{{ category.image|media }}" alt="{{ category.title }}" class="home-category__item-img" />
-        <p class="home-category__item-text">{{ category.title }}</p>
-        <a href="{{ 'category' | page({ slug: category.slug }) }}" class="home-category__item-link"></a>
+      <div class="categories__item">
+        <div class="categories__item-image">
+          <img
+            src="{{ category.image|media|resize(382, 287, { mode: 'crop', quality: '90' }) }}"
+            alt="{{ category.title }}"
+            class="categories__item-thumb"
+          />
+        </div>
+        <div class="categories__item-title">{{ category.title }}</div>
+        <div class="categories__item-count">{{ category.products_count }}</div>
+        <a href="{{ 'category' | page({ slug: category.slug }) }}" class="categories__item-link"></a>
       </div>
       {% endfor %}
     </div>

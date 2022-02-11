@@ -3,7 +3,7 @@ export class Cart {
   constructor(cartEl, CountEl) {
     this.$cart = document.querySelectorAll(cartEl);
     this.$countCart = document.querySelectorAll(CountEl);
-    this.storageName = "shop_cart"
+    this.storageName = process.env.MIX_STORE
   }
 
   addToCart(data) {
@@ -45,17 +45,19 @@ export class Cart {
       const cart = JSON.parse(localStorage.getItem(this.storageName)),
             cartCount = cart.reduce((sum, el) => sum + el.amount, 0);
       this.$countCart.forEach(count => count.textContent = cartCount);
-      if (cartCount > 0) {
-        this.$cart.forEach(cart => {
-          cart.removeAttribute("data-js-action");
-          cart.href = "/checkout";
-        })
-      } else {
-        this.$cart.forEach(cart => {
-          cart.setAttribute("data-js-action", "open-modal");
-          cart.href = "#!";
-        })
-      }
+
+      this.$countCart.forEach(cart => {
+        let link = cart.previousElementSibling;
+        if (link.tagName.toLowerCase() === "a") {
+          if (cartCount > 0) {
+            link.removeAttribute("data-js-action");
+            link.href = "/checkout";
+          } else {
+            link.setAttribute("data-js-action", "open-modal");
+            link.href = "#!";
+          }
+        }
+      })
     }
   }
 
@@ -72,14 +74,13 @@ export class Cart {
   }
 
   alertCart(classname, message) {
-    const alert = document.createElement("div");
-    alert.classList.add("alert", `alert_${classname}`);
-    alert.textContent = message;
-    document.body.appendChild(alert);
+    const html = this.createAlertHtml(classname, message);
+    document.body.insertAdjacentHTML('beforeend', html);
 
     setTimeout(() => {
+      const alert = document.querySelector('.product-popup');
       alert.remove();
-    }, 1500)
+    }, 2500)
   }
 
   clearStorage() {
@@ -90,6 +91,12 @@ export class Cart {
 
   fillStorage(data) {
     localStorage.setItem(this.storageName, JSON.stringify(data));
+  }
+
+  createAlertHtml(classname, message) {
+    return `<div class="product-popup product-popup_${classname}">
+              <a class="product-popup__link" href="/checkout">${message}</a>
+            </div>`
   }
 
 }

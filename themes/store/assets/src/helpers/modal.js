@@ -58,7 +58,7 @@ const header = document.querySelector("header"),
     if (!currentModal) return;
     modalId.classList.add("modal_active");
     currentModal.classList.add("modal__popup_open");
-    document.body.classList.add("modal-open");
+    document.body.classList.add("open-modal");
     document.body.style.paddingRight = offsetBody;
 
     if (target.dataset.productId) { // если это карточка товара
@@ -82,6 +82,6 @@ const header = document.querySelector("header"),
   function closeModal() {
     modalId.classList.remove("modal_active");
     closeAllModals();
-    document.body.classList.remove("modal-open");
+    document.body.classList.remove("open-modal");
     document.body.style.paddingRight = '';
   }
