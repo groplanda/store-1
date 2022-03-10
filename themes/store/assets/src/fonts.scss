@@ -1,49 +1,39 @@
 @font-face {
-  font-family: "Montserrat";
-  src: url("/themes/store/assets/fonts/MontserratRegular.eot");
-  src: url("/themes/store/assets/fonts/MontserratRegular.eot?#iefix")format("embedded-opentype"),
-  url("/themes/store/assets/fonts/MontserratRegular.woff") format("woff"),
-  url("/themes/store/assets/fonts/MontserratRegular.ttf") format("truetype");
-  font-style: normal;
+  font-family: 'San Francisco Pro';
+  src: local('San Francisco Pro Display Regular'), local('San-Francisco-Pro-Display-Regular'),
+      url('/themes/store/assets/fonts/SFProDisplay-Regular.woff2') format('woff2'),
+      url('/themes/store/assets/fonts/SFProDisplay-Regular.woff') format('woff'),
+      url('/themes/store/assets/fonts/SFProDisplay-Regular.ttf') format('truetype');
   font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: "Montserrat";
-  src: url("/themes/store/assets/fonts/MontserratMedium.eot");
-  src: url("/themes/store/assets/fonts/MontserratMedium.eot?#iefix")format("embedded-opentype"),
-  url("/themes/store/assets/fonts/MontserratMedium.woff") format("woff"),
-  url("/themes/store/assets/fonts/MontserratMedium.ttf") format("truetype");
-  font-style: normal;
+  font-family: 'San Francisco Pro';
+  src: local('San Francisco Pro Display Medium'), local('San-Francisco-Pro-Display-Medium'),
+      url('/themes/store/assets/fonts/SFProDisplay-Medium.woff2') format('woff2'),
+      url('/themes/store/assets/fonts/SFProDisplay-Medium.woff') format('woff'),
+      url('/themes/store/assets/fonts/SFProDisplay-Medium.ttf') format('truetype');
   font-weight: 500;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: "Montserrat";
-  src: url("/themes/store/assets/fonts/MontserratSemiBold.eot");
-  src: url("/themes/store/assets/fonts/MontserratSemiBold.eot?#iefix")format("embedded-opentype"),
-  url("/themes/store/assets/fonts/MontserratSemiBold.woff") format("woff"),
-  url("/themes/store/assets/fonts/MontserratSemiBold.ttf") format("truetype");
-  font-style: normal;
+  font-family: 'San Francisco Pro';
+  src: local('San Francisco Pro Display Semibold'), local('San-Francisco-Pro-Display-Semibold'),
+      url('/themes/store/assets/fonts/SFProDisplay-Semibold.woff2') format('woff2'),
+      url('/themes/store/assets/fonts/SFProDisplay-Semibold.woff') format('woff'),
+      url('/themes/store/assets/fonts/SFProDisplay-Semibold.ttf') format('truetype');
   font-weight: 600;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: "Montserrat";
-  src: url("/themes/store/assets/fonts/MontserratBold.eot");
-  src: url("/themes/store/assets/fonts/MontserratBold.eot?#iefix")format("embedded-opentype"),
-  url("/themes/store/assets/fonts/MontserratBold.woff") format("woff"),
-  url("/themes/store/assets/fonts/MontserratBold.ttf") format("truetype");
-  font-style: normal;
+  font-family: 'San Francisco Pro';
+  src: local('San Francisco Pro Display Bold'), local('San-Francisco-Pro-Display-Bold'),
+      url('/themes/store/assets/fonts/SFProDisplay-Bold.woff2') format('woff2'),
+      url('/themes/store/assets/fonts/SFProDisplay-Bold.woff') format('woff'),
+      url('/themes/store/assets/fonts/SFProDisplay-Bold.ttf') format('truetype');
   font-weight: 700;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src: url("/themes/store/assets/fonts/MontserratExtraBold.eot");
-  src: url("/themes/store/assets/fonts/MontserratExtraBold.eot?#iefix")format("embedded-opentype"),
-  url("/themes/store/assets/fonts/MontserratExtraBold.woff") format("woff"),
-  url("/themes/store/assets/fonts/MontserratExtraBold.ttf") format("truetype");
   font-style: normal;
-  font-weight: 800;
 }

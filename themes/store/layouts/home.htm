@@ -18,54 +18,24 @@ galleryName = 1
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <div class="wrapper" data-js="wrapper">
-      <!-- Header -->
-      {% partial "header" %}
+    <!-- Header -->
+    {% partial "header" %}
 
-      <!-- Panel -->
-      {% partial "fixed-panel" %}
-
-      <!-- Content -->
-      <main class="wrapper__container">
-        <div class="section">
-          <div class="container container--main">
-            {% partial "banner" %}
-            <div class="folders">
-              <div class="folders__row">
-                {% component 'CategoryList' %}
-              </div>
-            </div>
-            {% component 'PopularProducts' %}
-            {% component 'PopularProducts2' %}
-            {% partial "adds" %}
-
-            <section class="question-form">
-              <div class="question-form__image">
-                <img src="{{ 'assets/images/question_form.png'|theme }}" alt="вопросы" class="question-form__image-thumb">
-              </div>
-              <div class="question-form__container">
-                <div class="question-form__title">Остались вопросы?</div>
-                <button type="button" class="question-form__btn" data-js-action="open-modal" data-type-modal="form">Напишите нам</button>
-              </div>
-            </section>
-            <section class="about">
-              <div class="about__content">
-                <div class="about__content-title">О компании</div>
-                <div class="about__content-body">
-                  {% page %}
-                </div>
-                <a href="{{ 'company'|staticPage }}" class="about__content-link">Читать дальше</a>
-              </div>
-              {% component 'GalleryComponent' %}
-            </section>
+    <!-- Content -->
+    <main class="main">
+      <section class="intro section">
+        <div class="wrap intro__wrap">
+          <div class="intro__bg"></div>
+          <div class="intro__content">
+            <h1 class="intro__title">Ю-Упак - это полный цикл производства упаковки из всех видов картона</h1>
           </div>
         </div>
-      </main>
+      </section>
+    </main>
 
-      <!-- Footer -->
-      {% partial "footer" %}
-      {% partial "modals" %}
-    </div>
+    <!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
     {% partial "scripts" %}
   </body>
 </html>

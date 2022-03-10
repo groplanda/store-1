@@ -12,7 +12,43 @@ templateType = "mobile"
 ==
 {% partial "loading" %}
 <header class="header section">
-  <div class="header__container container">
+  <div class="wrap header__wrap">
+    <button type="button" class="header__hamburger" data-js-action="open-menu">
+      <svg class="header__hamburger-icon">
+        <use xlink:href="{{ 'assets/spritemap.svg#sprite-menu'|theme }}"></use>
+      </svg>
+    </button>
+    <a href="{{ 'home'|page }}" class="header__logo">
+      <img
+        src="{{ this.theme.site_logo|media|resize(206, false, { mode: 'crop', quality: '100' }) }}"
+        alt="{{this.theme.site_name}}"
+        class="header__logo-src"
+      />
+    </a>
+    <nav class="header__nav">
+      <div class="header__nav-item">
+        <a href="{{ 'home'|page }}" class="header__nav-link">Главная</a>
+      </div>
+      <div class="header__nav-item">
+        <a href="{{ 'company'|staticPage }}" class="header__nav-link">О Компании</a>
+      </div>
+      <div class="header__nav-item">
+        <a href="{{ 'catalog'|page }}" class="header__nav-link">Продукция</a>
+      </div>
+      <div class="header__nav-item">
+        <a href="{{ 'contact'|page }}" class="header__nav-link">Контакты</a>
+      </div>
+    </nav>
+    <button type="button" class="header__search" data-js-action="open-search">
+      <svg class="header__search-icon">
+        <use xlink:href="{{ 'assets/spritemap.svg#sprite-search'|theme }}"></use>
+      </svg>
+    </button>
+  </div>
+  <!-- <svg class="icon">
+    <use xlink:href="{{ 'assets/spritemap.svg#sprite-coolicon'|theme }}"></use>
+  </svg> -->
+  <!-- <div class="header__container container">
     <div class="header__row header__row--mobile">
       <button class="header__burg" data-js-action="toggle-panel" data-panel="nav">
         <svg viewBox="0 0 26 20" class="header__burg-ico icon-burg ">
@@ -174,5 +210,5 @@ templateType = "mobile"
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </header>

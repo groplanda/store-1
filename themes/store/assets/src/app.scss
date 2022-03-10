@@ -1,5 +1,7 @@
 @import "./fonts.scss";
 @import "./vars.scss";
+@import "./mixins.scss";
+@import "./keyframes.scss";
 
 * {
   box-sizing: border-box;
@@ -9,208 +11,170 @@
 }
 
 body {
+  color: $gray-color;
   font-family: $base-font;
   font-size: $base-font-size;
+  font-weight: 400;
   min-width: 320px;
-  line-height: 1.25;
+  line-height: $base-line-height;
 
   &.open-modal {
     overflow: hidden;
   }
 }
 
-img {
-  max-width: 100%;
-}
-
-a {
-  text-decoration: none;
-  transition: color .2s ease;
-
-  &:hover, &:focus, &:active {
-    text-decoration: none;
-  }
-}
-
-input, textarea {
-  background: none;
-  border: none;
+input, button, select, textarea {
   appearance: none;
   -webkit-appearance: none;
+  padding: 0;
+  margin: 0;
   font-family: $base-font;
-}
-
-button {
+  font-size: $base-font-size;
   background: none;
   border: none;
-  appearance: none;
+  outline: none;
+  transition: all .3s ease;
 
-  font-family: $base-font;
-  &:hover{
+  &:hover, &:focus {
+    outline: none;
     cursor: pointer;
   }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+ol, ul {
+  padding-left: 20px;
+}
+
+a {
+  color: $gray-color;
+  text-decoration: none;
+  transition: all .3s ease;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+span[hidden], img[hidden] {
+  display: none;
+}
+
+svg {
+  display: inline-block;
+  transition: all .25s ease;
+}
+
 .section {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.wrapper {
-  min-height: 100%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  $root: &;
-
-  &--active {
-    #{$root} {
-      &__container {
-        transform: translate(432px, 0);
-      }
-    }
-  }
-
-  &__container {
-    transition: transform .3s ease;
-  }
-}
-
-.container {
+.wrap {
   width: 100%;
-  max-width: 1740px;
-  padding: 0 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 0 15px;
 
-  &--main {
-    padding-left: 60px;
-    @media(max-width: 1599px) {
-      padding-left: 90px;
-    }
-    @media(max-width: 1199px) {
-      padding-left: 100px;
-    }
-    @media(max-width: 991px) {
-      padding-left: 60px;
-    }
-    @media(max-width: 890px) {
-      padding-left: 90px;
-    }
-    @media(max-width: 820px) {
-      padding-left: 100px;
-    }
-    @media(max-width: 767px) {
-      padding-left: 10px;
-    }
-  }
-
-  @media(max-width: 1740px) {
-    max-width: 1440px;
-  }
-
-  @media(max-width: 1440px) {
-    max-width: 1200px;
-  }
-
-  @media(max-width: 1199px) {
-    max-width: 991px;
-  }
-
-  @media(max-width: 991px) {
+  @media(min-width: 768px) {
     max-width: 768px;
   }
 
-  @media(max-width: 767px) {
-    max-width: 100%;
+  @media(min-width: 992px) {
+    max-width: 992px;
   }
 
-}
-
-@mixin placeholder($color) {
-  &::-moz-placeholder {
-    color: $color;
-    opacity: 1;
-  }
-  &::-webkit-input-placeholder {
-    color: $color;
-    opacity: 1;
-  }
-  &:-ms-input-placeholder {
-    color: $color;
-    opacity: 1;
-  }
-  &::-ms-input-placeholder {
-    color: $color;
-    opacity: 1;
-  }
-  &::placeholder {
-    color: $color;
-    opacity: 1;
+  @media(min-width: 1200px) {
+    max-width: 1200px;
   }
 }
 
-@mixin block-select() {
-  user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-@keyframes fadeOut {
-  0% {
-    opacity: 1
+.table {
+  width: 100%;
+  min-width: 768px;
+  margin-bottom: 1rem;
+  color: $black-color;
+  vertical-align: top;
+  border-color: $light-color;
+  border-spacing: 0;
+  border-top: 1px solid $light-color;
+
+  @media(min-width: 768px) {
+    min-width: auto;
   }
-  99% {
-    opacity: 0;
-    z-index: 1;
+
+  tr, td, thead, tbody {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
   }
-  100%{
-    opacity: 0;
-    display:none;
+
+  thead {
+    vertical-align: bottom;
+  }
+
+  tr {
+    border-width: 0;
+  }
+
+  td, th {
+    font-size: 14px;
+    line-height: 19px;
+    color: $black-color;
+    padding: 8px 6px;
+    border-width: 1px;
+    border-top: 0;
+    border-right: 0;
+
+    &:last-child {
+      border-right: 1px solid $light-color;
+    }
+
+    @media(min-width: 768x) {
+      padding: 10px 8px;
+      font-size: 16px;
+      line-height: 19px;
+    }
   }
 }
 
-@import './elements/about';
-@import './elements/banner';
-@import './elements/cart/cart';
-@import './elements/cart/cart-item';
-@import './elements/cart/cart-table';
-@import './elements/cart/cart-total';
-@import './elements/categories';
-@import './elements/category';
-@import './elements/checkout';
-@import './elements/contact-form';
-@import './elements/edit-block';
-@import './elements/filter';
-@import './elements/filters';
-@import './elements/fixed-panel';
-@import './elements/fixed-search';
-@import './elements/folders';
-@import './elements/footer';
-@import './elements/gallery';
-@import './elements/header';
-@import './elements/modal';
-@import './elements/post';
-@import './elements/loading';
-@import './elements/loading/load.scss';
-@import './elements/product/popup';
-@import './elements/product/price';
-@import './elements/product/product';
-@import './elements/product-slider/product-amount';
-@import './elements/product-slider/product-item';
-@import './elements/product-slider/product-slider';
-@import './elements/question-form';
-@import './elements/tags';
-@import './elements/testimonial-item';
-@import './elements/breadcrumbs';
-@import './elements/contact';
-@import './elements/radio';
-@import './elements/account';
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: $white-color;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  background: rgba($color: $green-color, $alpha: .85);
+  border-radius: 5px;
 
+  &:hover {
+    background: $green-color;
+  }
+}
 
-@import "nouislider/dist/nouislider.css";
-@import "lightbox2/dist/css/lightbox.css";
+@import './element/header';
+@import './element/intro';

@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -36,13 +37,16 @@ mix.webpackConfig({
       },
     ]
   },
+  plugins: [
+    new SVGSpritemapPlugin('./themes/' + process.env.MIX_THEME + '/assets/src/svg/*.svg')
+  ]
 });
 
-mix.js('./themes/store/assets/src/app.js', 'dist/js')
-mix.js('./themes/store/assets/src/vue/index.js', 'dist/js/vue.js')
+mix.js('./themes/' + process.env.MIX_THEME + '/assets/src/app.js', 'dist/js')
+mix.js('./themes/' + process.env.MIX_THEME + '/assets/src/vue/index.js', 'dist/js/vue.js')
   .vue()
   .version()
-  .sass('./themes/store/assets/src/app.scss', 'dist/css')
+  .sass('./themes/' + process.env.MIX_THEME + '/assets/src/app.scss', 'dist/css')
   .options({
     postCss: [
       require('postcss-url'),
