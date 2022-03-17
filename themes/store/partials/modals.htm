@@ -1,106 +1,44 @@
-<div class="modal" id="modal" style="display: none;">
+<div class="modal" id="modal">
   <div class="modal__dialog" data-role="modal-close">
 
     <div class="modal__popup" data-modal="cart">
       <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="popup__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
-      <div class="modal__popup-container">
-        <div class="modal__popup-cart-image">
-          <svg class="modal__popup-cart-ico" width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.32617 1.32596L4.18395 7.51855M4.18395 7.51855L11.6151 32.2889H45.6743V13.7111C45.6743 10.2911 42.9018 7.51855 39.4817 7.51855H4.18395ZM39.4817 44.6741C37.7717 44.6741 36.3854 43.2878 36.3854 41.5778C36.3854 39.8678 37.7717 38.4815 39.4817 38.4815C41.1918 38.4815 42.578 39.8678 42.578 41.5778C42.578 43.2878 41.1918 44.6741 39.4817 44.6741ZM14.7114 41.5778C14.7114 39.8678 16.0976 38.4815 17.8077 38.4815C19.5177 38.4815 20.9039 39.8678 20.9039 41.5778C20.9039 43.2878 19.5177 44.6741 17.8077 44.6741C16.0976 44.6741 14.7114 43.2878 14.7114 41.5778Z" stroke="#007AFF" stroke-width="3"/>
-          </svg>
+
+      <div class="modal__wrap">
+        <div id="mini-cart">
+          <MiniCart></MiniCart>
         </div>
-        <div class="modal__popup-cart-info">Ваша корзина пуста</div>
-        <a href="/catalog" class="button button_primary modal__popup-cart-button">Каталог товаров</a>
       </div>
     </div>
 
     <div class="modal__popup" data-modal="sign">
       <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="modal__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
 
-      <div class="header__form-title">Авторизация</div>
-      {{ form_open({ class: 'contact-form', id: 'authUser'  }) }}
-        <div class="contact-form__form-group">
-          <label class="contact-form__form-label">
-            Логин
-            <span class="contact-form__form-mark">*</span>
-          </label>
-          <input type="email" placeholder="user@mail.ru" class="contact-form__form-input" name="login">
-          <span class="contact-form__error" data-error-for="login"></span>
-        </div>
-        <div class="contact-form__form-group">
-          <label class="contact-form__form-label">
-            Пароль
-            <span class="contact-form__form-mark">*</span>
-          </label>
-          <input type="password" placeholder="**********" class="contact-form__form-input" name="password">
-          <span class="contact-form__error" data-error-for="password"></span>
-          <a data-js-action="open-modal" data-type-modal="reset-password" class="contact-form__forgot-password">Забыли пароль?</a>
-        </div>
-        <button type="submit" class="contact-form__btn contact-form__btn--full">Войти</button>
-        <a data-js-action="open-modal" data-type-modal="register" class="contact-form__link contact-form__link--center">Создать аккаунт</a>
-      {{ form_close() }}
-    </div>
+      <div class="modal__wrap">
 
-    <div class="modal__popup" data-modal="register">
-      <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="modal__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
-        </svg>
-      </button>
-      <div class="header__form-title">Регистрация</div>
-      {{ form_open({ class: 'contact-form', id: 'registerUser'  }) }}
-        <div class="contact-form__form-group">
-          <label class="contact-form__form-label">
-            Имя
-            <span class="contact-form__form-mark">*</span>
-          </label>
-          <input type="text" placeholder="Иванов Иван" class="contact-form__form-input" name="name">
-          <span class="contact-form__error" data-error-for="name"></span>
+        <div class="tabs" data-js="tabs">
+          <div class="tabs__heading">
+            <button type="button" class="tabs__btn tabs__btn--current" data-index="0">Авторизация</button>
+            <button type="button" class="tabs__btn" data-index="1">Регистрация</button>
+          </div>
+          <div class="tabs__body">
+            <div class="tabs__item tabs__item--selected" data-tab="0">
+              {% partial "auth" %}
+            </div>
+            <div class="tabs__item" data-tab="1">
+              {% partial "register" %}
+            </div>
+          </div>
         </div>
-        <div class="contact-form__form-group">
-          <label class="contact-form__form-label">
-            Email/Логин
-            <span class="contact-form__form-mark">*</span>
-          </label>
-          <input type="email" placeholder="user@mail.ru" class="contact-form__form-input" name="email">
-          <span class="contact-form__error" data-error-for="email"></span>
-        </div>
-        <div class="contact-form__form-group">
-          <label class="contact-form__form-label">
-            Пароль
-            <span class="contact-form__form-mark">*</span>
-          </label>
-          <input type="password" placeholder="**********" class="contact-form__form-input" name="password">
-          <span class="contact-form__error" data-error-for="password"></span>
-        </div>
-        <div class="contact-form__form-group">
-          <label class="contact-form__form-label">
-            Повторите пароль
-            <span class="contact-form__form-mark">*</span>
-          </label>
-          <input type="password" placeholder="**********" class="contact-form__form-input" name="password_confirmation">
-          <span class="contact-form__error" data-error-for="password_confirmation"></span>
-        </div>
-        <div class="contact-form__form-group">
-          <label class="radio radio_modal">
-            <input type="checkbox" name="is_subscribe" value="1" class="radio__input" />
-            <span class="radio__circle"></span>
-            <span class="radio__group">
-              <span class="radio__group-title">Хочу получать информацию о скидках и акциях</span>
-            </span>
-          </label>
-        </div>
-        <button type="submit" class="contact-form__btn contact-form__btn--full">Зарегистрироваться</button>
-        <a data-js-action="open-modal" data-type-modal="sign" class="contact-form__link contact-form__link--center">Авторизация</a>
-        {{ form_close() }}
+      </div>
     </div>
 
     <div class="modal__popup" data-modal="logout">

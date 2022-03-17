@@ -1,0 +1,51 @@
+.search-form {
+  width: 100%;
+  max-width: 290px;
+
+  @media(max-width: 991px) {
+    max-width: 220px;
+  }
+
+  @media(max-width: 767px) {
+    max-width: 100%;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    position: relative;
+  }
+
+  &__input {
+    border-radius: 30px;
+    padding: 0 30px;
+    outline: 0;
+    color: $dark-color;
+    width: 100%;
+    font-size: 15px;
+    height: 44px;
+    display: block;
+    background: #FFF;
+
+    @media(max-width: 991px) {
+      font-size: 14px;
+      padding: 0 20px;
+    }
+  }
+
+  &__btn {
+    z-index: 1;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 25px;
+    top: calc(50% - 10px);
+    cursor: pointer;
+  }
+
+  &__btn-ico {
+    fill: $dark-color;
+    width: 100%;
+    height: 100%;
+  }
+}

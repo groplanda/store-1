@@ -13,7 +13,8 @@ function addToCart() {
 
   if (addBtns.length > 0) {
     addBtns.forEach(btn => {
-      btn.addEventListener("click", function() {
+      btn.addEventListener("click", function(e) {
+        e.stopImmediatePropagation();
         const id = this.dataset.productId;
         if (!id) return;
         const optionId = this.dataset.optionId ? Number(this.dataset.optionId) : null,
@@ -34,6 +35,7 @@ function changeProductQty() {
   if (productAmount) {
     productAmount.forEach(amount => {
       amount.addEventListener("click", e => {
+        e.stopImmediatePropagation();
         const target = e.target,
               amountVal = amount.querySelector('[data-js-action="qty-val"]'),
               productEl = amount.closest('[data-product-index]'),
@@ -60,13 +62,17 @@ function setProductAmount(value, addToCart) {
 }
 
 function resetProductAmount(id) {
-  const productEl = document.querySelector(`[data-product-index="${id}"]`);
+  const productEl = document.querySelectorAll(`[data-product-index="${id}"]`);
 
   if(!productEl) return;
 
-  const amount = productEl.querySelectorAll('[data-js-action="qty-val"]'),
-        addToCart = productEl.querySelectorAll('[data-js-action="add-to-cart"]');
+  productEl.forEach(product => {
+    const amount = product.querySelectorAll('[data-js-action="qty-val"]'),
+    addToCart = product.querySelectorAll('[data-js-action="add-to-cart"]');
 
-        amount.forEach(a => a.value = 1);
-        addToCart.forEach(btn => btn.dataset.productAmount = 1);
+    amount.forEach(a => a.value = 1);
+    addToCart.forEach(btn => btn.dataset.productAmount = 1);
+  })
+
+
 }

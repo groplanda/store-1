@@ -60,7 +60,7 @@ a {
   transition: all .3s ease;
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 
@@ -75,7 +75,8 @@ span[hidden], img[hidden] {
 
 svg {
   display: inline-block;
-  transition: all .25s ease;
+  vertical-align: baseline;
+  transition: fill 0.3s, stroke 0.3s;
 }
 
 .section {
@@ -103,6 +104,10 @@ svg {
   @media(min-width: 1200px) {
     max-width: 1200px;
   }
+
+  @media(min-width: 1310px) {
+    max-width: 1280px;
+  }
 }
 
 .table-responsive {
@@ -114,7 +119,7 @@ svg {
   width: 100%;
   min-width: 768px;
   margin-bottom: 1rem;
-  color: $black-color;
+  color: $dark-color;
   vertical-align: top;
   border-color: $light-color;
   border-spacing: 0;
@@ -141,7 +146,7 @@ svg {
   td, th {
     font-size: 14px;
     line-height: 19px;
-    color: $black-color;
+    color: $dark-color;
     padding: 8px 6px;
     border-width: 1px;
     border-top: 0;
@@ -168,13 +173,29 @@ svg {
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  background: rgba($color: $green-color, $alpha: .85);
   border-radius: 5px;
-
-  &:hover {
-    background: $green-color;
-  }
 }
-
+@import './element/loading';
 @import './element/header';
-@import './element/intro';
+@import './element/modal';
+@import './element/header-nav';
+@import './element/search-form';
+@import './element/mobile-nav';
+@import './element/slider';
+@import './element/categories';
+@import './element/product-slider';
+@import './element/product-item';
+@import './element/product-amount';
+@import './element/post';
+@import './element/advantages';
+@import './element/footer';
+@import './element/contact-form';
+@import './element/mini-cart';
+@import './element/product-popup';
+@import './element/tabs';
+@import './element/breadcrumbs';
+@import './element/category';
+@import './element/filters';
+@import './element/product';
+@import './element/product-price';
+@import './element/filter';

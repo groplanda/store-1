@@ -58,6 +58,12 @@ export class Cart {
           }
         }
       })
+
+      window.dispatchEvent(new CustomEvent('change-cart-storage', {
+        detail: {
+          storage: localStorage.getItem(this.storageName)
+        }
+      }));
     }
   }
 

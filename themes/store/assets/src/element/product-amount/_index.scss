@@ -1,0 +1,54 @@
+.product-amount {
+  display: inline-flex;
+  align-items: center;
+  background: #F8F8F8;
+  border-radius: 8px;
+
+  $root: &;
+
+  &__btn {
+    width: 36px;
+    height: 36px;
+    outline: none;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    -webkit-appearance: none;
+    transition: all 0.18s linear;
+    border-radius: 8px;
+    background: #FFF;
+
+    &--disabled {
+      cursor: not-allowed;
+      #{$root} {
+        &__btn-ico {
+          fill: #999999;
+        }
+      }
+    }
+  }
+
+
+  &__btn-ico {
+    fill: $red-color;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+  }
+
+  &__val {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    width: 50px;
+    height: 36px;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    outline: none;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    }
+  }
+}

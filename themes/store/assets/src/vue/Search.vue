@@ -1,29 +1,28 @@
 <template>
   <section class="category section">
-    <div class="category__container container container--main">
+    <div class="category__wrap wrap">
       <div class="category__heading category__heading--space">
-        <div class="category__title">
-          Поиск по:
-          <span class="category__search-val">{{ search }}</span>
+        <div class="category__heading">
+          <h1 class="category__title">
+            Поиск по: <span class="category__title-colored">{{ search }}</span>
+            <sup class="category__total" v-if="products.length > 0">Найдено: {{ productsCount }}</sup>
+          </h1>
         </div>
         <div class="filter">
           <input type="text" placeholder="Поиск по каталогу..." class="filter__input" v-model="searchInput" @input="onSearch" />
           <button type="button" class="filter__btn" @click="onSearch">
-            <svg viewBox="0 0 22 22" class="filter__btn-ico icon-search">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M9 2a7 7 0 1 0 0 14A7 7 0 0 0 9 2zM0 9a9 9 0 1 1 16.032 5.618l5.675 5.675a1 1 0 0 1-1.414 1.414l-5.675-5.675A9 9 0 0 1 0 9z"
-              />
+            <svg class="filter__btn-ico icon-shopping-cart">
+              <use :xlink:href="$sprite_path + '#sprite-search'"></use>
             </svg>
           </button>
         </div>
       </div>
-      <div class="category__total" v-if="products.length > 0">Найдено: {{ productsCount }}</div>
-      <div v-else>Ничего не удалось найти...</div>
-      <div class="category__row">
-        <Loading v-if="loading" :isSearch="true" />
-        <ProductItem v-for="product in products" :key="product.id" :product="product" />
+      <div class="category__group">
+        <div class="category__row">
+          <Loading v-if="loading" :isSearch="true" />
+          <ProductItem v-for="product in products" :key="product.id" :product="product" />
+        </div>
+        <div class="category__empty" v-if="products.length === 0">Ничего не удалось найти...</div>
       </div>
     </div>
   </section>

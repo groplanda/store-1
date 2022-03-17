@@ -1,0 +1,152 @@
+.mobile-nav {
+  width: 100%;
+  max-width: 300px;
+  height: 100vh;
+  transition: all .3s ease;
+  background: #FFF;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-shadow: none;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+  transform: translateX(-100%);
+  transition: transform .3s ease, box-shadow .2s ease .4s;
+
+  &--show {
+    transform: translateX(0);
+    box-shadow: 0 0 0 3000px rgb(0, 0, 0, .5);
+  }
+
+  $root: &;
+
+  @media(max-width: 767px) {
+    display: block;
+  }
+
+  &__inner {
+    width: 100%;
+    position: relative;
+    padding: 45px 20px 30px;
+  }
+
+  &__close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+  }
+
+  &__close-ico {
+    width: 100%;
+    height: 100%;
+    fill: $blue-color;
+    pointer-events: none;
+  }
+
+  &__nav {
+    &--menu {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #f3f3f3;
+    }
+  }
+
+  &__nav-item {
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--opened {
+      #{$root} {
+        &__nav-ico {
+          transform: rotate(180deg);
+        }
+        &__nav-dropdown {
+          margin-top: 15px;
+          overflow: auto;
+        }
+      }
+    }
+
+    &--page {
+      #{$root} {
+        &__nav-ico {
+          color: $gray-color;
+          transform: rotate(-q90deg);
+        }
+        &__nav-link {
+          font-size: 15px;
+          color: $gray-color;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+
+  &__nav-btn {
+    width: 20px;
+    height: 20px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    cursor: pointer;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &--disabled {
+      pointer-events: none;
+      #{$root} {
+        &__nav-ico {
+          color: $gray-color;
+        }
+      }
+    }
+  }
+
+  &__nav-ico {
+    width: 100%;
+    height: 100%;
+    color: $blue-color;
+    transition: transform .3s ease;
+    pointer-events: none;
+  }
+
+  &__nav-link {
+    padding-left: 35px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__nav-text {
+    color: $blue-color;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__nav-dropdown {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    padding-left: 35px;
+    height: 0;
+    overflow: hidden;
+    transition: margin-top .3s ease, height .3s ease;
+  }
+
+  &__nav-sublink {
+    width: 100%;
+    display: flex;
+    padding: 5px 0;
+    color: $dark-color;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}

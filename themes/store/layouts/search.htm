@@ -5,25 +5,18 @@ description = "Search page"
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <div class="wrapper" data-js="wrapper">
-      <!-- Header -->
-      {% partial "header" %}
-
-      <!-- Panel -->
-      {% partial "fixed-panel" %}
-
-      <!-- Content -->
-      <main class="wrapper__container">
-        <div id="search">
-          <Search></Search>
-        </div>
-      </main>
-
-      <!-- Footer -->
-      {% partial "footer" %}
-      {% partial "modals" %}
-    </div>
-    {% partial "scripts" %}
+    <!-- Header -->
+    {% partial "header" %}
+    <!-- Content -->
+    <main class="main">
+      <div id="search">
+        <Search></Search>
+      </div>
+    </main>
+    {<!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "loading" %}
     {% partial "scripts-vue" %}
   </body>
 </html>

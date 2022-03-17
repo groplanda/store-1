@@ -1,25 +1,37 @@
 export class Tabs {
-  constructor(tabEl,activeHeadingClass, activeItemClass) {
+  constructor(tabEl, activeBtnClass, activeTabClass) {
     this.tabEl = document.querySelector(tabEl);
-    this.activeHeadingClass = activeHeadingClass;
-    this.activeItemClass = activeItemClass;
+    this.activeBtnClass = activeBtnClass;
+    this.activeTabClass = activeTabClass;
+
+    this.init();
   }
 
   init() {
-    if (this.tabEl) {
-      const tabHeadings = this.tabEl.querySelectorAll('[data-header-tab]'),
-            tabBodyItem = this.tabEl.querySelectorAll('[data-body-tab]');
-      this.tabEl.addEventListener("click", (e) => {
-        const target = e.target;
-        if (target && target.dataset.headerTab) {
-          const selected = target.dataset.headerTab;
+    this.tabEl.addEventListener("click", this.handleTab.bind(this))
+  }
 
-          tabHeadings.forEach(tHead => tHead.classList.remove(this.activeHeadingClass));
-          target.classList.add(this.activeHeadingClass);
-          tabBodyItem.forEach(tBody => tBody.classList.remove(this.activeItemClass));
-          this.tabEl.querySelector(`[data-body-tab="${selected}"]`).classList.add(this.activeItemClass);
-        }
-      })
+  handleTab(event) {
+    const target = event.target;
+
+    if (target && target.tagName.toLowerCase() === "button") {
+      const tabIndex = target.dataset.index;
+      const selectedTab = this.tabEl.querySelector(`[data-tab="${tabIndex}"]`);
+      console.log(selectedTab);
+      if (selectedTab) {
+        this.hideTabs();
+        target.classList.add(this.activeBtnClass);
+        selectedTab.classList.add(this.activeTabClass);
+      }
     }
+  }
+
+  hideTabs() {
+    this.tabEl.querySelectorAll('[data-index]').forEach(button => {
+      button.classList.remove(this.activeBtnClass);
+    });
+    this.tabEl.querySelectorAll('[data-tab]').forEach(tab => {
+      tab.classList.remove(this.activeTabClass);
+    });
   }
 }

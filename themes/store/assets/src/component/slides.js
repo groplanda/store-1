@@ -16,31 +16,24 @@ export function slides() {
       navigation: {
         nextEl: '[data-js-action="home-slider-next"]',
         prevEl: '[data-js-action="home-slider-prev"]',
-      },
-      on: {
-        init: function () {
-          setNextThumb(homeSlider);
-        },
-        slideChangeTransitionEnd: function () {
-          setNextThumb(homeSlider);
-        }
-      },
+      }
     })
   }
 
-  function setNextThumb(parent) {
-    const nextThumb = parent.querySelector('.swiper-slide-prev') || parent.querySelector('.swiper-slide-next'),
-          thumbEl = document.querySelector('[data-js-slider="home-slider-thumb"]');
+  const productSlider = document.querySelector('[data-js-slider="single-product"]');
 
-    if (nextThumb && thumbEl) {
-      const nextThumbImg = nextThumb.querySelector('.banner__slider-img'),
-            imgPath = nextThumbImg.src,
-            imgAlt  = nextThumbImg.alt;
+  if (productSlider) {
 
-      thumbEl.src = imgPath;
-      thumbEl.alt = imgAlt;
-
-    }
+    new Swiper('[data-js-slider="single-product"]', {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 0,
+      slideClass: 'swiper-slide',
+      navigation: {
+        nextEl: '[data-js-action="single-product-next"]',
+        prevEl: '[data-js-action="single-product-prev"]',
+      }
+    })
   }
 
   // home products
@@ -52,21 +45,25 @@ export function slides() {
     homeProducts.forEach(slider => {
       new Swiper(slider, {
         slidesPerView: 1,
-        spaceBetween: 20,
+        spaceBetween: 10,
         loop: false,
         slideClass: 'swiper-slide',
         breakpoints: {
-          575: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          },
+          576: {
             slidesPerView: 2,
-            spaceBetween: 20
+            spaceBetween: 10
           },
-          1199: {
+          992: {
             slidesPerView: 3,
-            spaceBetween: 30
+            spaceBetween: 15
           },
-          1440: {
+          1200: {
             slidesPerView: 4,
-            spaceBetween: 40
+            spaceBetween: 20
           }
         },
         on: {

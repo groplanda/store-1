@@ -148,7 +148,7 @@ Route::prefix('/api')->group(function () {
     ->where('title','LIKE',"%{$query}%")
     ->orWhere('code','LIKE',"%{$query}%")
     ->orderBy('price', 'desc')
-    ->with(['options'])
+    ->with(['options', 'categories'])
     ->get();
   });
   Route::get('/stocks', function () {

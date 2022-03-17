@@ -9,10 +9,7 @@ productsTitle = "Новинки"
 
 [PopularProducts PopularProducts2]
 productsType = "is_hit"
-productsTitle = "Лучшее"
-
-[GalleryComponent]
-galleryName = 1
+productsTitle = "Хиты"
 ==
 <!DOCTYPE html>
 <html lang="ru">
@@ -23,19 +20,24 @@ galleryName = 1
 
     <!-- Content -->
     <main class="main">
-      <section class="intro section">
-        <div class="wrap intro__wrap">
-          <div class="intro__bg"></div>
-          <div class="intro__content">
-            <h1 class="intro__title">Ю-Упак - это полный цикл производства упаковки из всех видов картона</h1>
-          </div>
+      {% partial "banner" %}
+      {% component 'CategoryList' %}
+      {% component 'PopularProducts' %}
+      {% component 'PopularProducts2' %}
+
+      <section class="post section">
+        <div class="post__wrap wrap">
+          <h1 class="post__title">{{ this.theme.site_name }}</h1>
+          <div class="post__content">{% page %}</div>
         </div>
       </section>
+      {% partial "adds" %}
     </main>
 
     <!-- Footer -->
     {% partial "footer" %}
     {% partial "modals" %}
-    {% partial "scripts" %}
+    {% partial "loading" %}
+    {% partial "scripts-vue" %}
   </body>
 </html>

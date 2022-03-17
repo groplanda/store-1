@@ -1,23 +1,39 @@
-<div class="fixed-panel__menu-title">Каталог</div>
-<div class="fixed-panel__menu-list">
-  {% for item in menu %}
-  {% set children = item.children|length > 0 %}
-  <div class="fixed-panel__menu-item">
-    <a href="{{ 'category' | page({ slug: item.slug }) }}" class="fixed-panel__menu-link">
-      {{ item.title }}
-    </a>
-    <span class="fixed-panel__menu-btn{{ children ? '' : ' fixed-panel__menu-btn_disable' }}" {{ children ? 'data-js-action="open-dropdown"' : '' }}>
-      <svg viewBox="0 0 16 16" class="fixed-panel__menu-ico icon-arrow">
-        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
-      </svg>
-    </span>
-    {% if children %}
-      <div class="fixed-panel__menu-dropdown">
-      {% for subcat in item.children %}
-        <a href="{{ 'category' | page({ slug: subcat.slug }) }}" class="fixed-panel__menu-subcat">{{ subcat.title }}</a>
-      {% endfor %}
+<div class="header-nav section">
+  <div class="header-nav__wrap wrap">
+    <nav class="header-nav__nav" data-js="header-nav">
+      {% for item in menu %}
+      {% set children = item.children|length > 0 %}
+      <div class="header-nav__nav-item">
+        <a href="{{ 'category' | page({ slug: item.slug }) }}" class="header-nav__nav-link">
+          {{ item.title }}
+        </a>
+        {% if children %}
+        <div class="header-nav__nav-dropdown">
+          {% for subcat in item.children %}
+          <a href="{{ 'category' | page({ slug: subcat.slug }) }}" class="header-nav__nav-sublink">
+            {{ subcat.title }}
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
-    {% endif %}
+      {% endfor %}
+    </nav>
+    <div class="search-form">
+      <form class="search-form__form" method="GET" action="/search">
+        <input
+          type="text"
+          autocomplete="off"
+          placeholder="Поиск по каталогу..."
+          class="search-form__input"
+          name="search"
+        />
+        <button type="submit" class="search-form__btn">
+          <svg class="search-form__btn-ico icon-search">
+            <use xlink:href="{{ 'assets/spritemap.svg#sprite-search'|theme }}"></use>
+          </svg>
+        </button>
+      </form>
+    </div>
   </div>
-  {% endfor %}
 </div>

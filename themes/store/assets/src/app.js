@@ -4,18 +4,18 @@ import 'swiper/css';
 import 'lightbox2';
 import './plugins/UserAuth';
 import './plugins/AddComment';
-import './helpers/modal';
 import noUiSlider from 'nouislider';
 import { ContactForm } from './plugins/ContactForm';
 import { dropdown } from './helpers/dropdown';
 import { setPageParam } from './helpers/url';
-import { scrollToUp } from './helpers/scrollToUp';
 import { cartHanlder } from './helpers/cartHanlder';
 import { slides } from './component/slides';
-import { fixedPanel } from './component/fixed-panel';
 import { header } from './component/header';
 import { productCard } from './component/product-card';
-
+import { Modal } from './plugins/Modal';
+import { HeaderNav } from './plugins/HeaderNav';
+import IMask from 'imask'
+import { Tabs } from './plugins/Tabs';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -24,7 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
     preloader.classList.remove("loading_active");
   }
 
-  scrollToUp();
+  new Modal('[data-js-action="open-modal"]', 'modal');
+
+  new HeaderNav('[data-js="header-nav"]');
+
+  new Tabs('[data-js="tabs"]', 'tabs__btn--current', 'tabs__item--selected');
 
   async function supportsWebp() {
     if (!self.createImageBitmap) return false;
@@ -228,10 +232,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   header();
 
-  fixedPanel();
-
   new ContactForm('[data-form="send-message"]')
 
   dropdown();
+
+  const phones = document.querySelectorAll('[data-mask="phone"]');
+
+  phones.forEach(phone => {
+    IMask(phone, {
+      mask: '+{7}(000)000-00-00'
+    });
+  })
 
 });

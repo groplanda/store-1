@@ -15,7 +15,11 @@
   <meta itemprop="description" content="{{ product.meta_description }}" />
   <!-- meta end -->
   <div class="product__body">
-    <div class="product__slider" data-js="product-slider">
+    <h1 class="product__title">{{ product.title }}</h1>
+    <div class="product__top">
+      {% if product.code %}
+      <div class="product__code">Артикул: <span class="product__code-value">{{ product.code }}</span></div>
+      {% endif %}
       <div class="product__tags">
         {% if product.is_new %}
         <div class="product__tag product__tag--new">New</div>
@@ -24,52 +28,79 @@
         <div class="product__tag product__tag--sale">Sale</div>
         {% endif %}
       </div>
-      <div class="product__slider-current">
-        <div id="zoomImage" class="product__slider-wrap">
-          <img src="{{ product.image|media }}" alt="{{ image.title }}" class="product__slider-image" />
+      <div class="product__slider-wrap">
+        <div class="swiper product__slider" data-js-slider="single-product">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide product__slide">
+              <div class="product__slide-content">
+                <picture>
+                  <source srcset="{{ product.image|media }}">
+                  <img src="{{ product.image|media }}" alt="{{ product.title }}" class="product__slide-thumb" />
+                </picture>
+              </div>
+            </div>
+            {% for image in product.gallery %}
+            <div class="swiper-slide product__slide">
+              <div class="product__slide-content">
+                <picture>
+                  <source srcset="{{ product.image|media }}">
+                  <img src="{{ image.path }}" alt="{{ image.title }}" class="product__slide-thumb" />
+                </picture>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
         </div>
-        <div class="product__slider-additional">
-          <div class="product__slider-thumb product__slider-thumb">
-            <img src="{{ product.image|media }}" alt="{{ product.title }}" class="product__slider-thumb-image" data-js-action="select-image" />
-          </div>
-          {% for image in product.gallery %}
-          <div class="product__slider-thumb product__slider-thumb">
-            <img src="{{ image.path }}" alt="{{ image.title }}" class="product__slider-thumb-image"  data-js-action="select-image" />
-          </div>
-          {% endfor %}
+        <button class="product__slider-btn button product__slider-btn--prev" data-js-action="single-product-prev">
+          <svg class="product__slider-arrow">
+            <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-prev'|theme }}"></use>
+          </svg>
+        </button>
+        <button class="product__slider-btn button product__slider-btn--next" data-js-action="single-product-next">
+          <svg class="product__slider-arrow">
+            <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-next'|theme }}"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="product__content">
+
+      <div class="product__entry product__entry--desktop">
+        <div class="product__title">Описание</div>
+        <div class="product__entry-descr">
+          {{ product.description|raw }}
         </div>
       </div>
 
-    </div>
-    <div class="product__content">
-      <div class="product__title">{{ product.title }}</div>
-      <div class="product__categories-list">
-        {% if product.categories[0] %}
-        <a
-          href="{{ 'category'|page({ slug: product.categories[0].slug }) }}"
-          class="product__categories-link"
-        >
-        {{ product.categories[0].title }}
-        </a>
-        {% endif %}
-      </div>
-      <div class="product__code">Артикул {{ product.code }}</div>
       {% if product.props %}
       <div class="product__props product__props--full">
+        <div class="product__props-title">Характеристики: </div>
         {% for prop in product.props %}
         <div class="product__props-row">
-          <div class="product__props-label">{{ prop.props_option }}</div>
+          <div class="product__props-label">
+            <span class="product__props-text">{{ prop.props_option }}</span>
+          </div>
           <div class="product__props-val">{{ prop.props_value }}</div>
         </div>
         {% endfor %}
       </div>
       {% endif %}
-      <div class="product__entry product__entry--desktop">
-        <div class="product__entry-title">Описание</div>
-        <div class="product__entry-descr">
-          {{ product.description|raw }}
-        </div>
+
+
+      {% if product.categories %}
+      <div class="product__categories-list">
+        {% for category in product.categories %}
+        <a
+          href="{{ 'category'|page({ slug: category.slug }) }}"
+          class="product__categories-link"
+        >
+        {{ category.title }}
+        </a>
+        {% endfor %}
       </div>
+      {% endif %}
+
     </div>
     <div class="product__bottom">
       <div class="product__order">
@@ -95,39 +126,21 @@
             <link itemprop="availability" href="https://schema.org/InStock" />
           </div>
           <div class="product-amount" data-js-action="update-qty">
-            <button
-              type="button"
-              class="product-amount__btn js-remove-cart"
-            >
-              <svg
-                viewBox="0 0 12 2"
-                class="product-amount__btn-ico icon-minus "
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M0 1a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"
-                ></path>
-              </svg></button
-            ><input
+            <button type="button" class="product-amount__btn js-remove-cart">
+              <svg class="product-amount__btn-ico icon-minus">
+                <use xlink:href="{{ 'assets/spritemap.svg#sprite-minus'|theme }}"></use>
+              </svg>
+            </button>
+            <input
               type="number"
               readonly="readonly"
               class="product-amount__val"
               value="1"
               data-js-action="qty-val"
-            /><button
-              type="button"
-              class="product-amount__btn js-add-cart"
-            >
-              <svg
-                viewBox="0 0 12 12"
-                class="product-amount__btn-ico icon-plus "
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M7 1a1 1 0 0 0-2 0v4H1a1 1 0 0 0 0 2h4v4a1 1 0 1 0 2 0V7h4a1 1 0 1 0 0-2H7V1z"
-                ></path>
+            />
+            <button type="button" class="product-amount__btn js-add-cart">
+              <svg class="product-amount__btn-ico icon-plus">
+                <use xlink:href="{{ 'assets/spritemap.svg#sprite-plus'|theme }}"></use>
               </svg>
             </button>
           </div>
@@ -139,10 +152,9 @@
           data-js-action="add-to-cart"
           data-product-amount="1"
         >
-            В корзину<svg viewBox="0 0 16 16" class="product__add-ico icon-cart ">
-            <path
-              d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
-            ></path>
+          В корзину
+          <svg class="product__add-ico icon-cart">
+            <use xlink:href="{{ 'assets/spritemap.svg#sprite-cart'|theme }}"></use>
           </svg>
         </button>
       </div>
@@ -160,32 +172,6 @@
           {{ product.description|raw }}
         </div>
       </div>
-      <div class="product__folders">
-        <div class="product__folders-title">Теги</div>
-        <div class="product__folders-list">
-          {% for tag in product.tags %}
-            <a
-              href="{{ 'category'|page({ slug: tag.slug }) }}"
-              class="product__folders-link"
-            >
-              {{ tag.title }}
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-      <div class="product__folders">
-        <div class="product__folders-title">Находится в разделах</div>
-        <div class="product__folders-list">
-          {% for cat in product.categories %}
-          <a
-            href="{{ 'category'|page({ slug: cat.slug }) }}"
-            class="product__folders-link"
-          >
-          {{ cat.title }}
-          </a>
-          {% endfor %}
-        </div>
-      </div>
     </div>
   </div>
   <div
@@ -197,14 +183,9 @@
   >
     <div class="product__form-title">Сделать заказ</div>
     <div class="product__form-tag">
-      В наличие<svg
-        viewBox="0 0 24 24"
-        class="product__form-tag-ico icon-check "
-      >
-        <path
-          d="M8.79508 15.875L4.62508 11.705L3.20508 13.115L8.79508 18.705L20.7951 6.705L19.3851 5.295L8.79508 15.875Z"
-          fill="currentColor"
-        ></path>
+      В наличие
+      <svg class="product__form-tag-ico icon-check">
+        <use xlink:href="{{ 'assets/spritemap.svg#sprite-checkbox'|theme }}"></use>
       </svg>
     </div>
     <div class="product-price">
@@ -225,30 +206,21 @@
       {% endif %}
     </div>
     <div class="product-amount" data-js-action="update-qty">
-      <button
-        type="button"
-        class="product-amount__btn js-remove-cart"
-      >
-        <svg viewBox="0 0 12 2" class="product-amount__btn-ico icon-minus ">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M0 1a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"
-          ></path>
-        </svg></button
-      ><input
+      <button type="button" class="product-amount__btn js-remove-cart">
+        <svg class="product-amount__btn-ico icon-minus">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-minus'|theme }}"></use>
+        </svg>
+      </button>
+      <input
         type="number"
         readonly="readonly"
         class="product-amount__val"
         value="1"
         data-js-action="qty-val"
-      /><button type="button" class="product-amount__btn js-add-cart">
-        <svg viewBox="0 0 12 12" class="product-amount__btn-ico icon-plus ">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M7 1a1 1 0 0 0-2 0v4H1a1 1 0 0 0 0 2h4v4a1 1 0 1 0 2 0V7h4a1 1 0 1 0 0-2H7V1z"
-          ></path>
+      />
+      <button type="button" class="product-amount__btn js-add-cart">
+        <svg class="product-amount__btn-ico icon-plus">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-plus'|theme }}"></use>
         </svg>
       </button>
     </div>
@@ -259,10 +231,9 @@
       data-js-action="add-to-cart"
       data-product-amount="1"
     >
-      В корзину<svg viewBox="0 0 16 16" class="product__add-ico icon-cart ">
-        <path
-          d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
-        ></path>
+      В корзину
+      <svg class="product__add-ico icon-cart">
+        <use xlink:href="{{ 'assets/spritemap.svg#sprite-cart'|theme }}"></use>
       </svg>
     </button>
   </div>

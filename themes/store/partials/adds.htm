@@ -1,28 +1,20 @@
-<div class="edit-block">
-  <div class="edit-block__row">
-    {% for add in this.theme.adds %}
-    <div class="edit-block__item edit-block__item_{{ add.type }}">
-      <div class="edit-block__item-image">
-        <img
-          src="{{ add.image|media }}"
-          alt="{{ add.title }}"
-          class="edit-block__item-thumb"
-        />
-      </div>
-      <div class="edit-block__item-title">{{ add.title }}</div>
-      <div class="edit-block__item-row">
-        <a href="{{ add.link }}" class="edit-block__item-link">
-          В каталог
-          <svg
-            viewBox="0 0 16 16"
-            class="edit-block__item-ico icon-control-prev "
-          >
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
-          </svg>
-        </a>
-        <div class="edit-block__item-label">{{ add.tag }}</div>
+<div class="advantages section">
+  <div class="advantages__wrap wrap">
+    <div class="advantages__container">
+      <div class="advantages__row">
+        {% for add in this.theme.adds %}
+        <div class="advantages__item">
+          <div class="advantages__item-img">
+            <picture>
+              <source srcset="{{ add.image|media|resize(40, 40, { quality: '100' }) }}">
+              <img src="{{ add.image|media|resize(40, 40, { quality: '100' }) }}" alt="{{ product.title }}" class="advantages__item-thumb" />
+            </picture>
+          </div>
+          <div class="advantages__item-title">{{ add.title }}</div>
+          <p class="advantages__item-descr">{{ add.descr }}</p>
+        </div>
+        {% endfor %}
       </div>
     </div>
-    {% endfor %}
   </div>
 </div>

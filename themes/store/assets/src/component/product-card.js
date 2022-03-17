@@ -1,6 +1,5 @@
 import Sticky from 'sticky-js';
 import { Wish } from '@/src/plugins/Wish';
-import ImageZoom from 'js-image-zoom';
 import { cartHanlder } from '@/src/helpers/cartHanlder';
 import $ from 'jquery';
 window.$ = window.jQuery = $;
@@ -11,23 +10,11 @@ export function productCard() {
         preloader = document.getElementById("preloader");
 
   if (productWrap) {
-    const zoom = document.getElementById("zoomImage");
     productWrap.addEventListener("click", handleProduct);
 
     new Sticky('[data-js="sticky"]');
     setupOptions();
-    zoomImage(zoom);
 
-  }
-  function zoomImage(selector) {
-    const slider = selector.closest('[data-js="product-slider"]');
-
-    new ImageZoom(selector, {
-      width: slider.clientWidth,
-      height: slider.clientWidth,
-      zoomWidth: 500,
-      offset: {vertical: 0, horizontal: 10}
-    })
   }
 
   function handleProduct(e) {
@@ -53,14 +40,6 @@ export function productCard() {
         product_id: target.dataset.productId,
         user_id: target.dataset.userId
       });
-    }
-
-    if (target.dataset.jsAction === "select-image") {
-      const imgSrc = target.src,
-            zoom = document.getElementById("zoomImage")
-
-      zoom.firstElementChild.src = imgSrc;
-      zoomImage(zoom);
     }
 
   }

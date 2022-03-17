@@ -1,0 +1,44 @@
+{{ form_open({ class: 'contact-form', id: 'registerUser'  }) }}
+  <div class="contact-form__form-group">
+    <label class="contact-form__form-label">
+      Имя
+      <span class="contact-form__form-mark">*</span>
+    </label>
+    <input type="text" placeholder="Иванов Иван" class="contact-form__form-input" name="name">
+    <span class="contact-form__error" data-error-for="name"></span>
+  </div>
+  <div class="contact-form__form-group">
+    <label class="contact-form__form-label">
+      Email/Логин
+      <span class="contact-form__form-mark">*</span>
+    </label>
+    <input type="email" placeholder="user@mail.ru" class="contact-form__form-input" name="email">
+    <span class="contact-form__error" data-error-for="email"></span>
+  </div>
+  <div class="contact-form__form-group">
+    <label class="contact-form__form-label">
+      Пароль
+      <span class="contact-form__form-mark">*</span>
+    </label>
+    <input type="password" placeholder="**********" class="contact-form__form-input" name="password">
+    <span class="contact-form__error" data-error-for="password"></span>
+  </div>
+  <div class="contact-form__form-group">
+    <label class="contact-form__form-label">
+      Повторите пароль
+      <span class="contact-form__form-mark">*</span>
+    </label>
+    <input type="password" placeholder="**********" class="contact-form__form-input" name="password_confirmation">
+    <span class="contact-form__error" data-error-for="password_confirmation"></span>
+  </div>
+  <div class="contact-form__form-group">
+    <label class="radio radio_modal">
+      <input type="checkbox" name="is_subscribe" value="1" class="radio__input" />
+      <span class="radio__circle"></span>
+      <span class="radio__group">
+        <span class="radio__group-title">Хочу получать информацию о скидках и акциях</span>
+      </span>
+    </label>
+  </div>
+  <button type="submit" class="contact-form__btn contact-form__btn--full">Зарегистрироваться</button>
+{{ form_close() }}

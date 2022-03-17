@@ -164,7 +164,7 @@ tabs:
               span: storm
               cssClass: col-md-12
       adds:
-        label: Доп. баннеры
+        label: Преимущества
         span: storm
         cssClass: col-md-12
         tab: Общие
@@ -178,31 +178,16 @@ tabs:
               type: text
               label: Заголовок
               span: storm
-              placeholder: 'Фурнитура'
+              placeholder: ''
               cssClass: col-md-4
-            link:
+            descr:
               type: text
-              label: Ссылка
+              label: Описание
               span: storm
-              placeholder: '/category/mebel'
-              cssClass: col-md-4
-            tag:
-              type: text
-              label: Тег
-              span: storm
-              placeholder: 'до - 20%'
-              cssClass: col-md-4
-            type:
-              label: Ширина баннера
-              type: dropdown
-              cssClass: col-md-12
-              default: 100
-              options:
-                  33: '33%'
-                  50: '50%'
-                  100: '100%'
+              placeholder: ''
+              cssClass: col-md-8
             image:
-              label: Фото
+              label: Иконка
               type: mediafinder
               mode: image
               imageHeight: 75

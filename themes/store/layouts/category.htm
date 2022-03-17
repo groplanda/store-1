@@ -7,22 +7,16 @@ maxItems = 9
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <div class="wrapper" data-js="wrapper">
-      <!-- Header -->
-      {% partial "header" %}
-
-      <!-- Panel -->
-      {% partial "fixed-panel" %}
-
-      <!-- Content -->
-      <main class="wrapper__container">
-        {% component 'ProductList' %}
-      </main>
-
-      <!-- Footer -->
-      {% partial "footer" %}
-      {% partial "modals" %}
-    </div>
-    {% partial "scripts" %}
+    <!-- Header -->
+    {% partial "header" %}
+    <!-- Content -->
+    <main class="main">
+      {% component 'ProductList' %}
+    </main>
+    {<!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "loading" %}
+    {% partial "scripts-vue" %}
   </body>
 </html>

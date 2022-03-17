@@ -1,32 +1,44 @@
 export function header() {
-  headerPopupHandle();
+  mobileMenu();
 }
 
-function headerPopupHandle() {
-  const trigger = document.querySelectorAll('[data-js-action="open-header-popup"]'),
-        popup = document.querySelector('[data-js="header-popup"]'),
-        activePopupClass = "header__popup_open";
+function mobileMenu() {
 
-  if (trigger && popup) {
-    trigger.forEach(t => {
-      t.addEventListener("click", () => popup.classList.toggle(activePopupClass));
+  const mobileDropdown = document.querySelectorAll('[data-js-action="mobile-toggle"]'),
+        openBtn = document.querySelector('[data-role="open-menu"]'),
+        closeBtn = document.querySelector('[data-role="close-menu"]'),
+        mobileMenu = document.querySelector('[data-js="mobile-nav"]');
+
+  if (mobileDropdown) {
+    mobileDropdown.forEach(btn => btn.addEventListener("click", e => openDropdown(e)));
+  }
+
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      mobileMenu.classList.add("mobile-nav--show");
     })
+  }
 
-    popup.addEventListener("click", e => {
-      if (e.target && e.target.dataset.jsAction === "close-header-popup") {
-        popup.classList.remove(activePopupClass);
-      }
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      mobileMenu.classList.remove("mobile-nav--show");
     })
+  }
 
-    document.addEventListener("click", e => {
-      const target = e.target;
-      if (popup.classList.contains(activePopupClass)) {
-        if (target && !target.closest('[data-js="header-popup"]') && target.dataset.jsAction !== "open-header-popup") {
-          popup.classList.remove(activePopupClass);
-
+  const openDropdown = (e) => {
+    if(e && e.target) {
+      const className = "mobile-nav__nav-item--opened";
+      const parent = e.target.closest('[data-js="nav-item"]');
+      const dropdown = parent.querySelector('[data-js="dropdown-item"]');
+      if(dropdown) {
+        parent.classList.toggle(className);
+        if (parent.classList.contains(className)) {
+          dropdown.style.height = dropdown.scrollHeight + 'px';
+        } else {
+          dropdown.style.height = 0;
         }
       }
-    })
-
+    }
   }
+
 }

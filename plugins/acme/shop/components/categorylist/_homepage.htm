@@ -1,18 +1,21 @@
-<div class="categories">
-  <div class="categories__container">
+<div class="categories section">
+  <div class="categories__wrap wrap">
     <div class="categories__row">
       {% for category in categories %}
       <div class="categories__item">
-        <div class="categories__item-image">
-          <img
-            src="{{ category.image|media|resize(382, 287, { mode: 'crop', quality: '90' }) }}"
-            alt="{{ category.title }}"
-            class="categories__item-thumb"
-          />
-        </div>
-        <div class="categories__item-title">{{ category.title }}</div>
-        <div class="categories__item-count">{{ category.products_count }}</div>
         <a href="{{ 'category' | page({ slug: category.slug }) }}" class="categories__item-link"></a>
+        <div class="categories__item-image">
+          <picture>
+            <source srcset="{{ category.image|media|resize(300, 210, { mode: 'crop', quality: '90' }) }}">
+            <img src="{{ category.image|media|resize(300, 210, { mode: 'crop', quality: '90' }) }}" alt="{{ category.title }}" class="categories__item-thumb" />
+          </picture>
+        </div>
+        <div class="categories__item-content">
+          <div class="categories__item-title">{{ category.title }}</div>
+          <svg class="categories__item-ico icon-arrow-down">
+            <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-down'|theme }}"></use>
+          </svg>
+        </div>
       </div>
       {% endfor %}
     </div>
