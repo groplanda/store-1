@@ -9,7 +9,7 @@
   $root: &;
 
   &__wrap {
-    display: block; 
+    display: block;
   }
 
   &__heading {
@@ -52,7 +52,7 @@
     justify-content: space-between;
     align-items: center;
     background: #FFF;
-    box-shadow: 0 10px 15px 0$shadow;
+    box-shadow: 0 10px 15px 0 $shadow;
     border-radius: 20px;
     margin-left: auto;
     padding: 10px 14px;
