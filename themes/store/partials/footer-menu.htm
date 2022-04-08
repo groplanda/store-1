@@ -1,0 +1,7 @@
+<div class="footer__nav">
+  {% for item in items %}
+  <a
+    href="{{ item.url }}"
+    class="footer__nav-link{{ item.isActive ? ' footer__nav-link_active' : '' }}">{{ item.title }}</a>
+  {% endfor %}
+</div>

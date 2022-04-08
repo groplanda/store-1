@@ -1,25 +1,21 @@
 description = "Contact page"
 ==
+
 <!DOCTYPE html>
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <div class="wrapper" data-js="wrapper">
-      <!-- Header -->
-      {% partial "header" %}
-
-      <!-- Panel -->
-      {% partial "fixed-panel" %}
-
-      <!-- Content -->
-      <main class="wrapper__container">
-        <section class="post section">
-          <div class="post__container container container--main">
-            {% partial "breadcrumbs" %}
-            <div class="post__heading">
-              <div class="post__title">{{ this.page.title }}</div>
-            </div>
-
+    <!-- Header -->
+    {% partial "header" %}
+    <!-- Content -->
+    <main class="main">
+      {% partial "breadcrumbs" %}
+      <section class="post section post--page">
+        <div class="post__wrap wrap">
+          <div class="post__heading">
+            <h1 class="post__title">{{ this.page.title }}</h1>
+          </div>
+          <div class="post__body">
             <div class="contact" itemscope itemtype="http://schema.org/Organization">
               <span itemprop="name" hidden>{{this.theme.site_name}}</span>
               <img itemprop="logo url" src="{{ this.theme.site_logo|media }}" alt="{{this.theme.site_name}}" hidden />
@@ -66,14 +62,13 @@ description = "Contact page"
               </div>
             </div>
           </div>
-        </section>
-      </main>
-
-      <!-- Footer -->
-      {% partial "footer" %}
-      {% partial "modals" %}
-    </div>
-    {% partial "scripts" %}
+        </div>
+      </section>
+    </main>
+    {<!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "loading" %}
     {% partial "scripts-vue" %}
   </body>
 </html>

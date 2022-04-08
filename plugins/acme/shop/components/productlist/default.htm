@@ -41,14 +41,8 @@
         <div class="filters__sorting-body" data-js="sort-products">
           <div class="filters__sorting-result">
             <div class="filters__sorting-text" data-js-action="open-sort">{{ sort.val }}</div>
-            <svg
-              viewBox="0 0 16 16"
-              class="filters__sorting-arrow icon-filter-arrow "
-            >
-              <path
-                d="M16 8L14.59 6.59L9 12.17V0H7V12.17L1.42 6.58L0 8L8 16L16 8Z"
-                fill="currentColor"
-              ></path>
+            <svg class="filters__sorting-arrow icon-filter-arrow">
+              <use xlink:href="{{ 'assets/spritemap.svg#sprite-filter-arrow'|theme }}"></use>
             </svg>
           </div>
           <div class="filters__sorting-dropdown" id="partialSort">
@@ -60,12 +54,14 @@
         </div>
       </div>
     </div>
-    <div class="category__row" id="partialProducts">
-      {% partial "ProductList::list" %}
-    </div>
-    <div class="category__pagination">
-      <div class="category__pagination-list" id="partialPaginate">
-        {% partial "ProductList::pagination" %}
+    <div class="category__container">
+      <div class="category__row" id="partialProducts">
+        {% partial "ProductList::list" %}
+      </div>
+      <div class="category__pagination">
+        <div class="category__pagination-list" id="partialPaginate">
+          {% partial "ProductList::pagination" %}
+        </div>
       </div>
     </div>
   </div>

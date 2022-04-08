@@ -1,5 +1,6 @@
 
 import { Cart } from '@/src/plugins/Cart';
+import { createMessage } from '@/src/utils/index';
 export function cartHanlder() {
   addToCart();
   changeProductQty();
@@ -7,7 +8,7 @@ export function cartHanlder() {
 
 function addToCart() {
   let addBtns = document.querySelectorAll('[data-js-action="add-to-cart"]');
-  const cart = new Cart(".js-cart", ".js-cart-count");
+  const cart = new Cart(".js-cart-count");
 
   cart.updateCart();
 
@@ -21,13 +22,15 @@ function addToCart() {
               amount = this.dataset.productAmount ? Number(this.dataset.productAmount) : 1,
               data = { id: Number(id), amount: amount, optionId: optionId };
 
-        cart.addToCart(data);
+        const result = cart.addToCart(data);
+        createMessage(result);
         resetProductAmount(id);
       })
     })
   }
 
 }
+
 
 function changeProductQty() {
   const productAmount = document.querySelectorAll('[data-js-action="update-qty"]');

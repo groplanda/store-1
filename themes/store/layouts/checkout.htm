@@ -5,25 +5,19 @@ description = "Checkout page"
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <div class="wrapper" data-js="wrapper">
-      <!-- Header -->
-      {% partial "header" %}
-
-      <!-- Panel -->
-      {% partial "fixed-panel" %}
-
-      <!-- Content -->
-      <main class="wrapper__container">
-        <div id="checkout">
-          <Checkout></Checkout>
-        </div>
-      </main>
-
-      <!-- Footer -->
-      {% partial "footer" %}
-      {% partial "modals" %}
-    </div>
-    {% partial "scripts" %}
+    <!-- Header -->
+    {% partial "header" %}
+    <!-- Content -->
+    <main class="main">
+      {% partial "breadcrumbs" %}
+      <div id="checkout">
+        <Checkout></Checkout>
+      </div>
+    </main>
+    {<!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "loading" %}
     {% partial "scripts-vue" %}
   </body>
 </html>

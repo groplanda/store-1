@@ -2,12 +2,20 @@
   0% {
     opacity: 1
   }
+  33% {
+    opacity: .7;
+  }
+  50% {
+    opacity: .5;
+  }
+  77% {
+    opacity: .3;
+  }
   99% {
     opacity: 0;
-    z-index: 1;
   }
   100%{
     opacity: 0;
-    display:none;
+    display: none;
   }
 }

@@ -56,7 +56,7 @@ export class quickView {
     const id = btn.dataset.productId,
           optionId = btn.dataset.optionId ? Number(btn.dataset.optionId) : null;
     if (!id) return;
-    const cart = new Cart(".js-cart", ".js-cart-count");
+    const cart = new Cart(".js-cart-count");
     cart.addToCart({ id: Number(id), amount: 1, optionId: optionId })
   }
 

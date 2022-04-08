@@ -10,58 +10,51 @@ function onStart()
 }
 ?>
 ==
+
 <!DOCTYPE html>
 <html lang="ru">
   {% partial "meta" %}
   <body>
-    <div class="wrapper" data-js="wrapper">
-      <!-- Header -->
-      {% partial "header" %}
-
-      <!-- Panel -->
-      {% partial "fixed-panel" %}
-
-      <!-- Content -->
-      <main class="wrapper__container">
-        <section class="post section">
-          <div class="post__container container container--main">
-            {% partial "breadcrumbs" %}
-            <div class="post__heading">
-              <div class="post__title">Восстановление пароля</div>
-            </div>
-            {% if reset %}
-            <div class="post__body">
-              {{ form_open({ class: 'contact-form contact-form--dark', id: 'restore-password'  }) }}
-                <div class="contact-form__form-group">
-                  <label class="contact-form__form-label">
-                    Код
-                    <span class="contact-form__form-mark">*</span>
-                  </label>
-                  <input type="text" placeholder="Код восстановления" value="{{ reset }}" class="contact-form__form-input" name="code">
-                  <span class="contact-form__error" data-error-for="code"></span>
-                </div>
-                <div class="contact-form__form-group">
-                  <label class="contact-form__form-label">
-                    Новый пароль
-                    <span class="contact-form__form-mark">*</span>
-                  </label>
-                  <input type="password" placeholder="**********" class="contact-form__form-input" name="password">
-                  <span class="contact-form__error" data-error-for="password"></span>
-                </div>
-                <button type="submit" class="contact-form__btn contact-form__btn--full">Изменить пароль</button>
-                <div class="contact-form__status" data-js-action="response"></div>
-              {{ form_close() }}
-            </div>
-            {% endif %}
+    <!-- Header -->
+    {% partial "header" %}
+    <!-- Content -->
+    <main class="main">
+      <section class="post section">
+        <div class="post__wrap wrap">
+          <div class="post__heading">
+            <h1 class="post__title post__title--center">{{ this.page.title }}</h1>
           </div>
-        </section>
-      </main>
-
-      <!-- Footer -->
-      {% partial "footer" %}
-      {% partial "modals" %}
-    </div>
-    {% partial "scripts" %}
+          {% if reset %}
+          <div class="post__body">
+            {{ form_open({ class: 'contact-form contact-form--restore', id: 'restore-password'  }) }}
+              <div class="contact-form__form-group">
+                <label class="contact-form__form-label">
+                  Код
+                  <span class="contact-form__form-mark">*</span>
+                </label>
+                <input type="text" placeholder="Код восстановления" value="{{ reset }}" class="contact-form__form-input" name="code">
+                <span class="contact-form__error" data-error-for="code"></span>
+              </div>
+              <div class="contact-form__form-group">
+                <label class="contact-form__form-label">
+                  Новый пароль
+                  <span class="contact-form__form-mark">*</span>
+                </label>
+                <input type="password" placeholder="**********" class="contact-form__form-input" name="password">
+                <span class="contact-form__error" data-error-for="password"></span>
+              </div>
+              <button type="submit" class="contact-form__btn contact-form__btn--full">Изменить пароль</button>
+              <div class="contact-form__status" data-js-action="response"></div>
+            {{ form_close() }}
+          </div>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+    {<!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "loading" %}
     {% partial "scripts-vue" %}
   </body>
 </html>

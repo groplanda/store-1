@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     repeatOrder(order) {
-      const cart = new Cart(".js-cart", ".js-cart-count");
+      const cart = new Cart(".js-cart-count");
       cart.clearStorage();
       cart.fillStorage(order);
       this.createRedirect();

@@ -1,12 +1,10 @@
-
 export class Cart {
-  constructor(cartEl, CountEl) {
-    this.$cart = document.querySelectorAll(cartEl);
+  constructor(CountEl) {
     this.$countCart = document.querySelectorAll(CountEl);
     this.storageName = process.env.MIX_STORE
   }
 
-  addToCart(data) {
+  addToCart(data, addEvent = true) {
     if (this.isHasStorage()) {
       const cart = JSON.parse(localStorage.getItem(this.storageName));
       let index = -1;
@@ -22,71 +20,82 @@ export class Cart {
         cart[index].amount = Number(cart[index].amount) + Number(data.amount);
       }
       localStorage.setItem(this.storageName, JSON.stringify(cart));
-      this.alertCart(isAdd ? "add" : "default", isAdd ? "Товар добавлен в корзину!" : "Количество товаров изменилось!");
+      this.updateCart(data.id, addEvent);
+      return {
+        key: isAdd ? "add" : "default",
+        message: isAdd ? "Товар добавлен в корзину!" : "Количество товаров изменилось!"
+      };
     } else {
       localStorage.setItem(this.storageName, JSON.stringify([data]));
-      this.alertCart("add", "Товар добален в корзину!");
+      this.updateCart(data.id, addEvent);
+      return {
+        key: "add",
+        message: "Товар добавлен в корзину!"
+      };
     }
-    this.updateCart();
   }
 
-  removeFromCart(index) {
+  changeToCart(data) {
+    if (this.isHasStorage()) {
+      let index = -1;
+      const cart = JSON.parse(localStorage.getItem(this.storageName));
+      index = this.findById(cart, data.id);
+      const isAdd = data.amount > 0;
+      if (index === -1) {
+        return;
+      }
+      cart[index].amount = data.amount;
+      localStorage.setItem(this.storageName, JSON.stringify(cart));
+      this.updateCart(data.id);
+
+      return {
+        key: isAdd ? "add" : "default",
+        message: isAdd ? "Товар добавлен в корзину!" : "Количество товаров изменилось!"
+      };
+    }
+  }
+
+  removeFromCart(id, addEvent = true) {
     if (this.isHasStorage()) {
       const cart = JSON.parse(localStorage.getItem(this.storageName));
-      cart.splice(index, 1);
-      localStorage.setItem(this.storageName, JSON.stringify(cart));
-      this.updateCart();
-      this.alertCart("remove", "Товар удален из корзины!");
+      const filtered = cart.filter(item => +item.id !== +id);
+      localStorage.setItem(this.storageName, JSON.stringify(filtered));
+      this.updateCart(id, addEvent);
+      return {
+        key: "remove",
+        message: "Товар удален из корзины!"
+      };
     }
   }
 
-  updateCart() {
+  updateCart(id = false, addEvent = false) {
     if (this.isHasStorage()) {
       const cart = JSON.parse(localStorage.getItem(this.storageName)),
             cartCount = cart.reduce((sum, el) => sum + el.amount, 0);
+
       this.$countCart.forEach(count => count.textContent = cartCount);
 
-      this.$countCart.forEach(cart => {
-        let link = cart.previousElementSibling;
-        if (link.tagName.toLowerCase() === "a") {
-          if (cartCount > 0) {
-            link.removeAttribute("data-js-action");
-            link.href = "/checkout";
-          } else {
-            link.setAttribute("data-js-action", "open-modal");
-            link.href = "#!";
+      if (addEvent) {
+        window.dispatchEvent(new CustomEvent('change-cart-storage', {
+          detail: {
+            changed: id,
+            storage: localStorage.getItem(this.storageName)
           }
-        }
-      })
-
-      window.dispatchEvent(new CustomEvent('change-cart-storage', {
-        detail: {
-          storage: localStorage.getItem(this.storageName)
-        }
-      }));
+        }));
+      }
     }
   }
 
   findById(products, id) {
-    return products.findIndex(product => product.id === id);
+    return products.findIndex(product => +product.id === +id);
   }
 
   findByOption(products, data) {
-    return products.findIndex(product => product.id === data.id && product.optionId === data.optionId);
+    return products.findIndex(product => +product.id === +data.id && +product.optionId === +data.optionId);
   }
 
   isHasStorage() {
     return localStorage.getItem(this.storageName);
-  }
-
-  alertCart(classname, message) {
-    const html = this.createAlertHtml(classname, message);
-    document.body.insertAdjacentHTML('beforeend', html);
-
-    setTimeout(() => {
-      const alert = document.querySelector('.product-popup');
-      alert.remove();
-    }, 2500)
   }
 
   clearStorage() {
@@ -98,12 +107,4 @@ export class Cart {
   fillStorage(data) {
     localStorage.setItem(this.storageName, JSON.stringify(data));
   }
-
-  createAlertHtml(classname, message) {
-    return `<div class="product-popup product-popup_${classname}">
-              <a class="product-popup__link" href="/checkout">${message}</a>
-            </div>`
-  }
-
 }
-

@@ -1,7 +1,7 @@
 <div class="modal" id="modal">
   <div class="modal__dialog" data-role="modal-close">
 
-    <div class="modal__popup" data-modal="cart">
+    <div class="modal__popup modal__popup_cart" data-modal="cart">
       <button type="button" class="modal__close" data-role="modal-close">
         <svg class="modal__close-ico icon-cross">
           <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
@@ -43,25 +43,24 @@
 
     <div class="modal__popup" data-modal="logout">
       <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="modal__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
-      <div class="modal__container">
-        <svg class="modal__success" width="100" height="92" viewBox="0 0 100 92" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M45.8322 91.7681C20.5621 91.7681 0 71.2067 0 45.9367C0 20.6666 20.5621 0.104523 45.8322 0.104523C54.6194 0.104523 63.1687 2.60841 70.556 7.34993C72.0063 8.28374 72.4312 10.217 71.4974 11.6711C70.5605 13.1252 68.6311 13.5456 67.177 12.6125C60.8021 8.51643 53.4194 6.35433 45.8322 6.35433C24.0074 6.35433 6.24981 24.112 6.24981 45.9367C6.24981 67.7607 24.0074 85.5183 45.8322 85.5183C67.6561 85.5183 85.4138 67.7607 85.4138 45.9367C85.4138 44.6321 85.3512 43.3405 85.2307 42.0702C85.0643 40.3491 86.3224 38.824 88.0389 38.6577C89.7639 38.499 91.2844 39.7494 91.4515 41.466C91.5926 42.9369 91.6636 44.4284 91.6636 45.9367C91.6636 71.2067 71.1022 91.7681 45.8322 91.7681Z" fill="currentColor"/>
-          <path d="M51.0398 56.3528C50.2403 56.3528 49.44 56.0484 48.8319 55.4365L30.0825 36.6871C28.8618 35.4657 28.8618 33.4867 30.0825 32.266C31.3032 31.0453 33.2822 31.0453 34.5028 32.266L51.0444 48.8075L94.6633 5.18784C95.8847 3.96717 97.8637 3.96717 99.0844 5.18784C100.305 6.4085 100.305 8.3875 99.0844 9.60817L53.2522 55.4403C52.6396 56.0484 51.8401 56.3528 51.0398 56.3528Z" fill="currentColor"/>
+      <div class="modal__wrap">
+        <svg class="modal__success-ico">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-success'|theme }}"></use>
         </svg>
         <div class="modal__description">Вы успешно вышли!</div>
-        <a href="#!" data-role="modal-close" class="contact-form__btn contact-form__btn--full">Закрыть окно</a>
+        <a href="#!" data-role="modal-close" class="button modal__button">Закрыть окно</a>
       </div>
     </div>
 
     {% if this.page.layout == 'product' %}
     <div class="modal__popup" data-modal="add-comment">
       <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="popup__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
       <div class="modal__popup-container">
@@ -82,42 +81,37 @@
             <div class="modal__stars">
               <label class="modal__star">
                 <input class="modal__star-input modal__star-input_one" value="1" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-               </svg>
+                <svg class="modal__star-ico">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-star'|theme }}"></use>
+                </svg>
               </label>
 
               <label class="modal__star">
                 <input class="modal__star-input modal__star-input_two" value="2" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-               </svg>
+                <svg class="modal__star-ico">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-star'|theme }}"></use>
+                </svg>
               </label>
 
               <label class="modal__star">
                 <input class="modal__star-input modal__star-input_three" value="3" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-               </svg>
+                <svg class="modal__star-ico">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-star'|theme }}"></use>
+                </svg>
               </label>
 
               <label class="modal__star">
                 <input class="modal__star-input modal__star-input_four" value="4" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-               </svg>
+                <svg class="modal__star-ico">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-star'|theme }}"></use>
+                </svg>
               </label>
 
               <label class="modal__star">
                 <input class="modal__star-input modal__star-input_five" value="5" type="radio" name="star" data-js-action="star-rating" />
-                <svg xmlns="http://www.w3.org/2000/svg" class="modal__star-ico" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-               </svg>
+                <svg class="modal__star-ico">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-star'|theme }}"></use>
+                </svg>
               </label>
 
               <span class="modal__form-error" data-error-for="star"></span>
@@ -133,11 +127,11 @@
 
     <div class="modal__popup" data-modal="reset-password">
       <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="modal__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
-      <div class="header__form-title">Восстановление пароля</div>
+      <div class="modal__title">Восстановление пароля</div>
       {{ form_open({ class: 'contact-form', id: 'reset-password'  }) }}
         <div class="contact-form__form-group">
           <label class="contact-form__form-label">
@@ -148,31 +142,30 @@
           <span class="contact-form__error" data-error-for="email"></span>
         </div>
         <button type="submit" class="contact-form__btn contact-form__btn--full">Сбросить пароль</button>
-        <a data-js-action="open-modal" data-type-modal="sign" class="contact-form__link contact-form__link--center">Я вспомнил пароль</a>
+        <a data-js-action="open-modal" data-name="sign" class="contact-form__link contact-form__link--center">Я вспомнил пароль</a>
       {{ form_close() }}
     </div>
 
     <div class="modal__popup" data-modal="reset-success">
       <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="modal__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
-      <div class="modal__container">
-        <svg class="modal__success" width="100" height="92" viewBox="0 0 100 92" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M45.8322 91.7681C20.5621 91.7681 0 71.2067 0 45.9367C0 20.6666 20.5621 0.104523 45.8322 0.104523C54.6194 0.104523 63.1687 2.60841 70.556 7.34993C72.0063 8.28374 72.4312 10.217 71.4974 11.6711C70.5605 13.1252 68.6311 13.5456 67.177 12.6125C60.8021 8.51643 53.4194 6.35433 45.8322 6.35433C24.0074 6.35433 6.24981 24.112 6.24981 45.9367C6.24981 67.7607 24.0074 85.5183 45.8322 85.5183C67.6561 85.5183 85.4138 67.7607 85.4138 45.9367C85.4138 44.6321 85.3512 43.3405 85.2307 42.0702C85.0643 40.3491 86.3224 38.824 88.0389 38.6577C89.7639 38.499 91.2844 39.7494 91.4515 41.466C91.5926 42.9369 91.6636 44.4284 91.6636 45.9367C91.6636 71.2067 71.1022 91.7681 45.8322 91.7681Z" fill="currentColor"/>
-          <path d="M51.0398 56.3528C50.2403 56.3528 49.44 56.0484 48.8319 55.4365L30.0825 36.6871C28.8618 35.4657 28.8618 33.4867 30.0825 32.266C31.3032 31.0453 33.2822 31.0453 34.5028 32.266L51.0444 48.8075L94.6633 5.18784C95.8847 3.96717 97.8637 3.96717 99.0844 5.18784C100.305 6.4085 100.305 8.3875 99.0844 9.60817L53.2522 55.4403C52.6396 56.0484 51.8401 56.3528 51.0398 56.3528Z" fill="currentColor"/>
+      <div class="modal__wrap">
+        <svg class="modal__success-ico">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-success'|theme }}"></use>
         </svg>
         <div class="modal__description" id="reset-success"></div>
-        <a href="#!" data-role="modal-close" class="contact-form__btn contact-form__btn--full">Закрыть окно</a>
+        <a href="#!" data-role="modal-close" class="button modal__button">Закрыть окно</a>
       </div>
     </div>
 
     {% if this.page.layout == 'category' %}
     <div class="modal__popup modal__popup_lg" data-modal="single-product">
       <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="popup__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
       <div class="modal__popup-container">
@@ -198,8 +191,8 @@
 
     <div class="modal__popup" data-modal="form">
       <button type="button" class="modal__close" data-role="modal-close">
-        <svg viewBox="0 0 16 16" class="modal__close-ico icon-cross ">
-          <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"></path>
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
       <div class="header__form-title">Заказать звонок</div>

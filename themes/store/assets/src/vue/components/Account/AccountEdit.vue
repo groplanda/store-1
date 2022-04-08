@@ -1,38 +1,38 @@
 <template>
-  <form class="account__form" @submit.prevent="onEdit">
-    <div class="account__form-row">
-      <div class="account__form-group">
-        <label class="account__form-label">Имя и фамилия</label>
-        <input type="text" class="account__form-input" v-model="form.name" placeholder="Иван Иванов" />
-        <span class="account__form-error" v-if="nameErr">{{ nameErr }}</span>
+  <form class="contact-form" @submit.prevent="onEdit">
+    <div class="contact-form__row">
+      <div class="contact-form__form-group">
+        <label class="contact-form__form-label">Имя и фамилия</label>
+        <input type="text" class="contact-form__form-input" v-model="form.name" placeholder="Иван Иванов" />
+        <span class="contact-form__error" v-if="nameErr">{{ nameErr }}</span>
       </div>
-      <div class="account__form-group">
-        <label class="account__form-label">Отчество</label>
-        <input type="text" class="account__form-input" v-model="form.surname" placeholder="Иванович" />
-        <span class="account__form-error" v-if="surnameErr">{{ surnameErr }}</span>
-      </div>
-    </div>
-    <div class="account__form-row">
-      <div class="account__form-group">
-        <label class="account__form-label">Email</label>
-        <input type="text" class="account__form-input" v-model="form.email" placeholder="ivanov@yandex.ru" readonly />
-        <span class="account__form-error" v-if="emailErr">{{ emailErr }}</span>
-      </div>
-      <div class="account__form-group">
-        <label class="account__form-label">Номер телефона</label>
-        <input type="text" class="account__form-input" v-model="form.phone" placeholder="+7 (___) ___ __-__" v-mask="'+7 (###) ###-##-##'" />
-        <span class="account__form-error" v-if="phoneErr">{{ phoneErr }}</span>
+      <div class="contact-form__form-group">
+        <label class="contact-form__form-label">Отчество</label>
+        <input type="text" class="contact-form__form-input" v-model="form.surname" placeholder="Иванович" />
+        <span class="contact-form__error" v-if="surnameErr">{{ surnameErr }}</span>
       </div>
     </div>
-    <div class="account__form-row">
-      <div class="account__form-group">
-        <label class="account__form-label">Адрес доставки</label>
-        <input type="text" class="account__form-input" v-model="form.address" placeholder="г. Москва, ул. Пушкина д.1" />
-         <span class="account__form-error" v-if="addressErr">{{ addressErr }}</span>
+    <div class="contact-form__row">
+      <div class="contact-form__form-group">
+        <label class="contact-form__form-label">Email</label>
+        <input type="text" class="contact-form__form-input" v-model="form.email" placeholder="ivanov@yandex.ru" readonly />
+        <span class="contact-form__error" v-if="emailErr">{{ emailErr }}</span>
+      </div>
+      <div class="contact-form__form-group">
+        <label class="contact-form__form-label">Номер телефона</label>
+        <input type="text" class="contact-form__form-input" v-model="form.phone" placeholder="+7 (___) ___ __-__" v-mask="'+7 (###) ###-##-##'" />
+        <span class="contact-form__error" v-if="phoneErr">{{ phoneErr }}</span>
       </div>
     </div>
-    <div class="account__form-row">
-      <div class="account__form-group">
+    <div class="contact-form__row">
+      <div class="contact-form__form-group">
+        <label class="contact-form__form-label">Адрес доставки</label>
+        <input type="text" class="contact-form__form-input" v-model="form.address" placeholder="г. Москва, ул. Пушкина д.1" />
+         <span class="contact-form__error" v-if="addressErr">{{ addressErr }}</span>
+      </div>
+    </div>
+    <div class="contact-form__row">
+      <div class="contact-form__form-group">
         <label class="radio radio_edit">
           <input type="checkbox" name="is_subscribe" value="1" v-model="form.is_subscribe" class="radio__input" />
           <span class="radio__circle"></span>
@@ -42,8 +42,8 @@
         </label>
       </div>
     </div>
-    <button type="submit" class="account__form-submit">Изменить данные</button>
-    <span class="account__form-done" v-if="submitStatus">{{ submitStatus }}</span>
+    <button type="submit" class="contact-form__btn">Изменить данные</button>
+    <span class="contact-form__status" v-if="submitStatus">{{ submitStatus }}</span>
   </form>
 </template>
 <script>

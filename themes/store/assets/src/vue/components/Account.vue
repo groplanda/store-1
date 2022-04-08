@@ -1,13 +1,13 @@
 <template>
   <section class="account section">
     <Loading  v-if="!userData" />
-    <div class="container container--main account__container" v-else>
+    <div class="account__wrap wrap" v-else>
       <div class="account__tab_default" v-if="activeTab === 0">
         <div class="account__heading account__heading_home">
           <h1 class="title account__title">Личный кабинет</h1>
           <button class="account__heading-logout" type="button" @click="onLogout" title="Выйти">
-            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2.00201 18H16.002C17.105 18 18.002 17.103 18.002 16V2C18.002 0.897 17.105 0 16.002 0H2.00201C0.899014 0 0.00201416 0.897 0.00201416 2V8.001H7.00001V4L13 9L7.00001 14V10.001H0.00201416V16C0.00201416 17.103 0.899014 18 2.00201 18Z" fill="white"/>
+            <svg class="account__heading-exit">
+              <use :xlink:href="$sprite_path + '#sprite-exit'"></use>
             </svg>
           </button>
         </div>
@@ -35,12 +35,12 @@
 </template>
 <script>
 import axios from "axios";
-import AccountOrders from "./components/Account/AccountOrders";
-import AccountEdit from "./components/Account/AccountEdit";
-import AccountBack from "./components/Account/AccountBack";
-import AccountInfo from "./components/Account/AccountInfo";
-import AccountChangePassword from "./components/Account/AccountChangePassword";
-import Loading from "./components/Loading/Loading";
+import AccountOrders from "./Account/AccountOrders";
+import AccountEdit from "./Account/AccountEdit";
+import AccountBack from "./Account/AccountBack";
+import AccountInfo from "./Account/AccountInfo";
+import AccountChangePassword from "./Account/AccountChangePassword";
+import Loading from "./Loading/Loading";
 
 export default {
   name: "Account",

@@ -1,29 +1,29 @@
 <template>
-  <form class="account__form" @submit.prevent="onChange">
-    <div class="account__form-row">
-      <div class="account__form-group">
-        <label class="account__form-label">Текущий пароль</label>
-        <input type="password" class="account__form-input" v-model="form.current_password" placeholder="**********" />
-        <span class="account__form-error" v-if="currentPasswordErr">{{ currentPasswordErr }}</span>
+  <form class="contact-form" @submit.prevent="onChange">
+    <div class="contact-form__row">
+      <div class="contact-form__form-group">
+        <label class="contact-form__form-label">Текущий пароль</label>
+        <input type="password" class="contact-form__form-input" v-model="form.current_password" placeholder="**********" />
+        <span class="contact-form__error" v-if="currentPasswordErr">{{ currentPasswordErr }}</span>
       </div>
     </div>
-    <div class="account__form-row">
-      <div class="account__form-group">
-        <label class="account__form-label">Новый пароль</label>
-        <input type="password" class="account__form-input" v-model="form.password" placeholder="**********" />
-        <span class="account__form-error" v-if="passwordErr">{{ passwordErr }}</span>
+    <div class="contact-form__row">
+      <div class="contact-form__form-group">
+        <label class="contact-form__form-label">Новый пароль</label>
+        <input type="password" class="contact-form__form-input" v-model="form.password" placeholder="**********" />
+        <span class="contact-form__error" v-if="passwordErr">{{ passwordErr }}</span>
       </div>
     </div>
-    <div class="account__form-row">
-      <div class="account__form-group">
-        <label class="account__form-label">Подтвердите пароль</label>
-        <input type="password" class="account__form-input" v-model="form.password_confirmation" placeholder="**********" />
-        <span class="account__form-error" v-if="passwordConfirmationErr">{{ passwordConfirmationErr }}</span>
+    <div class="contact-form__row">
+      <div class="contact-form__form-group">
+        <label class="contact-form__form-label">Подтвердите пароль</label>
+        <input type="password" class="contact-form__form-input" v-model="form.password_confirmation" placeholder="**********" />
+        <span class="contact-form__error" v-if="passwordConfirmationErr">{{ passwordConfirmationErr }}</span>
       </div>
     </div>
-    <button type="submit" class="account__form-submit">Изменить пароль</button>
+    <button type="submit" class="contact-form__btn">Изменить пароль</button>
     <input type="hidden" v-model="form.email" />
-    <span class="account__form-done" v-if="submitStatus">{{ submitStatus }}</span>
+    <span class="contact-form__status" v-if="submitStatus">{{ submitStatus }}</span>
   </form>
 </template>
 <script>

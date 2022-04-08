@@ -11,10 +11,10 @@ description = "Banners"
       <div class="slider__banner">
         {% for banner in this.theme.banners %}
         <div class="slider__banner-item">
-          <div class="slider__banner-title">{{ banner.title }}</div>
-          <div class="slider__banner-descr">до 19 июля Вы можете приобрести второй букет со скидкой 5%!</div>
-          <div class="slider__banner-price">{{ banner.tag }}</div>
-          <a href="{{ banner.link }}" class="slider__banner-link"></a>
+          <div class="slider__banner-title">{{banner.title}}</div>
+          <div class="slider__banner-descr">{{banner.descr}}</div>
+          <div class="slider__banner-price">{{banner.tag}}</div>
+          <a href="{{banner.link}}" class="slider__banner-link"></a>
           <picture>
             <source srcset="{{ banner.image|media|resize(290, 220, { mode: 'crop', quality: '90' })  }}">
             <img src="{{ banner.image|media|resize(290, 220, { mode: 'crop', quality: '90' })  }}" alt="{{ banner.title }}" class="slider__banner-img" />

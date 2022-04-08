@@ -89,6 +89,7 @@
 </template>
 <script>
 import { Cart } from "@/src/plugins/Cart";
+import { createMessage } from '@/src/utils/index';
 
 export default {
   name: "ProductItem",
@@ -143,12 +144,13 @@ export default {
   },
   methods: {
     addToCart() {
-      const cart = new Cart(".js-cart", ".js-cart-count");
-      cart.addToCart({
+      const cart = new Cart(".js-cart-count");
+      const result = cart.addToCart({
         id: Number(this.product.id),
         amount: this.count,
         optionId: null
       });
+       createMessage(result);
       this.count = 1;
     },
     changeCount(e) {

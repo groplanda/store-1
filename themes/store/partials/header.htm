@@ -23,10 +23,9 @@ templateType = "mobile"
         <div class="header__nav">
           <a href="{{ 'home'|page }}" class="header__nav-link">Главная</a>
           <a href="{{ 'company'|staticPage }}" class="header__nav-link">О компании</a>
-          <a href="{{ 'sales'|staticPage }}" class="header__nav-link header__nav-link--tablet-link">Акции и скидки</a>
           <a href="{{ 'contact'|page }}" class="header__nav-link">Контакты</a>
           {% if user %}
-          <a href="{{ 'account'|page }}" class="header__nav-link">Аккаунт</a>
+          <a href="{{ 'account'|page }}" class="header__nav-link">Мой аккаунт</a>
           {% else %}
           <a href="#!" class="header__nav-link" data-js-action="open-modal" data-name="sign">Вход</a>
           {% endif %}
@@ -50,8 +49,8 @@ templateType = "mobile"
           <div class="header__cart">
             <div class="header__cart-heading" data-js-action="open-modal" data-name="cart">
               <div class="header__cart-val">
-                <svg viewBox="0 0 16 16" class="header__cart-ico icon-cart ">
-                  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
+                <svg class="header__cart-ico icon-cart">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-shopping-cart'|theme }}"></use>
                 </svg>
                 <div class="header__cart-count js-cart-count">0</div>
               </div>
@@ -75,13 +74,13 @@ templateType = "mobile"
         </a>
         <div class="header__content">
           <div class="header__link-list">
-            <a href="" class="header__link-item header__link-item--gift">
+            <a href="{{ 'sales'|staticPage }}" class="header__link-item header__link-item--gift">
               <svg class="header__link-ico icon-gift">
                 <use xlink:href="{{ 'assets/spritemap.svg#sprite-gift'|theme }}"></use>
               </svg>
               <span>Акции и скидки</span>
             </a>
-            <a href="" class="header__link-item header__link-item--delivery">
+            <a href="{{ 'delivery'|staticPage }}" class="header__link-item header__link-item--delivery">
               <svg class="header__link-ico icon-pay">
                 <use xlink:href="{{ 'assets/spritemap.svg#sprite-delivery'|theme }}"></use>
               </svg>

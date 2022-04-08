@@ -176,4 +176,8 @@
   'Acme\\Settings\\Components\\GalleryComponent' => 'plugins\\acme\\settings\\components\\GalleryComponent.php',
   'acme\\settings\\Controllers\\demands' => 'plugins\\acme\\settings\\controllers\\demands.php',
   'Acme\\Settings\\Models\\Demand' => 'plugins\\acme\\settings\\models\\Demand.php',
+  'RainLab\\Pages\\FormWidgets\\MenuItems' => 'plugins\\rainlab\\pages\\formwidgets\\MenuItems.php',
+  'RainLab\\Pages\\Classes\\MenuItem' => 'plugins\\rainlab\\pages\\classes\\MenuItem.php',
+  'Rainlab\\Pages\\FormWidgets\\MenuItemSearch' => 'plugins\\rainlab\\pages\\formwidgets\\MenuItemSearch.php',
+  'RainLab\\Pages\\Classes\\MenuItemReference' => 'plugins\\rainlab\\pages\\classes\\MenuItemReference.php',
 );

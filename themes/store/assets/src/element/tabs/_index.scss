@@ -6,47 +6,44 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     margin: 0 -10px 20px;
     padding-bottom: 20px;
-    position: relative;
-
-    &::after {
-      content: "";
-      display: block;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: calc(100% - 20px);
-      height: 2px;
-      border-radius: 10px;
-      background: $border-color;
-      position: absolute;
-      margin: 0 auto;
-
-      @media (min-width: 768px) {
-        height: 4px;
-      }
-    }
   }
 
   &__btn {
-    color: $dark-color;
+    color: $gray-color;
     font-size: 16px;
-    font-weight: 500;
-    padding: 0 5px;
-    width: calc(50% - 20px);
+    padding-left: 30px;
     margin: 0 10px;
-
+    position: relative;
 
     @media (min-width: 768px) {
-      font-size: 24px;
-      padding: 0 15px;
+      font-size: 20px;
+    }
+
+    &::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background: $gray-color;
+      position: absolute;
+      left: 0;
+      top: calc(50% - 5px);
+      transition: background .2s ease;
     }
 
     &--current,
     &:hover {
-      color: $blue-color;
-      font-weight: 600;
+      color: $red-color;
+      font-weight: 500;
+    }
+
+    &--current {
+      &::after {
+        background: $red-color;
+      }
     }
   }
 

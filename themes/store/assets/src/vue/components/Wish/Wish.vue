@@ -2,10 +2,12 @@
   <div class="category">
     <Loading v-if="loading" />
     <div class="category__content" v-else>
-      <div class="category__row category__row_catalog" v-if="wishlist.length > 0">
-        <ProductItem v-for="product in wishlist" :key="product.id" :product="product" :isWish="true" />
+      <div class="category__container">
+        <div class="category__row category__row_catalog" v-if="wishlist.length > 0">
+          <ProductItem v-for="product in wishlist" :key="product.id" :product="product" :isWish="true" />
+        </div>
+        <div class="title title_sm account__title" v-else>В избранном ничего нет...</div>
       </div>
-      <div class="title title_sm account__title" v-else>В избранном ничего нет...</div>
     </div>
   </div>
 </template>

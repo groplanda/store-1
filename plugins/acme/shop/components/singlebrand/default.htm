@@ -13,7 +13,8 @@
         </svg>
       </a>
     </div>
-    <div class="category__row category__row_default">
+    <div class="category__container">
+      <div class="category__row category__row_default">
       {% for product in brand.products %}
       <div class="category__item category__item_default">
         <div class="product-card product-card_page">
@@ -54,6 +55,7 @@
         </div>
       </div>
       {% endfor %}
+      </div>
     </div>
   </div>
 </section>

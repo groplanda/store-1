@@ -1,22 +1,18 @@
 description = "Footer"
 [CategoryMenu] templateType = "footer"
 [viewBag]
+
+[staticMenu menu]
+code = "menu"
 ==
 
 <footer class="footer section">
   <div class="footer__wrap wrap">
     <div class="footer__top">
-      <div class="footer__nav">
-        <a href="/" aria-current="page" class="footer__nav-link router-link-exact-active router-link-active">Главная</a>
-        <a href="/post/about" class="footer__nav-link">О компании</a>
-        <a href="/post/cooperation" class="footer__nav-link">Сотрудничество</a>
-        <a href="/post/delivery" class="footer__nav-link">Оплата и доставка</a>
-        <a href="/stocks" class="footer__nav-link">Акции и скидки</a>
-        <a href="/post/contacts" class="footer__nav-link">Контакты</a>
-      </div>
+      {% partial "footer-menu" items=menu.menuItems %}
       <div class="footer__right">
         <div class="footer__contacts">
-          <svg  class="footer__contacts-ico icon-phone">
+          <svg class="footer__contacts-ico icon-phone">
             <use xlink:href="{{ 'assets/spritemap.svg#sprite-phone'|theme }}"></use>
           </svg>
           <div class="footer__contact-city">{{ this.theme.city }}, {{ this.theme.address }}</div>
@@ -71,7 +67,7 @@ description = "Footer"
   <div class="footer__copyright">
     <div class="footer__container container">
       <div class="footer__copyright-text">
-        2018 - 2021 “Цветы оптом в Волжском дешево – купить без посредников”
+        {{ this.theme.site_footer|raw }}
       </div>
     </div>
   </div>

@@ -17,7 +17,7 @@
           </button>
         </div>
       </div>
-      <div class="category__group">
+      <div class="category__container">
         <div class="category__row">
           <Loading v-if="loading" :isSearch="true" />
           <ProductItem v-for="product in products" :key="product.id" :product="product" />
@@ -31,8 +31,8 @@
 import axios from "axios";
 import { choseWordForm } from "@/src/helpers/prepare.js";
 import { debounce } from "debounce";
-import ProductItem from "./components/Search/ProductItem";
-import Loading from "./components/Loading/Loading";
+import ProductItem from "./Search/ProductItem";
+import Loading from "./Loading/Loading";
 import { setPageParam } from '@/src/helpers/url';
 
 export default {

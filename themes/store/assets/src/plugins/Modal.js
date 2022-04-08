@@ -25,6 +25,19 @@ export class Modal {
         this.closeModal();
       }
     })
+
+    if(window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      this.openSelectedModal(hash);
+      history.pushState("", document.title, window.location.pathname);
+    }
+
+    window.addEventListener("call-modal", (event) => {
+      if (event.detail.name) {
+        this.openSelectedModal(event.detail.name)
+      }
+    });
+
   }
 
   hadleClick(event) {
@@ -78,8 +91,14 @@ export class Modal {
     this.$modals.forEach(modal => modal.classList.remove(this.activeModalClass));
   }
 
-  setTitle() {
+  openSelectedModal(current) {
+    const offsetBody = this.getScrollBarWith() + "px";
+    this.closeAllModals();
 
+    if (this.openModal(current)) {
+      document.body.classList.add("open-modal");
+      document.body.style.paddingRight = offsetBody;
+    }
   }
 
 }

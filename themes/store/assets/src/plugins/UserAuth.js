@@ -119,12 +119,15 @@ function resetPassword(e) {
       }
 
       if (data.status === "success") {
-        const trigger = createTrigger("reset-success");
-        document.body.appendChild(trigger);
         resetSuccessMsg.innerHTML = data.message;
-        trigger.click();
-        trigger.remove();
         form.reset();
+
+        window.dispatchEvent(new CustomEvent("call-modal", {
+          detail: {
+            name: "reset-success"
+          }
+        }));
+
       }
     })
     .catch(function (error) {
@@ -170,12 +173,4 @@ function restorePassword(e) {
     .catch(function (error) {
       console.log(error);
     })
-}
-
-function createTrigger(target) {
-  const trigger = document.createElement('a');
-  trigger.setAttribute('data-js-action', 'open-modal');
-  trigger.setAttribute('data-type-modal', target);
-  trigger.style.cssText = 'position:absolute;opacity:0;z-index:-1';
-  return trigger;
 }

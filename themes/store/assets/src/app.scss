@@ -156,7 +156,7 @@ svg {
       border-right: 1px solid $light-color;
     }
 
-    @media(min-width: 768x) {
+    @media(min-width: 768px) {
       padding: 10px 8px;
       font-size: 16px;
       line-height: 19px;
@@ -175,6 +175,42 @@ svg {
   line-height: 19px;
   border-radius: 5px;
 }
+.cart-alert{
+  padding: 4px 8px;
+  color: $white-color;
+  font-size: 10px;
+  line-height: 14px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 100;
+  top: 15px;
+  right: 15px;
+  animation: fadeOut 500ms 2s ease normal forwards;
+
+  &_add {
+    background: $green-color;
+  }
+
+  &_default {
+    background: $blue-color;
+  }
+
+  &_remove {
+    background: $dark-color;
+  }
+
+  @media(min-width: 768px) {
+    font-size: 12px;
+    line-height: 20px;
+    top: 20px;
+    right: 20px;
+    padding: 5px 10px;
+  }
+}
+
 @import './element/loading';
 @import './element/header';
 @import './element/modal';
@@ -189,6 +225,7 @@ svg {
 @import './element/post';
 @import './element/advantages';
 @import './element/footer';
+@import './element/contact';
 @import './element/contact-form';
 @import './element/mini-cart';
 @import './element/product-popup';
@@ -199,3 +236,6 @@ svg {
 @import './element/product';
 @import './element/product-price';
 @import './element/filter';
+@import './element/checkout';
+@import './element/radio';
+@import './element/account';
