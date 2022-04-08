@@ -222,9 +222,7 @@ export default {
           this.clearProductData();
           this.createRedirect(data.id);
         }, 2000);
-
       }
-
       this.submitStatus = message;
       this.$store.dispatch('setLoading', false);
     },
