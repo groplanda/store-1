@@ -9,7 +9,7 @@
   $root: &;
 
   &__wrap {
-    flex-direction: column;
+    display: block; 
   }
 
   &__heading {
