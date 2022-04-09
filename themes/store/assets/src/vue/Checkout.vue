@@ -393,11 +393,9 @@ export default {
     onValidate(response) {
       this.errors = onValidate(response, this.form);
     },
-
     setSubmitStatus(status) {
       this.submitStatus = status;
     },
-
     getProductsByIds(cartData) {
       const productIds = cartData.filter(el => !el.optionId).map(el => el.id),
             options = cartData.filter(el => el.optionId && el.optionId).map(el => {
