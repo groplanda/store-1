@@ -11,24 +11,9 @@
     <a href="tel:{{ contact.phone }}" data-contact="phone" class="header__contact-tel js-phone-text">{{ contact.phone }}</a>
     {% endif %}
     {% if contact.name %}
-
-      {% if count > 1 %}
-      <button class="header__contact-city" data-js-action="open-modal" data-type-modal="city">
-        <span class="header__contact-name" data-contact="name">{{ contact.name }}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="header__contact-angle">
-          <g data-name="Layer 2">
-            <g data-name="arrow-ios-downward">
-              <rect width="24" height="24" opacity="0"/>
-              <path d="M12 16a1 1 0 0 1-.64-.23l-6-5a1 1 0 1 1 1.28-1.54L12 13.71l5.36-4.32a1 1 0 0 1 1.41.15 1 1 0 0 1-.14 1.46l-6 4.83A1 1 0 0 1 12 16z"/>
-            </g>
-          </g>
-        </svg>
-      </button>
-      {% else %}
-      <button class="header__contact-city">
-        {{ contact.name }}
-      </button>
-      {% endif %}
+    <button class="header__contact-city">
+      {{ contact.name }}
+    </button>
     {% endif %}
     {% if contact.address %}
     <div class="header__contact-street" data-contact="addess">{{ contact.address }}</div>

@@ -28,14 +28,14 @@ class ContactData extends ComponentBase
       ];
     }
 
-    public function onRender()
-    {
-      $view = $this->property('templateType');
+  public function onRender()
+  {
+    $view = $this->property('templateType');
 
-      if($view == 'footer') {
-        return $this->renderPartial('@_footer.htm');
-      }
+    if($view == 'footer') {
+      return $this->renderPartial('@_footer.htm');
     }
+  }
 
   public function prepareVars()
   {

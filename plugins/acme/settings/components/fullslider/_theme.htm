@@ -1,0 +1,19 @@
+<section class="theme-slider" data-js-slider="home-slider-wrap">
+  <div class="theme-slider__container swiper" data-js-slider="home-slider">
+    <div class="theme-slider__list swiper-wrapper">
+      {% for slide in slider %}
+      <div class="theme-slider__item swiper-slide">
+        <div class="theme-slider__content">
+          <div class="theme-slider__title">{{slide.title}}</div>
+          <p class="theme-slider__descr">{{slide.description}}</p>
+          <a href="{{slide.link}}" class="theme-slider__button button button_primary">Подробнее</a>
+        </div>
+        <picture>
+          <source srcset="{{ slide.image|media|resize(1410, 600, { mode: 'crop', quality: '90' }) }}" type="image/jpeg"/>
+          <img src="{{ slide.image|media|resize(1410, 600, { mode: 'crop', quality: '80' }) }}" alt="{{ slide.title }}" class="theme-slider__image" />
+        </picture>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
