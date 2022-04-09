@@ -147,6 +147,7 @@ export default {
     paymentErr() {
       return checkErr('user_payment', this.errors);
     },
+    
     products() {
       return this.$store.getters.getProducts;
     },

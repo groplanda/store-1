@@ -9,6 +9,9 @@ templateType = "default"
 
 [CategoryMenu CategoryMenu2]
 templateType = "mobile"
+
+[staticMenu mobile]
+code = "mobile"
 ==
 <header class="header">
   <div class="header__top">
@@ -128,5 +131,19 @@ templateType = "mobile"
     </div>
   </div>
   {% component 'CategoryMenu' %}
-  {% component 'CategoryMenu2' %}
+  <div class="mobile-nav" data-js="mobile-nav">
+    <div class="mobile-nav__inner">
+      <button type="button" class="mobile-nav__close" data-role="close-menu">
+        <svg class="mobile-nav__close-ico icon-close">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
+        </svg>
+      </button>
+      <div class="mobile-nav__inner-scroll">
+        {% component 'CategoryMenu2' %}
+        <div class="mobile-nav__nav mobile-nav__nav--menu">
+          {% partial "mobile-menu" items=mobile.menuItems %}
+        </div>
+      </div>
+    </div>
+  </div>
 </header>

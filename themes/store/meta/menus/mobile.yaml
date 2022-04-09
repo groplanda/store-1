@@ -1,0 +1,64 @@
+items:
+    -
+        title: Главная
+        type: cms-page
+        code: ''
+        reference: home
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'О компании'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: company
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Доставка
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: delivery
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Акции и скидки'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: sales
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Сотрудничество
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: cooperation
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Контакты
+        type: cms-page
+        code: ''
+        reference: contact
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: 'Меню мобильное'

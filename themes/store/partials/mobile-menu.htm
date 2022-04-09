@@ -1,0 +1,15 @@
+{% for item in items %}
+<div class="mobile-nav__nav-item mobile-nav__nav-item--page">
+  <a
+    href="{{ item.url }}"
+    class="mobile-nav__nav-link {{ this.page.title == item.title ? 'mobile-nav__nav-item--active' : '' }}"
+    aria-current="page">
+    <button class="mobile-nav__nav-btn">
+      <svg class="mobile-nav__nav-ico icon-arrow-down">
+        <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-down'|theme }}"></use>
+      </svg>
+    </button>
+    <span>{{ item.title }}</span>
+  </a>
+</div>
+{% endfor %}

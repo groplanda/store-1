@@ -1,44 +1,23 @@
-<div class="mobile-nav" data-js="mobile-nav">
-  <div class="mobile-nav__inner">
-    <button type="button" class="mobile-nav__close" data-role="close-menu">
-      <svg class="mobile-nav__close-ico icon-close">
-        <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
-      </svg>
-    </button>
-    <div class="mobile-nav__inner-scroll">
-      <div class="mobile-nav__nav">
-        {% for item in menu %}
-        <div data-js="nav-item" class="mobile-nav__nav-item {{ this.page.title == item.title ? 'mobile-nav__nav-item--active' : '' }}">
-          <div class="mobile-nav__nav-link">
-            <button class="mobile-nav__nav-btn{{ item.children|length == 0 ? ' mobile-nav__nav-btn--disabled' : '' }}" data-js-action="mobile-toggle">
-              <svg class="mobile-nav__nav-ico icon-arrow-down">
-                <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-down'|theme }}"></use>
-              </svg>
-            </button>
-            <a href="{{ 'category' | page({ slug: item.slug }) }}" class="mobile-nav__nav-text">{{ item.title }}</a>
-          </div>
-          {% if item.children|length > 0 %}
-          <div data-js="dropdown-item" class="mobile-nav__nav-dropdown">
-            {% for subcat in item.children %}
-              <a href="{{ 'category' | page({ slug: subcat.slug }) }}" class="mobile-nav__nav-sublink{{ this.page.title == subcat.title ? ' mobile-nav__nav-sublink--active' : '' }}">{{ subcat.title }}</a>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
+<div class="mobile-nav__inner-scroll">
+  <div class="mobile-nav__nav">
+    {% for item in menu %}
+    <div data-js="nav-item" class="mobile-nav__nav-item {{ this.page.title == item.title ? 'mobile-nav__nav-item--active' : '' }}">
+      <div class="mobile-nav__nav-link">
+        <button class="mobile-nav__nav-btn{{ item.children|length == 0 ? ' mobile-nav__nav-btn--disabled' : '' }}" data-js-action="mobile-toggle">
+          <svg class="mobile-nav__nav-ico icon-arrow-down">
+            <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-down'|theme }}"></use>
+          </svg>
+        </button>
+        <a href="{{ 'category' | page({ slug: item.slug }) }}" class="mobile-nav__nav-text">{{ item.title }}</a>
+      </div>
+      {% if item.children|length > 0 %}
+      <div data-js="dropdown-item" class="mobile-nav__nav-dropdown">
+        {% for subcat in item.children %}
+          <a href="{{ 'category' | page({ slug: subcat.slug }) }}" class="mobile-nav__nav-sublink{{ this.page.title == subcat.title ? ' mobile-nav__nav-sublink--active' : '' }}">{{ subcat.title }}</a>
         {% endfor %}
       </div>
-      <div class="mobile-nav__nav mobile-nav__nav--menu">
-        <div class="mobile-nav__nav-item mobile-nav__nav-item--page">
-          <a href="/" class="mobile-nav__nav-link router-link-exact-active router-link-active" aria-current="page">
-            <button class="mobile-nav__nav-btn">
-              <svg class="mobile-nav__nav-ico icon-arrow-down">
-                <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-down'|theme }}"></use>
-              </svg>
-            </button>
-            <span>Главная</span>
-          </a>
-        </div>
-      </div>
+      {% endif %}
     </div>
+    {% endfor %}
   </div>
 </div>
