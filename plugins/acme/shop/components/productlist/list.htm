@@ -19,8 +19,9 @@
         <div class="product-item__image">
           <a href="{{ 'product'|page({ id: product.id }) }}" class="product-item__link">
             <picture>
-              <source srcset="{{ product.image|media|resize(281, 281, { mode: 'crop', quality: '80' }) }}">
-              <img src="{{ product.image|media|resize(281, 281, { mode: 'crop', quality: '80' }) }}" alt="{{ product.title }}" class="product-item__image-thumb" />
+              <source srcset="{{ product.image|media|resize(285, 285, { mode: 'crop', quality: '100' }) }}" media="(min-width: 768px)">
+              <source srcset="{{ product.image|media|resize(370, 370, { mode: 'crop', quality: '100' }) }}">
+              <img src="{{ product.image|media|resize(370, 370, { mode: 'crop', quality: '100' }) }}" alt="{{ product.title }}" class="product-item__image-thumb" />
             </picture>
           </a>
         </div>
