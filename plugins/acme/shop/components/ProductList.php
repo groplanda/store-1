@@ -62,7 +62,7 @@ class ProductList extends \Cms\Classes\ComponentBase
               $this->page['parentCat'] = $parentCat;
             }
 
-            $products = $category->products()->listFrontEnd($options, $perPage);
+            $products = $category->products()->active()->listFrontEnd($options, $perPage);
 
             // filters
             $this->page['maxPrice'] = $category->products()->max('price');
