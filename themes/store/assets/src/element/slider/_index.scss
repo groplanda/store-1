@@ -238,7 +238,7 @@
   }
 
   &__banner-title {
-    color: $white-color;
+    color: $dark-color;
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 5px;
@@ -250,7 +250,7 @@
   }
 
   &__banner-descr {
-    color: $white-color;
+    color: $dark-color;
     font-size: 16px;
     font-weight: 300;
     max-height: 62px;
@@ -264,7 +264,7 @@
 
   &__banner-price {
     margin-top: 5px;
-    color: $white-color;
+    color: $dark-color;
     font-size: 35px;
     font-weight: 700;
     z-index: 1;
@@ -295,7 +295,7 @@
     right: 20px;
     bottom: 20px;
     text-decoration: none;
-    background: $blue-color;
+    background: $theme-color;
     color: $white-color;
     font-size: 20px;
     font-weight: 700;

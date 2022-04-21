@@ -149,7 +149,7 @@
   }
 
   &__pagination-item {
-    background: $blue-color;
+    background: $theme-color;
     box-shadow: 7px 7px 30px $shadow;
     color: #FFF;
     font-size: 18px;
@@ -174,7 +174,7 @@
     }
 
     &--active {
-      background: darken($color: $blue-color, $amount: 10%);
+      background: darken($color: $theme-color, $amount: 10%);
     }
 
     &--disabled {

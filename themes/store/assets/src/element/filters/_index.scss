@@ -80,13 +80,13 @@
     top: calc(50% - 5px);
     width: 10px;
     height: 10px;
-    color: $blue-color;
+    color: $theme-color;
     transition: transform .3s ease;
   }
 
   &__sorting-dropdown {
     padding: 20px 0;
-    background: $blue-color;
+    background: $theme-color;
     box-shadow: 7px 7px 30px $shadow;
     border-radius: 10px;
     margin-top: 20px;

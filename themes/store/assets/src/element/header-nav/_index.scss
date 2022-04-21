@@ -1,5 +1,5 @@
 .header-nav {
-  background: $blue-color;
+  background: $theme-color;
   padding: 10px 0;
 
   $root: &;
@@ -36,7 +36,7 @@
     &:hover {
       #{$root} {
         &__nav-link {
-          color: $blue-color;
+          color: $theme-color;
           background: #FFF;
         }
         &__nav-dropdown {
@@ -106,7 +106,7 @@
   }
 
   &__nav-sublink {
-    color: $blue-color;
+    color: $theme-color;
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
@@ -124,7 +124,7 @@
     top: 100%;
     margin-top: 10px;
     z-index: 100;
-    background: $blue-color;
+    background: $theme-color;
     padding: 10px 25px;
     opacity: 0;
     pointer-events: none;

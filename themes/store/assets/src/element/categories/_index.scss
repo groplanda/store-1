@@ -41,7 +41,7 @@
     }
 
     &:hover {
-      background: $blue-color;
+      background: $theme-color;
       #{$root} {
         &__item-content {
           color: #FFF;
@@ -115,7 +115,7 @@
     top: calc(50% - 15px);
     width: 30px;
     height: 30px;
-    color: $blue-color;
+    color: $theme-color;
     transform: rotate(-90deg);
 
     @media(max-width: 767px) {
