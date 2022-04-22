@@ -20,7 +20,7 @@
       <div class="category__container">
         <div class="category__row">
           <Loading v-if="loading" :isSearch="true" />
-          <ProductItem v-for="product in products" :key="product.id" :product="product" />
+          <ProductItem v-for="product in products" :key="product.id" :product="product" :currency="currency" />
         </div>
         <div class="category__empty" v-if="products.length === 0">Ничего не удалось найти...</div>
       </div>
@@ -56,7 +56,10 @@ export default {
         " " +
         choseWordForm(this.products.length, "товар", "товара", "товаров")
       );
-    }
+    },
+    currency() {
+      return +localStorage.getItem('currency') || 1;
+    },
   },
   methods: {
     onSearch: debounce(function() {

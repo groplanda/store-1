@@ -1,4 +1,5 @@
 {% set products = __SELF__.products %}
+
 <section class="product-slider section" data-js="home-products-slider-body">
   <div class="product-slider__wrap wrap">
     <div class="product-slider__heading">
@@ -75,20 +76,19 @@
                 </div>
                 <div class="product-item__cart">
                   <div class="product-item__price">
-
                     {% if product.sale_price > 0 %}
                     <div class="product-item__current-price">
-                      <strong class="product-item__price-val">{{ product.sale_price|number_format(0, '', ' ') }}</strong>
+                      <strong class="product-item__price-val" data-price>{{ product.sale_price|number_format(2, '.', ' ') }}</strong>
                       <span class="product-item__price-label">₽</span>
                     </div>
                     <div class="product-item__old-price">
-                      <strong class="product-item__price-val">{{ product.price|number_format(0, '', ' ') }}</strong>
+                      <strong class="product-item__price-val" data-price>{{ product.price|number_format(2, '.', ' ') }}</strong>
                       <span class="product-item__price-label">₽</span>
                     </div>
 
                     {% else %}
                     <div class="product-item__current-price">
-                      <strong class="product-item__price-val">{{ product.price|number_format(0, '', ' ') }}</strong>
+                      <strong class="product-item__price-val" data-price>{{ product.price|number_format(2, '.', ' ') }}</strong>
                       <span class="product-item__price-label">₽</span>
                     </div>
                     {% endif %}

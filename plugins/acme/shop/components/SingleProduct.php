@@ -6,6 +6,7 @@ use Auth;
 
 class SingleProduct extends \Cms\Classes\ComponentBase
 {
+
     public function componentDetails()
     {
       return [
@@ -69,6 +70,8 @@ class SingleProduct extends \Cms\Classes\ComponentBase
         $this->page['user_id'] = $user->id;
         $this->page['is_wish'] = $this->isProductWish($user->id, $product->id);
       }
+      $dollar = 1;
+      $this->page['currency'] = $dollar;
     }
 
     public function onRun()

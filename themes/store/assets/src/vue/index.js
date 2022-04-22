@@ -40,10 +40,14 @@ if (accountEl) {
 const miniCartEl = document.getElementById("mini-cart");
 
 if (miniCartEl) {
-  new Vue({
-    el: miniCartEl,
-    store,
-    components: { minicart }
+
+  store.dispatch('init').then(() => {
+    new Vue({
+      el: miniCartEl,
+      store,
+      components: { minicart }
+    })
   })
+
 }
 

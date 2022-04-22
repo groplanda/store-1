@@ -2,6 +2,7 @@ import Sticky from 'sticky-js';
 import { Wish } from '@/src/plugins/Wish';
 import { cartHanlder } from '@/src/helpers/cartHanlder';
 import $ from 'jquery';
+import { updatePrices } from '@/src/utils/index';
 window.$ = window.jQuery = $;
 
 export function productCard() {
@@ -112,6 +113,7 @@ export function productCard() {
       new Sticky('[data-sticky]');
       setupOptions();
       productWrap.addEventListener("click", handleProduct);
+      updatePrices();
       setTimeout(() => {
         preloader.classList.remove("loading_active");
       }, 400)

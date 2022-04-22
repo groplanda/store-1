@@ -57,9 +57,14 @@ export default {
       noImage: "/themes/store/assets/images/no-image.jpg"
     }
   },
+  computed: {
+    currency() {
+      return this.$store.getters.getCurrency;
+    }
+  },
   methods: {
     productPrice(price) {
-      return price.toLocaleString('ru') + ' ₽';
+      return (price * this.currency).toLocaleString('ru') + ' ₽';
     },
     changeAmount(val) {
       this.count = val;

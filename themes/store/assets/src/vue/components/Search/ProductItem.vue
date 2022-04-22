@@ -101,6 +101,10 @@ export default {
     isWish: {
       type: Boolean,
       default: false
+    },
+    currency: {
+      type: Number,
+      default: 1
     }
   },
   data() {
@@ -117,12 +121,12 @@ export default {
     },
     basePrice() {
       let price = 0;
-      price = this.product.price.toLocaleString("ru");
+      price = (this.product.price * this.currency).toLocaleString("ru");
       return price;
     },
     salePrice() {
       let sale = 0;
-      sale = this.product.sale_price.toLocaleString("ru");
+      sale = (this.product.sale_price * this.currency).toLocaleString("ru");
       return sale;
     },
     hasOptions() {

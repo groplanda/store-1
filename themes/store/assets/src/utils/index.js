@@ -61,3 +61,16 @@ export function createMessage(result) {
   alert.remove();
  }, 2500)
 }
+
+export function updatePrices() {
+  const prices = document.querySelectorAll('[data-price]');
+  const currency = +localStorage.getItem('currency') || 1;
+
+
+  prices.forEach(price => {
+    const currentVal = +price.textContent.replace(/\s+/g, '').trim(),
+          newPrice = (currentVal * currency).toFixed(2);
+
+    price.textContent = newPrice.toLocaleString('ru-RU');
+  })
+}

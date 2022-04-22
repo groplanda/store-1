@@ -180,4 +180,5 @@
   'RainLab\\Pages\\Classes\\MenuItem' => 'plugins\\rainlab\\pages\\classes\\MenuItem.php',
   'Rainlab\\Pages\\FormWidgets\\MenuItemSearch' => 'plugins\\rainlab\\pages\\formwidgets\\MenuItemSearch.php',
   'RainLab\\Pages\\Classes\\MenuItemReference' => 'plugins\\rainlab\\pages\\classes\\MenuItemReference.php',
+  'Acme\\Shop\\Classes\\CurrencyController' => 'plugins\\acme\\shop\\classes\\CurrencyController.php',
 );

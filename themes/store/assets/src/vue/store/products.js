@@ -100,14 +100,16 @@ export default {
       return state.products.length
     },
 
-    getTotal (state) {
+    getTotal (state, getters) {
+      const currency = getters.getCurrency;
       return state.products.reduce((sum, product) => {
-        return sum + (+product.amount * (+product.sale_price > 0 ? +product.sale_price : +product.price));
+        return sum + (+product.amount * (+product.sale_price > 0 ? +product.sale_price * currency : +product.price * currency));
       }, 0)
     },
 
-    getSum (state) {
-      return state.products.reduce((sum, product) => sum + (+product.amount * +product.price), 0)
+    getSum (state, getters) {
+      const currency = getters.getCurrency;
+      return state.products.reduce((sum, product) => sum + (+product.amount * (+product.price * currency)), 0)
     },
 
     getProductCount (state) {

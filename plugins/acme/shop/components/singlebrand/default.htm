@@ -35,10 +35,10 @@
             <div class="product-card__bottom">
               <div class="product-card__prices">
                 {% if product.sale_price > 0 %}
-                <div class="product-card__current-price">{{ product.sale_price|number_format(0, '', ' ') }} ₽</div>
-                <div class="product-card__old-price">{{ product.price|number_format(0, '', ' ') }} ₽</div>
+                <div class="product-card__current-price" data-price>{{ product.sale_price|number_format(2, '.', ' ') }} ₽</div>
+                <div class="product-card__old-price" data-price>{{ product.price|number_format(2, '.', ' ') }} ₽</div>
                 {% else %}
-                <div class="product-card__current-price">{{ product.price|number_format(0, '', ' ') }} ₽</div>
+                <div class="product-card__current-price" data-price>{{ product.price|number_format(2, '.', ' ') }} ₽</div>
                 {% endif %}
               </div>
               {% if product.price > 0 %}

@@ -3,12 +3,15 @@ tabs:
   lazy:
       - Контакты
       - Общие
+      - Валюта
   paneCssClass:
       0: first-tab
       1: second-tab
+      2: three-tab
   icons:
       Контакты: icon-phone
       Общие: icon-cogs
+      Валюта: icon-dollar
   fields:
       phone:
           label: Телефон
@@ -205,3 +208,18 @@ tabs:
               imageWidth: 75
               span: storm
               cssClass: col-md-12
+      show_currency:
+        label: Цены в иностранной валюте
+        type: switch
+        options:
+        - Нет
+        - Да
+        span: full
+        tab: Валюта
+      manual_currency:
+        type: number
+        label: Указать цену вручную
+        span: full
+        placeholder: 86
+        tab: Валюта
+        comment: Укажите актуальный курс если потребуется

@@ -46,6 +46,7 @@ Route::prefix('/api')->group(function () {
 
   });
   Route::post('/add-order', 'Acme\Shop\Classes\OrderController@add');
+  Route::get('/currency', 'Acme\Shop\Classes\CurrencyController@get')->middleware('web');
   Route::get('/categories', function () {
     return Category::orderBy('sort_order', 'asc')->where([['is_show', 1], ['parent_id', null]])->withCount('products')->with(['children' => function($query) {
       $query->orderBy('sort_order', 'asc')->where('is_show', 1)->get(['id', 'parent_id', 'title', 'slug']);

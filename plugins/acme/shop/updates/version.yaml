@@ -135,3 +135,6 @@
 1.0.46:
     - 'Created table acme_shop_wish'
     - builder_table_create_acme_shop_wish.php
+1.0.47:
+    - 'Updated table acme_shop_product'
+    - builder_table_update_acme_shop_product_7.php

@@ -16,6 +16,7 @@ import { Modal } from './plugins/Modal';
 import { HeaderNav } from './plugins/HeaderNav';
 import IMask from 'imask'
 import { Tabs } from './plugins/Tabs';
+import { updatePrices } from './utils/index';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -225,6 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       }
       cartHanlder();
+      updatePrices();
     });
   }
 
@@ -243,5 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mask: '+{7}(000)000-00-00'
     });
   })
+
+  updatePrices();
 
 });
