@@ -191,16 +191,16 @@
     <div class="product-price">
       {% if product.sale_price > 0 %}
       <div class="product-price__current">
-        <strong class="product-price__val" data-price>{{ (currency * product.sale_price)|number_format(2, '.', ' ') }}</strong>
+        <strong class="product-price__val" data-price>{{ product.sale_price|number_format(2, '.', ' ') }}</strong>
         <span class="product-price__label">₽</span>
       </div>
       <div class="product-price__old">
-        <strong class="product-price__val" data-price>{{ (currency * product.price)|number_format(2, '.', ' ') }}</strong>
+        <strong class="product-price__val" data-price>{{ product.price|number_format(2, '.', ' ') }}</strong>
         <span class="product-price__label">₽</span>
       </div>
       {% else %}
       <div class="product-price__current">
-        <strong class="product-price__val" data-price>{{ (currency * product.price)|number_format(2, '.', ' ') }}</strong>
+        <strong class="product-price__val" data-price>{{ product.price|number_format(2, '.', ' ') }}</strong>
         <span class="product-price__label">₽</span>
       </div>
       {% endif %}
