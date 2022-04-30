@@ -61,7 +61,7 @@ class SingleProduct extends \Cms\Classes\ComponentBase
         $this->page['breadcrumbs'] = $breadcrumbs;
       }
 
-      if ($product->categories[0]) {
+      if (isset($product->categories[0]) && !empty($product->categories[0])) {
         $this->page['additionals'] = Product::select(['id', 'title', 'slug', 'image', 'sale_price', 'price'])->where([['is_active', 1], ['id', '!=', $product->id]])->orderBy('sort_order', 'asc')->limit(4)->get();
       }
 
