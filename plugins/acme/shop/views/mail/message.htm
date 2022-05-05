@@ -6,9 +6,9 @@
     E-mail: {{ user_email }}
 </p>
 {% endif %}
-{% if user_adress %}
+{% if user_address %}
 <p>
-    Адрес: {{ user_adress }}
+    Адрес: {{ user_address }}
 </p>
 {% endif %}
 {% if user_comment %}
@@ -16,3 +16,40 @@
     Комментарий: {{ user_comment }}
 </p>
 {% endif %}
+<div class="table">
+  <table>
+    <thead>
+        <tr align="center">
+            <th>№</td>
+            <th>Название</td>
+            <th>Фото</td>
+            <th>Цена</td>
+            <th>Количество</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        {% set image = 'storage/app/media/' ~ product.image|trim('/') %}
+        <tr>
+            <td style="text-align: center;">{{ loop.index }}</td>
+            <td style="text-align: center;">
+              <span style="display: block; max-width: 160px; width: 100%; margin: 0 auto;">{{ product.title }}</span>
+            </td>
+            <td style="text-align: center;">
+              <img
+                border="0"
+                vspace="0"
+                hspace="0"
+                style="color: #FFFFFF; font-size: 10px; margin: 0 auto; padding: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block; max-width: 100%; width: auto; height: 60px"
+                src="{{ message.embed(image|app) }}"
+              />
+            </td>
+            <td>
+              <h3 style="color: #F4484E; text-align: center;">{{ product.price }} ₽</h3>
+            </td>
+            <td style="text-align: center;">{{ product.amount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
