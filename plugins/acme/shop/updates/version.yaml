@@ -138,3 +138,6 @@
 1.0.47:
     - 'Updated table acme_shop_product'
     - builder_table_update_acme_shop_product_7.php
+1.0.48:
+    - 'Updated table acme_shop_product'
+    - builder_table_update_acme_shop_product_8.php

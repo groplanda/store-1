@@ -79,7 +79,7 @@ class Product extends Model
       //'rating desc' => 'По рейтингу',
     ];
 
-    public function scopeListFrontEnd($query, $options = [], $perPage)
+    public function scopeListFrontEnd($query, $options = [], $perPage = 6)
     {
 
       extract(array_merge([

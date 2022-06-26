@@ -111,9 +111,20 @@ tabs:
             tab: 'Вариативные товары'
             type: featuredbox
         options:
-            label: 'Опции'
+            label: Опции
             nameFrom: name
             span: full
             type: partial
             path: field_options
             tab: Опции
+        meta_title:
+            label: 'Мета заголовок'
+            span: full
+            type: text
+            tab: 'Мета поля'
+        meta_description:
+            label: 'Мета описание'
+            size: ''
+            span: full
+            type: textarea
+            tab: 'Мета поля'

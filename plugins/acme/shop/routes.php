@@ -21,7 +21,7 @@ Route::prefix('/api')->group(function () {
     $hit_products = Product::select('id','title','image','price','sale_price','is_new','is_hit','code')->with(['categories'])->orderBy('sort_order', 'asc')->where('is_active', 1)->where('is_hit', 1)->limit(8)->get();
     return $hit_products;
   });
-  Route::get('/products/{ids?}', function ($ids = "", Request $request) {
+  Route::get('/products/{ids?}', function (Request $request, $ids = null) {
     $ids_array = explode(',', $ids);
     $productCollection = Product::select('id','title','image','price','sale_price')->whereIn('id', $ids_array)->with(['options'])->get();
     $options = $request->get('options');
