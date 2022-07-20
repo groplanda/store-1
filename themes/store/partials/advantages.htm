@@ -1,0 +1,29 @@
+<section class="advantages section">
+  <div class="wrap advantages__wrap">
+    <div class="advantages__container">
+      <h2 class="advantages__title title">Преимущества вакуумных пакетов</h2>
+      <div class="advantages__row">
+        {% for advantage in this.theme.adds %}
+        <div class="advantages__item">
+          <div class="advantages__image">
+            {% if advantage.image %}
+            <picture>
+              <source srcset="{{advantage.image|media}}" >
+              <img
+                src="{{advantage.image|media}}"
+                alt="{{advantage.title}}"
+                class="advantages__src"
+              />
+            </picture>
+            {% endif %}
+          </div>
+          <div class="advantages__group">
+            <p class="advantages__name">{{advantage.title}}</p>
+            <p class="advantages__descr">{{advantage.descr}}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

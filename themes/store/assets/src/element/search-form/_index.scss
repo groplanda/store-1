@@ -26,6 +26,7 @@
     height: 44px;
     display: block;
     background: #FFF;
+    border: 1px solid $light-color;
 
     @media(max-width: 991px) {
       font-size: 14px;

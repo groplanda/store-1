@@ -23,16 +23,64 @@ code = "mobile"
           </svg>
           <div class="header__menu-text">меню</div>
         </button>
-        <div class="header__nav">
-          <a href="{{ 'home'|page }}" class="header__nav-link">Главная</a>
-          <a href="{{ 'company'|staticPage }}" class="header__nav-link">О компании</a>
-          <a href="{{ 'contact'|page }}" class="header__nav-link">Контакты</a>
-          {% if user %}
-          <a href="{{ 'account'|page }}" class="header__nav-link">Мой аккаунт</a>
-          {% else %}
-          <a href="#!" class="header__nav-link" data-js-action="open-modal" data-name="sign">Вход</a>
-          {% endif %}
+
+        <div class="header__top-contacts">
+          <div class="header__top-contact">
+            <svg  class="header__top-ico icon-phone">
+              <use xlink:href="{{ 'assets/spritemap.svg#sprite-phone'|theme }}"></use>
+            </svg>
+            {% for phone in this.theme.phone %}
+              <a href="tel:{{phone.val}}" class="header__top-phone">{{ phone.val }}</a>
+            {% endfor %}
+          </div>
+          <div class="header__top-contact">
+            <svg class="header__top-ico icon-address">
+              <use xlink:href="{{ 'assets/spritemap.svg#sprite-pin'|theme }}"></use>
+            </svg>
+            <div class="header__top-address">{{this.theme.city}}, {{this.theme.address}}</div>
+          </div>
+          <div class="header__top-messenger">
+            {% if this.theme.whatsapp %}
+              <a href="whatsapp://send?phone={{ this.theme.whatsapp }}" class="header__messenger-link header__messenger-link--wa">
+                <svg class="header__messenger-ico icon-whatsapp ">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-whatsapp'|theme }}"></use>
+                </svg>
+              </a>
+            {% endif %}
+            {% if this.theme.viber %}
+              <a href="viber://add?number={{ this.theme.viber }}" class="header__messenger-link header__messenger-link--viber">
+                <svg class="header__messenger-ico icon-viber">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-viber'|theme }}"></use>
+                </svg>
+              </a>
+            {% endif %}
+            {% if this.theme.instagram %}
+              <a href="{{ this.theme.instagram }}" target="_blank" class="header__messenger-link header__messenger-link--instagram">
+                <svg class="header__messenger-ico icon-instagram">
+                  <use xlink:href="{{ 'assets/spritemap.svg#sprite-instagram'|theme }}"></use>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
         </div>
+
+        <div class="header__top-search">
+          <form class="search-form__form" method="GET" action="/search">
+            <input
+              type="text"
+              autocomplete="off"
+              placeholder="Поиск по каталогу..."
+              class="search-form__input"
+              name="search"
+            />
+            <button type="submit" class="search-form__btn">
+              <svg class="search-form__btn-ico icon-search">
+                <use xlink:href="{{ 'assets/spritemap.svg#sprite-search'|theme }}"></use>
+              </svg>
+            </button>
+          </form>
+        </div>
+
         <div class="header__right">
           <div class="header__person">
             {% if user %}
@@ -76,14 +124,9 @@ code = "mobile"
           <span itemprop="name" hidden>{{this.theme.site_name}}</span>
         </a>
         <div class="header__content">
-          <div class="header__link-list">
-            <a href="{{ 'delivery'|staticPage }}" class="header__link-item header__link-item--delivery">
-              <svg class="header__link-ico icon-pay">
-                <use xlink:href="{{ 'assets/spritemap.svg#sprite-delivery'|theme }}"></use>
-              </svg>
-              <span>Оплата и доставка</span>
-            </a>
-          </div>
+
+          {% partial "menu" items=mobile.menuItems %}
+
           <div class="header__contacts">
             <svg  class="header__contacts-ico icon-phone">
               <use xlink:href="{{ 'assets/spritemap.svg#sprite-phone'|theme }}"></use>
@@ -124,7 +167,24 @@ code = "mobile"
       </div>
     </div>
   </div>
-  {% component 'CategoryMenu' %}
+  <div class="header__bottom">
+    <div class="header__wrap wrap">
+      <form class="search-form__form" method="GET" action="/search">
+        <input
+          type="text"
+          autocomplete="off"
+          placeholder="Поиск по каталогу..."
+          class="search-form__input"
+          name="search"
+        />
+        <button type="submit" class="search-form__btn">
+          <svg class="search-form__btn-ico icon-search">
+            <use xlink:href="{{ 'assets/spritemap.svg#sprite-search'|theme }}"></use>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
   <div class="mobile-nav" data-js="mobile-nav">
     <div class="mobile-nav__inner">
       <button type="button" class="mobile-nav__close" data-role="close-menu">
@@ -133,7 +193,6 @@ code = "mobile"
         </svg>
       </button>
       <div class="mobile-nav__inner-scroll">
-        {% component 'CategoryMenu2' %}
         <div class="mobile-nav__nav mobile-nav__nav--menu">
           {% partial "mobile-menu" items=mobile.menuItems %}
         </div>

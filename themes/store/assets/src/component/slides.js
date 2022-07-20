@@ -9,14 +9,11 @@ export function slides() {
   if (homeSlider) {
 
     new Swiper('[data-js-slider="home-slider"]', {
-      loop: false,
+      loop: true,
       slidesPerView: 1,
       spaceBetween: 0,
-      slideClass: 'swiper-slide',
-      navigation: {
-        nextEl: '[data-js-action="home-slider-next"]',
-        prevEl: '[data-js-action="home-slider-prev"]',
-      }
+      slideClass: 'slider__item',
+      slideActiveClass: 'slider__item_active',
     })
   }
 

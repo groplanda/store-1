@@ -23,3 +23,22 @@ fields:
         size: large
         span: full
         type: textarea
+    props:
+        label: Преимущетсва
+        prompt: Добавить
+        style: default
+        span: full
+        type: repeater
+        form:
+            fields:
+                icon:
+                    label: Иконка
+                    mode: image
+                    imageWidth: '80'
+                    imageHeight: '80'
+                    span: auto
+                    type: mediafinder
+                name:
+                    label: Название
+                    span: auto
+                    type: text

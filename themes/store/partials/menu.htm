@@ -1,0 +1,21 @@
+<nav class="header__nav">
+  {% for item in items %}
+  <div class="header__nav-item{{ item.isActive ? ' header__nav-item_active' : '' }}">
+    <a href="{{ item.url }}" class="header__nav-link{{item.items ? ' header__nav-link_children' : ''}}" data-type="{{item.code}}" {{ item.viewBag.cssClass }} data-scroll>
+      {{ item.title }}
+    </a>
+    {% if item.items %}
+      <svg class="header__nav-arrow">
+        <use xlink:href="{{ 'assets/spritemap.svg#sprite-angle-down'|theme }}"></use>
+      </svg>
+    {% endif %}
+    {% if item.items %}
+    <div class="header__nav-dropdown">
+      {% for subitem in item.items %}
+      <a href="{{ subitem.url }}" class="header__nav-sublink">{{ subitem.title }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</nav>

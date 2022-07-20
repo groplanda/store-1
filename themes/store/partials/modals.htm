@@ -195,7 +195,7 @@
           <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
         </svg>
       </button>
-      <div class="header__form-title">Заказать звонок</div>
+      <div class="modal__title">Заказать прайс-лист</div>
       <form class="contact-form" data-form="send-message">
         <div class="contact-form__form-group">
           <label class="contact-form__form-label">
@@ -211,10 +211,17 @@
             <span class="contact-form__form-mark">*</span>
           </label>
           <input type="tel" placeholder="" class="contact-form__form-input" name="user_phone">
-          <input type="hidden" name="user_subject" value="Форма модальная">
           <span class="contact-form__error" data-error-for="user_phone"></span>
         </div>
+        <div class="contact-form__form-group">
+          <label class="contact-form__form-label">
+            E-mail
+          </label>
+          <input type="text" placeholder="" class="contact-form__form-input" name="user_email">
+          <span class="contact-form__error" data-error-for="user_email"></span>
+        </div>
         <button type="submit" class="contact-form__btn">Отправить</button>
+        <input type="hidden" name="user_subject" value="Заказать прайс-лист">
         <div class="contact-form__status" data-js="form-status"></div>
       </form>
     </div>

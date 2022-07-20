@@ -13,7 +13,7 @@ import { slides } from './component/slides';
 import { header } from './component/header';
 import { productCard } from './component/product-card';
 import { Modal } from './plugins/Modal';
-import { HeaderNav } from './plugins/HeaderNav';
+//import { HeaderNav } from './plugins/HeaderNav';
 import IMask from 'imask'
 import { Tabs } from './plugins/Tabs';
 import { updatePrices } from './utils/index';
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   new Modal('[data-js-action="open-modal"]', 'modal');
 
-  new HeaderNav('[data-js="header-nav"]');
+  //new HeaderNav('[data-js="header-nav"]');
 
   new Tabs('[data-js="tabs"]', 'tabs__btn--current', 'tabs__item--selected');
 

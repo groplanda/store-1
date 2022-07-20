@@ -10,6 +10,8 @@ productsTitle = "Новинки"
 [PopularProducts PopularProducts2]
 productsType = "is_hit"
 productsTitle = "Хиты"
+
+[FullSlider]
 ==
 <!DOCTYPE html>
 <html lang="ru">
@@ -20,7 +22,7 @@ productsTitle = "Хиты"
 
     <!-- Content -->
     <main class="main">
-      {% partial "banner" %}
+      {% component 'FullSlider' %}
       {% component 'CategoryList' %}
       {% component 'PopularProducts' %}
       {% component 'PopularProducts2' %}
@@ -31,7 +33,7 @@ productsTitle = "Хиты"
           <div class="post__content">{% page %}</div>
         </div>
       </section>
-      {% partial "adds" %}
+      {% partial "advantages" %}
     </main>
 
     <!-- Footer -->

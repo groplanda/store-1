@@ -22,6 +22,8 @@ class Slider extends Model
      */
     public $table = 'acme_settings_slider';
 
+    protected $jsonable = ['props'];
+
     /**
      * @var array Validation rules
      */

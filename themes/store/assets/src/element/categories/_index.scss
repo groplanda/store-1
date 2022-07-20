@@ -22,7 +22,7 @@
 
   &__item {
     width: 100%;
-    max-width: calc(25% - 20px);
+    max-width: calc(33.333% - 20px);
     margin: 0 10px 20px 10px;
     background: #fff;
     border-radius: 15px;
@@ -30,10 +30,6 @@
     box-shadow: 0 10px 29px 0 $shadow;
     transition: background .3s ease;
     position: relative;
-
-    @media(max-width: 991px) {
-      max-width: calc(33.333% - 20px);
-    }
 
     @media(max-width: 767px) {
       max-width: calc(50% - 10px);
