@@ -1,6 +1,18 @@
 description = "Script width vue tags"
 ==
-<script src="{{ 'assets/dist/js/app.js'|theme }}"></script>
-<script src="{{ 'assets/dist/js/vue.js'|theme }}"></script>
+<?php
+function onStart()
+{
+    $scriptAsset = 'assets/dist/js/app.js';
+    $vueAsset = 'assets/dist/js/vue.js';
+    $lastUpdate = filemtime($this->theme->getPath() . '/' . $scriptAsset);
+    $lastUpdateVue = filemtime($this->theme->getPath() . '/' . $vueAsset);
+    $this['scripts'] = sprintf('%s?v=%s', $this->controller->themeUrl($scriptAsset), $lastUpdate);
+    $this['scriptsvue'] = sprintf('%s?v=%s', $this->controller->themeUrl($vueAsset), $lastUpdateVue);
+}
+?>
+==
+<script src="{{scripts}}"></script>
+<script src="{{scriptsvue}}"></script>
 {% framework extras %}
 {% scripts %}
