@@ -24,37 +24,6 @@
       <div class="product-item__bottom">
         <div class="product-item__info">
           <a :href="'/product/' + product.id" class="product-item__title">{{ product.title }}</a>
-          <a
-            v-if="hasCategory"
-            :href="'/category/' + product.categories[0].slug"
-            class="product-item__category"
-          >
-            {{ product.categories[0].title}}
-          </a>
-        </div>
-        <div class="product-item__amount">
-          <div class="product-amount" data-js-action="update-qty">
-            <button type="button" class="product-amount__btn" @click="changeCount" data-type="minus">
-              <svg class="product-amount__btn-ico icon-minus">
-                <use :xlink:href="spritePath + '#sprite-minus'"></use>
-              </svg>
-            </button>
-            <input
-              type="number"
-              readonly="readonly"
-              class="product-amount__val"
-              value="1"
-              v-model="count"
-              data-js-action="qty-val"
-            />
-            <button type="button" class="product-amount__btn" @click="changeCount" data-type="plus">
-              <svg class="product-amount__btn-ico icon-plus">
-                <use :xlink:href="spritePath + '#sprite-plus'"></use>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div class="product-item__cart">
           <div class="product-item__price">
 
             <template v-if="product.sale_price > 0">
@@ -72,6 +41,30 @@
               <span class="product-item__price-label">₽</span>
             </div>
 
+          </div>
+        </div>
+        <div class="product-item__cart">
+          <div class="product-item__amount">
+            <div class="product-amount" data-js-action="update-qty">
+              <button type="button" class="product-amount__btn" @click="changeCount" data-type="minus">
+                <svg class="product-amount__btn-ico icon-minus">
+                  <use :xlink:href="spritePath + '#sprite-minus'"></use>
+                </svg>
+              </button>
+              <input
+                type="number"
+                readonly="readonly"
+                class="product-amount__val"
+                value="1"
+                v-model="count"
+                data-js-action="qty-val"
+              />
+              <button type="button" class="product-amount__btn" @click="changeCount" data-type="plus">
+                <svg class="product-amount__btn-ico icon-plus">
+                  <use :xlink:href="spritePath + '#sprite-plus'"></use>
+                </svg>
+              </button>
+            </div>
           </div>
           <button
             type="button"

@@ -49,50 +49,46 @@
               <div class="product-item__bottom">
                 <div class="product-item__info">
                   <a href="{{ 'product'|page({ id: product.id }) }}" class="product-item__title">{{ product.title }}</a>
-                  {% if product.categories[0] %}
-                  <a href="{{ 'category' | page({ slug: product.categories[0].slug }) }}" class="product-item__category">{{ product.categories[0].title}}</a>
-                  {% endif %}
-                </div>
-                <div class="product-item__amount">
-                  <div class="product-amount" data-js-action="update-qty">
-                    <button type="button" class="product-amount__btn js-remove-cart">
-                      <svg class="product-amount__btn-ico icon-minus">
-                        <use xlink:href="{{ 'assets/spritemap.svg#sprite-minus'|theme }}"></use>
-                      </svg>
-                    </button>
-                    <input
-                      type="number"
-                      readonly="readonly"
-                      class="product-amount__val"
-                      value="1"
-                      data-js-action="qty-val"
-                    />
-                    <button type="button" class="product-amount__btn js-add-cart">
-                      <svg class="product-amount__btn-ico icon-plus">
-                        <use xlink:href="{{ 'assets/spritemap.svg#sprite-plus'|theme }}"></use>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-item__cart">
                   <div class="product-item__price">
                     {% if product.sale_price > 0 %}
-                    <div class="product-item__current-price">
-                      <strong class="product-item__price-val" data-price>{{ product.sale_price|number_format(2, '.', ' ') }}</strong>
-                      <span class="product-item__price-label">₽</span>
-                    </div>
-                    <div class="product-item__old-price">
-                      <strong class="product-item__price-val" data-price>{{ product.price|number_format(2, '.', ' ') }}</strong>
-                      <span class="product-item__price-label">₽</span>
-                    </div>
-
+                      <div class="product-item__current-price">
+                        <strong class="product-item__price-val" data-price>{{ product.sale_price|number_format(2, '.', ' ') }}</strong>
+                        <span class="product-item__price-label">₽</span>
+                      </div>
+                      <div class="product-item__old-price">
+                        <strong class="product-item__price-val" data-price>{{ product.price|number_format(2, '.', ' ') }}</strong>
+                        <span class="product-item__price-label">₽</span>
+                      </div>
                     {% else %}
-                    <div class="product-item__current-price">
-                      <strong class="product-item__price-val" data-price>{{ product.price|number_format(2, '.', ' ') }}</strong>
-                      <span class="product-item__price-label">₽</span>
-                    </div>
+                      <div class="product-item__current-price">
+                        <strong class="product-item__price-val" data-price>{{ product.price|number_format(2, '.', ' ') }}</strong>
+                        <span class="product-item__price-label">₽</span>
+                      </div>
                     {% endif %}
+                  </div>
+                </div>
 
+                <div class="product-item__cart">
+                  <div class="product-item__amount">
+                    <div class="product-amount" data-js-action="update-qty">
+                      <button type="button" class="product-amount__btn js-remove-cart">
+                        <svg class="product-amount__btn-ico icon-minus">
+                          <use xlink:href="{{ 'assets/spritemap.svg#sprite-minus'|theme }}"></use>
+                        </svg>
+                      </button>
+                      <input
+                        type="number"
+                        readonly="readonly"
+                        class="product-amount__val"
+                        value="1"
+                        data-js-action="qty-val"
+                      />
+                      <button type="button" class="product-amount__btn js-add-cart">
+                        <svg class="product-amount__btn-ico icon-plus">
+                          <use xlink:href="{{ 'assets/spritemap.svg#sprite-plus'|theme }}"></use>
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                   <button
                     type="button"
