@@ -225,5 +225,51 @@
         <div class="contact-form__status" data-js="form-status"></div>
       </form>
     </div>
+
+    <div class="modal__popup" data-modal="leave">
+      <button type="button" class="modal__close" data-role="modal-close">
+        <svg class="modal__close-ico icon-cross">
+          <use xlink:href="{{ 'assets/spritemap.svg#sprite-cross'|theme }}"></use>
+        </svg>
+      </button>
+      <div class="mini-cart__empty-info">Не нашли то что нужно? <br>Оставьте заявку и мы с вами свяжемся!</div>
+      <form class="contact-form" data-form="send-message">
+        <div class="contact-form__form-group">
+          <label class="contact-form__form-label">
+            Имя
+            <span class="contact-form__form-mark">*</span>
+          </label>
+          <input type="text" placeholder="" class="contact-form__form-input" name="user_name">
+          <span class="contact-form__error" data-error-for="user_name"></span>
+        </div>
+        <div class="contact-form__form-group">
+          <label class="contact-form__form-label">
+            Телефон
+            <span class="contact-form__form-mark">*</span>
+          </label>
+          <input type="tel" placeholder="" class="contact-form__form-input" name="user_phone">
+          <span class="contact-form__error" data-error-for="user_phone"></span>
+        </div>
+        <div class="contact-form__form-group">
+          <label class="contact-form__form-label">
+            E-mail
+          </label>
+          <input type="text" placeholder="" class="contact-form__form-input" name="user_email">
+          <span class="contact-form__error" data-error-for="user_email"></span>
+        </div>
+        <div class="contact-form__form-row">
+          <button type="submit" class="contact-form__btn">Отправить</button>
+          <input type="hidden" name="user_subject" value="Заказать прайс-лист">
+          {% if this.theme.whatsapp %}
+            <a class="contact-form__whatsapp" href="whatsapp://send?phone=+{{this.theme.whatsapp}}" title="whatsapp">
+              <svg class="contact-form__whatsapp-ico">
+                <use xlink:href="{{ 'assets/spritemap.svg#sprite-whatsapp'|theme }}"></use>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+        <div class="contact-form__status" data-js="form-status"></div>
+      </form>
+    </div>
   </div>
 </div>

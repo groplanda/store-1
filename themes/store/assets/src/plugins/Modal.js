@@ -6,7 +6,7 @@ export class Modal {
     this.$modals = this.$modalId.querySelectorAll('[data-modal]');
     this.$close = this.$modalId.querySelectorAll('[data-role="modal-close"]');
     this.activeModalClass = "modal__popup_selected";
-
+    this.isOpenModal = false;
     this.init();
   }
 
@@ -37,6 +37,22 @@ export class Modal {
         this.openSelectedModal(event.detail.name)
       }
     });
+
+    document.addEventListener('mouseleave', event => {
+      if(event.clientY <= 0 || event.clientX <= 0 || (event.clientX >= window.innerWidth || event.clientY >= window.innerHeight)) {
+        if (!this.isOpenModal) {
+          this.openModal('leave', '')
+        }
+      }
+    })
+
+    window.addEventListener('scroll', () => {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        if (!this.isOpenModal) {
+          this.openModal('leave', '')
+        }
+      }
+    })
 
   }
 
@@ -77,6 +93,7 @@ export class Modal {
     }
     this.$modalId.classList.add('modal_active');
     modal.classList.add(this.activeModalClass);
+    this.isOpenModal = true;
     return true;
   }
 

@@ -22,8 +22,12 @@
             <p class="theme-slider__description title">{{slide.description|raw}}</p>
 
             <div class="theme-slider__row">
-              <button type="button" data-js-action="open-modal" data-name="form" class="theme-slider__link theme-slider__link_callback button">заказать прайс-лист</button>
-              <a href="{{slide.link}}" class="theme-slider__link theme-slider__link_default button">каталог</a>
+              <button type="button" data-js-action="open-modal" data-name="form" class="theme-slider__link theme-slider__link_callback button">
+                <span>заказать прайс-лист</span>
+              </button>
+              <a href="{{slide.link}}" class="theme-slider__link theme-slider__link_default button">
+                <span>каталог</span>
+              </a>
             </div>
 
             {% if slide.props %}
@@ -47,16 +51,6 @@
         </div>
       </div>
       {% endfor %}
-    </div>
-    <div class="button slider__button_prev slider__button">
-      <svg class="theme-slider__button-ico">
-        <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-back'|theme }}"></use>
-      </svg>
-    </div>
-    <div class="button slider__button_next slider__button">
-      <svg class="theme-slider__button-ico">
-        <use xlink:href="{{ 'assets/spritemap.svg#sprite-arrow-forward'|theme }}"></use>
-      </svg>
     </div>
   </div>
 </div>

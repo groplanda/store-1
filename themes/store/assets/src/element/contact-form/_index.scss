@@ -332,4 +332,27 @@
       text-align: center;
     }
   }
+
+  &__form-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__whatsapp {
+    width: 51px;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: $green-color;
+    margin-left: 20px;
+  }
+
+  &__whatsapp-ico {
+    fill: $white-color;
+    width: 24px;
+    height: 24px;
+  }
 }
