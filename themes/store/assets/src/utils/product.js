@@ -20,7 +20,7 @@ export function createProductData(item, index, data) {
     item.amount = findAmountById(data, item.id);
   }
   item.index = index + '-' + item.id;
-  item.image = decodeURI(item.image);
+  item.image = item.image.replace(/%20/g, " ");
   return item;
 }
 
