@@ -147,7 +147,7 @@ export default {
     paymentErr() {
       return checkErr('user_payment', this.errors);
     },
-    
+
     products() {
       return this.$store.getters.getProducts;
     },
@@ -198,7 +198,7 @@ export default {
       this.$store.dispatch('setLoading', true);
       this.submitStatus = 'Заказ отправляется...'
 
-      this.form.products = this.products;
+      this.form.products = this.forrmattedProducts(this.products);
       this.form.user_sum = this.$store.getters.getTotal;
 
       const request = await axios.post('/api/add-order', this.form);
@@ -248,6 +248,13 @@ export default {
       this.submitStatus = null
       Object.keys(this.form).forEach(key => this.form[key] = '');
     },
+
+    forrmattedProducts(products) {
+      return products.map(product => {
+        product.image = product.image.replace(/%20/g, " ");
+        return product;
+      })
+    }
   },
   created() {
     this.$store.dispatch('getUser');
