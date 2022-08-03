@@ -91,11 +91,9 @@ tabs:
                         type: number
                     image:
                         label: Изображение
-                        mode: image
-                        imageWidth: '80'
-                        imageHeight: '80'
+                        type: partial
+                        path: ~/plugins/acme/shop/models/order/_image_column.htm
                         span: auto
-                        type: mediafinder
         user:
             label: 'Покупатель из кабинета'
             nameFrom: name
