@@ -151,9 +151,9 @@ class OrderController extends Controller
 
     } else {
       $this->insertDemand($request);
-      Mail::send('acme.shop::mail.request', $request->all(), function($message) {
+      Mail::send('acme.shop::mail.request', $request->all(), function($message) use ($request) {
         $message->to($this->getUserMail(), 'Admin Person');
-        $message->subject('E-mail');
+        $message->subject($request->get('user_subject'));
       });
 
       return response()->json(['status' => 'success', 'message' => 'Сообщение отправлено!']);

@@ -205,8 +205,8 @@
 </template>
 
 <script>
-import { onValidate, checkErr } from "@/src/helpers/validate.js";
-import { Cart } from '@/src/plugins/Cart';
+import { onValidate, checkErr } from "../helpers/validate.js";
+import { Cart } from '../plugins/Cart';
 import axios from "axios";
 import CartItem from "./components/Checkout/CartItem";
 import CartTotal from "./components/Checkout/CartTotal";

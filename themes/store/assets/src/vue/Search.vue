@@ -32,7 +32,7 @@
 </template>
 <script>
 import axios from "axios";
-import { choseWordForm } from "@/src/helpers/prepare.js";
+import { choseWordForm } from "../helpers/prepare.js";
 import ProductItem from './components/Search/ProductItem';
 import Loading from "./components/Loading/Loading";
 import { Cart } from '../plugins/Cart';

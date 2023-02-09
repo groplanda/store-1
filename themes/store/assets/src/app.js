@@ -13,6 +13,8 @@ import noUiSlider from 'nouislider';
 import { Wish } from './plugins/Wish';
 import { SingleProduct } from './plugins/SingleProduct';
 import { SelectCity } from './plugins/SelectCity';
+import Inputmask from "inputmask";
+import { ContactForm } from './plugins/ContactForm';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -34,7 +36,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 
+  const phones = document.querySelectorAll('[data-mask="phone"]');
+  const im = new Inputmask("+7 (999) 999-99-99");
+  phones.forEach(phone => {
+    im.mask(phone);
+  })
+
   Swiper.use([Navigation, Pagination, Thumbs]);
+
+  new ContactForm('[data-form="send-message"]');
 
   // isMobile
   const IS_MOBILE = window.innerWidth < 767;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { onValidate, checkErr } from "@/src/helpers/validate.js";
+import { onValidate, checkErr } from "../helpers/validate.js";
 
 // stars
 

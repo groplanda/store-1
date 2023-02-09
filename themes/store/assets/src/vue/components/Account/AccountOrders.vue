@@ -5,7 +5,7 @@
 </template>
 <script>
 import AccountSingleOrder from "./AccountSingleOrder";
-import { Cart } from '@/src/plugins/Cart';
+import { Cart } from '../../../plugins/Cart';
 
 export default {
   name: "AccountOrders",

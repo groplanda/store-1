@@ -6,7 +6,7 @@
         <div class="theme-slider__content">
           <div class="theme-slider__title">{{slide.title}}</div>
           <p class="theme-slider__descr">{{slide.description}}</p>
-          <a href="{{slide.link}}" class="theme-slider__button button button_primary">Подробнее</a>
+          <a href="{{slide.link}}" class="theme-slider__button button" data-js-action="open-modal" data-type-modal="callcak"><span>Запросить прайс-лист с оптовыми ценами</span></a>
         </div>
         <picture>
           <source srcset="{{ slide.image|media|resize(1410, 600, { mode: 'crop', quality: '90' }) }}" type="image/jpeg"/>

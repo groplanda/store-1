@@ -1,5 +1,5 @@
 let mix = require('laravel-mix');
-
+let path = require('path');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -13,13 +13,14 @@ let mix = require('laravel-mix');
 
 mix.setPublicPath('./themes/store/assets');
 
+mix.alias({
+  '@': path.join(__dirname + '/themes/' + process.env.MIX_THEME + '/assets'),
+  '@vue': path.join(__dirname + '/themes/' + process.env.MIX_THEME + '/assets/src/vue')
+});
+
 mix.webpackConfig({
   resolve: {
     extensions: ['.js', '.vue', '.json'],
-    alias: {
-      '@': __dirname + '/themes/' + process.env.MIX_THEME + '/assets',
-      '@vue': __dirname + '/themes/' + process.env.MIX_THEME + '/assets/src/vue'
-    },
   },
   module: {
     rules: [
@@ -60,12 +61,12 @@ mix.js('./themes/store/assets/src/vue/index.js', 'dist/js/vue.js')
     ]
   })
   .browserSync({
-    proxy: 'html-store.loc',
-    host: 'html-store.loc',
+    proxy: process.env.MIX_HOST,
+    host: process.env.MIX_HOST,
     notify: false,
     files: [
-      "./themes/store/assets/dist/css/*.css",
-      "./themes/store/assets/dist/js/*.js",
-      "./themes/store/**/*.htm",
+      "./themes/" + process.env.MIX_THEME + "/assets/dist/css/*.css",
+      "./themes/" + process.env.MIX_THEME + "/assets/dist/js/*.js",
+      "./themes/" + process.env.MIX_THEME + "/**/*.htm",
     ]
 });

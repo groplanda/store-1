@@ -3,7 +3,7 @@ export class Cart {
   constructor(cartEl, CountEl) {
     this.$cart = document.querySelectorAll(cartEl);
     this.$countCart = document.querySelectorAll(CountEl);
-    this.storageName = "sushi_shop"
+    this.storageName = "askizky_sausages"
   }
 
   addToCart(data) {

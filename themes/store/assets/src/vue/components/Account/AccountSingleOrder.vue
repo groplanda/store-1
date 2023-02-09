@@ -59,7 +59,7 @@
 
 </template>
 <script>
-import { choseWordForm } from "@/src/helpers/prepare.js";
+import { choseWordForm } from "../../../helpers/prepare.js";
 
 export default {
   name: "AccountSingleOrder",
