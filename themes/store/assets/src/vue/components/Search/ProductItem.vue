@@ -1,6 +1,7 @@
 <template>
   <div class="category__item">
     <div class="product-card">
+      <p class="product-card__name">{{ product.title }}</p>
       <div class="product-card__image">
         <picture class="product-card__picture">
           <source :srcset="product.image ? '/storage/app/media' + product.image : noImage" class="product-card__image-src" />
@@ -12,75 +13,16 @@
           </svg>
         </span>
       </div>
-      <div class="product-card__group">
-        <div class="product-card__content">
-          <div class="product-card__name">{{ product.title }}</div>
-          <div class="product-card__descr" v-html="product.description"></div>
-        </div>
-        <div class="product-card__footer">
-          <div class="product-card__prices">
-            <template v-if="product.sale_price > 0">
-            <div class="product-card__current-price">
-              {{ basePrice }}
-              <span class="product-card__prices-descr">за 1 порцию</span>
-            </div>
-            <div class="product-card__old-price">
-              {{ salePrice }}
-            </div>
-            </template>
-            <div class="product-card__current-price" v-else>
-              {{ basePrice }}
-              <span class="product-card__prices-descr">за 1 порцию</span>
-            </div>
-          </div>
-
-          <a v-if="hasOptions" :href="'/product/' + product.id" class="product-card__button button button_primary">
-            <span class="product-card__button-value">Подробнее</span>
-          </a>
-
-          <template v-else>
-            <button
-              type="button"
-              class="product-card__button button button_primary"
-              :class="btnHideClass"
-              @click="addToCart(1)"
-              :data-product-id="product.id"
-            >
-              <span class="product-card__button-value">В корзину</span>
-            </button>
-            <div class="qty" :class="qtyShowClass">
-              <button
-                type="button"
-                class="qty__btn qty__btn_remove"
-                @click="addToCart(-1)"
-                >
-                <svg class="qty__btn-ico" width="8" height="3" viewBox="0 0 8 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0.702813 0.0799997H7.30281V2.576H0.702813V0.0799997Z" fill="currentColor"/>
-                </svg>
-              </button>
-              <div class="qty__val" data-js-action="qty-val">{{ amount }}</div>
-              <button
-                type="button"
-                class="qty__btn qty__btn_add"
-                @click="addToCart(1)"
-              >
-                <svg class="qty__btn-ico" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M11.5459 6.8H7.29788V11H4.72988V6.8H0.481875V4.4H4.72988V0.199999H7.29788V4.4H11.5459V6.8Z" fill="currentColor"/>
-                </svg>
-              </button>
-            </div>
-          </template>
-        </div>
-      </div>
-      <a :href="'/product/' + product.id" class="product-card__url"></a>
       <a
         href="#!"
-        class="product-card__url product-card__url_quick"
         @click="quickView"
+        class="product-card__url js-quick-view button button_primary"
         data-js-action="open-modal"
         data-type-modal="single-product"
       >
+        Подробнее
       </a>
+
     </div>
   </div>
 </template>

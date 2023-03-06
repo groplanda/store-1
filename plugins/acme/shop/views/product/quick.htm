@@ -39,12 +39,15 @@
           <div class="product__prop">
             {% for prop in product.props %}
             <div class="product__prop-item">
-              <div class="product__prop-label">{{ prop.props_option }}</div>
+              {% if prop.props_option  %}
+                <div class="product__prop-label">{{ prop.props_option }}</div>
+              {% endif %}
               <div class="product__prop-val">{{ prop.props_value }}</div>
             </div>
             {% endfor %}
           </div>
           {% endif %}
+          {% if product.price > 0 or product.sale_price > 0 %}
           <div class="product__price">
             <span data-js="price-current">
               {{ product.sale_price > 0 ? product.sale_price|number_format(0, '', ' ') : product.price|number_format(0, '', ' ') }}
@@ -52,8 +55,9 @@
             <span data-js="price-old" class="product__price-old{{ product.sale_price == 0 ? ' product__price-old_hide' : '' }}">
               {{ product.price|number_format(0, '', ' ') }}
             </span>
-            &nbsp;₽ за 1 порцию (1шт)
+            &nbsp;₽
           </div>
+          {% endif %}
         </div>
         <div class="product__content-footer">
           {% if product.price > 0  %}
@@ -75,7 +79,7 @@
           </div>
           <a href="/product/{{ product.id }}" class="button button_primary product__add product__add_more">Подробнее</a>
           {% else %}
-          <a href="/product/{{ product.id }}" class="button button_primary product__add">Подробнее</a>
+          <button type="button" class="button button_primary product__add" data-js-action="open-modal" data-type-modal="callback" data-title="Запросить прайс-лист с оптовыми ценами">Прайс-лист по оптовым ценам</button>
           {% endif %}
         </div>
       </div>

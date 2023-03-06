@@ -128,3 +128,13 @@ tabs:
         mode: image
         imageWidth: 200
         tab: Общие
+      site_descr:
+        type: textarea
+        label: Описание сайта шапка
+        size: tiny
+        span: full
+        tab: Общие
+      show_cart:
+        label: Отображать корзину
+        type: switch
+        tab: Общие

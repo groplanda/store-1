@@ -73,7 +73,11 @@
   }
 
   &__container-scroll {
-    padding: 60px 5px;
+    padding: 60px 5px 20px;
+
+    &_active {
+      overflow-y: scroll;
+    }
   }
 
   &__nav {

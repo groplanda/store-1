@@ -307,7 +307,7 @@
   &__item {
     width: 100%;
     max-width: 280px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 
     @media(min-width: 575px) {
       margin-left: auto;
@@ -317,10 +317,11 @@
     @media(min-width: 768px) {
       width: 100%;
       max-width: calc(50% - 10px);
-      margin: 0 5px 10px 5px;
+      margin: 0 5px 45px 5px;
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
+      height: auto;
     }
 
     @media(min-width: 992px) {

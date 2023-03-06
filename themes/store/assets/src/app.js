@@ -15,6 +15,7 @@ import { SingleProduct } from './plugins/SingleProduct';
 import { SelectCity } from './plugins/SelectCity';
 import Inputmask from "inputmask";
 import { ContactForm } from './plugins/ContactForm';
+import { menu } from './module/menu';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -212,46 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // mobile menu
-  const triggers = document.querySelectorAll('[data-js-action="open-menu"]'),
-        mobileMenu = document.querySelector('[data-menu="mobile"]');
-
-  if (triggers) {
-    triggers.forEach(trigger => {
-      trigger.addEventListener("click", () => {
-        mobileMenu.classList.toggle("menu_open");
-        document.body.classList.toggle("modal-open");
-      })
-    })
-  }
-
-  if (mobileMenu) {
-    mobileMenu.addEventListener("click", e => {
-      if (e.target && e.target.dataset.jsAction === "mobile-overlay") {
-        mobileMenu.classList.remove("menu_open");
-        document.body.classList.remove("modal-open");
-      }
-    })
-  }
-
-  const dropdownMenu = document.querySelectorAll('[data-js-action="open-dropdown-menu"]');
-
-  if (dropdownMenu) {
-    dropdownMenu.forEach(btn => {
-      btn.addEventListener("click", toggleMobileDropdown)
-    })
-  }
-
-  function toggleMobileDropdown() {
-    const activeClass = "menu__item-btn_active",
-          nextClass = ".menu__dropdown";
-    $('[data-js-action="open-dropdown-menu"]').not(this).removeClass(activeClass).next(nextClass).slideUp();
-    $(this).toggleClass(activeClass);
-    if ($(this).hasClass(activeClass)) {
-      $(this).next(nextClass).slideDown();
-    } else {
-      $(this).next(nextClass).slideUp();
-    }
-  }
+  menu();
 
   // catalog filters
 

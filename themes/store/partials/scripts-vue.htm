@@ -7,7 +7,7 @@ function onStart()
     $lastUpdate = filemtime($this->theme->getPath() . '/' . $scriptAsset);
     $this['scripts'] = sprintf('%s?v=%s', $this->controller->themeUrl($scriptAsset), $lastUpdate);
 
-    $scriptVueAsset = 'assets/dist/js/app.js';
+    $scriptVueAsset = 'assets/dist/js/vue.js';
     $lastVueUpdate = filemtime($this->theme->getPath() . '/' . $scriptVueAsset);
     $this['vuescripts'] = sprintf('%s?v=%s', $this->controller->themeUrl($scriptVueAsset), $lastVueUpdate);
 }

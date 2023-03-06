@@ -2,7 +2,7 @@ const header = document.querySelector("header"),
         triggerCloseModal  = document.querySelectorAll('[data-role="modal-close"]'),
         modalId = document.getElementById("modal"),
         modalList = modalId.querySelectorAll("[data-modal]"),
-        mobileMenu = document.querySelector('[data-menu="mobile"]');
+        mobileMenu = document.querySelector('[data-js="mobile-menu"]');
 
   document.body.addEventListener("click", function (e) {
     if (e.target.dataset.jsAction === "open-modal" ) {
@@ -50,6 +50,7 @@ const header = document.querySelector("header"),
     }
     const target = e.target,
           offsetBody = getScrollBarWith() + "px",
+          title = target.dataset.title ? target.dataset.title : 'Запросить прайс-лист с оптовыми ценами',
           typeModal = target.dataset.typeModal;
     if (!typeModal) {
       return;
@@ -57,6 +58,13 @@ const header = document.querySelector("header"),
     closeAllModals();
     const currentModal = modalId.querySelector(`[data-modal="${typeModal}"]`);
     if (!currentModal) return;
+
+    if (title) {
+      const titleEl = modalId.querySelector('[data-modal="title"]');
+      const subjectEl = modalId.querySelector('input[name="user_subject"]');
+      titleEl.textContent = subjectEl.value = title;
+    }
+
     modalId.classList.add("modal_active");
     currentModal.classList.add("modal__popup_open");
     document.body.classList.add("modal-open");

@@ -262,14 +262,14 @@
       </div>
     </div>
 
-    <div class="modal__popup" data-modal="callcak">
+    <div class="modal__popup" data-modal="callback">
       <button class="modal__popup-close" data-role="modal-close">
         <svg class="modal__popup-cross" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16.8023 1.19766L9 9M9 9L1.19765 16.8023M9 9L16.8023 16.8023M9 9L1.19765 1.19766" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
       <div class="modal__popup-container">
-        <div class="title modal__popup-title">Запросить прайс-лист с оптовыми ценами</div>
+        <div class="title modal__popup-title" data-modal="title">Запросить прайс-лист с оптовыми ценами</div>
         <br />
         <form class="form" data-form="send-message">
           <div class="form__group">
@@ -289,7 +289,7 @@
           </div>
 
           <input type="hidden" name="user_subject" value="Запросить прайс-лист с оптовыми ценами" />
-          <button type="submit" class="button button_primary form__submit">Оставить отзыв</button>
+          <button type="submit" class="button button_primary form__submit">Запросить прайс-лист</button>
           <span class="form__done" data-js="success"></span>
         </form>
       </div>

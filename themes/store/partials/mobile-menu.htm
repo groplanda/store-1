@@ -1,0 +1,29 @@
+<div class="{{class}}">
+  {% if back %}
+    <div class="header__mobile-menu-back" type="button" data-js-action="mobile-back">
+      <svg class="header__mobile-menu-chevron header__mobile-menu-chevron_back" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+      </svg>
+      <span class="header__mobile-menu-back-name">{{parent}}</span>
+    </div>
+  {% endif %}
+  {% for item in items %}
+  <div class="header__mobile-menu-item">
+    <a
+      href="{{item.url}}"
+      class="header__mobile-menu-link{{ item.isActive ? ' header__mobile-menu-link_current' : '' }}"
+      {% if item.items %} data-js-action="mobile-dropdown" {% endif %}
+    >
+      {{item.title}}
+      {% if item.items %}
+        <svg class="header__mobile-menu-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      {% endif %}
+    </a>
+    {% if item.items %}
+      {% partial "mobile-menu" items=item.items class="header__mobile-menu-dropdown" back=true parent=item.title %}
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>

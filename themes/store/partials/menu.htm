@@ -1,0 +1,30 @@
+<nav class="header__nav">
+  {% for item in items %}
+    <div class="header__nav-item{{item.items ? ' header__nav-item_children' : ''}}">
+      <a
+        href="{{ item.url }}"
+        class="header__nav-link{{ item.isActive ? ' header__nav-link_current' : '' }}"
+        {% if item.items %} data-js="dropdown" {% endif %}
+      >
+        {{ item.title }}
+        {% if item.items %}
+        <svg class="header__nav-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+        {% endif %}
+      </a>
+      {% if item.items %}
+      <div class="header__nav-dropdown {{item.viewBag.cssClass ? item.viewBag.cssClass : ''}}">
+        {% for subitem in item.items %}
+        <div class="header__nav-subitem">
+          <a
+            href="{{ subitem.url }}"
+            class="header__nav-sublink{{ item.isActive ? ' header__nav-sublink_current' : '' }}"
+          >{{ subitem.title }}</a>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</nav>
