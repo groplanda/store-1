@@ -28,23 +28,25 @@
 <section id="categorySection" class="category section">
   <div class="category__wrap wrap">
 
-    <div class="category__list">
-      <div class="title category__list-title">Наши категории</div>
-      <div class="category__list-scroll">
-        <div class="category__list-row">
-          {% for cat in all_categories %}
-          <a href="{{ 'category' | page({ slug: cat.slug }) }}" class="category__list-item{{ category.id == cat.id ? ' category__list-item_active' : '' }}">{{ cat.title }}</a>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-
     <div class="category__heading">
       <h1 class="title category__title">{{ category.title }}</h1>
       {% if category.products_count > 0 %}
       <span class="category__suptitle">{{ category.products_count }} {{ countLabel }}</span>
       {% endif %}
     </div>
+
+    {% if category.children|length > 0 %}
+    <div class="category__list">
+      <div class="category__list-scroll">
+        <div class="category__list-row">
+          {% for children in category.children %}
+          <a href="{{'category'|page({slug:children.slug})}}" class="category__list-item">{{children.title}}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
     <div class="category__body">
       <div class="category__content">
         <div class="category__sort">
@@ -74,25 +76,6 @@
 
   </div>
 </section>
-{% if categories %}
-<section class="category-additional section">
-  <div class="wrap category-additional__wrap">
-    <h2 class="title title_sm category-additional__title">Другие типы {{ category.title }}</h2>
-    <div class="category-additional__row">
-      {% for cat in categories %}
-      <div class="category-additional__item">
-        <a href="{{ 'category' | page({ slug: cat.slug }) }}" class="category-additional__image {{ cat.image ? 'category-additional__image_overlay' : '' }}">
-          {% if cat.image %}
-          <img src="{{ cat.image|media|resize(166, 100, { mode: 'crop', quality: '80' }) }}" alt="{{ cat.title }}" class="category-additional__pic" />
-          {% endif %}
-        </a>
-        <a href="{{ 'category' | page({ slug: cat.slug }) }}" class="category-additional__link">{{ cat.title }}</a>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endif %}
 <section class="content section">
   <div class="wrap content__wrap">
     <h2 class="title content__title">{{ category.meta_title ? category.meta_title : category.title }}</h2>

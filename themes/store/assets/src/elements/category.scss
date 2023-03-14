@@ -86,19 +86,19 @@
     margin: 0 10.5px;
     white-space: nowrap;
 
-    &:last-child {
-      padding-right: 45px;
-    }
-
     &:hover, &_active {
       color: $red-color;
       text-decoration: none;
     }
 
+    @media(max-width: 767px) {
+      &:last-child {
+        padding-right: 45px;
+      }
+    }
+
     @media(min-width: 768px) {
       font-size: 12px;
-      width: 100%;
-      max-width: calc(16.666% - 21px);
       margin-top: 10px;
       margin-bottom: 10px;
       padding: 5px 0;
@@ -113,34 +113,27 @@
       transition: all .25s ease;
       white-space: inherit;
       filter: drop-shadow(-3px -3px 5px #FFFFFF) drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.15));
+      width: auto;
+      padding-left: 15px;
+      padding-right: 15px;
 
       &:hover, &_active {
         color: #FFF;
-        font-weight: bold;
-        font-size: 14px;
         background: $red-color;
       }
 
-      &:last-child {
-        padding-right: 0;
-      }
     }
 
     @media(min-width: 992px) {
-      font-size: 14px;
-      max-width: calc(14.285% - 21px);
-
-      &:hover, &_active {
-        font-size: 16px;
-      }
+      font-size: 13px;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
-    @media(min-width: 1199px) {
-      max-width: calc(11.111% - 21px);
-      font-size: 16px;
-      &:hover, &_active {
-        font-size: 18px;
-      }
+    @media(min-width: 1200px) {
+      font-size: 15px;
+      padding-left: 25px;
+      padding-right: 25px;
     }
   }
 
