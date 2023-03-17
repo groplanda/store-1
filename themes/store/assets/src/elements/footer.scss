@@ -102,13 +102,47 @@
     }
   }
 
+  &__contact-item {
+    margin-bottom: 10px;
+    text-align: center;
+
+    @media(min-width: 768px) {
+      text-align: right;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__contact-label {
+    margin-bottom: 5px;
+    color: #000;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 700;
+
+    @media(min-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media(min-width: 1200px) {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  }
+
   &__contact-text {
     color: #000;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
     display: block;
 
     @media(min-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media(min-width: 1200px) {
       font-size: 16px;
     }
 

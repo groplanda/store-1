@@ -1,11 +1,17 @@
 <div class="footer__contact">
-  {% if contact.phone %}
-  <a href="tel:{{ contact.phone }}" data-contact="phone" class="footer__contact-text js-phone-text">{{ contact.phone }} </a>
-  {% endif %}
-  {% if contact.name %}
-  <a href="{{ 'contact'|page }}" class="footer__contact-text footer__contact-text_address">
-    <span data-contact="name">{{ contact.name }}</span>,
-    <span data-contact="addess">{{ contact.address }}</span>
-  </a>
-  {% endif %}
+  {% for row in contact %}
+    <div class="footer__contact-item">
+      {% if row.name %}
+        <p data-contact="name" class="footer__contact-label">{{row.name}}</p>
+      {% endif %}
+      {% if row.phone %}
+        <a href="tel:{{row.phone}}" data-contact="phone" class="footer__contact-text js-phone-text">{{row.phone}}</a>
+      {% endif %}
+      {% if row.name %}
+        <a href="{{ 'contact'|page }}" class="footer__contact-text footer__contact-text_address">
+          <span data-contact="addess">{{row.address}}</span>
+        </a>
+      {% endif %}
+    </div>
+  {% endfor %}
 </div>

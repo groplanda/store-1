@@ -1,4 +1,7 @@
 description = "Contact page"
+
+[ContactData]
+templateType = "contact"
 ==
 <!DOCTYPE html>
 <html lang="ru">
@@ -19,26 +22,9 @@ description = "Contact page"
               <h1 class="title page__title">{{ this.page.title }}</h1>
               <div class="page__content" itemscope itemtype="http://schema.org/Organization">
                 <span itemprop="name" hidden>{{this.theme.site_name}}</span>
-                <img itemprop="logo url" src="{ this.theme.site_logo|media }}" alt="{{this.theme.site_name}}" hidden />
+                <img itemprop="logo url" src="{{ this.theme.site_logo|media }}" alt="{{this.theme.site_name}}" hidden />
 
-                <div class="page__contact" itemscope itemtype="http://schema.org/PostalAddress">
-                  <div class="page__contact-title title title_sm">Офис</div>
-                  <p class="page__contact-text">
-                    <span itemprop="addressLocality">{{ this.theme.city }}</span>,
-                    <span itemprop="streetAddress">{{ this.theme.address }}</span>
-                    <span itemprop="postalCode" hidden>{{ this.theme.post_code }}</span>
-                  </p>
-                </div>
-
-                <div class="page__contact" >
-                  <div class="page__contact-title title">Телефоны</div>
-                  {% for phone in this.theme.phone %}
-                  <p class="page__contact-text">
-                    <a class="page__contact-link" itemprop="telephone" href="tel:{{ phone.val }}">{{ phone.val }}</a>
-                    {% if phone.text|length > 0 %}<span class="page__contact-small"> {{ phone.text }} </span> {% endif %}
-                  </p>
-                  {% endfor %}
-                </div>
+                {% component 'ContactData' %}
 
                 <div class="page__contact" >
                   <div class="page__contact-title title title_sm">E-mail</div>
@@ -69,8 +55,7 @@ description = "Contact page"
       </div>
     </main>
 
-    <!-- Footer -->
-    {% partial "footer" %}
+
     {% partial "modals" %}
     {% partial "scripts" %}
   </body>

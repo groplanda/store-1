@@ -23,7 +23,7 @@ class ContactData extends ComponentBase
             'type'        => 'dropdown',
             'default'     => 'default',
             'placeholder' => 'Выберите...',
-            'options'     => ['default' => 'Шапка', 'footer' => 'Подвал']
+            'options'     => ['default' => 'Шапка', 'footer' => 'Подвал', 'contact' => 'Контакты']
           ]
       ];
     }
@@ -35,15 +35,26 @@ class ContactData extends ComponentBase
     if($view == 'footer') {
       return $this->renderPartial('@_footer.htm');
     }
+
+    if($view == 'contact') {
+      return $this->renderPartial('@_contact.htm');
+    }
   }
 
   public function prepareVars()
   {
+    $view = $this->property('templateType');
+
     if (isset($_COOKIE['selected_city']) && !empty($_COOKIE['selected_city'])) {
       $cidyId = $_COOKIE['selected_city'];
       $data = Contact::findOrFail((int)$cidyId);
     } else {
-      $data = Contact::active()->orderBy('sort_order', 'asc')->first();
+
+      if ($view == 'footer' || $view == 'contact') {
+        $data = Contact::active()->orderBy('sort_order', 'asc')->get();
+      } else {
+        $data = Contact::active()->orderBy('sort_order', 'asc')->first();
+      }
     }
     $count = Contact::active()->count();
     return [

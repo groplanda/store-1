@@ -1,0 +1,14 @@
+{% for row in contact %}
+  <div class="page__contact" itemscope itemtype="http://schema.org/PostalAddress">
+    <div class="page__contact-title title title_sm">Адрес</div>
+    <p class="page__contact-text">
+      <span itemprop="addressLocality">{{row.name}}</span>,
+      <span itemprop="streetAddress">{{row.address}}</span>
+    </p>
+    <div class="page__contact-title page__contact-title_phone title title_sm">Телефон</div>
+    <p class="page__contact-text">
+      <a class="page__contact-link" itemprop="telephone" href="tel:{{row.phone}}">{{row.phone}}</a>
+    </p>
+  </div>
+{% endfor %}
+
