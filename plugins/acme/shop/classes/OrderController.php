@@ -243,6 +243,6 @@ class OrderController extends Controller
   }
 
   private function getSenders() {
-    return [$this->getUserMail(), 'ooosarmatex@mail.ru'];
+    return [$this->getUserMail()];
   }
 }
