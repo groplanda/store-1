@@ -58,10 +58,12 @@ class OrderController extends Controller
       date_default_timezone_set('Europe/Moscow');
       $time = date('m/d/Y H:i:s', time());
 
-      Mail::send('acme.shop::mail.message', $request->all(), function($message) {
-        $message->to($this->getUserMail(), 'Admin Person');
-        $message->subject('Новый заказ с сайта');
-      });
+      foreach ($this->getSenders() as $sender) {
+        Mail::send('acme.shop::mail.message' , $request->all(), function($message) use ($sender) {
+          $message->to($sender, 'Admin Person');
+          $message->subject('Новый заказ с сайта');
+        });
+      }
 
       if ($request->get('user_email')) {
         $vars = $request->all();
@@ -138,10 +140,13 @@ class OrderController extends Controller
 
     } else {
       $this->insertDemand($request);
-      Mail::send('acme.shop::mail.request', $request->all(), function($message) {
-        $message->to($this->getUserMail(), 'Admin Person');
-        $message->subject('E-mail');
-      });
+
+      foreach ($this->getSenders() as $sender) {
+        Mail::send('acme.shop::mail.request' , $request->all(), function($message) use ($request, $sender) {
+          $message->to($sender, 'Admin Person');
+          $message->subject($request->get('user_subject'));
+        });
+      }
 
       return response()->json(['status' => 'success', 'message' => 'Сообщение отправлено!']);
     }
@@ -235,5 +240,9 @@ class OrderController extends Controller
 
   private function checkPromocode($id, $condition) {
     return Promocode::where([['id', $id], ['condition', '<=', $condition], ['is_active', 1]])->first();
+  }
+
+  private function getSenders() {
+    return [$this->getUserMail(), 'ooosarmatex@mail.ru'];
   }
 }
