@@ -49,7 +49,7 @@
 
     <div class="category__body">
       <div class="category__content">
-        <div class="category__sort">
+        <!-- <div class="category__sort">
           <div class="category__sort-list">
             <div class="category__sort-label" data-js-action="open-sort">
               <span>Сортировка:</span>
@@ -64,7 +64,7 @@
               <button type="button" class="category__sort-item" data-js-action="sort-products" value="sort_order asc">По умолчанию</button>
             </div>
           </div>
-        </div>
+        </div> -->
         <div id="partialProducts" class="category__row">
           {% partial "ProductList::list" %}
         </div>
@@ -76,6 +76,7 @@
 
   </div>
 </section>
+{% if category.description %}
 <section class="content section">
   <div class="wrap content__wrap">
     <h2 class="title content__title">{{ category.meta_title ? category.meta_title : category.title }}</h2>
@@ -84,3 +85,4 @@
     </div>
   </div>
 </section>
+{% endif %}

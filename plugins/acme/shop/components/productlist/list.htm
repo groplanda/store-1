@@ -89,5 +89,10 @@
   </div>
   {% endfor %}
 {% else %}
-    <p class="category__empty">Ничего не удалось найти!</p>
+    <div class="category__empty">
+      <p class="category__empty-text">
+        Здравствуйте, выберите пожалуйста нужный раздел для просмотра интересующей Вас продукции
+      </p>
+      <img src="{{ 'assets/images/category/arrow_up.png'|theme }}" alt="Вверх" class="category__empty-img">
+    </div>
 {% endif %}

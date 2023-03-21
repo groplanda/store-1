@@ -64,8 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
       loop: true,
       slidesPerView: 1,
       spaceBetween: 0,
-      slideClass: 'slider__item',
-      slideActiveClass: 'slider__item_active',
+      slideClass: 'theme-slider__item',
+      slideActiveClass: 'theme-slider__item_active',
     })
   }
 
