@@ -39,6 +39,9 @@ export class ContactForm {
       result.textContent = data.message;
       result.classList.add("show");
 
+      // eslint-disable-next-line no-undef
+      ym(93154317,'reachGoal','zaivka');
+
     })
     .catch(e => {
       this.preloader.classList.remove(this.preloaderActiveClass);
