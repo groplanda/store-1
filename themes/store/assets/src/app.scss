@@ -158,6 +158,56 @@ svg {
   animation: fadeOut 4s both;
 }
 
+.up {
+  width: 40px;
+  height: 40px;
+  right: 12px;
+  bottom: 12px;
+  position: fixed;
+  z-index: 3;
+  border-radius: 50%;
+  color: #FFF;
+  background: rgba($red-color, 0.8);
+  transition: opacity .4s ease .3s transform .5s .4s;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(100%);
+
+  &.--show {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+
+  $root: &;
+
+  &:hover,
+  &:focus {
+    background: $red-color;
+    color: $light-color;
+  }
+
+  @media(min-width: 768px) {
+    width: 60px;
+    height: 60px;
+    right: 24px;
+    bottom: 24px;
+  }
+
+  &__arrow {
+    color: inherit;
+    width: 20px;
+    height: 20px;
+    transition: all .2 ease;
+
+    @media(min-width: 768px) {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
 @mixin placeholder($color) {
   &::-moz-placeholder {
     color: $color;
@@ -205,6 +255,22 @@ svg {
   100% { left: 110%; margin-left: 80px; }
 }
 
+@keyframes pulse-theme {
+  0% {
+    box-shadow: 0 0 0 0px rgba($red-color, 0), 0 0 0 0px rgba($red-color, 0);
+  }
+  40% {
+    box-shadow: 0 0 0 15px rgba($red-color, 0.2), 0 0 0 27px rgba($red-color, 0.12);
+  }
+  80% {
+    box-shadow: 0 0 0 15px rgba($red-color, 0), 0 0 0 27px rgba($red-color, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgba($red-color, 0), 0 0 0 27px rgba($red-color, 0);
+  }
+}
+
+
 @import "./elements/header.scss";
 @import "./elements/slider.scss";
 @import "./elements/home-category.scss";
@@ -230,3 +296,5 @@ svg {
 @import "./elements/account.scss";
 @import "./elements/contact-modal.scss";
 @import "./elements/theme-slider.scss";
+@import "./elements/widget.scss";
+@import "./elements/feature.scss";

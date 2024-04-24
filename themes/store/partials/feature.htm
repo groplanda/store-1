@@ -1,0 +1,16 @@
+<section class="feature section">
+  <div class="feature__container">
+    <h2 class="feature__title title">Наши преимущества</h2>
+    <div class="feature__row">
+      {% for feature in this.theme.feature %}
+        <div class="feature__item">
+          <div class="feature__item-picture">
+            <img src="{{feature.ico|media|resize(false, 150, { mode: 'crop', quality: '100' }) }}" alt="{{ feature.title }}" class="feature__item-ico" />
+          </div>
+          <p class="feature__item-title">{{ feature.title }}</p>
+          <div class="feature__item-descr">{{ feature.descr }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -546,6 +546,57 @@ document.addEventListener("DOMContentLoaded", () => {
     history.pushState({id: id}, null, fullLoc + id + getParams);
   }
 
+  chatWidget();
+
+  function chatWidget() {
+    const el = document.getElementById('chat');
+
+    if (!el) {
+      return;
+    }
+
+    const open = el.querySelector('[data-toggle="open"]');
+    const close = el.querySelector('[data-toggle="close"]');
+
+    open.addEventListener('click', () => el.classList.remove('--hide'));
+    close.addEventListener('click', () => el.classList.add('--hide'));
+  }
+
+  menuFixed()
+
+  function menuFixed() {
+    const menu = document.querySelector('[data-js="fixed-menu"]');
+
+    if (!menu || window.innerWidth < 1200) {
+      return;
+    }
+
+    const up = document.getElementById('up');
+
+    const offset = menu.offsetHeight + menu.closest('header').offsetHeight;
+
+    window.addEventListener('scroll', function() {
+
+      if (this.scrollY > offset) {
+        menu.classList.add('--show');
+        up.classList.add('--show');
+      } else {
+        menu.classList.remove('--show');
+        up.classList.remove('--show');
+
+        const active = menu.querySelectorAll('.header__nav-link_active');
+        active.forEach(link => link.classList.remove('header__nav-link_active'));
+      }
+    });
+
+    up.addEventListener('click', () => {
+      document.body.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    })
+  }
+
   const selectCity = new SelectCity();
   selectCity.init();
 });

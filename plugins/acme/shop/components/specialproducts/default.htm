@@ -4,7 +4,11 @@
       <div class="category__row">
         {% for product in special %}
         <div class="category__item">
-          <div class="product-card">
+          <div class="product-card js-quick-view"
+            data-js-action="open-modal"
+            data-type-modal="single-product"
+            data-quick-product-id="{{ product.id }}"
+          >
             <p class="product-card__name">{{ product.title }}</p>
             <div class="product-card__image">
               <picture>
@@ -75,15 +79,11 @@
               </div>
             {% endif %}
             {% if this.theme.show_cart != true %}
-              <a
-                href="#!"
-                class="product-card__url js-quick-view button button_primary"
-                data-js-action="open-modal"
-                data-type-modal="single-product"
-                data-quick-product-id="{{ product.id }}"
+              <span
+                class="product-card__url button button_primary"
               >
                 Подробнее
-              </a>
+              </span>
             {% endif %}
 
           </div>

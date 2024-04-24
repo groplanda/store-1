@@ -3,12 +3,15 @@ tabs:
   lazy:
       - Контакты
       - Общие
+      - Преимущества
   paneCssClass:
       0: first-tab
       1: second-tab
+      2: third-tab
   icons:
       Контакты: icon-phone
       Общие: icon-cogs
+      Преимущества: icon-paw
   fields:
       phone:
           label: Телефон
@@ -138,3 +141,30 @@ tabs:
         label: Отображать корзину
         type: switch
         tab: Общие
+      feature:
+          label: Преимущества
+          span: storm
+          cssClass: col-md-12
+          tab: Преимущества
+          type: repeater
+          prompt: Добавить
+          form:
+            fields:
+              ico:
+                label: Иконка
+                type: mediafinder
+                mode: image
+                imageWidth: 100
+                span: storm
+                cssClass: col-md-6
+              title:
+                label: Заголовок
+                type: text
+                span: storm
+                cssClass: col-md-6
+              descr:
+                label: Описание
+                type: textarea
+                size: tiny
+                span: storm
+                cssClass: col-md-12

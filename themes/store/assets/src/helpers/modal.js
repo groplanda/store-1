@@ -5,8 +5,11 @@ const header = document.querySelector("header"),
         mobileMenu = document.querySelector('[data-js="mobile-menu"]');
 
   document.body.addEventListener("click", function (e) {
-    if (e.target.dataset.jsAction === "open-modal" ) {
-      openModal(e);
+    const target = e.target;
+    if (target.dataset.jsAction === "open-modal" || target.closest('[data-js-action="open-modal"]')) {
+      e.preventDefault();
+      const trigger = target.dataset.jsAction === "open-modal" ? target : target.closest('[data-js-action="open-modal"]');
+      openModal(trigger);
     }
   })
 
@@ -43,13 +46,11 @@ const header = document.querySelector("header"),
     return windowsWidth - documentWidth;
   }
 
-  function openModal(e) {
-    e.preventDefault();
-    if (!e.target) {
+  function openModal(target) {
+    if (!target) {
       return;
     }
-    const target = e.target,
-          offsetBody = getScrollBarWith() + "px",
+    const offsetBody = getScrollBarWith() + "px",
           title = target.dataset.title ? target.dataset.title : 'Запросить прайс-лист с оптовыми ценами',
           typeModal = target.dataset.typeModal;
     if (!typeModal) {

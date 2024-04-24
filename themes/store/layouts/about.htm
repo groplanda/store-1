@@ -1,0 +1,41 @@
+description = "About static page"
+
+[staticPage]
+useContent = 1
+default = 0
+==
+<!DOCTYPE html>
+<html lang="ru">
+  {% partial "meta" %}
+  <body>
+    <!-- Header -->
+    {% partial "header" %}
+
+    <!-- Content -->
+    <main class="main section">
+      <div class="main__wrap wrap">
+        <div class="main__content">
+          <!-- хлебные крошки старт --->
+          {% partial "breadcrumbs" %}
+          <!-- хлебные крошки конец --->
+          <section class="page section">
+            <div class="wrap page__wrap">
+              <h1 class="title page__title">{{ this.page.title }}</h1>
+              <div class="page__entry">
+                {% component 'staticPage' %}
+              </div>
+            </div>
+          </section>
+
+          {% partial "feature" %}
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    {% partial "footer" %}
+    {% partial "modals" %}
+    {% partial "scripts" %}
+  </body>
+</html>
