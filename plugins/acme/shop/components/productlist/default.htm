@@ -1,4 +1,5 @@
 {% set index = 1 %}
+{% set children =  __SELF__.children %}
 <div class="breadcrumbs section">
   <div class="breadcrumbs__wrap wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
     {% for breadcrumb in breadcrumbs %}
@@ -35,37 +36,38 @@
       {% endif %}
     </div>
 
-    {% if category.children|length > 0 %}
-    <div class="category__list">
-      <div class="category__list-scroll">
-        <div class="category__list-row">
-          {% for children in category.children %}
-          <a href="{{'category'|page({slug:children.slug})}}" class="category__list-item">{{children.title}}</a>
-          {% endfor %}
+    {% if children|length > 0 %}
+      <div class="shop">
+        <div class="shop__container">
+          <div class="shop__row">
+            {% for subcat in children %}
+              <div class="shop__item">
+                <a href="{{ 'category'|page({slug:subcat.slug}) }}" class="shop__category" style="--clr: {{subcat.color}}">
+                  <span class="shop__category-picture">
+                    <picture>
+                      <source srcset="{{ subcat.image|media|resize(100, false, { mode: 'crop', quality: '100' })}}" />
+                      <img src="{{ subcat.image|media|resize(100, false, { mode: 'crop', quality: '100' })}}" alt="{{ category.title }}" class="shop__category-preview" />
+                    </picture>
+                  </span>
+                  <span class="shop__category-group">
+                    <span class="shop__category-name">{{subcat.title}}</span>
+                    {% if subcat.products_count > 0 %}
+                      <span class="shop__category-info">
+                        <span class="shop__category-counter" data-js-action="products-count">{{ subcat.products_count }}</span>
+                      </span>
+                    {% endif %}
+                  </span>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
-    </div>
     {% endif %}
 
     <div class="category__body">
-      <div class="category__content">
-        <!-- <div class="category__sort">
-          <div class="category__sort-list">
-            <div class="category__sort-label" data-js-action="open-sort">
-              <span>Сортировка:</span>
-              <svg class="category__sort-ico" width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.6195 0.990037C10.5034 0.873629 10.3655 0.781272 10.2136 0.718256C10.0617 0.65524 9.89893 0.622803 9.73451 0.622803C9.5701 0.622803 9.40729 0.65524 9.25543 0.718256C9.10357 0.781272 8.96563 0.873629 8.84951 0.990037L0.539515 9.30004C0.446811 9.39255 0.373263 9.50244 0.323082 9.62341C0.272901 9.74439 0.24707 9.87407 0.24707 10.005C0.24707 10.136 0.272901 10.2657 0.323082 10.3867C0.373263 10.5076 0.446811 10.6175 0.539515 10.71L8.84951 19.02C9.33951 19.51 10.1295 19.51 10.6195 19.02C11.1095 18.53 11.1095 17.74 10.6195 17.25L3.37951 10L10.6295 2.75004C11.1095 2.27004 11.1095 1.47004 10.6195 0.990037Z" fill="currentColor"/>
-              </svg>
-            </div>
-            <div class="category__sort-dropdown" id="partialSort">
-              <button type="button" class="category__sort-item category__sort-item_active" data-js-action="sort-products" value="price asc">Сначала дешёвые</button>
-              <button type="button" class="category__sort-item" data-js-action="sort-products" value="price desc">Сначала дорогие</button>
-              <button type="button" class="category__sort-item" data-js-action="sort-products" value="sale_price desc">По скидкам</button>
-              <button type="button" class="category__sort-item" data-js-action="sort-products" value="sort_order asc">По умолчанию</button>
-            </div>
-          </div>
-        </div> -->
-        <div id="partialProducts" class="category__row">
+      <div class="shop">
+        <div id="partialProducts" class="shop__row">
           {% partial "ProductList::list" %}
         </div>
         <div id="partialPaginate" class="category__pagination">

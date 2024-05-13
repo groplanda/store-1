@@ -50,3 +50,15 @@ tabs:
             span: full
             type: textarea
             tab: 'Мета поля'
+        color:
+            label: Цвет
+            availableColors:
+                - '#FF9846'
+                - '#F46D40'
+                - '#EB5757'
+                - '#61A8DE'
+                - '#1BD741'
+                - '#F3BB1C'
+            span: full
+            type: colorpicker
+            tab: Цвет

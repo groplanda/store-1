@@ -47,6 +47,14 @@
       margin-right: 10px;
     }
 
+    @media(min-width: 1280px) {
+      font-size: 15px;
+    }
+
+    @media(min-width: 1368px) {
+      font-size: 16px;
+    }
+
     &:hover {
       color: $red-color;
       text-decoration: none;

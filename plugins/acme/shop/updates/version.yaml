@@ -150,3 +150,6 @@
 1.0.51:
     - 'Updated table acme_shop_product'
     - builder_table_update_acme_shop_product_8.php
+1.0.52:
+    - 'Updated table acme_shop_categories'
+    - builder_table_update_acme_shop_categories_9.php

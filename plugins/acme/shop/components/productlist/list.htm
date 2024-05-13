@@ -1,17 +1,16 @@
 {% if products.total != 0 %}
   {% for product in products %}
-  <div class="category__item">
+  <div class="shop__item">
     <div class="product-card js-quick-view"
       data-js-action="open-modal"
       data-type-modal="single-product"
       data-quick-product-id="{{ product.id }}"
     >
-      <p class="product-card__name">{{ product.title }}</p>
       <div class="product-card__image">
         <picture>
           {% if product.image %}
-            <source srcset="{{ product.image|media|resize(400, false, { mode: 'crop', quality: '90' }) }}" type="image/jpeg" class="product-card__image-src" />
-            <img src="{{ product.image|media|resize(400, false, { mode: 'crop', quality: '90' }) }}"  alt="{{ product.title }}"  class="product-card__image-src" />
+            <source srcset="{{ product.image|media|resize(400, 400, { mode: 'crop', quality: '90' }) }}" type="image/jpeg" class="product-card__image-src" />
+            <img src="{{ product.image|media|resize(400, 400, { mode: 'crop', quality: '90' }) }}"  alt="{{ product.title }}"  class="product-card__image-src" />
           {% else %}
             <source srcset="{{ 'assets/images/no-image.jpg'|theme}}" type="image/jpeg" class="product-card__image-src" />
             <img src="{{ 'assets/images/no-image.jpg'|theme }}"  alt="{{ product.title }}"  class="product-card__image-src" />
@@ -25,73 +24,70 @@
           </span>
         {% endif %}
       </div>
-      {% if product.sale_price > 0 or product.price > 0 %}
-        <div class="product-card__group">
-          <div class="product-card__prices">
-            {% if product.sale_price > 0 %}
-            <div class="product-card__current-price">
-              {{ product.sale_price|number_format(0, '', ' ') }} ₽
-              <span class="product-card__prices-descr"></span>
+      <div class="product-card__body">
+        <p class="product-card__name">{{ product.title }}</p>
+        <div class="product-card__info">{{ product.description|raw }}</div>
+        {% if product.sale_price > 0 or product.price > 0 %}
+          <div class="product-card__group">
+            <div class="product-card__prices">
+              {% if product.sale_price > 0 %}
+              <div class="product-card__current-price">
+                {{ product.sale_price|number_format(0, '', ' ') }} ₽
+                <span class="product-card__prices-descr"></span>
+              </div>
+              <div class="product-card__old-price">
+                {{ product.price|number_format(0, '', ' ') }} ₽
+              </div>
+              {% else %}
+              <div class="product-card__current-price">
+                {{ product.price|number_format(0, '', ' ') }} ₽
+                <span class="product-card__prices-descr"></span>
+              </div>
+              {% endif %}
             </div>
-            <div class="product-card__old-price">
-              {{ product.price|number_format(0, '', ' ') }} ₽
-            </div>
-            {% else %}
-            <div class="product-card__current-price">
-              {{ product.price|number_format(0, '', ' ') }} ₽
-              <span class="product-card__prices-descr"></span>
-            </div>
+
+            {% if this.theme.show_cart %}
+              {% if product.options|length > 0 %}
+                <a href="{{ 'product'|page({ id: product.id }) }}" class="product-card__button button button_primary">
+                  <span class="product-card__button-value">Подробнее</span>
+                </a>
+              {% elseif product.price > 0  %}
+                <button type="button" class="product-card__button button button_primary" data-product-id="{{ product.id }}" data-js-action="add-to-cart">
+                  <span class="product-card__button-value">В корзину</span>
+                </button>
+                <div class="qty">
+                  <button type="button" class="qty__btn qty__btn_remove js-remove-cart" data-product-id="{{ product.id }}" data-js-action="add-to-cart" data-product-amount="-1" data-type="qty">
+                    <svg class="qty__btn-ico" width="8" height="3" viewBox="0 0 8 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0.702813 0.0799997H7.30281V2.576H0.702813V0.0799997Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <div class="qty__val" data-js-action="qty-val">1</div>
+                  <button type="button" class="qty__btn qty__btn_add js-add-cart" data-product-id="{{ product.id }}" data-js-action="add-to-cart" data-type="qty">
+                    <svg class="qty__btn-ico" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.5459 6.8H7.29788V11H4.72988V6.8H0.481875V4.4H4.72988V0.199999H7.29788V4.4H11.5459V6.8Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
+              {% else %}
+                <a href="{{ 'product'|page({ id: product.id }) }}" class="product-card__button button button_primary">
+                  <span class="product-card__button-value">Подробнее</span>
+                </a>
+              {% endif %}
+
             {% endif %}
           </div>
-
-          {% if this.theme.show_cart %}
-            {% if product.options|length > 0 %}
-              <a href="{{ 'product'|page({ id: product.id }) }}" class="product-card__button button button_primary">
-                <span class="product-card__button-value">Подробнее</span>
-              </a>
-            {% elseif product.price > 0  %}
-              <button type="button" class="product-card__button button button_primary" data-product-id="{{ product.id }}" data-js-action="add-to-cart">
-                <span class="product-card__button-value">В корзину</span>
-              </button>
-              <div class="qty">
-                <button type="button" class="qty__btn qty__btn_remove js-remove-cart" data-product-id="{{ product.id }}" data-js-action="add-to-cart" data-product-amount="-1" data-type="qty">
-                  <svg class="qty__btn-ico" width="8" height="3" viewBox="0 0 8 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.702813 0.0799997H7.30281V2.576H0.702813V0.0799997Z" fill="currentColor"/>
-                  </svg>
-                </button>
-                <div class="qty__val" data-js-action="qty-val">1</div>
-                <button type="button" class="qty__btn qty__btn_add js-add-cart" data-product-id="{{ product.id }}" data-js-action="add-to-cart" data-type="qty">
-                  <svg class="qty__btn-ico" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.5459 6.8H7.29788V11H4.72988V6.8H0.481875V4.4H4.72988V0.199999H7.29788V4.4H11.5459V6.8Z" fill="currentColor"/>
-                  </svg>
-                </button>
-              </div>
-            {% else %}
-              <a href="{{ 'product'|page({ id: product.id }) }}" class="product-card__button button button_primary">
-                <span class="product-card__button-value">Подробнее</span>
-              </a>
-            {% endif %}
-
-          {% endif %}
-        </div>
-      {% endif %}
-      {% if this.theme.show_cart != true %}
-        <span
-          class="product-card__url button button_primary"
-        >
-          Подробнее
-        </span>
-      {% endif %}
-
+        {% endif %}
+        {% if this.theme.show_cart != true %}
+          <div class="product-card__row">
+            <span class="product-card__url button button_primary" data-js-action="open-modal" data-type-modal="callback" data-title="Запросить прайс-лист с оптовыми ценами">Заказать</span>
+            <span class="product-card__url button button_primary">Подробнее</span>
+          </div>
+        {% endif %}
+      </div>
     </div>
 
   </div>
   {% endfor %}
 {% else %}
-    <div class="category__empty">
-      <p class="category__empty-text">
-        Здравствуйте, выберите пожалуйста нужный раздел для просмотра интересующей Вас продукции
-      </p>
-      <img src="{{ 'assets/images/category/arrow_up.png'|theme }}" alt="Вверх" class="category__empty-img">
-    </div>
+
 {% endif %}

@@ -1,0 +1,125 @@
+.shop {
+  width: 100%;
+
+  $root: &;
+
+  &__container {
+    width: 100%;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+
+  &__item {
+    padding: 10px 12px;
+    width: 100%;
+
+    @media(min-width: 576px) {
+      width: 50%;
+    }
+
+    @media(min-width: 1024px) {
+      width: 33.333%;
+    }
+
+    @media(min-width: 1200px) {
+      width: 25%;
+      padding: 12px;
+    }
+  }
+
+  &__category {
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: hidden;
+    text-decoration: none;
+    background: var(--clr);
+
+    @media(min-width: 768px) {
+      padding: 15px;
+    }
+
+    @media(min-width: 1200px) {
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    &:hover {
+      text-decoration: none;
+      transform: translateY(-4px);
+
+      #{$root} {
+        &__category-preview {
+          transform: scale(1.1);
+        }
+        &__category-name {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &__category-picture {
+    width: 30%;
+    margin-right: 15px;
+    display: block;
+
+    @media(min-width: 1200px) {
+      margin-right: 20px;
+    }
+  }
+
+  &__category-preview {
+    width: 100%;
+    display: block;
+    transition: all .3s ease;
+  }
+
+  &__category-group {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__category-name {
+    color: #FFF;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 2px;
+
+    @media(min-width: 768px) {
+      font-size: 16px;
+    }
+
+    @media(min-width: 1200px) {
+      font-size: 18px;
+    }
+  }
+
+  &__category-info {
+    font-size: 13px;
+    font-weight: 400;
+    color: $grey-color;
+    opacity: .8;
+
+    @media(min-width: 768px) {
+      font-size: 14px;
+    }
+
+    @media(min-width: 1200px) {
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__category-counter {
+    opacity: 0;
+  }
+}

@@ -5,6 +5,8 @@ use Acme\Shop\Models\Category;
 
 class ProductList extends \Cms\Classes\ComponentBase
 {
+    public $children = [];
+
     public function componentDetails()
     {
         return [
@@ -36,7 +38,7 @@ class ProductList extends \Cms\Classes\ComponentBase
         if ($slug == null) {
             $this->page['products'] = Product::active()->listFrontEnd($options, $perPage);
         } else {
-            $category = Category::where('slug', $slug)->with(['products' => function($query) {
+            $category = Category::where([['slug', $slug], ['is_show', 1]])->with(['products' => function($query) {
               $query->select(['id', 'title', 'slug', 'image', 'sale_price', 'price', 'brand_id'])->where('is_active', 1)->with(['tags', 'options'])->with(['brand' => function($query) {
                 return $query->where([['is_active', 1]])->select(['id', 'title'])->get();
               }])->get();
@@ -46,6 +48,7 @@ class ProductList extends \Cms\Classes\ComponentBase
               return \Response::make($this->controller->run('404'), 404);
             }
 
+            $this->children = Category::where([['parent_id', $category->id], ['is_show', 1]])->withCount('products')->get();
             $this->page['all_categories'] = Category::orderBy('sort_order', 'asc')->where([['is_show', 1], ['parent_id', null]])->get(['id', 'title', 'slug']);
 
             $breadcrumbs[] = ['title' => 'Главная', 'url' => 'home'];

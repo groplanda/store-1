@@ -597,6 +597,22 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
+  countProducts();
+
+  function morph(int, array) {
+    return (array = array || ['товар', 'товара', 'товаров']) && array[(int % 100 > 4 && int % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(int % 10 < 5) ? int % 10 : 5]];
+  }
+
+  function countProducts() {
+    const el = document.querySelectorAll('[data-js-action="products-count"]');
+
+    el.forEach(item => {
+      const count = +item.textContent;
+      item.textContent = `${count} ${morph(count)}`;
+      item.style.opacity = 1;
+    })
+  }
+
   const selectCity = new SelectCity();
   selectCity.init();
 });
