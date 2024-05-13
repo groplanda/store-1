@@ -332,10 +332,10 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 0 -2.5px;
+    margin: 20px -2.5px 0 -2.5px;
 
     @media(min-width: 768px) {
-      margin: 0 -5px;
+      margin: 40px -5px 0 -5px;
     }
   }
 
