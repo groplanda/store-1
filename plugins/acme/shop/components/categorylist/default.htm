@@ -5,7 +5,7 @@
       {% for category in categories %}
       <div class="catalog__item">
         <a href="{{ 'category' | page({ slug: category.slug }) }}" class="catalog__item-link">
-          <img src="{{ category.image|media|resize(400, 264, { mode: 'crop', quality: '100' }) }}" alt="{{ category.title }}" class="catalog__item-img" />
+          <img src="{{ category.image|media|resize(400, 300, { mode: 'crop', quality: '100' }) }}" alt="{{ category.title }}" class="catalog__item-img" />
         </a>
         <div class="catalog__item-group">
           <a href="{{ 'category' | page({ slug: category.slug }) }}" class="catalog__item-title">{{ category.title }}</a>
