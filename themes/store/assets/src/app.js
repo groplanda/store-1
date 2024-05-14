@@ -16,8 +16,14 @@ import { SelectCity } from './plugins/SelectCity';
 import Inputmask from "inputmask";
 import { ContactForm } from './plugins/ContactForm';
 import { menu } from './module/menu';
+import lightbox from 'lightbox2';
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  lightbox.option({
+    'disableScrolling': true,
+    'wrapAround': false
+  })
 
   async function supportsWebp() {
     if (!self.createImageBitmap) return false;
@@ -619,4 +625,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const selectCity = new SelectCity();
   selectCity.init();
+
+  const gallery = document.querySelectorAll('[data-slider="gallery"]');
+
+  gallery.forEach(item => {
+    new Swiper(item, {
+      slidesPerView: 'auto',
+      spaceBetween: 0,
+      loop: false,
+      pagination: {
+        el: '.gallery__pagination',
+        bulletClass: 'gallery__pagination-bullet',
+        bulletActiveClass: 'gallery__pagination-bullet_active',
+        currentClass: 'gallery__pagination-bullet_current',
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 'auto',
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1340: {
+          slidesPerView: 3,
+          spaceBetween: 40,
+        }
+      },
+      on: {
+        beforeInit() {
+          const section = this.el.closest('section');
+          const prev = section.querySelector('button[data-dir="prev"]');
+          const next = section.querySelector('button[data-dir="next"]');
+
+          this.params.navigation.prevEl = prev;
+          this.params.navigation.nextEl = next;
+        },
+        init(swiper) {
+          if (swiper.imagesToLoad.length) {
+            const {prevEl, nextEl} = swiper.navigation;
+            console.log(swiper);
+            const offset = (swiper.imagesToLoad[0].offsetHeight / 2) - (prevEl.offsetHeight / 2);
+            nextEl.style.top = prevEl.style.top = `${offset}px`;
+            nextEl.classList.add('gallery__button_active');
+            prevEl.classList.add('gallery__button_active');
+          }
+
+        }
+      },
+    })
+  })
+
 });

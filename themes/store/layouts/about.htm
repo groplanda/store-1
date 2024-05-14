@@ -3,6 +3,14 @@ description = "About static page"
 [staticPage]
 useContent = 1
 default = 0
+
+[GalleryComponent]
+templateSlider = "default"
+galleryId = 1
+
+[GalleryComponent GalleryComponent2]
+templateSlider = "docs"
+galleryId = 2
 ==
 <!DOCTYPE html>
 <html lang="ru">
@@ -28,7 +36,8 @@ default = 0
           </section>
 
           {% partial "feature" %}
-
+          {% component 'GalleryComponent' %}
+          {% component 'GalleryComponent2' %}
         </div>
       </div>
     </main>

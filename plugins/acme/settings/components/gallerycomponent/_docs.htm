@@ -1,0 +1,41 @@
+{% set gallery = __SELF__.gallery %}
+
+<section class="gallery section">
+  <div class="gallery__container">
+    <h2 class="gallery__title title">{{gallery.title}}</h2>
+    <div class="gallery__group">
+      <div class="gallery__slider swiper" data-slider="gallery">
+        <div class="swiper-wrapper">
+          {% for image in gallery.images %}
+          {% set full = image.path %}
+          {% set poster = image.thumb(450, false, { mode: 'crop', quality: '90' }) %}
+            <div class="swiper-slide gallery__slide">
+              <a href="{{ full }}" class="gallery__item gallery__item_file" data-lightbox="g-{{__SELF__.id}}">
+                <picture class="gallery__picture">
+                  <source srcset="{{poster}}">
+                  <img src="{{poster}}" alt="{{image.title}}" class="gallery__image" />
+                </picture>
+                {% if image.title %}
+                  <div class="gallery__hover">
+                    <p class="gallery__name">{{image.title}}</p>
+                  </div>
+                {% endif %}
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="gallery__pagination"></div>
+      </div>
+      <button class="gallery__button_prev gallery__button" type="button" data-dir="prev">
+        <svg class="gallery__button-arrow" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.125 1.75L1 6.875L6.125 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="gallery__button_next gallery__button" type="button" data-dir="next">
+        <svg class="gallery__button-arrow" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.875 11.25L7 6.125L1.875 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>

@@ -12,7 +12,8 @@ class Plugin extends PluginBase
         'Acme\Settings\Components\PageList' => 'PageList',
         'Acme\Settings\Components\PageSingle' => 'PageSingle',
         'Acme\Settings\Components\ContactData' => 'ContactData',
-        'Acme\Settings\Components\ContactModal' => 'ContactModal'
+        'Acme\Settings\Components\ContactModal' => 'ContactModal',
+        'Acme\Settings\Components\GalleryComponent' => 'GalleryComponent'
       ];
     }
 

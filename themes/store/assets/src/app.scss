@@ -103,6 +103,8 @@ svg {
 }
 
 .main {
+  overflow: hidden;
+
   &__wrap {
     @media(min-width: 768px) {
       max-width: 1530px;
@@ -299,3 +301,5 @@ svg {
 @import "./elements/widget.scss";
 @import "./elements/feature.scss";
 @import "./elements/shop.scss";
+@import "./elements/gallery.scss";
+@import "./lightbox.css"
