@@ -162,4 +162,20 @@
       min-height: 300px;
     }
   }
+
+  &_prev {
+    left: -15px;
+
+    @media(min-width: 768px) {
+      left: 16px;
+    }
+  }
+
+  &_next {
+    right: -15px;
+
+    @media(min-width: 768px) {
+      right: 16px;
+    }
+  }
 }

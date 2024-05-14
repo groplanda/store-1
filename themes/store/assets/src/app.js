@@ -66,6 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
       spaceBetween: 0,
       slideClass: 'theme-slider__item',
       slideActiveClass: 'theme-slider__item_active',
+      navigation: {
+        nextEl: '.theme-slider_next',
+        prevEl: '.theme-slider_prev',
+      }
     })
   }
 
