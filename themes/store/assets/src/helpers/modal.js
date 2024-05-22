@@ -52,6 +52,7 @@ const header = document.querySelector("header"),
     }
     const offsetBody = getScrollBarWith() + "px",
           title = target.dataset.title ? target.dataset.title : 'Запросить прайс-лист с оптовыми ценами',
+          product = target.dataset.product ? target.dataset.product : false,
           typeModal = target.dataset.typeModal;
     if (!typeModal) {
       return;
@@ -64,6 +65,11 @@ const header = document.querySelector("header"),
       const titleEl = modalId.querySelector('[data-modal="title"]');
       const subjectEl = modalId.querySelector('input[name="user_subject"]');
       titleEl.textContent = subjectEl.value = title;
+    }
+
+    if (product) {
+      const productEl = modalId.querySelector('input[name="user_product"]');
+      productEl.value = product;
     }
 
     modalId.classList.add("modal_active");

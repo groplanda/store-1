@@ -150,11 +150,22 @@ class OrderController extends Controller
       return response()->json(array_merge(['status' => 'error'], $validatorErrors));
 
     } else {
+      $data = [
+        'user_name' => trim($request->get('user_name')),
+        'user_phone' => trim($request->get('user_phone')),
+        'user_email' => trim($request->get('user_email')),
+        'user_message' => trim($request->get('user_message')),
+        'user_subject' => trim($request->get('user_subject')),
+        'user_product' => trim($request->get('user_product'))
+      ];
+
       $this->insertDemand($request);
       Mail::send('acme.shop::mail.request', $request->all(), function($message) use ($request) {
         $message->to($this->getUserMail(), 'Admin Person');
         $message->subject($request->get('user_subject'));
       });
+
+      $this->sendToTelegram($data);
 
       return response()->json(['status' => 'success', 'message' => 'Сообщение отправлено!']);
     }
@@ -286,5 +297,40 @@ class OrderController extends Controller
   private function getHostUrl() {
     $url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';
     return $url . $_SERVER['SERVER_NAME'];
+  }
+
+  private function sendToTelegram($request)
+  {
+    $bot_token = '6755816113:AAGfH4vlapc32gPqvpVFLIL9XHOPmRZQgPw';
+    $chat_id = '-4235078681';
+
+    $fields = [
+      'user_name'        => 'Имя',
+      'user_phone'       => 'Телефон',
+      'user_email'       => 'Email',
+      'user_message'     => 'Сообщений',
+      'user_subject'     => 'Тема письма',
+      'user_product'     => 'Товар',
+    ];
+
+    $message = '';
+
+    foreach ($request as $key => $value) {
+      $label = $fields[$key];
+      $text = !is_array($value) ? $value : implode(', ', $value);
+      if (isset($label) && $text !== '') {
+        $message .= "<b>".$label."</b>: ".$text. "\n";
+      }
+    }
+
+    $message = rawurlencode($message);
+    $request = "https://api.telegram.org/bot{$bot_token}/sendMessage?chat_id={$chat_id}&parse_mode=html&text={$message}";
+    $sendToTelegram = fopen($request,"r");
+
+    if ($sendToTelegram) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

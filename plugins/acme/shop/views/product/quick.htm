@@ -79,7 +79,7 @@
           </div>
           <a href="/product/{{ product.id }}" class="button button_primary product__add product__add_more">Подробнее</a>
           {% else %}
-          <button type="button" class="button button_primary product__add" data-js-action="open-modal" data-type-modal="callback" data-title="Запросить прайс-лист с оптовыми ценами">Прайс-лист по оптовым ценам</button>
+          <button type="button" class="button button_primary product__add" data-js-action="open-modal" data-type-modal="callback" data-title="Запросить прайс-лист с оптовыми ценами" data-product="{{ product.title }}">Прайс-лист по оптовым ценам</button>
           {% endif %}
         </div>
       </div>

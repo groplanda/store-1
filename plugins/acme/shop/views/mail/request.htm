@@ -9,6 +9,11 @@
   E-mail: {{ user_email }}
 </p>
 {% endif %}
+{% if user_product %}
+<p>
+  Товар: {{ user_product }}
+</p>
+{% endif %}
 {% if user_message %}
 <p>
   Комментарий: {{ user_message }}

@@ -79,7 +79,7 @@
         {% endif %}
         {% if this.theme.show_cart != true %}
           <div class="product-card__row">
-            <span class="product-card__url button button_primary" data-js-action="open-modal" data-type-modal="callback" data-title="Запросить прайс-лист с оптовыми ценами">Заказать</span>
+            <span class="product-card__url button button_primary" data-js-action="open-modal" data-type-modal="callback" data-title="Запросить прайс-лист с оптовыми ценами" data-product="{{ product.title }}">Заказать</span>
             <span class="product-card__url button button_primary">Подробнее</span>
           </div>
         {% endif %}
