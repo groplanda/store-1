@@ -33,6 +33,9 @@ export class ContactForm {
         return;
       }
 
+      // eslint-disable-next-line no-undef
+      ym(98558682,'reachGoal','zayvka');
+
       const result = formEl.querySelector('[data-js="success"]');
 
       formEl.reset();

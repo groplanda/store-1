@@ -31,6 +31,8 @@ function registerUser(e) {
       }
 
       if (data.status === "success") {
+        // eslint-disable-next-line no-undef
+        ym(98558682,'reachGoal','reg')
         createRedirect();
       }
     })
@@ -59,6 +61,8 @@ function authUser(e) {
       }
 
       if (data.status === "success") {
+        // eslint-disable-next-line no-undef
+        ym(98558682,'reachGoal','whod')
         createRedirect();
       }
     })
